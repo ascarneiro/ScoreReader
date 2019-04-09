@@ -1,33 +1,31 @@
 import cherrypy
-import json
+import cv2
+import glob
+import numpy as np
+import MuscimaFunctions as mf
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+
+class Server(object):  
+  def __init__(self):
+      self.m = mf.MuscimaFunctions()
+
+  @cherrypy.expose
+  def main(self):
+    self.m.main()
+
+  @cherrypy.expose
+  def imageFromDir(self):
+    images = []
+    files = glob.glob ("C:/TCC/ScoreReader/img/*.jpg")
+    for file in files:
+        print(file)
+        image = cv2.imread (file)
+        images.append (image)
+        img = mpimg.imread(image)
+        imgplot = plt.imshow(img)
+        plt.show()
+        #print('images shape:', np.array(images).shape)
 
 
-class Animal(object):
-    def toJSON(self):
-        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
-
-class Server(object):
-    @cherrypy.expose
-    def calcularMedia(self):
-        return 'Media e: %d' % ((7 + 10 + 9) / 3,) 
-
-    @cherrypy.expose
-    def classificar(self):
-        return "A nota e Do :P...."
-
-    @cherrypy.expose
-    @cherrypy.tools.json_out()
-    def getJson(self):
-        return   {
-                    "message": "Hello World!"
-                }
-
-    @cherrypy.expose
-    @cherrypy.tools.json_out()
-    def asJson(self):
-        animal = Animal()
-        animal.classe   = "mamifero"
-        animal.especie  = "carneiro"
-        return animal.toJSON()
-	
 cherrypy.quickstart(Server())
