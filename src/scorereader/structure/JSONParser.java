@@ -5,18 +5,13 @@
  */
 package scorereader.structure;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author ascarneiro
  */
-public class AgrupadorPartitura {
-    private List<Partitura> partituras = new ArrayList<>();
+public class JSONParser {
 
-    public AgrupadorPartitura() {
+    public static Elemento jsonToElement(String json) {
+        return new Elemento(null, "");
     }
-    
-    
 }
