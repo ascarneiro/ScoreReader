@@ -1,0 +1,13 @@
+File-Prefix    Author        Program    Description
+------------------------------------------------------------------
+josquin        C. Dalitz +)  abctab2ps  4part choir
+rossi          C. Dalitz     abctab2ps  trio sonata
+gregorian      C. Dalitz     lilypond   gregorian chant notation
+derore         L. Conrad *)  lilypond   mensural notation
+ockeghem       M.A.B. #)     musixtext  mensural with ligatures
+
++) based on Laura Conrad's transcription from *)
+
+*) from http://www.laymusic.org/
+
+#) from http://www.mab.jpn.org/

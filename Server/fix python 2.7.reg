@@ -1,0 +1,19 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Python\PythonCore\2.7]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Python\PythonCore\2.7\Help]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Python\PythonCore\2.7\Help\MainPythonDocumentation]
+@="C:\\ProgramData\\Anaconda3\\envs\\IA2\\Doc\\python26.chm"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Python\PythonCore\2.7\InstallPath]
+@="C:\\ProgramData\\Anaconda3\\envs\\IA2\\"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Python\PythonCore\2.7\InstallPath\InstallGroup]
+@="Python 2.7"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Python\PythonCore\2.7\Modules]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Python\PythonCore\2.7\PythonPath]
+@="C:\\ProgramData\\Anaconda3\\envs\\IA2\\Lib;C:\\ProgramData\\Anaconda3\\envs\\IA2\\DLLs;C:\\ProgramData\\Anaconda3\\envs\\IA2\\Lib\\lib-tk"

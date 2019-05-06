@@ -1,0 +1,21 @@
+Statistics of testset:
+======================
+
+ staffs | percentage |            type            
+--------+------------+----------------------------
+    299 |     100.00 | total sum
+    197 |      65.89 | modern
+     58 |      19.40 | tablature
+     44 |      14.72 | historic (chant, mensural)
+
+ staffs | percentage |        program        
+--------+------------+-----------------------
+    299 |     100.00 | total sum
+     78 |      26.09 | abctab2ps
+     56 |      18.73 | Philip's Music Writer
+     49 |      16.39 | LilyPond
+     29 |       9.70 | Django
+     25 |       8.36 | MusixTex
+     24 |       8.03 | Finale
+     24 |       8.03 | Music Publisher
+     14 |       4.68 | lute tab

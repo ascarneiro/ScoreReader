@@ -1,0 +1,5276 @@
+%!PS-Adobe-3.0
+%%Title: (bouquetluth.jtb)
+%%Version: 1 2
+%%Creator: (PScript5.dll Version 5.2)
+%%CreationDate: (2/28/2002 17:32:49)
+%%DocumentData: Clean7Bit
+%%LanguageLevel: 2
+%%BoundingBox: 0 0 595 842
+%%Pages: 1
+%%DocumentProcessColors: (atend)
+%%DocumentSuppliedResources:
+%%+ procset (Adobe Acrobat - PDF operators) 1.2 0
+%%+ procset (Adobe Acrobat - type operators) 1.2 0
+%%EndComments
+%%BeginDefaults
+%%EndDefaults
+%%BeginProlog
+%%EndProlog
+%%BeginSetup
+%%BeginResource: l2check
+%%Copyright: Copyright 1993 Adobe Systems Incorporated. All Rights Reserved.
+systemdict /languagelevel known
+{ systemdict /languagelevel get 1 eq }
+{ true }
+ifelse
+{
+initgraphics /Helvetica findfont 18 scalefont setfont
+72 600 moveto (Error: Your printer driver needs to be configured) dup show
+72 580 moveto (for printing to a PostScript Language Level 1 printer.) dup show
+exch = =
+/Helvetica-Bold findfont 16 scalefont setfont
+72 520 moveto (Windows and Unix) show
+/Times-Roman findfont 16 scalefont setfont
+72 500 moveto (Select ªLanguage Level 1º in the PostScript options section) show
+72 480 moveto (of the Acrobat print dialog.) show
+/Helvetica-Bold findfont 16 scalefont setfont
+72 440 moveto (Macintosh) show
+/Times-Roman findfont 16 scalefont setfont
+72 420 moveto (In the Chooser, select your printer driver.) show
+72 400 moveto (Then select your printer and click the Setup button.) show
+72 380 moveto (Follow any on-screen dialogs that may appear.) show
+showpage
+quit
+}
+if
+%%EndResource
+userdict /pdf_svglb currentglobal put true setglobal
+
+userdict /pdf_svglb get setglobal
+/currentpacking where{pop currentpacking true setpacking}if
+%%BeginResource: procset pdfvars
+%%Copyright: Copyright 1987-2001 Adobe Systems Incorporated. All Rights Reserved.
+%%Version: 5.0 6
+%%Title: definition of dictionary of variables used by PDF & PDFText procsets
+userdict /PDF 160 dict put
+userdict /PDFVars 89 dict dup begin put
+/docSetupDone false def
+/InitAll 0 def
+/TermAll 0 def
+/DocInitAll 0 def
+/DocTermAll 0 def
+/_pdfEncodings 2 array def
+/_pdf_str1 1 string def
+/_pdf_i 0 def
+/_pdf_na 0 def
+/_pdf_showproc 0 def
+/_italMtx [1 0 .212557 1 0 0] def
+/_italMtx_WMode1 [1 -.212557 0 1 0 0] def
+/_italMtxType0 [1 0 .1062785 1 0 0] def
+/_italMtx_WMode1Type0 [1 -.1062785 0 1 0 0] def
+/_basefont 0 def
+/_basefonto 0 def
+/_pdf_oldCIDInit null def
+/_pdf_FontDirectory 30 dict def
+/_categories 10 dict def
+/_sa? true def
+/_ColorSep5044? false def
+/nulldict 0 dict def
+/_processColors 0 def
+/overprintstack null def
+/_defaulttransfer currenttransfer def
+/_defaultflatness currentflat def
+/_defaulthalftone null def
+/_defaultcolortransfer null def
+/_defaultblackgeneration null def
+/_defaultundercolorremoval null def
+/_defaultcolortransfer null def
+PDF begin
+[/c/cs/cm/d/d0/f/h/i/j/J/l/m/M/n/q/Q/re/ri/S/sc/sh/Tf/w/W
+/applyInterpFunc/applystitchFunc/domainClip/encodeInput
+/initgs/int/limit/rangeClip
+/defineRes/findRes/setSA/pl
+%% to keep CoolType entries in GlyphDirProcs safe from collisions with Win PS driver
+/? /! /| /: /+ /GetGlyphDirectory
+/pdf_flushFilters /pdf_readstring /pdf_dictOp /pdf_image /pdf_maskedImage
+/pdf_shfill /pdf_sethalftone
+] {null def} bind forall
+end
+end
+%%EndResource
+PDFVars begin PDF begin
+%%BeginResource: procset pdfutil
+%%Copyright: Copyright 1993-1999 Adobe Systems Incorporated. All Rights Reserved.
+%%Version: 4.0 2
+%%Title: Basic utilities used by other PDF procsets
+/bd {bind def} bind def
+/ld {load def} bd
+/bld {
+dup length dict begin
+{ null def } forall
+bind
+end
+def
+} bd
+/dd { PDFVars 3 1 roll put } bd
+/xdd { exch dd } bd
+/Level2?
+systemdict /languagelevel known
+{ systemdict /languagelevel get 2 ge } { false } ifelse
+def
+/Level1? Level2? not def
+/Level3?
+systemdict /languagelevel known
+{systemdict /languagelevel get 3 eq } { false } ifelse
+def
+/getifknown {
+2 copy known { get true } { pop pop false } ifelse
+} bd
+/here {
+currentdict exch getifknown
+} bd
+/isdefined? { where { pop true } { false } ifelse } bd
+%%EndResource
+%%BeginResource: procset pdf
+%%Version: 5.0 7
+%%Copyright: Copyright 1998-2001 Adobe Systems Incorporated. All Rights Reserved.
+%%Title: General operators for PDF, common to all Language Levels.
+/cm { matrix astore concat } bd
+/d /setdash ld
+/f /fill ld
+/h /closepath ld
+/i {dup 0 eq {pop _defaultflatness} if setflat} bd
+/j /setlinejoin ld
+/J /setlinecap ld
+/M /setmiterlimit ld
+/n /newpath ld
+/S /stroke ld
+/w /setlinewidth ld
+/W /clip ld
+/initgs {
+0 setgray
+[] 0 d
+0 j
+0 J
+10 M
+1 w
+false setSA
+/_defaulttransfer load settransfer
+0 i
+/RelativeColorimetric ri
+newpath
+} bd
+/int {
+dup 2 index sub 3 index 5 index sub div 6 -2 roll sub mul
+exch pop add exch pop
+} bd
+/limit {
+dup 2 index le { exch } if pop
+dup 2 index ge { exch } if pop
+} bd
+/domainClip {
+Domain aload pop 3 2 roll
+limit
+} [/Domain] bld
+/applyInterpFunc {
+0 1 DimOut 1 sub
+{
+dup C0 exch get exch
+dup C1 exch get exch
+3 1 roll
+1 index sub
+3 index
+N exp mul add
+exch
+currentdict /Range_lo known
+{
+dup Range_lo exch get exch
+Range_hi exch get
+3 2 roll limit
+}
+{
+pop
+}
+ifelse
+exch
+} for
+pop
+} [/DimOut /C0 /C1 /N /Range_lo /Range_hi] bld
+/encodeInput {
+NumParts 1 sub
+0 1 2 index
+{
+dup Bounds exch get
+2 index gt
+{ exit }
+{ dup
+3 index eq
+{ exit }
+{ pop } ifelse
+} ifelse
+} for
+3 2 roll pop
+dup Bounds exch get exch
+dup 1 add Bounds exch get exch
+2 mul
+dup Encode exch get exch
+1 add Encode exch get
+int
+} [/NumParts /Bounds /Encode] bld
+/rangeClip {
+exch dup Range_lo exch get
+exch Range_hi exch get
+3 2 roll
+limit
+} [/Range_lo /Range_hi] bld
+/applyStitchFunc {
+Functions exch get exec
+currentdict /Range_lo known {
+0 1 DimOut 1 sub {
+DimOut 1 add -1 roll
+rangeClip
+} for
+} if
+} [/Functions /Range_lo /DimOut] bld
+/pdf_flushfilters
+{
+aload length
+{ dup status
+1 index currentfile ne and
+{ dup flushfile closefile }
+{ pop }
+ifelse
+} repeat
+} bd
+/pdf_readstring
+{
+1 index dup length 1 sub get
+exch readstring pop
+exch pdf_flushfilters
+} bind def
+/pdf_dictOp
+{
+3 2 roll
+10 dict copy
+begin
+_Filters dup length 1 sub get def
+currentdict exch exec
+_Filters pdf_flushfilters
+end
+} [/_Filters] bld
+/pdf_image {{image} /DataSource pdf_dictOp} bd
+/pdf_imagemask {{imagemask} /DataSource pdf_dictOp} bd
+/pdf_shfill {{sh} /DataSource pdf_dictOp} bd
+/pdf_sethalftone {{sethalftone} /Thresholds pdf_dictOp} bd
+/pdf_maskedImage
+{
+10 dict copy begin
+/miDict currentdict def
+/DataDict DataDict 10 dict copy def
+DataDict begin
+/DataSource
+_Filters dup length 1 sub get
+def
+miDict image
+_Filters pdf_flushfilters
+end
+end
+} [/miDict /DataDict /_Filters] bld
+/RadialShade {
+40 dict begin
+/background exch def
+/ext1 exch def
+/ext0 exch def
+/BBox exch def
+/r2 exch def
+/c2y exch def
+/c2x exch def
+/r1 exch def
+/c1y exch def
+/c1x exch def
+/rampdict exch def
+gsave
+BBox length 0 gt {
+newpath
+BBox 0 get BBox 1 get moveto
+BBox 2 get BBox 0 get sub 0 rlineto
+0 BBox 3 get BBox 1 get sub rlineto
+BBox 2 get BBox 0 get sub neg 0 rlineto
+closepath
+clip
+newpath
+} if
+c1x c2x eq
+{
+c1y c2y lt {/theta 90 def}{/theta 270 def} ifelse
+}
+{
+/slope c2y c1y sub c2x c1x sub div def
+/theta slope 1 atan def
+c2x c1x lt c2y c1y ge and { /theta theta 180 sub def} if
+c2x c1x lt c2y c1y lt and { /theta theta 180 add def} if
+}
+ifelse
+gsave
+clippath
+c1x c1y translate
+theta rotate
+-90 rotate
+{ pathbbox } stopped
+{ 0 0 0 0 } if
+/yMax exch def
+/xMax exch def
+/yMin exch def
+/xMin exch def
+grestore
+xMax xMin eq yMax yMin eq or
+{
+grestore
+end
+}
+{
+rampdict begin
+40 dict begin
+background length 0 gt { background sssetbackground gsave clippath fill grestore } if
+gsave
+c1x c1y translate
+theta rotate
+-90 rotate
+/c2y c1x c2x sub dup mul c1y c2y sub dup mul add sqrt def
+/c1y 0 def
+/c1x 0 def
+/c2x 0 def
+ext0 {
+0 getrampcolor
+c2y r2 add r1 lt
+{
+c1x c1y r1 360 0 arcn
+xMin yMin moveto
+xMax yMin lineto
+xMax yMax lineto
+xMin yMax lineto
+xMin yMin lineto
+eofill
+}
+{
+c2y r1 add r2 le
+{
+c1x c1y r1 0 360 arc
+fill
+}
+{
+c2x c2y r2 0 360 arc fill
+r1 r2 eq
+{
+/p1x r1 neg def
+/p1y c1y def
+/p2x r1 def
+/p2y c1y def
+p1x p1y moveto p2x p2y lineto p2x yMin lineto p1x yMin lineto
+fill
+}
+{
+/AA r2 r1 sub c2y div def
+/theta AA 1 AA dup mul sub sqrt div 1 atan def
+/SS1 90 theta add dup sin exch cos div def
+/p1x r1 SS1 SS1 mul SS1 SS1 mul 1 add div sqrt mul neg def
+/p1y p1x SS1 div neg def
+/SS2 90 theta sub dup sin exch cos div def
+/p2x r1 SS2 SS2 mul SS2 SS2 mul 1 add div sqrt mul def
+/p2y p2x SS2 div neg def
+r1 r2 gt
+{
+/L1maxX p1x yMin p1y sub SS1 div add def
+/L2maxX p2x yMin p2y sub SS2 div add def
+}
+{
+/L1maxX 0 def
+/L2maxX 0 def
+}ifelse
+p1x p1y moveto p2x p2y lineto L2maxX L2maxX p2x sub SS2 mul p2y add lineto
+L1maxX L1maxX p1x sub SS1 mul p1y add lineto
+fill
+}
+ifelse
+}
+ifelse
+} ifelse
+} if
+c1x c2x sub dup mul
+c1y c2y sub dup mul
+add 0.5 exp
+0 dtransform
+dup mul exch dup mul add 0.5 exp 72 div
+0 72 matrix defaultmatrix dtransform dup mul exch dup mul add sqrt
+72 0 matrix defaultmatrix dtransform dup mul exch dup mul add sqrt
+1 index 1 index lt { exch } if pop
+/hires exch def
+hires mul
+/numpix exch def
+/numsteps NumSamples def
+/rampIndxInc 1 def
+/subsampling false def
+numpix 0 ne
+{
+NumSamples numpix div 0.5 gt
+{
+/numsteps numpix 2 div round cvi dup 1 le { pop 2 } if def
+/rampIndxInc NumSamples 1 sub numsteps div def
+/subsampling true def
+} if
+} if
+/xInc c2x c1x sub numsteps div def
+/yInc c2y c1y sub numsteps div def
+/rInc r2 r1 sub numsteps div def
+/cx c1x def
+/cy c1y def
+/radius r1 def
+newpath
+xInc 0 eq yInc 0 eq rInc 0 eq and and
+{
+0 getrampcolor
+cx cy radius 0 360 arc
+stroke
+NumSamples 1 sub getrampcolor
+cx cy radius 72 hires div add 0 360 arc
+0 setlinewidth
+stroke
+}
+{
+0
+numsteps
+{
+dup
+subsampling { round cvi } if
+getrampcolor
+cx cy radius 0 360 arc
+/cx cx xInc add def
+/cy cy yInc add def
+/radius radius rInc add def
+cx cy radius 360 0 arcn
+eofill
+rampIndxInc add
+}
+repeat
+pop
+} ifelse
+ext1 {
+c2y r2 add r1 lt
+{
+c2x c2y r2 0 360 arc
+fill
+}
+{
+c2y r1 add r2 le
+{
+c2x c2y r2 360 0 arcn
+xMin yMin moveto
+xMax yMin lineto
+xMax yMax lineto
+xMin yMax lineto
+xMin yMin lineto
+eofill
+}
+{
+c2x c2y r2 0 360 arc fill
+r1 r2 eq
+{
+/p1x r2 neg def
+/p1y c2y def
+/p2x r2 def
+/p2y c2y def
+p1x p1y moveto p2x p2y lineto p2x yMax lineto p1x yMax lineto
+fill
+}
+{
+/AA r2 r1 sub c2y div def
+/theta AA 1 AA dup mul sub sqrt div 1 atan def
+/SS1 90 theta add dup sin exch cos div def
+/p1x r2 SS1 SS1 mul SS1 SS1 mul 1 add div sqrt mul neg def
+/p1y c2y p1x SS1 div sub def
+/SS2 90 theta sub dup sin exch cos div def
+/p2x r2 SS2 SS2 mul SS2 SS2 mul 1 add div sqrt mul def
+/p2y c2y p2x SS2 div sub def
+r1 r2 lt
+{
+/L1maxX p1x yMax p1y sub SS1 div add def
+/L2maxX p2x yMax p2y sub SS2 div add def
+}
+{
+/L1maxX 0 def
+/L2maxX 0 def
+}ifelse
+p1x p1y moveto p2x p2y lineto L2maxX L2maxX p2x sub SS2 mul p2y add lineto
+L1maxX L1maxX p1x sub SS1 mul p1y add lineto
+fill
+}
+ifelse
+}
+ifelse
+} ifelse
+} if
+grestore
+grestore
+end
+end
+end
+} ifelse
+} bd
+/GenStrips {
+40 dict begin
+/background exch def
+/ext1 exch def
+/ext0 exch def
+/BBox exch def
+/y2 exch def
+/x2 exch def
+/y1 exch def
+/x1 exch def
+/rampdict exch def
+gsave
+BBox length 0 gt {
+newpath
+BBox 0 get BBox 1 get moveto
+BBox 2 get BBox 0 get sub 0 rlineto
+0 BBox 3 get BBox 1 get sub rlineto
+BBox 2 get BBox 0 get sub neg 0 rlineto
+closepath
+clip
+newpath
+} if
+x1 x2 eq
+{
+y1 y2 lt {/theta 90 def}{/theta 270 def} ifelse
+}
+{
+/slope y2 y1 sub x2 x1 sub div def
+/theta slope 1 atan def
+x2 x1 lt y2 y1 ge and { /theta theta 180 sub def} if
+x2 x1 lt y2 y1 lt and { /theta theta 180 add def} if
+}
+ifelse
+gsave
+clippath
+x1 y1 translate
+theta rotate
+{ pathbbox } stopped
+{ 0 0 0 0 } if
+/yMax exch def
+/xMax exch def
+/yMin exch def
+/xMin exch def
+grestore
+xMax xMin eq yMax yMin eq or
+{
+grestore
+end
+}
+{
+rampdict begin
+20 dict begin
+background length 0 gt { background sssetbackground gsave clippath fill grestore } if
+gsave
+x1 y1 translate
+theta rotate
+/xStart 0 def
+/xEnd x2 x1 sub dup mul y2 y1 sub dup mul add 0.5 exp def
+/ySpan yMax yMin sub def
+/numsteps NumSamples def
+/rampIndxInc 1 def
+/subsampling false def
+xStart 0 transform
+xEnd 0 transform
+3 -1 roll
+sub dup mul
+3 1 roll
+sub dup mul
+add 0.5 exp 72 div
+0 72 matrix defaultmatrix dtransform dup mul exch dup mul add sqrt
+72 0 matrix defaultmatrix dtransform dup mul exch dup mul add sqrt
+1 index 1 index lt { exch } if pop
+mul
+/numpix exch def
+numpix 0 ne
+{
+NumSamples numpix div 0.5 gt
+{
+/numsteps numpix 2 div round cvi dup 1 le { pop 2 } if def
+/rampIndxInc NumSamples 1 sub numsteps div def
+/subsampling true def
+} if
+} if
+ext0 {
+0 getrampcolor
+xMin xStart lt
+{ xMin yMin xMin neg ySpan rectfill } if
+} if
+/xInc xEnd xStart sub numsteps div def
+/x xStart def
+0
+numsteps
+{
+dup
+subsampling { round cvi } if
+getrampcolor
+x yMin xInc ySpan rectfill
+/x x xInc add def
+rampIndxInc add
+}
+repeat
+pop
+ext1 {
+xMax xEnd gt
+{ xEnd yMin xMax xEnd sub ySpan rectfill } if
+} if
+grestore
+grestore
+end
+end
+end
+} ifelse
+} bd
+%%EndResource
+%%BeginResource: procset pdflev2
+%%Version: 5.0 15
+%%Copyright: Copyright 1987-2001 Adobe Systems Incorporated. All Rights Reserved.
+%%LanguageLevel: 2
+%%Title: PDF operators, with code specific for Level 2
+/docinitialize {
+PDF begin
+/_defaulthalftone currenthalftone dd
+/_defaultblackgeneration currentblackgeneration dd
+/_defaultundercolorremoval currentundercolorremoval dd
+/_defaultcolortransfer [currentcolortransfer] dd
+/_defaulttransfer currenttransfer dd
+end
+PDFVars /docSetupDone true put
+} bd
+/initialize {
+PDFVars /docSetupDone get {
+_defaulthalftone sethalftone
+/_defaultblackgeneration load setblackgeneration
+/_defaultundercolorremoval load setundercolorremoval
+_defaultcolortransfer aload pop setcolortransfer
+} if
+false setoverprint
+} bd
+/terminate { } bd
+/c /curveto ld
+/cs /setcolorspace ld
+/l /lineto ld
+/m /moveto ld
+/q /gsave ld
+/Q /grestore ld
+/sc /setcolor ld
+/setSA/setstrokeadjust ld
+/re {
+4 2 roll m
+1 index 0 rlineto
+0 exch rlineto
+neg 0 rlineto
+h
+} bd
+/concattransferfuncs {
+[ 3 1 roll /exec load exch /exec load ] cvx
+} bd
+/concatandsettransfer {
+/_defaulttransfer load concattransferfuncs settransfer
+} bd
+/concatandsetcolortransfer {
+_defaultcolortransfer aload pop
+8 -1 roll 5 -1 roll concattransferfuncs 7 1 roll
+6 -1 roll 4 -1 roll concattransferfuncs 5 1 roll
+4 -1 roll 3 -1 roll concattransferfuncs 3 1 roll
+concattransferfuncs
+setcolortransfer
+} bd
+/defineRes/defineresource ld
+/findRes/findresource ld
+currentglobal
+true systemdict /setglobal get exec
+[/Function /ExtGState /Form /Shading /FunctionDictionary /MadePattern /PatternPrototype /DataSource /Image]
+{ /Generic /Category findresource dup length dict copy /Category defineresource pop }
+forall
+systemdict /setglobal get exec
+/ri
+{
+/findcolorrendering isdefined?
+{
+mark exch
+findcolorrendering
+counttomark 2 eq
+{ type /booleantype eq
+{ dup type /nametype eq
+{ dup /ColorRendering resourcestatus
+{ pop pop
+dup /DefaultColorRendering ne
+{
+/ColorRendering findresource
+setcolorrendering
+} if
+} if
+} if
+} if
+} if
+cleartomark
+}
+{ pop
+} ifelse
+} bd
+/knownColorants? {
+pop false
+} bd
+/getrampcolor {
+/indx exch def
+0 1 NumComp 1 sub {
+dup
+Samples exch get
+dup type /stringtype eq { indx get } if
+exch
+Scaling exch get aload pop
+3 1 roll
+mul add
+} for
+setcolor
+} bd
+/sssetbackground { aload pop setcolor } bd
+%%EndResource
+%%BeginResource: procset pdftext
+%%Version: 5.0 6
+%%Copyright: Copyright 1987-2001 Adobe Systems Incorporated. All Rights Reserved.
+%%Title: Text operators for PDF
+PDF /PDFText 78 dict dup begin put
+/docinitialize
+{
+/resourcestatus where {
+pop
+/CIDParams /ProcSet resourcestatus {
+pop pop
+false /CIDParams /ProcSet findresource /SetBuildCompatible get exec
+} if
+} if
+PDF begin
+PDFText /_pdfDefineIdentity-H known
+{ PDFText /_pdfDefineIdentity-H get exec}
+if
+end
+} bd
+/initialize {
+PDFText begin
+} bd
+/terminate { end } bd
+Level2?
+{
+/_safeput
+{
+3 -1 roll load 3 1 roll put
+}
+bd
+}
+{
+/_safeput
+{
+2 index load dup dup length exch maxlength ge
+{ dup length 5 add dict copy
+3 index xdd
+}
+{ pop }
+ifelse
+3 -1 roll load 3 1 roll put
+}
+bd
+}
+ifelse
+/pdf_has_composefont? systemdict /composefont known def
+/CopyFont {
+{
+1 index /FID ne 2 index /UniqueID ne and
+{ def } { pop pop } ifelse
+} forall
+} bd
+/Type0CopyFont
+{
+exch
+dup length dict
+begin
+CopyFont
+[
+exch
+FDepVector
+{
+dup /FontType get 0 eq
+{
+1 index Type0CopyFont
+/_pdfType0 exch definefont
+}
+{
+/_pdfBaseFont exch
+2 index exec
+}
+ifelse
+exch
+}
+forall
+pop
+]
+/FDepVector exch def
+currentdict
+end
+} bd
+Level2? {currentglobal true setglobal} if
+/cHexEncoding
+[/c00/c01/c02/c03/c04/c05/c06/c07/c08/c09/c0A/c0B/c0C/c0D/c0E/c0F/c10/c11/c12
+/c13/c14/c15/c16/c17/c18/c19/c1A/c1B/c1C/c1D/c1E/c1F/c20/c21/c22/c23/c24/c25
+/c26/c27/c28/c29/c2A/c2B/c2C/c2D/c2E/c2F/c30/c31/c32/c33/c34/c35/c36/c37/c38
+/c39/c3A/c3B/c3C/c3D/c3E/c3F/c40/c41/c42/c43/c44/c45/c46/c47/c48/c49/c4A/c4B
+/c4C/c4D/c4E/c4F/c50/c51/c52/c53/c54/c55/c56/c57/c58/c59/c5A/c5B/c5C/c5D/c5E
+/c5F/c60/c61/c62/c63/c64/c65/c66/c67/c68/c69/c6A/c6B/c6C/c6D/c6E/c6F/c70/c71
+/c72/c73/c74/c75/c76/c77/c78/c79/c7A/c7B/c7C/c7D/c7E/c7F/c80/c81/c82/c83/c84
+/c85/c86/c87/c88/c89/c8A/c8B/c8C/c8D/c8E/c8F/c90/c91/c92/c93/c94/c95/c96/c97
+/c98/c99/c9A/c9B/c9C/c9D/c9E/c9F/cA0/cA1/cA2/cA3/cA4/cA5/cA6/cA7/cA8/cA9/cAA
+/cAB/cAC/cAD/cAE/cAF/cB0/cB1/cB2/cB3/cB4/cB5/cB6/cB7/cB8/cB9/cBA/cBB/cBC/cBD
+/cBE/cBF/cC0/cC1/cC2/cC3/cC4/cC5/cC6/cC7/cC8/cC9/cCA/cCB/cCC/cCD/cCE/cCF/cD0
+/cD1/cD2/cD3/cD4/cD5/cD6/cD7/cD8/cD9/cDA/cDB/cDC/cDD/cDE/cDF/cE0/cE1/cE2/cE3
+/cE4/cE5/cE6/cE7/cE8/cE9/cEA/cEB/cEC/cED/cEE/cEF/cF0/cF1/cF2/cF3/cF4/cF5/cF6
+/cF7/cF8/cF9/cFA/cFB/cFC/cFD/cFE/cFF] def
+Level2? {setglobal} if
+/modEnc {
+/_enc xdd
+/_icode 0 dd
+counttomark 1 sub -1 0
+{
+index
+dup type /nametype eq
+{
+_enc _icode 3 -1 roll put
+_icode 1 add
+}
+if
+/_icode xdd
+} for
+cleartomark
+_enc
+} bd
+/trEnc {
+/_enc xdd
+255 -1 0 {
+exch dup -1 eq
+{ pop /.notdef }
+{ Encoding exch get }
+ifelse
+_enc 3 1 roll put
+} for
+pop
+_enc
+} bd
+/TE {
+/_i xdd
+StandardEncoding 256 array copy modEnc
+_pdfEncodings exch _i exch put
+} bd
+/TZ
+{
+/_usePDFEncoding xdd
+findfont
+dup length 6 add dict
+begin
+{
+1 index /FID ne { def } { pop pop } ifelse
+} forall
+/pdf_origFontName FontName def
+/FontName exch def
+currentdict /PaintType known
+{ PaintType 2 eq {/PaintType 0 def} if }
+if
+_usePDFEncoding 0 ge
+{
+/Encoding _pdfEncodings _usePDFEncoding get def
+pop
+}
+{
+_usePDFEncoding -1 eq
+{
+counttomark 0 eq
+{ pop }
+{
+Encoding 256 array copy
+modEnc /Encoding exch def
+}
+ifelse
+}
+{
+256 array
+trEnc /Encoding exch def
+}
+ifelse
+}
+ifelse
+pdf_EuroProcSet pdf_origFontName known
+{
+pdf_origFontName pdf_AddEuroGlyphProc
+} if
+Level2?
+{
+currentdict /pdf_origFontName undef
+} if
+FontName currentdict
+end
+definefont pop
+}
+bd
+Level2?
+{
+/TZG
+{
+currentglobal true setglobal
+2 index _pdfFontStatus
+{
+2 index findfont
+false setglobal
+3 index findfont
+true setglobal
+ne
+{
+2 index findfont dup rcheck
+{
+dup length dict begin
+{
+1 index /FID ne { def } { pop pop } ifelse
+} forall
+currentdict end
+}
+if
+3 index exch definefont pop
+}
+if
+} if
+setglobal
+TZ
+} bd
+}
+{
+/TZG {TZ} bd
+} ifelse
+Level2?
+{
+currentglobal false setglobal
+userdict /pdftext_data 5 dict put
+pdftext_data
+begin
+/saveStacks
+{
+pdftext_data
+begin
+/vmmode currentglobal def
+false setglobal
+count array astore /os exch def
+end
+countdictstack array dictstack pdftext_data exch /ds exch put
+cleardictstack pdftext_data /dscount countdictstack put
+pdftext_data /vmmode get setglobal
+} bind def
+/restoreStacks
+{
+pdftext_data /vmmode currentglobal put false setglobal
+clear cleardictstack
+pdftext_data /ds get dup
+pdftext_data /dscount get 1 2 index length 1 sub
+{ get begin dup } for
+pop pop
+pdftext_data /os get aload pop
+pdftext_data /vmmode get setglobal
+} bind def
+/testForClonePrinterBug
+{
+currentglobal true setglobal
+/undefinedCategory /Generic /Category findresource
+dup length dict copy /Category defineresource pop
+setglobal
+pdftext_data /saveStacks get exec
+pdftext_data /vmmode currentglobal put false setglobal
+/undefined /undefinedCategory { resourcestatus } stopped
+pdftext_data exch /bugFound exch put
+pdftext_data /vmmode get setglobal
+pdftext_data /restoreStacks get exec
+pdftext_data /bugFound get
+} bind def
+end
+setglobal
+/pdf_resourcestatus
+pdftext_data /testForClonePrinterBug get exec
+{
+{
+pdftext_data /saveStacks get exec
+pdftext_data /os get dup dup length 1 sub
+dup 1 sub dup 0 lt { pop 0 } if
+exch 1 exch { get exch dup } for
+pop pop
+{ resourcestatus }
+stopped
+{
+clear cleardictstack pdftext_data /restoreStacks get exec
+{ pop pop } stopped pop false
+}
+{
+count array astore pdftext_data exch /results exch put
+pdftext_data /restoreStacks get exec pop pop
+pdftext_data /results get aload pop
+}
+ifelse
+}
+}
+{ { resourcestatus } }
+ifelse
+bd
+}
+if
+Level2?
+{
+/_pdfUndefineResource
+{
+currentglobal 3 1 roll
+_pdf_FontDirectory 2 index 2 copy known
+{undef}
+{pop pop}
+ifelse
+1 index (pdf) exch _pdfConcatNames 1 index
+1 index 1 _pdfConcatNames 1 index
+5 index 1 _pdfConcatNames 1 index
+4
+{
+2 copy pdf_resourcestatus
+{
+pop 2 lt
+{2 copy findresource gcheck setglobal undefineresource}
+{pop pop}
+ifelse
+}
+{ pop pop}
+ifelse
+} repeat
+setglobal
+} bd
+}
+{
+/_pdfUndefineResource { pop pop} bd
+}
+ifelse
+Level2?
+{
+/_pdfFontStatus
+{
+currentglobal exch
+/Font pdf_resourcestatus
+{pop pop true}
+{false}
+ifelse
+exch setglobal
+} bd
+}
+{
+/_pdfFontStatusString 50 string def
+_pdfFontStatusString 0 (fonts/) putinterval
+/_pdfFontStatus
+{
+FontDirectory 1 index known
+{ pop true }
+{
+_pdfFontStatusString 6 42 getinterval
+cvs length 6 add
+_pdfFontStatusString exch 0 exch getinterval
+{ status } stopped
+{pop false}
+{
+{ pop pop pop pop true}
+{ false }
+ifelse
+}
+ifelse
+}
+ifelse
+} bd
+}
+ifelse
+Level2?
+{
+/_pdfCIDFontStatus
+{
+/CIDFont /Category pdf_resourcestatus
+{
+pop pop
+/CIDFont pdf_resourcestatus
+{pop pop true}
+{false}
+ifelse
+}
+{ pop false }
+ifelse
+} bd
+}
+if
+/_pdfString100 100 string def
+/_pdfComposeFontName
+{
+dup length 1 eq
+{
+0 get
+1 index
+type /nametype eq
+{
+_pdfString100 cvs
+length dup dup _pdfString100 exch (-) putinterval
+_pdfString100 exch 1 add dup _pdfString100 length exch sub getinterval
+2 index exch cvs length
+add 1 add _pdfString100 exch 0 exch getinterval
+exch pop
+true
+}
+{
+pop pop
+false
+}
+ifelse
+}
+{
+false
+}
+ifelse
+dup {exch cvn exch} if
+} bd
+/_pdfConcatNames
+{
+exch
+_pdfString100 cvs
+length dup dup _pdfString100 exch (-) putinterval
+_pdfString100 exch 1 add dup _pdfString100 length exch sub getinterval
+3 -1 roll exch cvs length
+add 1 add _pdfString100 exch 0 exch getinterval
+cvn
+} bind def
+/_pdfTextTempString 50 string def
+/_pdfRegOrderingArray [(Adobe-Japan1) (Adobe-CNS1) (Adobe-Korea1) (Adobe-GB1)] def
+/_pdf_CheckCIDSystemInfo
+{
+1 index _pdfTextTempString cvs
+(Identity) anchorsearch
+{
+pop pop pop pop true
+}
+{
+false
+_pdfRegOrderingArray
+{
+2 index exch
+anchorsearch
+{ pop pop pop true exit}
+{ pop }
+ifelse
+}
+forall
+exch pop
+exch /CIDFont findresource
+/CIDSystemInfo get
+3 -1 roll /CMap findresource
+/CIDSystemInfo get
+exch
+3 -1 roll
+{
+2 copy
+/Supplement get
+exch
+dup type /dicttype eq
+{/Supplement get}
+{pop 0 }
+ifelse
+ge
+}
+{ true }
+ifelse
+{
+dup /Registry get
+2 index /Registry get eq
+{
+/Ordering get
+exch /Ordering get
+dup type /arraytype eq
+{
+1 index type /arraytype eq
+{
+true
+1 index length 1 sub -1 0
+{
+dup 2 index exch get exch 3 index exch get ne
+{ pop false exit}
+if
+} for
+exch pop exch pop
+}
+{ pop pop false }
+ifelse
+}
+{
+eq
+}
+ifelse
+}
+{ pop pop false }
+ifelse
+}
+{ pop pop false }
+ifelse
+}
+ifelse
+} bind def
+pdf_has_composefont?
+{
+/_pdfComposeFont
+{
+2 copy _pdfComposeFontName not
+{
+2 index
+}
+if
+(pdf) exch _pdfConcatNames
+dup _pdfFontStatus
+{ dup findfont 5 2 roll pop pop pop true}
+{
+4 1 roll
+1 index /CMap pdf_resourcestatus
+{
+pop pop
+true
+}
+{false}
+ifelse
+1 index true exch
+{
+_pdfCIDFontStatus not
+{pop false exit}
+if
+}
+forall
+and
+{
+1 index 1 index 0 get _pdf_CheckCIDSystemInfo
+{
+3 -1 roll pop
+2 index 3 1 roll
+composefont true
+}
+{
+pop pop exch pop false
+}
+ifelse
+}
+{
+_pdfComposeFontName
+{
+dup _pdfFontStatus
+{
+exch pop
+1 index exch
+findfont definefont true
+}
+{
+pop exch pop
+false
+}
+ifelse
+}
+{
+exch pop
+false
+}
+ifelse
+}
+ifelse
+{ true }
+{
+dup _pdfFontStatus
+{ dup findfont true }
+{ pop false }
+ifelse
+}
+ifelse
+}
+ifelse
+} bd
+}
+{
+/_pdfComposeFont
+{
+_pdfComposeFontName not
+{
+dup
+}
+if
+dup
+_pdfFontStatus
+{exch pop dup findfont true}
+{
+1 index
+dup type /nametype eq
+{pop}
+{cvn}
+ifelse
+eq
+{pop false}
+{
+dup _pdfFontStatus
+{dup findfont true}
+{pop false}
+ifelse
+}
+ifelse
+}
+ifelse
+} bd
+}
+ifelse
+/_pdfStyleDicts 4 dict dup begin
+/Adobe-Japan1 4 dict dup begin
+Level2?
+{
+/Serif
+/HeiseiMin-W3-83pv-RKSJ-H _pdfFontStatus
+{/HeiseiMin-W3}
+{
+/HeiseiMin-W3 _pdfCIDFontStatus
+{/HeiseiMin-W3}
+{/Ryumin-Light}
+ifelse
+}
+ifelse
+def
+/SansSerif
+/HeiseiKakuGo-W5-83pv-RKSJ-H _pdfFontStatus
+{/HeiseiKakuGo-W5}
+{
+/HeiseiKakuGo-W5 _pdfCIDFontStatus
+{/HeiseiKakuGo-W5}
+{/GothicBBB-Medium}
+ifelse
+}
+ifelse
+def
+/HeiseiMaruGo-W4-83pv-RKSJ-H _pdfFontStatus
+{/HeiseiMaruGo-W4}
+{
+/HeiseiMaruGo-W4 _pdfCIDFontStatus
+{/HeiseiMaruGo-W4}
+{
+/Jun101-Light-RKSJ-H _pdfFontStatus
+{ /Jun101-Light }
+{ SansSerif }
+ifelse
+}
+ifelse
+}
+ifelse
+/RoundSansSerif exch def
+/Default Serif def
+}
+{
+/Serif /Ryumin-Light def
+/SansSerif /GothicBBB-Medium def
+{
+(fonts/Jun101-Light-83pv-RKSJ-H) status
+}stopped
+{pop}{
+{ pop pop pop pop /Jun101-Light }
+{ SansSerif }
+ifelse
+/RoundSansSerif exch def
+}ifelse
+/Default Serif def
+}
+ifelse
+end
+def
+/Adobe-Korea1 4 dict dup begin
+/Serif /HYSMyeongJo-Medium def
+/SansSerif /HYGoThic-Medium def
+/RoundSansSerif SansSerif def
+/Default Serif def
+end
+def
+/Adobe-GB1 4 dict dup begin
+/Serif /STSong-Light def
+/SansSerif /STHeiti-Regular def
+/RoundSansSerif SansSerif def
+/Default Serif def
+end
+def
+/Adobe-CNS1 4 dict dup begin
+/Serif /MKai-Medium def
+/SansSerif /MHei-Medium def
+/RoundSansSerif SansSerif def
+/Default Serif def
+end
+def
+end
+def
+/TZzero
+{
+/_wmode xdd
+/_styleArr xdd
+/_regOrdering xdd
+3 copy
+_pdfComposeFont
+{
+5 2 roll pop pop pop
+}
+{
+[
+0 1 _styleArr length 1 sub
+{
+_styleArr exch get
+_pdfStyleDicts _regOrdering 2 copy known
+{
+get
+exch 2 copy known not
+{ pop /Default }
+if
+get
+}
+{
+pop pop pop /Unknown
+}
+ifelse
+}
+for
+]
+exch pop
+2 index 3 1 roll
+_pdfComposeFont
+{3 -1 roll pop}
+{
+findfont dup /FontName get exch
+}
+ifelse
+}
+ifelse
+dup /WMode 2 copy known
+{ get _wmode ne }
+{ pop pop _wmode 1 eq}
+ifelse
+{
+exch _wmode _pdfConcatNames
+dup _pdfFontStatus
+{ exch pop dup findfont false}
+{ exch true }
+ifelse
+}
+{
+dup /FontType get 0 ne
+}
+ifelse
+{
+dup /FontType get 3 eq _wmode 1 eq and
+{
+_pdfVerticalRomanT3Font dup length 10 add dict copy
+begin
+/_basefont exch
+dup length 3 add dict
+begin
+{1 index /FID ne {def}{pop pop} ifelse }
+forall
+/Encoding Encoding dup length array copy
+dup 16#27 /quotesingle put
+dup 16#60 /grave put
+_regOrdering /Adobe-Japan1 eq
+{dup 16#5c /yen put dup 16#a5 /yen put dup 16#b4 /yen put}
+if
+def
+FontName
+currentdict
+end
+definefont
+def
+/Encoding _basefont /Encoding get def
+/_fauxfont true def
+}
+{
+dup length 3 add dict
+begin
+{1 index /FID ne {def}{pop pop} ifelse }
+forall
+FontType 0 ne
+{
+/Encoding Encoding dup length array copy
+dup 16#27 /quotesingle put
+dup 16#60 /grave put
+_regOrdering /Adobe-Japan1 eq
+{dup 16#5c /yen put}
+if
+def
+/_fauxfont true def
+} if
+} ifelse
+/WMode _wmode def
+dup dup /FontName exch def
+currentdict
+end
+definefont pop
+}
+{
+pop
+}
+ifelse
+/_pdf_FontDirectory 3 1 roll _safeput
+}
+bd
+Level2?
+{
+/Tf {
+_pdf_FontDirectory 2 index 2 copy known
+{get exch 3 -1 roll pop}
+{pop pop}
+ifelse
+selectfont
+} bd
+}
+{
+/Tf {
+_pdf_FontDirectory 2 index 2 copy known
+{get exch 3 -1 roll pop}
+{pop pop}
+ifelse
+exch findfont exch
+dup type /arraytype eq
+{makefont}
+{scalefont}
+ifelse
+setfont
+} bd
+}
+ifelse
+/cshow where
+{
+pop /pdf_cshow /cshow load dd
+/pdf_remove2 {pop pop} dd
+}
+{
+/pdf_cshow {exch forall} dd
+/pdf_remove2 {} dd
+} ifelse
+/pdf_xshow
+{
+/_pdf_na xdd
+/_pdf_i 0 dd
+currentpoint
+/_pdf_y xdd
+/_pdf_x xdd
+{
+pdf_remove2
+_pdf_str1 exch 0 exch put
+_pdf_str1 /_pdf_showproc load exec
+{_pdf_na _pdf_i get} stopped
+{ pop pop }
+{
+_pdf_x _pdf_y moveto
+0
+rmoveto
+}
+ifelse
+_pdf_i 1 add /_pdf_i xdd
+currentpoint
+/_pdf_y xdd
+/_pdf_x xdd
+}
+exch
+pdf_cshow
+} bd
+/pdf_yshow
+{
+/_pdf_na xdd
+/_pdf_i 0 dd
+currentpoint
+/_pdf_y xdd
+/_pdf_x xdd
+{
+pdf_remove2
+_pdf_str1 exch 0 exch put
+_pdf_str1 /_pdf_showproc load exec
+{_pdf_na _pdf_i get} stopped
+{ pop pop }
+{
+_pdf_x _pdf_y moveto
+0 exch
+rmoveto
+}
+ifelse
+_pdf_i 1 add /_pdf_i xdd
+currentpoint
+/_pdf_y xdd
+/_pdf_x xdd
+}
+exch
+pdf_cshow
+} bd
+/pdf_xyshow
+{
+/_pdf_na xdd
+/_pdf_i 0 dd
+currentpoint
+/_pdf_y xdd
+/_pdf_x xdd
+{
+pdf_remove2
+_pdf_str1 exch 0 exch put
+_pdf_str1 /_pdf_showproc load exec
+{_pdf_na _pdf_i get} stopped
+{ pop pop }
+{
+{_pdf_na _pdf_i 1 add get} stopped
+{ pop pop pop}
+{
+_pdf_x _pdf_y moveto
+rmoveto
+}
+ifelse
+}
+ifelse
+_pdf_i 2 add /_pdf_i xdd
+currentpoint
+/_pdf_y xdd
+/_pdf_x xdd
+}
+exch
+pdf_cshow
+} bd
+/pdfl1xs {/_pdf_showproc /show load dd pdf_xshow} bd
+/pdfl1ys {/_pdf_showproc /show load dd pdf_yshow} bd
+/pdfl1xys {/_pdf_showproc /show load dd pdf_xyshow} bd
+Level2? _ColorSep5044? not and
+{
+/pdfxs {{xshow} stopped {pdfl1xs} if} bd
+/pdfys {{yshow} stopped {pdfl1ys} if} bd
+/pdfxys {{xyshow} stopped {pdfl1xys} if} bd
+}
+{
+/pdfxs /pdfl1xs load dd
+/pdfys /pdfl1ys load dd
+/pdfxys /pdfl1xys load dd
+} ifelse
+/pdf_charpath {false charpath} bd
+/pdf_xcharpath {/_pdf_showproc /pdf_charpath load dd pdf_xshow} bd
+/pdf_ycharpath {/_pdf_showproc /pdf_charpath load dd pdf_yshow} bd
+/pdf_xycharpath {/_pdf_showproc /pdf_charpath load dd pdf_xyshow} bd
+/pdf_strokepath
+{
+{
+pdf_remove2
+_pdf_str1 exch 0 exch put
+_pdf_str1 false charpath
+currentpoint S moveto
+} bind
+exch pdf_cshow
+} bd
+/pdf_xstrokepath {/_pdf_showproc {pdf_charpath S} dd pdf_xshow} bd
+/pdf_ystrokepath {/_pdf_showproc {pdf_charpath S} dd pdf_yshow} bd
+/pdf_xystrokepath {/_pdf_showproc {pdf_charpath S} dd pdf_xyshow} bd
+Level2? {currentglobal true setglobal} if
+/d0/setcharwidth ld
+/nND {{/.notdef} repeat} bd
+/T3Defs {
+/BuildChar
+{
+1 index /Encoding get exch get
+1 index /BuildGlyph get exec
+}
+def
+/BuildGlyph {
+exch begin
+GlyphProcs exch get exec
+end
+} def
+/_pdfT3Font true def
+} bd
+/_pdfBoldRomanWidthProc
+{
+stringwidth 1 index 0 ne { exch .03 add exch }if setcharwidth
+0 0
+} bd
+/_pdfType0WidthProc
+{
+dup stringwidth 0 0 moveto
+2 index true charpath pathbbox
+0 -1
+7 index 2 div .88
+setcachedevice2
+pop
+0 0
+} bd
+/_pdfType0WMode1WidthProc
+{
+dup stringwidth
+pop 2 div neg -0.88
+2 copy
+moveto
+0 -1
+5 -1 roll true charpath pathbbox
+setcachedevice
+} bd
+/_pdfBoldBaseFont
+11 dict begin
+/FontType 3 def
+/FontMatrix[1 0 0 1 0 0]def
+/FontBBox[0 0 1 1]def
+/Encoding cHexEncoding def
+/_setwidthProc /_pdfBoldRomanWidthProc load def
+/_bcstr1 1 string def
+/BuildChar
+{
+exch begin
+_basefont setfont
+_bcstr1 dup 0 4 -1 roll put
+dup
+_setwidthProc
+3 copy
+moveto
+show
+_basefonto setfont
+moveto
+show
+end
+}bd
+currentdict
+end
+def
+pdf_has_composefont?
+{
+/_pdfBoldBaseCIDFont
+11 dict begin
+/CIDFontType 1 def
+/CIDFontName /_pdfBoldBaseCIDFont def
+/FontMatrix[1 0 0 1 0 0]def
+/FontBBox[0 0 1 1]def
+/_setwidthProc /_pdfType0WidthProc load def
+/_bcstr2 2 string def
+/BuildGlyph
+{
+exch begin
+_basefont setfont
+_bcstr2 1 2 index 256 mod put
+_bcstr2 0 3 -1 roll 256 idiv put
+_bcstr2 dup _setwidthProc
+3 copy
+moveto
+show
+_basefonto setfont
+moveto
+show
+end
+}bd
+currentdict
+end
+def
+/_pdfDefineIdentity-H
+{
+/Identity-H /CMap PDFText /pdf_resourcestatus get exec
+{
+pop pop
+}
+{
+/CIDInit/ProcSet findresource begin 12 dict begin
+begincmap
+/CIDSystemInfo
+3 dict begin
+/Registry (Adobe) def
+/Ordering (Identity) def
+/Supplement 0 def
+currentdict
+end
+def
+/CMapName /Identity-H def
+/CMapVersion 1 def
+/CMapType 1 def
+1 begincodespacerange
+<0000> <ffff>
+endcodespacerange
+1 begincidrange
+<0000> <ffff> 0
+endcidrange
+endcmap
+CMapName currentdict/CMap defineresource pop
+end
+end
+} ifelse
+} def
+} if
+/_pdfVerticalRomanT3Font
+10 dict begin
+/FontType 3 def
+/FontMatrix[1 0 0 1 0 0]def
+/FontBBox[0 0 1 1]def
+/_bcstr1 1 string def
+/BuildChar
+{
+exch begin
+_basefont setfont
+_bcstr1 dup 0 4 -1 roll put
+dup
+_pdfType0WidthProc
+moveto
+show
+end
+}bd
+currentdict
+end
+def
+Level2? {setglobal} if
+/MakeBoldFont
+{
+dup /ct_SyntheticBold known
+{
+dup length 3 add dict begin
+CopyFont
+/ct_StrokeWidth .03 0 FontMatrix idtransform pop def
+/ct_SyntheticBold true def
+currentdict
+end
+definefont
+}
+{
+dup dup length 3 add dict
+begin
+CopyFont
+/PaintType 2 def
+/StrokeWidth .03 0 FontMatrix idtransform pop def
+/dummybold currentdict
+end
+definefont
+dup /FontType get dup 9 ge exch 11 le and
+{
+_pdfBoldBaseCIDFont
+dup length 3 add dict copy begin
+dup /CIDSystemInfo get /CIDSystemInfo exch def
+/_Type0Identity /Identity-H 3 -1 roll [ exch ] composefont
+/_basefont exch def
+/_Type0Identity /Identity-H 3 -1 roll [ exch ] composefont
+/_basefonto exch def
+currentdict
+end
+/CIDFont defineresource
+}
+{
+_pdfBoldBaseFont
+dup length 3 add dict copy begin
+/_basefont exch def
+/_basefonto exch def
+currentdict
+end
+definefont
+}
+ifelse
+}
+ifelse
+} bd
+/MakeBold {
+1 index
+_pdf_FontDirectory 2 index 2 copy known
+{get}
+{exch pop}
+ifelse
+findfont
+dup
+/FontType get 0 eq
+{
+dup /WMode known {dup /WMode get 1 eq }{false} ifelse
+version length 4 ge
+and
+{version 0 4 getinterval cvi 2015 ge }
+{true}
+ifelse
+{/_pdfType0WidthProc}
+{/_pdfType0WMode1WidthProc}
+ifelse
+_pdfBoldBaseFont /_setwidthProc 3 -1 roll load put
+{MakeBoldFont} Type0CopyFont definefont
+}
+{
+dup /_fauxfont known not 1 index /SubstMaster known not and
+{
+_pdfBoldBaseFont /_setwidthProc /_pdfBoldRomanWidthProc load put
+MakeBoldFont
+}
+{
+2 index 2 index eq
+{ exch pop }
+{
+dup length dict begin
+CopyFont
+currentdict
+end
+definefont
+}
+ifelse
+}
+ifelse
+}
+ifelse
+pop pop
+dup /dummybold ne
+{/_pdf_FontDirectory exch dup _safeput }
+{ pop }
+ifelse
+}bd
+/MakeItalic {
+_pdf_FontDirectory exch 2 copy known
+{get}
+{exch pop}
+ifelse
+dup findfont
+dup /FontInfo 2 copy known
+{
+get
+/ItalicAngle 2 copy known
+{get 0 eq }
+{ pop pop true}
+ifelse
+}
+{ pop pop true}
+ifelse
+{
+exch pop
+dup /FontType get 0 eq Level2? not and
+{ dup /FMapType get 6 eq }
+{ false }
+ifelse
+{
+dup /WMode 2 copy known
+{
+get 1 eq
+{ _italMtx_WMode1Type0 }
+{ _italMtxType0 }
+ifelse
+}
+{ pop pop _italMtxType0 }
+ifelse
+}
+{
+dup /WMode 2 copy known
+{
+get 1 eq
+{ _italMtx_WMode1 }
+{ _italMtx }
+ifelse
+}
+{ pop pop _italMtx }
+ifelse
+}
+ifelse
+makefont
+dup /FontType get 42 eq Level2? not or
+{
+dup length dict begin
+CopyFont
+currentdict
+end
+}
+if
+1 index exch
+definefont pop
+/_pdf_FontDirectory exch dup _safeput
+}
+{
+pop
+2 copy ne
+{
+/_pdf_FontDirectory 3 1 roll _safeput
+}
+{ pop pop }
+ifelse
+}
+ifelse
+}bd
+/MakeBoldItalic {
+/dummybold exch
+MakeBold
+/dummybold
+MakeItalic
+}bd
+Level2?
+{
+/pdf_CopyDict
+{1 index length add dict copy}
+def
+}
+{
+/pdf_CopyDict
+{
+1 index length add dict
+1 index wcheck
+{ copy }
+{ begin
+{def} forall
+currentdict
+end
+}
+ifelse
+}
+def
+}
+ifelse
+/pdf_AddEuroGlyphProc
+{
+currentdict /CharStrings known
+{
+CharStrings /Euro known not
+{
+dup
+/CharStrings
+CharStrings 1 pdf_CopyDict
+begin
+/Euro pdf_EuroProcSet 4 -1 roll get def
+currentdict
+end
+def
+/pdf_PSBuildGlyph /pdf_PSBuildGlyph load def
+/pdf_PathOps /pdf_PathOps load def
+/Symbol eq
+{
+/Encoding Encoding dup length array copy
+dup 160 /Euro put def
+}
+if
+}
+{ pop
+}
+ifelse
+}
+{ pop
+}
+ifelse
+}
+def
+Level2? {currentglobal true setglobal} if
+/pdf_PathOps 4 dict dup begin
+/m {moveto} def
+/l {lineto} def
+/c {curveto} def
+/cp {closepath} def
+end
+def
+/pdf_PSBuildGlyph
+{
+gsave
+8 -1 roll pop
+7 1 roll
+currentdict /PaintType 2 copy known {get 2 eq}{pop pop false} ifelse
+dup 9 1 roll
+{
+currentdict /StrokeWidth 2 copy known
+{
+get 2 div
+5 1 roll
+4 -1 roll 4 index sub
+4 1 roll
+3 -1 roll 4 index sub
+3 1 roll
+exch 4 index add exch
+4 index add
+5 -1 roll pop
+}
+{
+pop pop
+}
+ifelse
+}
+if
+setcachedevice
+pdf_PathOps begin
+exec
+end
+{
+currentdict /StrokeWidth 2 copy known
+{ get }
+{ pop pop 0 }
+ifelse
+setlinewidth stroke
+}
+{
+fill
+}
+ifelse
+grestore
+} def
+/pdf_EuroProcSet 13 dict def
+pdf_EuroProcSet
+begin
+/Courier-Bold
+{
+600 0 6 -12 585 612
+{
+385 274 m
+180 274 l
+179 283 179 293 179 303 c
+179 310 179 316 180 323 c
+398 323 l
+423 404 l
+197 404 l
+219 477 273 520 357 520 c
+409 520 466 490 487 454 c
+487 389 l
+579 389 l
+579 612 l
+487 612 l
+487 560 l
+449 595 394 612 349 612 c
+222 612 130 529 98 404 c
+31 404 l
+6 323 l
+86 323 l
+86 304 l
+86 294 86 284 87 274 c
+31 274 l
+6 193 l
+99 193 l
+129 77 211 -12 359 -12 c
+398 -12 509 8 585 77 c
+529 145 l
+497 123 436 80 356 80 c
+285 80 227 122 198 193 c
+360 193 l
+cp
+600 0 m
+}
+pdf_PSBuildGlyph
+} def
+/Courier-BoldOblique /Courier-Bold load def
+/Courier
+{
+600 0 17 -12 578 584
+{
+17 204 m
+97 204 l
+126 81 214 -12 361 -12 c
+440 -12 517 17 578 62 c
+554 109 l
+501 70 434 43 366 43 c
+266 43 184 101 154 204 c
+380 204 l
+400 259 l
+144 259 l
+144 270 143 281 143 292 c
+143 299 143 307 144 314 c
+418 314 l
+438 369 l
+153 369 l
+177 464 249 529 345 529 c
+415 529 484 503 522 463 c
+522 391 l
+576 391 l
+576 584 l
+522 584 l
+522 531 l
+473 566 420 584 348 584 c
+216 584 122 490 95 369 c
+37 369 l
+17 314 l
+87 314 l
+87 297 l
+87 284 88 272 89 259 c
+37 259 l
+cp
+600 0 m
+}
+pdf_PSBuildGlyph
+} def
+/Courier-Oblique /Courier load def
+/Helvetica
+{
+556 0 24 -19 541 703
+{
+541 628 m
+510 669 442 703 354 703 c
+201 703 117 607 101 444 c
+50 444 l
+25 372 l
+97 372 l
+97 301 l
+49 301 l
+24 229 l
+103 229 l
+124 67 209 -19 350 -19 c
+435 -19 501 25 509 32 c
+509 131 l
+492 105 417 60 343 60 c
+267 60 204 127 197 229 c
+406 229 l
+430 301 l
+191 301 l
+191 372 l
+455 372 l
+479 444 l
+194 444 l
+201 531 245 624 348 624 c
+433 624 484 583 509 534 c
+cp
+556 0 m
+}
+pdf_PSBuildGlyph
+} def
+/Helvetica-Oblique /Helvetica load def
+/Helvetica-Bold
+{
+556 0 12 -19 563 710
+{
+563 621 m
+537 659 463 710 363 710 c
+216 710 125 620 101 462 c
+51 462 l
+12 367 l
+92 367 l
+92 346 l
+92 337 93 328 93 319 c
+52 319 l
+12 224 l
+102 224 l
+131 58 228 -19 363 -19 c
+417 -19 471 -12 517 18 c
+517 146 l
+481 115 426 93 363 93 c
+283 93 254 166 246 224 c
+398 224 l
+438 319 l
+236 319 l
+236 367 l
+457 367 l
+497 462 l
+244 462 l
+259 552 298 598 363 598 c
+425 598 464 570 486 547 c
+507 526 513 517 517 509 c
+cp
+556 0 m
+}
+pdf_PSBuildGlyph
+} def
+/Helvetica-BoldOblique /Helvetica-Bold load def
+/Symbol
+{
+750 0 20 -12 714 685
+{
+714 581 m
+650 645 560 685 465 685 c
+304 685 165 580 128 432 c
+50 432 l
+20 369 l
+116 369 l
+115 356 115 347 115 337 c
+115 328 115 319 116 306 c
+50 306 l
+20 243 l
+128 243 l
+165 97 300 -12 465 -12 c
+560 -12 635 25 685 65 c
+685 155 l
+633 91 551 51 465 51 c
+340 51 238 131 199 243 c
+555 243 l
+585 306 l
+184 306 l
+183 317 182 326 182 336 c
+182 346 183 356 184 369 c
+614 369 l 644 432 l
+199 432 l
+233 540 340 622 465 622 c
+555 622 636 580 685 520 c
+cp
+750 0 m
+}
+pdf_PSBuildGlyph
+} def
+/Times-Bold
+{
+500 0 16 -14 478 700
+{
+367 308 m
+224 308 l
+224 368 l
+375 368 l
+380 414 l
+225 414 l
+230 589 257 653 315 653 c
+402 653 431 521 444 457 c
+473 457 l
+473 698 l
+444 697 l
+441 679 437 662 418 662 c
+393 662 365 700 310 700 c
+211 700 97 597 73 414 c
+21 414 l
+16 368 l
+69 368 l
+69 359 68 350 68 341 c
+68 330 68 319 69 308 c
+21 308 l
+16 262 l
+73 262 l
+91 119 161 -14 301 -14 c
+380 -14 443 50 478 116 c
+448 136 l
+415 84 382 40 323 40 c
+262 40 231 77 225 262 c
+362 262 l
+cp
+500 0 m
+}
+pdf_PSBuildGlyph
+} def
+/Times-BoldItalic
+{
+500 0 9 -20 542 686
+{
+542 686 m
+518 686 l
+513 673 507 660 495 660 c
+475 660 457 683 384 683 c
+285 683 170 584 122 430 c
+58 430 l
+34 369 l
+105 369 l
+101 354 92 328 90 312 c
+34 312 l
+9 251 l
+86 251 l
+85 238 84 223 84 207 c
+84 112 117 -14 272 -14 c
+326 -14 349 9 381 9 c
+393 9 393 -10 394 -20 c
+420 -20 l
+461 148 l
+429 148 l
+416 109 362 15 292 15 c
+227 15 197 55 197 128 c
+197 162 204 203 216 251 c
+378 251 l
+402 312 l
+227 312 l
+229 325 236 356 241 369 c
+425 369 l
+450 430 l
+255 430 l
+257 435 264 458 274 488 c
+298 561 337 654 394 654 c
+437 654 484 621 484 530 c
+484 516 l
+516 516 l
+cp
+500 0 m
+}
+pdf_PSBuildGlyph
+} def
+/Times-Italic
+{
+500 0 23 -10 595 692
+{
+399 317 m
+196 317 l
+199 340 203 363 209 386 c
+429 386 l
+444 424 l
+219 424 l
+246 514 307 648 418 648 c
+448 648 471 638 492 616 c
+529 576 524 529 527 479 c
+549 475 l
+595 687 l
+570 687 l
+562 674 558 664 542 664 c
+518 664 474 692 423 692 c
+275 692 162 551 116 424 c
+67 424 l
+53 386 l
+104 386 l
+98 363 93 340 90 317 c
+37 317 l
+23 279 l
+86 279 l
+85 266 85 253 85 240 c
+85 118 137 -10 277 -10 c
+370 -10 436 58 488 128 c
+466 149 l
+424 101 375 48 307 48 c
+212 48 190 160 190 234 c
+190 249 191 264 192 279 c
+384 279 l
+cp
+500 0 m
+}
+pdf_PSBuildGlyph
+} def
+/Times-Roman
+{
+500 0 10 -12 484 692
+{
+347 298 m
+171 298 l
+170 310 170 322 170 335 c
+170 362 l
+362 362 l
+374 403 l
+172 403 l
+184 580 244 642 308 642 c
+380 642 434 574 457 457 c
+481 462 l
+474 691 l
+449 691 l
+433 670 429 657 410 657 c
+394 657 360 692 299 692 c
+204 692 94 604 73 403 c
+22 403 l
+10 362 l
+70 362 l
+69 352 69 341 69 330 c
+69 319 69 308 70 298 c
+22 298 l
+10 257 l
+73 257 l
+97 57 216 -12 295 -12 c
+364 -12 427 25 484 123 c
+458 142 l
+425 101 384 37 316 37 c
+256 37 189 84 173 257 c
+335 257 l
+cp
+500 0 m
+}
+pdf_PSBuildGlyph
+} def
+end
+Level2? {setglobal} if
+currentdict readonly pop end
+%%EndResource
+PDFText begin
+[userdict /pdf_svglb currentglobal put true setglobal
+39/quotesingle 96/grave 128/Adieresis/Aring/Ccedilla/Eacute/Ntilde/Odieresis
+/Udieresis/aacute/agrave/acircumflex/adieresis/atilde/aring/ccedilla/eacute
+/egrave/ecircumflex/edieresis/iacute/igrave/icircumflex/idieresis/ntilde
+/oacute/ograve/ocircumflex/odieresis/otilde/uacute/ugrave/ucircumflex
+/udieresis/dagger/degree/cent/sterling/section/bullet/paragraph/germandbls
+/registered/copyright/trademark/acute/dieresis/.notdef/AE/Oslash
+/.notdef/plusminus/.notdef/.notdef/yen/mu/.notdef/.notdef
+/.notdef/.notdef/.notdef/ordfeminine/ordmasculine/.notdef/ae/oslash
+/questiondown/exclamdown/logicalnot/.notdef/florin/.notdef/.notdef
+/guillemotleft/guillemotright/ellipsis/space/Agrave/Atilde/Otilde/OE/oe
+/endash/emdash/quotedblleft/quotedblright/quoteleft/quoteright/divide
+/.notdef/ydieresis/Ydieresis/fraction/currency/guilsinglleft/guilsinglright
+/fi/fl/daggerdbl/periodcentered/quotesinglbase/quotedblbase/perthousand
+/Acircumflex/Ecircumflex/Aacute/Edieresis/Egrave/Iacute/Icircumflex
+/Idieresis/Igrave/Oacute/Ocircumflex/.notdef/Ograve/Uacute/Ucircumflex
+/Ugrave/dotlessi/circumflex/tilde/macron/breve/dotaccent/ring/cedilla
+/hungarumlaut/ogonek/caron
+0 TE
+[1/dotlessi/caron 39/quotesingle 96/grave 
+127/bullet/Euro/bullet/quotesinglbase/florin/quotedblbase/ellipsis
+/dagger/daggerdbl/circumflex/perthousand/Scaron/guilsinglleft/OE
+/bullet/Zcaron/bullet/bullet/quoteleft/quoteright/quotedblleft
+/quotedblright/bullet/endash/emdash/tilde/trademark/scaron
+/guilsinglright/oe/bullet/zcaron/Ydieresis/space/exclamdown/cent/sterling
+/currency/yen/brokenbar/section/dieresis/copyright/ordfeminine
+/guillemotleft/logicalnot/hyphen/registered/macron/degree/plusminus
+/twosuperior/threesuperior/acute/mu/paragraph/periodcentered/cedilla
+/onesuperior/ordmasculine/guillemotright/onequarter/onehalf/threequarters
+/questiondown/Agrave/Aacute/Acircumflex/Atilde/Adieresis/Aring/AE/Ccedilla
+/Egrave/Eacute/Ecircumflex/Edieresis/Igrave/Iacute/Icircumflex/Idieresis
+/Eth/Ntilde/Ograve/Oacute/Ocircumflex/Otilde/Odieresis/multiply/Oslash
+/Ugrave/Uacute/Ucircumflex/Udieresis/Yacute/Thorn/germandbls/agrave
+/aacute/acircumflex/atilde/adieresis/aring/ae/ccedilla/egrave/eacute
+/ecircumflex/edieresis/igrave/iacute/icircumflex/idieresis/eth/ntilde
+/ograve/oacute/ocircumflex/otilde/odieresis/divide/oslash/ugrave/uacute
+/ucircumflex/udieresis/yacute/thorn/ydieresis
+1 TE
+end
+
+userdict /pdf_svglb get setglobal
+%%BeginResource: pdfasc.prc
+%%Version: 4.0 2
+%%Copyright: Copyright 1992-1997 Adobe Systems Incorporated. All Rights Reserved.
+/AS {
+9 dict begin
+/shrink? xdd
+/Pury xdd
+/Purx xdd
+/Plly xdd
+/Pllx xdd
+gsave newpath clippath pathbbox newpath grestore
+/Dury xdd
+/Durx xdd
+/Dlly xdd
+/Dllx xdd
+Durx Dllx sub Dury Dlly sub
+Pury Plly sub div exch Purx Pllx sub div
+2 copy gt { exch } if pop
+Durx Dllx add 2 div Dury Dlly add 2 div translate
+shrink? { dup scale } { pop } ifelse
+Purx Pllx add -2 div Pury Plly add -2 div translate
+end
+} [/shrink? /Pury /Purx /Plly /Pllx /Durx /Dury /Dllx /Dlly]
+bld
+%%EndResource
+currentdict readonly pop
+end end
+/currentpacking where {pop setpacking}if
+PDFVars/DocInitAll{[PDF PDFText]{/docinitialize get exec}forall }put
+PDFVars/InitAll{[PDF PDFText]{/initialize get exec}forall initgs}put
+PDFVars/TermAll{[PDFText PDF]{/terminate get exec}forall}put
+PDFVars begin PDF begin
+PDFVars/DocInitAll get exec PDFVars/InitAll get exec
+PDFVars/TermAll get exec end end
+
+%%EndSetup
+%%Page: 28 1
+%%BeginPageSetup
+userdict /pgsave save put
+PDFVars begin PDF begin PDFVars/InitAll get exec
+8.5 -25 translate
+0 0 595 842 true PDF begin PDFVars begin AS end end
+%%EndPageSetup
+0 0 595 842 re
+W
+n
+q
+0.119995 0 0 0.119995 0 0 cm
+q
+q
+8.3333 0 0 8.3333 0 0 cm
+[/DeviceGray] cs 0 sc
+userdict begin
+userdict /pdf_svglb currentglobal put true setglobal
+%%BeginResource: font JYOFWV+TTE220CA80t00
+11 dict begin
+/FontName /JYOFWV+TTE220CA80t00 def
+/FontMatrix [1 1000 div 0 0 1 1000 div 0 0 ] def
+/Encoding  256 array 0 1 255 {1 index exch /.notdef put} for  def
+/PaintType 0 def
+/FontType 1 def
+/FontBBox { 0 0 0 0 } def
+/FontInfo 1 dict dup begin
+  /OrigFontType /TrueType def
+end readonly def
+currentdict
+end
+
+systemdict begin
+dup /Private 7 dict dup begin
+/BlueValues [-15 0 600 650] def
+/MinFeature {16 16} def
+/password 5839 def
+/ND {def} def
+/NP {put} def
+/RD {string currentfile exch readhexstring pop} def
+2 index /CharStrings 1320 dict dup begin
+/.notdef 
+<10bf317005b8302fd4ad> ND 
+end
+end
+put
+put
+dup /FontName get exch definefont pop
+end
+/JYOFWV+TTE220CA80t00 findfont /Encoding get
+pop
+%%EndResource
+
+userdict /pdf_svglb get setglobal
+end
+[/N31/JYOFWV+TTE220CA80t00 -1 TZG
+554.28 833.48 m
+
+systemdict begin
+/JYOFWV+TTE220CA80t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g16 
+<10bf317051187d4161bfbf87f013ce66d6ecfae318ccce40fd> ND 
+/g3 
+<10bf317079c757bf91> ND 
+/g83 
+<10bf31706c4c139ad1504911cc5a84ae5482b57788c421a4d0e3940e08fe
+dcbd4145104e9520728914bfa2ddec0bb90a4637a6d849e1891b31f80ddf
+fda0b833c7acce6eeaa4833fcece0f9db2cbf14353ab88b38d5043981198
+a96d665a08dbeac329973c281a7cdf231a67a90551697c22be962a60d488
+6d38b63bd7195716dccbcf2bf770809e5578ff591e6d108186bdb01bfc10
+49780307b25cae737076174307e79535ee2fb6e05a45b0d3caf0903e2a12
+29396a769ff61c6cf35b54d9e667f2423d91e330dca406> ND 
+/g68 
+<10bf31704ab21818500193ceb7cb34e9df44d2f8ec9dd5c98d55ae22888d
+9df2e6f213a10b28cefcaf95aa9640c835b3bd1ffcdc75a4a63fa25c6d04
+6e0087c66cd64147f3ed96dff91cb0244813473d9381cce21ce83d903943
+f4ac8f3242bc292da1de1531cc532a86e1f3cc7d1e021df739aea871418b
+5de99006d4c5ab2682816c98649eed26a6b084e7f7ec911ec66ec74f0ad5
+38dbeb4cb0b01a394cc508cff8b61d71209af50bf8f8ceff036e8a30b999
+2cc25f8ecf6950be6e3e9dff42e54836dd89050eeb2b37dd3a0be262e8d0
+35a9d19daa2c018f11edad2db0075ba942763369ef43d94cbf0bc2410fbc
+2ce40e96872b5ba313aee01224b418272066554dc36af669eca48e0dfc1b
+4fcee06d> ND 
+/g74 
+<10bf3170435d457c3b535901786e4ecdfb54e2e2b9d2701f56213d6ea8be
+da670f1455ed9f86b1c016d867556f3788c566c4463df8ad7d43c02c4979
+a753f92e0fb7646a83ff0f5483c56c2068dd67dd1a5dd3a611211f45ea8a
+35b888ad55e124a20754e67bac1ef0ea9cbba7f58cea97597a63f216145f
+d4b1eb5399d5bbfbbc01d511109a8add39032dea881c9b31058c82b67a04
+92f9d8a57410a541b1f63ff9896c604eda0a0591b1386ac4427b83c53a87
+c98421d096ccb68b8c0e35a1af0cd94a1a3369869ea22ba34f12d1caac5e
+ac238e7e41a885ba431e6eddaba7b95689002deff01ef7d6a1854016ca37
+5eeab391e7639b19f0586044cd5fda99d3ca3e02e54cf2076f699ff3ebd0
+4c3dd3f44d53269cec407cbbfffb133426e4d1bd41ac8a3fac28b4201e70
+a033f3f2600b5249c7d3c180bb2a1bff5d06f7c83253a3e60ac5c563d7c3
+8bc1f4609da1fece808da2237f6b3e03c48db1> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/JYOFWV+TTE220CA80t00 findfont /Encoding get
+dup 8 /g16 put
+dup 9 /g3 put
+dup 10 /g83 put
+dup 11 /g68 put
+dup 12 /g74 put
+pop
+/N31 [7.25512 0 0 7.25999 0 0] Tf
+(\b\t\n\013\f) show
+
+systemdict begin
+/JYOFWV+TTE220CA80t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g72 
+<10bf317040c23fc2e1ae41aa9282758c8c31679b7e286f24fa5b5a9a6fa9
+75c7be3cf05ebf2a0fc236eb986b5f92e4980314c681fa061e7cec91d696
+7818e2a880229495638c5ebd9d4d2949f80813353896ef8dcfc225660744
+df906eeb5dc0c12faef2701cc430f938b192981dca77eb2c468f927adc09
+540054eb413213ac2c8b75433c91b7aacb70b3c4376bd38fad0e034e7675
+e0> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/JYOFWV+TTE220CA80t00 findfont /Encoding get
+dup 13 /g72 put
+pop
+(\r)
+[3.21397 ] pdfxs
+
+systemdict begin
+/JYOFWV+TTE220CA80t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g21 
+<10bf317051174587fc4339fd7aa7b8af57a669ad5baffe5d23f92485e821
+cb483459ef2a67bd0fcc266d8c36d0cc7572f71f1c120834f365b1c07eb7
+2270c6aa05e49d9d9441f784e1fb5a81cd488763e3b37da266df1ad7ba82
+c2fb8d8ce7a6686548f6534ed619eb14cafae1c5ae449ccab53891f131e0
+06bdc4ff9ecba89386b5394512a4bc802ea3f3e2f7> ND 
+/g25 
+<10bf3170422f93576c7ab8d05cee72851c4197dccefef78b0082f3d29ef0
+33a80cc2d6f9738acfd1dd16b0708009f16090b4fac11aa191e1a812b520
+cf011e1dfe3302d5b11934545e9d2c954fc90f083cb13e93c2f5ca1f17ee
+eb171444226c36c903f97b7e7efd367663b9166c814fc969499a489a939c
+31acbeb709480b614b16893a90a8edc9318ba48291bcc15ea445e4bd9faf
+84afba189061e0b664889545a4d39e1edb07931e18ad9c393154a4c4b2d9
+d555cc564186408dce0a24c01e77336ebf> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/JYOFWV+TTE220CA80t00 findfont /Encoding get
+dup 4 /g21 put
+dup 6 /g25 put
+pop
+(\t\004\006\t\b\t) show
+Q
+5 w
+1 J
+1 j
+n
+354 6425.67 m
+4722 6425.67 l
+[/DeviceGray] cs 0 sc
+S
+n
+354 6366.67 m
+4722 6366.67 l
+S
+n
+354 6307.67 m
+4722 6307.67 l
+S
+n
+354 6248.67 m
+4722 6248.67 l
+S
+n
+354 6189.67 m
+4722 6189.67 l
+S
+n
+354 6130.67 m
+4722 6130.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+userdict begin
+userdict /pdf_svglb currentglobal put true setglobal
+%%BeginResource: font KBDFWV+TTE23CC1C8t00
+11 dict begin
+/FontName /KBDFWV+TTE23CC1C8t00 def
+/FontMatrix [1 1000 div 0 0 1 1000 div 0 0 ] def
+/Encoding  256 array 0 1 255 {1 index exch /.notdef put} for  def
+/PaintType 0 def
+/FontType 1 def
+/FontBBox { 0 0 0 0 } def
+/FontInfo 1 dict dup begin
+  /OrigFontType /TrueType def
+end readonly def
+currentdict
+end
+
+systemdict begin
+dup /Private 7 dict dup begin
+/BlueValues [-15 0 600 650] def
+/MinFeature {16 16} def
+/password 5839 def
+/ND {def} def
+/NP {put} def
+/RD {string currentfile exch readhexstring pop} def
+2 index /CharStrings 88 dict dup begin
+/.notdef 
+<10bf3170383ea4b036> ND 
+end
+end
+put
+put
+dup /FontName get exch definefont pop
+end
+/KBDFWV+TTE23CC1C8t00 findfont /Encoding get
+pop
+%%EndResource
+
+userdict /pdf_svglb get setglobal
+end
+[/N25/KBDFWV+TTE23CC1C8t00 -1 TZG
+74.52 753.44 m
+
+systemdict begin
+/KBDFWV+TTE23CC1C8t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g56 
+<10bf31700974a5c2dd577a31f3a239a9a69337271fae9a9051a0cf71fbb7
+56cfb3bf79655d10b81001c54c00a5bf19b213f295bce93ba37b64413283
+45c26fc27f7135c533ab87c32bbf236568c75129bf6e96b54ac84ae334af
+d7427cdb5c5182652fffae9868d6e27f82aebb8f54c1057b91a8ef4b2cd4
+5d05cd538af1367cdb6a864a364539a4307f38fc40da3aa8da867a5e748e
+b3415944d21f45e2eb1a3e851cabc330a1b325d4a8d9fc010c6ea7ceea84
+a444b104058633c17edb> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/KBDFWV+TTE23CC1C8t00 findfont /Encoding get
+dup 1 /g56 put
+pop
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+userdict begin
+userdict /pdf_svglb currentglobal put true setglobal
+%%BeginResource: font TCLEWV+TTE23CFED8t00
+11 dict begin
+/FontName /TCLEWV+TTE23CFED8t00 def
+/FontMatrix [1 1000 div 0 0 1 1000 div 0 0 ] def
+/Encoding  256 array 0 1 255 {1 index exch /.notdef put} for  def
+/PaintType 0 def
+/FontType 1 def
+/FontBBox { 0 0 0 0 } def
+/FontInfo 1 dict dup begin
+  /OrigFontType /TrueType def
+end readonly def
+currentdict
+end
+
+systemdict begin
+dup /Private 7 dict dup begin
+/BlueValues [-15 0 600 650] def
+/MinFeature {16 16} def
+/password 5839 def
+/ND {def} def
+/NP {put} def
+/RD {string currentfile exch readhexstring pop} def
+2 index /CharStrings 230 dict dup begin
+/.notdef 
+<10bf3170383ea4b036> ND 
+end
+end
+put
+put
+dup /FontName get exch definefont pop
+end
+/TCLEWV+TTE23CFED8t00 findfont /Encoding get
+pop
+%%EndResource
+
+userdict /pdf_svglb get setglobal
+end
+[/N28/TCLEWV+TTE23CFED8t00 -1 TZG
+76.08 781.64 m
+
+systemdict begin
+/TCLEWV+TTE23CFED8t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g194 
+<10bf31706ea6996a6c3711e6d3f38640a1d4bdae266c008f4e03cba6c0ea
+3826a83afb0c28de6cefe6cbc9015f15d28414f607a05684a12c61361ec0
+fdea674b3b16e24068ea9a9568c3b7c89d> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/TCLEWV+TTE23CFED8t00 findfont /Encoding get
+dup 2 /g194 put
+pop
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+Q
+n
+755 6425.67 m
+755 6130.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+101.04 760.52 m
+
+systemdict begin
+/KBDFWV+TTE23CC1C8t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g54 
+<10bf317069b1fa1ca0dfbf27706650d339946e0e979795f8d2afeb9d6053
+9512ad64c4cab489d36469088837c50783944c1daf73e41de266dad8ae76
+d19080f0af21f089818cb230398f6c98482b540202c5371e4c8164dca730
+da548b9e29c89584256c051093349b0103464be33b0cf06dfdc118833e17
+f9b9ef5ed8b2ef1de09a779e56fc5e4740f070cce89ac67f7586ee3b6a79
+29292c5dda96e9e3800e24edc902393da077cc0030f87bd423a15f4d3b5a
+c8c8> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/KBDFWV+TTE23CC1C8t00 findfont /Encoding get
+dup 3 /g54 put
+pop
+/N25 [11.9918 0 0 12 0 0] Tf
+(\003) show
+101.64 753.44 m
+(\001) show
+100.92 739.28 m
+
+systemdict begin
+/KBDFWV+TTE23CC1C8t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g53 
+<10bf31705fc1f11ad59b741fa1dcc5879cf7040fe7f1c28ce8f9f91960b9
+8e4f13018ee56220a89da54dac5b2ee8d91dba4e9a878959013a741d7865
+46ad2d75340f13104818a510eb6e7a1052223bf0a1fcb50fcb5b6c45ff98
+fbd710b1af53fd21ff1a61d6e7336fc58b959f800124be9217ebeaa6ee68
+02dbda41829f9f2736df8d9ab61b> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/KBDFWV+TTE23CC1C8t00 findfont /Encoding get
+dup 2 /g53 put
+pop
+(\002) show
+103.2 781.64 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+103.08 781.64 m
+
+systemdict begin
+/TCLEWV+TTE23CFED8t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g142 
+<10bf3170053e9176a00915882f4bd2fd30bed41b08180da2454029a6b2cd
+f95599e87f086b18ecd7998a18be9e6ca5a8b4341b4513a0ad94338fc8d6
+a4b283933ce7bc6299df> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/TCLEWV+TTE23CFED8t00 findfont /Encoding get
+dup 6 /g142 put
+pop
+(\006) show
+115.2 760.52 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+116.64 781.64 m
+
+systemdict begin
+/TCLEWV+TTE23CFED8t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g195 
+<10bf31707d9d77102152af29784b220ca1e073f802b0e32f1157eb486dcb
+0660718043748ce8393077ebd4afcf2cdcde26ffd2b3feddbe9a4a0a1fa6
+6c09d376c2ccace32086879ce0f4e8b3537ab54bafaacb28375a4edf11df
+076f58df9eb04ef78befbdeae4509804396de8383eda56657b8eafdace85
+aff79199adfa9175b99f6827ac439b4c9b3b7148121ee17147e5552c85ac
+42a6a2729d62b75de85b> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/TCLEWV+TTE23CFED8t00 findfont /Encoding get
+dup 1 /g195 put
+pop
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\001) show
+128.04 767.6 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+130.32 781.64 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+Q
+n
+1207 6425.67 m
+1207 6130.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+155.88 753.44 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+155.16 739.28 m
+(\002) show
+155.28 760.52 m
+(\003) show
+157.44 781.64 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+168.72 722.84 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+165.6 722.84 m
+
+systemdict begin
+/TCLEWV+TTE23CFED8t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g173 
+<10bf31708b4dec8b6b8dff4660ccc9da6197631c4c6dfbaa37b8a4f89fe1
+e5fa7b274ccc96e6530b3ab25c6d13e66717d960fe735190eb8817cb7d85
+c3a84827737945634430e1e7bbfb2ba0ab38fd5a38a0112e4d629d5cfe61
+953ea09404> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/TCLEWV+TTE23CFED8t00 findfont /Encoding get
+dup 3 /g173 put
+pop
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\003) show
+162.12 723.68 m
+(\003) show
+158.641 724.52 m
+(\003) show
+183 760.52 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+182.28 725.12 m
+(\002) show
+184.44 781.64 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\001) show
+195.96 760.52 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\003) show
+Q
+n
+1772 6425.67 m
+1772 6130.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+222.96 725.12 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+222.96 760.52 m
+(\002) show
+225.24 781.64 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+237.24 753.44 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+250.799 746.36 m
+
+systemdict begin
+/KBDFWV+TTE23CC1C8t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g55 
+<10bf31706fd8a9bea09e5c1a1f54d0e869a943cf44924c97138c7c264dcc
+65f93a1840e2c8616865807319893a7986b32fb753daa2f237f20bbe6d92
+354d4f5a42fd3cc86f0595ad11d891c26b9a907124dbcc5c6d92136cffc1
+9b26be2cca17b628c305de8a7a2f96cd2b0f1390ffe4ec114bf417fd8947
+54a06e3ae55758212131b13c9d1717912bc2b72b4956> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/KBDFWV+TTE23CC1C8t00 findfont /Encoding get
+dup 5 /g55 put
+pop
+(\005) show
+250.799 753.44 m
+(\005) show
+Q
+n
+2224 6425.67 m
+2224 6130.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+277.92 753.44 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+277.92 746.36 m
+(\005) show
+277.2 739.28 m
+(\002) show
+279.48 781.64 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+290.76 722.84 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+287.64 722.84 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\003) show
+284.16 723.68 m
+(\003) show
+280.681 724.52 m
+(\003) show
+305.04 767.6 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+Q
+n
+2676 6425.67 m
+2676 6130.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+331.44 760.52 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+331.56 753.44 m
+(\003) show
+332.16 732.2 m
+(\001) show
+332.16 767.6 m
+(\001) show
+333.48 781.64 m
+
+systemdict begin
+/TCLEWV+TTE23CFED8t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g193 
+<10bf317056005fdc845d7d6ef8478700c113b0d0df3f5f3e794717f3243e
+1a64833524e6a14bd8978fa2fd8697697f6f5f7f95c5c7e78903> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/TCLEWV+TTE23CFED8t00 findfont /Encoding get
+dup 4 /g193 put
+pop
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\004) show
+345.12 760.52 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\003) show
+345.72 739.28 m
+(\001) show
+347.16 781.64 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\001) show
+359.28 760.52 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+Q
+n
+3128 6425.67 m
+3128 6130.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+386.4 739.28 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+385.68 767.6 m
+(\002) show
+387.96 781.64 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+399.36 753.44 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\003) show
+399.96 732.2 m
+(\001) show
+399.96 760.52 m
+(\001) show
+401.52 781.64 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+401.4 781.64 m
+(\006) show
+412.8 767.6 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+414.84 781.64 m
+
+systemdict begin
+/TCLEWV+TTE23CFED8t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g196 
+<10bf31707d9d7c28c3b12c56353ba2713e3508d7089bced1555b42a59493
+177432db2fe3d08e8a15c0460d01e0e229cf11f2a282b5982e877061e67f
+c4ca3047efdb3bc84efc6680aeccc903fc44851aad54c8cc9e38227d8bbe
+2472fc171f16ebc241678735ab57f8b886fa830178d227da1a3030801c04
+bf82385a0b07e6c53fb3931b418d87f342331edebf4971fe585d054a649e
+700e3c7be95860ef9e2022ea483a72294cf65e7e79cd2f19a53e7d0d9032
+565a8bc9c4581ea61c07d94c5cbd99b50af39c0f67bba4aa> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/TCLEWV+TTE23CFED8t00 findfont /Encoding get
+dup 7 /g196 put
+pop
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\007) show
+427.08 760.52 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+Q
+n
+3693 6425.67 m
+3693 6130.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+453.6 760.52 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\003) show
+455.76 781.64 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+467.76 739.28 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+480.599 722.84 m
+(\002) show
+477.48 722.84 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\003) show
+Q
+n
+4145 6425.67 m
+4145 6130.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+507.84 753.44 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\003) show
+507.84 760.52 m
+(\003) show
+509.76 781.64 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\004) show
+522 753.44 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+523.56 781.64 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+Q
+7 w
+n
+351 6422.67 m
+351 6130.67 l
+S
+9 w
+n
+331 6421.67 m
+331 6130.67 l
+S
+5 w
+n
+4720 6423.67 m
+4720 6130.67 l
+S
+n
+354 5622.67 m
+4722 5622.67 l
+S
+n
+354 5563.67 m
+4722 5563.67 l
+S
+n
+354 5504.67 m
+4722 5504.67 l
+S
+n
+354 5445.67 m
+4722 5445.67 l
+S
+n
+354 5386.67 m
+4722 5386.67 l
+S
+n
+354 5327.67 m
+4722 5327.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+73.92 664.16 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\003) show
+74.5199 657.08 m
+(\001) show
+73.8 642.92 m
+(\002) show
+76.08 685.28 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+85.68 626.48 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+82.56 626.48 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\003) show
+79.0804 627.32 m
+(\003) show
+75.6008 628.16 m
+(\003) show
+87.8395 685.28 m
+(\001) show
+98.28 664.16 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+109.439 671.24 m
+(\002) show
+121.438 664.16 m
+(\003) show
+Q
+n
+1137 5622.67 m
+1137 5327.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+145.8 664.16 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+147.24 685.28 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\001) show
+156.96 628.76 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+168.839 664.16 m
+(\002) show
+180.838 664.16 m
+(\003) show
+193.316 664.16 m
+(\001) show
+204.595 664.16 m
+(\003) show
+Q
+n
+1830 5622.67 m
+1830 5327.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+228.24 635.84 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+228.24 664.16 m
+(\002) show
+230.4 685.28 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\001) show
+240.84 657.08 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+252.719 657.08 m
+(\005) show
+264.598 657.08 m
+(\001) show
+275.757 664.16 m
+(\002) show
+288.355 657.08 m
+(\005) show
+Q
+n
+2523 5622.67 m
+2523 5327.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+311.4 642.92 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+312.12 657.08 m
+(\001) show
+313.56 685.28 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\001) show
+323.28 664.16 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+335.279 664.16 m
+(\003) show
+347.758 664.16 m
+(\001) show
+358.917 671.24 m
+(\002) show
+370.915 671.24 m
+(\003) show
+Q
+n
+3216 5622.67 m
+3216 5327.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+395.28 671.24 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+396.72 685.28 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\001) show
+407.16 650 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\005) show
+419.039 657.08 m
+(\001) show
+430.198 664.16 m
+(\002) show
+442.197 664.16 m
+(\003) show
+454.675 664.16 m
+(\001) show
+Q
+n
+3909 5622.67 m
+3909 5327.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+478.44 642.92 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+477.72 671.24 m
+(\002) show
+479.88 685.28 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\001) show
+489.72 664.16 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\003) show
+501.599 657.08 m
+(\003) show
+502.199 635.84 m
+(\001) show
+502.199 664.16 m
+(\001) show
+503.76 685.28 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+503.64 685.28 m
+(\006) show
+513.36 671.24 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+515.4 685.28 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\007) show
+525.96 664.16 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+Q
+7 w
+n
+351 5619.67 m
+351 5327.67 l
+S
+9 w
+n
+331 5618.67 m
+331 5327.67 l
+S
+5 w
+n
+4720 5620.67 m
+4720 5327.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+38.4 676.16 m
+
+systemdict begin
+/JYOFWV+TTE220CA80t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g20 
+<10bf31703f936777ef6ab5b17ad0fc524bca43afb4d6bd033b207e305eb9
+500a1bba1c5d1211b7d3554901c08f9a7d0460ee691811cc57d9c6c6ff2c
+b63ea8d0b6e5c487edd2cc0e49b14c95da9dab19cfa2efc8777faaf6ad13
+92abfc4ee42c189664ae310e4d68c59fd5d45a857f35> ND 
+/g19 
+<10bf31705d64a97b18a954221b81da077dce3c27781d4269f20d6aa6e14e
+77836da1ef894ffc3211c71d899e5b708d4beeac3579f4791d72cc55a3d8
+bf72c283c7b7a1a3ee743fa453b8f613c65fc2dcc886ffe545a8263df8a0
+4730a51263da395530f5c131f9e531febf5ea9e107bfd5c076b0f3947bd3
+c594d65832ffa8b742d23c18fe2da2bd604c65e5cade920058d782663981
+d325e081c2939258553b18a0434333ddc975a43ae794b73a47ee453981e4
+35f8d61f61b8bb8289792ef11175fc2cdc4381809115> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/JYOFWV+TTE220CA80t00 findfont /Encoding get
+dup 2 /g20 put
+dup 5 /g19 put
+pop
+/N31 [8.03447 0 0 8.03999 0 0] Tf
+(\002\005) show
+Q
+n
+354 4819.67 m
+4722 4819.67 l
+S
+n
+354 4760.67 m
+4722 4760.67 l
+S
+n
+354 4701.67 m
+4722 4701.67 l
+S
+n
+354 4642.67 m
+4722 4642.67 l
+S
+n
+354 4583.67 m
+4722 4583.67 l
+S
+n
+354 4524.67 m
+4722 4524.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+73.92 567.8 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\003) show
+76.08 588.92 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+90.84 546.56 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+106.438 530.12 m
+(\002) show
+103.32 530.12 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\003) show
+Q
+n
+1050 4819.67 m
+1050 4524.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+139.2 560.72 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\003) show
+139.2 567.8 m
+(\003) show
+141.12 588.92 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\004) show
+156.12 574.88 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+157.68 588.92 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+Q
+n
+1458 4819.67 m
+1458 4524.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+188.4 567.8 m
+
+systemdict begin
+/KBDFWV+TTE23CC1C8t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g58 
+<10bf3170776b00994a9214773b5d93c35937af10a6afd1c5fa328943d4dd
+c6cb9b7461610b9e4fb8b20b60946962036d61d0139679e28c45333545d1
+2a8436a10a225c397f2f28ac120570398640dd588a1f270a834da8a3af12
+435229f256612c7db1c9a105ab5457f4ef6202a95dd5e291c08c5b6fab2d
+fb802396c40ef73629f7872278ea8322c69265ac2628f5f9f6ae0069a1f5
+f1a4e167d51b9a2c30be6c12eda79be61ec457694df201b4e4114476d08a
+87bd2a1aa11d8914f562460a41> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/KBDFWV+TTE23CC1C8t00 findfont /Encoding get
+dup 6 /g58 put
+pop
+/N25 [11.9918 0 0 12 0 0] Tf
+(\006) show
+188.28 560.72 m
+
+systemdict begin
+/KBDFWV+TTE23CC1C8t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g59 
+<10bf3170435d4b4aee6c19794431766692cc02c1fc83ccb57924c612337d
+255d6d7b9ee634e0667e537cb53fd736932bfc09b6e842509a13dd4402a4
+bcbec2a181f690036b7cc536883fc9fb17f7d717710a5f07fd3b1163ca92
+90230a666c55066a256a025a45c3ce62c30eb0fadd1655c75ac4aef7a73b
+4eae9b862d2fa685e33978b6dc3656686ff69f753f9f3b1c7fbf69ead5d7
+c4d5ad16b41b3b9be0e7f2972f45d311e7b76ba5d4c2059dbaad81f09d3c
+894047ad95d2005461fc867d4501037b09> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/KBDFWV+TTE23CC1C8t00 findfont /Encoding get
+dup 7 /g59 put
+pop
+(\007) show
+188.76 546.56 m
+(\001) show
+188.76 574.88 m
+(\001) show
+190.08 588.92 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\004) show
+204.6 560.72 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\007) show
+206.52 588.92 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\001) show
+221.4 567.8 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+Q
+n
+2002 4819.67 m
+2002 4524.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+253.68 567.8 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\006) show
+255.6 588.92 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+270.36 539.48 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+270.36 567.8 m
+(\001) show
+271.68 588.92 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\004) show
+Q
+n
+2410 4819.67 m
+2410 4524.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+302.28 530.12 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+299.16 530.12 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\003) show
+302.52 560.72 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\007) show
+304.32 588.92 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\004) show
+304.44 588.92 m
+(\006) show
+Q
+n
+2682 4819.67 m
+2682 4524.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+335.64 567.8 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+335.64 546.56 m
+(\005) show
+337.2 588.92 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+351.36 560.72 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\003) show
+368.278 567.8 m
+(\001) show
+Q
+n
+3226 4819.67 m
+3226 4524.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+400.2 530.12 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+397.08 530.12 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\003) show
+400.56 567.8 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\006) show
+402.24 588.92 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\004) show
+416.52 532.4 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+418.8 588.92 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+Q
+n
+3634 4819.67 m
+3634 4524.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+449.88 567.8 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+451.32 588.92 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\001) show
+465.6 567.8 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\003) show
+481.798 539.48 m
+(\002) show
+481.798 567.8 m
+(\002) show
+484.08 588.92 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+483.96 588.92 m
+(\006) show
+498.84 560.72 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+500.16 588.92 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\007) show
+514.44 567.8 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+Q
+7 w
+n
+351 4816.67 m
+351 4524.67 l
+S
+9 w
+n
+331 4815.67 m
+331 4524.67 l
+S
+5 w
+n
+4720 4817.67 m
+4720 4524.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+38.4 579.8 m
+/N31 [8.03447 0 0 8.03999 0 0] Tf
+(\002\006) show
+Q
+n
+354 4016.67 m
+4722 4016.67 l
+S
+n
+354 3957.67 m
+4722 3957.67 l
+S
+n
+354 3898.67 m
+4722 3898.67 l
+S
+n
+354 3839.67 m
+4722 3839.67 l
+S
+n
+354 3780.67 m
+4722 3780.67 l
+S
+n
+354 3721.67 m
+4722 3721.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+74.52 464.36 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+76.08 492.56 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+88.56 450.2 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+103.319 433.76 m
+(\002) show
+100.2 433.76 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\003) show
+96.7204 434.6 m
+(\003) show
+93.2408 435.44 m
+(\003) show
+Q
+n
+1011 4016.67 m
+1011 3721.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+133.56 464.36 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+133.56 457.28 m
+(\005) show
+134.88 492.56 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\004) show
+148.32 478.52 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+149.88 492.56 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+Q
+n
+1380 4016.67 m
+1380 3721.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+177.48 471.44 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\006) show
+177.36 464.36 m
+(\007) show
+177.84 450.2 m
+(\001) show
+177.84 478.52 m
+(\001) show
+179.16 492.56 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\004) show
+192.12 464.36 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\007) show
+194.04 492.56 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\001) show
+207.36 471.44 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+Q
+n
+1872 4016.67 m
+1872 3721.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+236.88 450.2 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+236.52 471.44 m
+(\006) show
+238.44 492.56 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+251.64 471.44 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+251.64 443.12 m
+(\001) show
+252.96 492.56 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\004) show
+Q
+n
+2241 4016.67 m
+2241 3721.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+280.44 433.76 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+277.32 433.76 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\003) show
+280.68 464.36 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\007) show
+282.48 492.56 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\004) show
+282.6 492.56 m
+(\006) show
+Q
+n
+2487 4016.67 m
+2487 3721.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+309.96 436.04 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+311.52 464.36 m
+
+systemdict begin
+/KBDFWV+TTE23CC1C8t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g61 
+<10bf31705d6b585269b90c05098be60dc31595d144b4f3319e8a156adf75
+f21659cefd666479d673db95107c56316a5839b39d3b413c0a7946090ad3
+e58ae41dd5a219300fc3fff548069808af345d50ce9ebb> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/KBDFWV+TTE23CC1C8t00 findfont /Encoding get
+dup 10 /g61 put
+pop
+(\n) show
+312 492.56 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\004) show
+312.12 492.56 m
+(\006) show
+Q
+n
+2733 4016.67 m
+2733 3721.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+339.48 433.76 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+336.36 433.76 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\003) show
+339.84 471.44 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\006) show
+341.52 492.56 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\004) show
+354.24 436.04 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+356.52 492.56 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+Q
+n
+3102 4016.67 m
+3102 3721.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+384.48 471.44 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+385.92 492.56 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\001) show
+398.64 471.44 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\003) show
+413.279 443.12 m
+(\002) show
+413.279 471.44 m
+(\002) show
+415.56 492.56 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+415.44 492.56 m
+(\006) show
+428.76 464.36 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+430.08 492.56 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\007) show
+442.8 471.44 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+Q
+n
+3840 4016.67 m
+3840 3721.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+473.04 464.36 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+474.6 492.56 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+487.08 450.2 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+501.839 433.76 m
+(\002) show
+498.72 433.76 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\003) show
+495.24 434.6 m
+(\003) show
+491.761 435.44 m
+(\003) show
+Q
+n
+4332 4016.67 m
+4332 3721.67 l
+S
+n
+4351 4016.67 m
+4351 3721.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+515.28 478.52 m
+
+systemdict begin
+/TCLEWV+TTE23CFED8t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g170 
+<10bf317022fe2342a6ec954cf5731aa0886692e5eabf5eac0420a9ed3a4d
+c6dea168445bfb58380e7c20550a804eefbea4ba31c62cbd38a97c828a35
+224b793bf04615a5fb> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/TCLEWV+TTE23CFED8t00 findfont /Encoding get
+dup 5 /g170 put
+pop
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\005) show
+515.28 471.44 m
+(\005) show
+515.28 464.36 m
+(\005) show
+515.28 457.28 m
+(\005) show
+515.28 450.2 m
+(\005) show
+Q
+7 w
+n
+351 4013.67 m
+351 3721.67 l
+S
+9 w
+n
+331 4012.67 m
+331 3721.67 l
+S
+5 w
+n
+4720 4014.67 m
+4720 3721.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+38.4 483.44 m
+
+systemdict begin
+/JYOFWV+TTE220CA80t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g23 
+<10bf3170560fd6dff2fb75d42bc747593e2e8799b9da62cadb61754b01d0
+502de8976c6da58433f96bab5f54dda4972ae38950cee31d2d7fa8f70752
+> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/JYOFWV+TTE220CA80t00 findfont /Encoding get
+dup 3 /g23 put
+pop
+/N31 [8.03447 0 0 8.03999 0 0] Tf
+(\004\003) show
+Q
+n
+354 2623.67 m
+4722 2623.67 l
+S
+n
+354 2564.67 m
+4722 2564.67 l
+S
+n
+354 2505.67 m
+4722 2505.67 l
+S
+n
+354 2446.67 m
+4722 2446.67 l
+S
+n
+354 2387.67 m
+4722 2387.67 l
+S
+n
+354 2328.67 m
+4722 2328.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+73.8 311.36 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+76.08 325.4 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+Q
+n
+762 2623.67 m
+762 2328.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+102.72 304.28 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\003) show
+102.72 297.2 m
+(\003) show
+103.32 283.04 m
+(\001) show
+102.6 311.36 m
+(\002) show
+104.64 325.4 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\004) show
+117.72 290.12 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+117.36 311.36 m
+(\006) show
+119.28 325.4 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+Q
+n
+1122 2623.67 m
+1122 2328.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+146.52 311.36 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+146.16 304.28 m
+(\006) show
+146.52 283.04 m
+(\001) show
+147.84 325.4 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\004) show
+160.92 304.28 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+160.92 297.2 m
+(\001) show
+160.2 290.12 m
+(\002) show
+160.32 311.36 m
+(\003) show
+162.48 325.4 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+Q
+n
+1482 2623.67 m
+1482 2328.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+189 311.36 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+189.12 304.28 m
+(\003) show
+189.72 297.2 m
+(\001) show
+189 283.04 m
+(\002) show
+191.28 325.4 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+191.16 325.4 m
+(\006) show
+203.52 311.36 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\003) show
+205.56 325.4 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\001) show
+217.8 297.2 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+218.52 283.04 m
+(\005) show
+218.52 304.28 m
+(\001) show
+220.08 325.4 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+Q
+n
+1962 2623.67 m
+1962 2328.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+246.72 304.28 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\003) show
+247.32 283.04 m
+(\001) show
+248.76 325.4 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\001) show
+261 304.28 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+275.519 304.28 m
+(\003) show
+290.517 304.28 m
+(\001) show
+304.196 311.36 m
+(\002) show
+318.715 311.36 m
+(\003) show
+Q
+n
+2802 2623.67 m
+2802 2328.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+348.12 311.36 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+349.68 325.4 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+362.52 290.12 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\005) show
+376.319 297.2 m
+(\003) show
+Q
+n
+3282 2623.67 m
+3282 2328.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+405 290.12 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+405.12 311.36 m
+(\003) show
+407.28 325.4 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+419.4 311.36 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+421.56 325.4 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\001) show
+433.92 311.36 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\003) show
+448.919 304.28 m
+(\001) show
+462.717 311.36 m
+(\003) show
+Q
+n
+4002 2623.67 m
+4002 2328.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+491.4 311.36 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+493.68 325.4 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+506.52 283.04 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+520.919 304.28 m
+(\001) show
+520.919 275.96 m
+(\001) show
+Q
+7 w
+n
+351 2620.67 m
+351 2328.67 l
+S
+9 w
+n
+331 2619.67 m
+331 2328.67 l
+S
+5 w
+n
+4720 2621.67 m
+4720 2328.67 l
+S
+n
+354 1820.67 m
+4722 1820.67 l
+S
+n
+354 1761.67 m
+4722 1761.67 l
+S
+n
+354 1702.67 m
+4722 1702.67 l
+S
+n
+354 1643.67 m
+4722 1643.67 l
+S
+n
+354 1584.67 m
+4722 1584.67 l
+S
+n
+354 1525.67 m
+4722 1525.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+74.52 200.84 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+73.8001 186.68 m
+(\002) show
+73.9201 207.92 m
+(\003) show
+76.08 229.04 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+90.12 207.92 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+92.28 229.04 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\001) show
+106.56 207.92 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\003) show
+123.478 207.92 m
+(\001) show
+139.077 215 m
+(\002) show
+Q
+n
+1322 1820.67 m
+1322 1525.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+172.44 193.76 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\005) show
+172.44 200.84 m
+(\005) show
+174 229.04 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+188.04 179.6 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+204.358 215 m
+(\002) show
+Q
+n
+1866 1820.67 m
+1866 1525.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+237.72 200.84 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\005) show
+237.72 193.76 m
+(\005) show
+237 207.92 m
+(\002) show
+239.04 229.04 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\004) show
+253.32 215 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+255.6 229.04 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+Q
+n
+2274 1820.67 m
+2274 1525.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+286.08 207.92 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\003) show
+286.68 186.68 m
+(\001) show
+285.96 215 m
+(\002) show
+288.24 229.04 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+303 207.92 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+304.44 229.04 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\001) show
+318.6 215 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+335.038 215 m
+(\003) show
+351.237 215 m
+(\002) show
+Q
+n
+3090 1820.67 m
+3090 1525.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+384 200.84 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\003) show
+384.6 179.6 m
+(\001) show
+384.6 207.92 m
+(\001) show
+386.16 229.04 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+400.2 207.92 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+402.36 229.04 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\001) show
+416.64 207.92 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\003) show
+433.558 207.92 m
+(\001) show
+449.157 207.92 m
+(\002) show
+Q
+n
+3906 1820.67 m
+3906 1525.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+482.52 200.84 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+482.52 193.76 m
+(\005) show
+481.8 186.68 m
+(\002) show
+481.92 207.92 m
+(\003) show
+484.08 229.04 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+483.96 229.04 m
+(\006) show
+498.12 207.92 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+500.28 229.04 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\001) show
+514.56 179.6 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\003) show
+515.16 200.84 m
+(\001) show
+516.72 229.04 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+Q
+7 w
+n
+351 1817.67 m
+351 1525.67 l
+S
+9 w
+n
+331 1816.67 m
+331 1525.67 l
+S
+5 w
+n
+4720 1818.67 m
+4720 1525.67 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+40.44 219.92 m
+
+systemdict begin
+/JYOFWV+TTE220CA80t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g28 
+<10bf3170586c1823284921c461e40c9bc05fd2e168a441ba5ba2fbf214ee
+1a790eefbbd09d6eca5b8fc3c1400ff2ddc3317d61a98a90ac6afbccef63
+726381dbd375c31276764ee9b7ca11900d1b6bd8547993c0abd9c5294194
+0a4a868828d6eff0ffc5b0028e22102de454e8babdc2e686a979f9809eb8
+6c8ae6d2959faf4188be79132170471e7fda52e95eb4e4a06e49c5707a2d
+ee6b451ebafc7b551591bda9cc7db0179eea13d650dbcb76ec03a54d15cf
+a05a08dd53524f842cceb80c69fabb62> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/JYOFWV+TTE220CA80t00 findfont /Encoding get
+dup 14 /g28 put
+pop
+/N31 [8.03447 0 0 8.03999 0 0] Tf
+(\016) show
+Q
+n
+354 1017.67 m
+4722 1017.67 l
+S
+n
+354 958.669 m
+4722 958.669 l
+S
+n
+354 899.669 m
+4722 899.669 l
+S
+n
+354 840.669 m
+4722 840.669 l
+S
+n
+354 781.669 m
+4722 781.669 l
+S
+n
+354 722.669 m
+4722 722.669 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+73.8 118.64 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+74.1599 111.56 m
+(\006) show
+76.08 132.68 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+92.52 73.8803 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+89.4 73.8803 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\003) show
+92.64 111.56 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\003) show
+94.68 132.68 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\001) show
+111.96 111.56 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+129.958 118.64 m
+(\002) show
+148.676 76.16 m
+(\002) show
+Q
+n
+1422 1017.67 m
+1422 722.669 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+186.84 111.56 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+188.28 132.68 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\001) show
+204.96 111.56 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\003) show
+223.558 83.24 m
+(\002) show
+223.558 111.56 m
+(\002) show
+225.84 132.68 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+225.72 132.68 m
+(\006) show
+243 104.48 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+244.32 132.68 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\007) show
+261 111.56 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+Q
+n
+2358 1017.67 m
+2358 722.669 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+299.16 104.48 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+300.72 132.68 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+317.16 90.3203 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+335.878 73.8803 m
+(\002) show
+332.76 73.8803 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\003) show
+329.28 74.7203 m
+(\003) show
+325.801 75.5603 m
+(\003) show
+Q
+n
+2982 1017.67 m
+2982 722.669 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+374.04 104.48 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\001) show
+374.04 97.4 m
+(\005) show
+375.36 132.68 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\004) show
+Q
+n
+3294 1017.67 m
+3294 722.669 l
+S
+n
+3313 1017.67 m
+3313 722.669 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+390.72 118.64 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\005) show
+390.72 111.56 m
+(\005) show
+390.72 104.48 m
+(\005) show
+390.72 97.4 m
+(\005) show
+390.72 90.3201 m
+(\005) show
+399.839 118.64 m
+(\005) show
+399.839 111.56 m
+(\005) show
+399.839 104.48 m
+(\005) show
+399.839 97.4001 m
+(\005) show
+399.839 90.3201 m
+(\005) show
+410.76 83.2403 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+410.76 118.64 m
+(\002) show
+413.04 132.68 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+Q
+n
+3606 1017.67 m
+3606 722.669 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+448.92 111.56 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\005) show
+448.92 104.48 m
+(\001) show
+448.2 90.32 m
+(\002) show
+450.48 132.68 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+466.92 111.56 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\002) show
+469.08 132.68 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\001) show
+486.36 111.56 m
+/N25 [11.9918 0 0 12 0 0] Tf
+(\005) show
+505.078 104.48 m
+(\001) show
+506.64 132.68 m
+/N28 [16.9084 0 0 16.92 0 0] Tf
+(\002) show
+Q
+7 w
+n
+351 1014.67 m
+351 722.669 l
+S
+9 w
+n
+331 1013.67 m
+331 722.669 l
+S
+5 w
+n
+4720 1015.67 m
+4720 722.669 l
+S
+q
+8.3333 0 0 8.3333 0 0 cm
+38.4 123.56 m
+
+systemdict begin
+/JYOFWV+TTE220CA80t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g24 
+<10bf31705fc1db542bee188a07fd47db25db594a5f034bcac6a6f17bd9bd
+9facc0ce9d57b61fa5e5e0949b0e878ad216b85d266e55febdb7ea221a11
+298c20d8acb866de9655c014886bc486e411adbcbfe47dfe54d9ea1d06d0
+647072411d8d9681a0a3a412410f6fd55fc154ac862d6a2effa4cfba8e58
+40271871b786114b782f875da98cf05f399abd01fd484dab2604ae463277
+1f7dced86cec952d0d> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/JYOFWV+TTE220CA80t00 findfont /Encoding get
+dup 16 /g24 put
+pop
+/N31 [8.03447 0 0 8.03999 0 0] Tf
+(\002\020) show
+Q
+Q
+q
+n
+479 7016.67 m
+1297 7016.67 l
+1297 6893.67 l
+479 6893.67 l
+h
+W
+n
+q
+8.3333 0 0 8.3333 0 0 cm
+[/DeviceGray] cs 0 sc
+userdict begin
+userdict /pdf_svglb currentglobal put true setglobal
+%%BeginResource: font KCEFWV+TTE235F498t00
+11 dict begin
+/FontName /KCEFWV+TTE235F498t00 def
+/FontMatrix [1 1000 div 0 0 1 1000 div 0 0 ] def
+/Encoding  256 array 0 1 255 {1 index exch /.notdef put} for  def
+/PaintType 0 def
+/FontType 1 def
+/FontBBox { 0 0 0 0 } def
+/FontInfo 1 dict dup begin
+  /OrigFontType /TrueType def
+end readonly def
+currentdict
+end
+
+systemdict begin
+dup /Private 7 dict dup begin
+/BlueValues [-15 0 600 650] def
+/MinFeature {16 16} def
+/password 5839 def
+/ND {def} def
+/NP {put} def
+/RD {string currentfile exch readhexstring pop} def
+2 index /CharStrings 663 dict dup begin
+/.notdef 
+<10bf317079c9f7e602> ND 
+end
+end
+put
+put
+dup /FontName get exch definefont pop
+end
+/KCEFWV+TTE235F498t00 findfont /Encoding get
+pop
+%%EndResource
+
+userdict /pdf_svglb get setglobal
+end
+[/N18/KCEFWV+TTE235F498t00 -1 TZG
+57.48 830.96 m
+
+systemdict begin
+/KCEFWV+TTE235F498t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g38 
+<10bf3170232e9f1eba7c131264487bd890844ebfae3941b30e60d1f270d4
+1221adb97d80218074daec72ab0df0506131dbbf7110d0672ea43d544ee8
+572493d11957e0f69f3b60c62bb67a46cc7bcd9b3bbf950e282253590ceb
+23a2d943a6d6e4bd22149c3f0c40d0385767952c72d7129e5b8055918003
+e3f43e13e34962aada16954b02434baf1962f6237a0619397898022218de
+67a4e380b7e1dc6c21f63a73eda493650c0d1baa40eec03ea19685305628
+47c2425e7a8b9ba65b7e8f7d375583a498aca7aa332f6ca1973f3195a4b4
+ac6ef9c4cd8ebdd7fe49d79167562990f67ef353fb5db9b869a5228dee47
+353f30a8a591723459b80c7a869e8dd7f8b1aaca6782983f64534795> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/KCEFWV+TTE235F498t00 findfont /Encoding get
+dup 9 /g38 put
+pop
+/N18 [14.0306 0 0 14.04 0 0] Tf
+(\t) show
+66.239 830.96 m
+
+systemdict begin
+/KCEFWV+TTE235F498t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g82 
+<10bf317031d675d1fbd054cc0682f4422744400eebaa352008b001700ff9
+e2cbe58916e938fe64613a129ef06cf02701b391fbd3ec1df2fce1a77c9c
+a846d4f1d3f3421757f8edc35a2993a093ae9d2d97e91cf4afc07cd0a749
+a6a4ef8e54fc1b8c703daeab75652b442bac665b9fa3469d8c84da156302
+8781efa8de5570232b382c10ddf3a6feb324aedb35e3d52403ad2af667eb
+2818bea8580082d3e182a3eb3aad09f0bc11> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/KCEFWV+TTE235F498t00 findfont /Encoding get
+dup 7 /g82 put
+pop
+(\007) show
+71.1584 830.96 m
+
+systemdict begin
+/KCEFWV+TTE235F498t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g88 
+<10bf3170435df2fddd4818d3a066accf4986f782ef0351392b098fe6d05d
+1a03954441251aa27d0002d9956a3d48a755b1d076ac5930f85d98965508
+a6ea3affba9e9875a7a12f1e8ec4bf99b56bf1e9d25d4beffc9414891153
+91c596f626a0e908d35a03c5eb7f3e628f8ccde8cb07167388013f0c7b5c
+0d5d7e427bc0b741ba8e07845a320224538db945abccfeafa82c23cedb18
+52d5f53666d2fd8e4ad171df4f09505312a34c1c010fe5aa033e5e5cc1a9
+d360cbfbdc594dea58eb3494d6eb01e889ca6a491a91e846123f580d580e
+a89bf5335c3b4584273796568f06ef5701882e6da1a24d653fac70513314
+dccbf33c3390fe24b5b8996edf652c3ff5cea40b1795a6a6a3d609f38e8a
+c909409b4ef00b18dbf5a79fc3ccc25547fa0bd54ecf01bb33744271894f
+a59925339d9288c73620cbb34122ffaa18f75a47> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/KCEFWV+TTE235F498t00 findfont /Encoding get
+dup 20 /g88 put
+pop
+(\024) show
+77.1577 830.96 m
+
+systemdict begin
+/KCEFWV+TTE235F498t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g85 
+<10bf317031d641e3c4a35cbc2812b008c3890f0738e4b04f98ff617f32db
+76ea878033bb2b96c8ec9eff019d37f5d2ca4e19b7d2af060b751d37cace
+2f54cb02200f4d4d6553c18d9f4c3177f76a8f929544ef8dcbaa51f98f8d
+830f51fc1ac46dd85cb0e942f1ade94934e19cf05bd2f328b4421b034776
+f96e4edeb8772556d6e02324df09c7545fa070db6015c2c62453cf5f97c2
+c7d1372ae50ca96697463c0719a710b1fdbd35e02fea0936cef7897580f3
+e914ccee24542047d14e6778036313a628ec90b072c62cce7b9ae0f081ca
+990cab2a625122662eda9d07a314ddf5bfd554c05df03117d92f936821df
+54c3aa0af3e7e8> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/KCEFWV+TTE235F498t00 findfont /Encoding get
+dup 17 /g85 put
+pop
+(\021) show
+81.3572 830.96 m
+
+systemdict begin
+/KCEFWV+TTE235F498t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g68 
+<10bf3170435de71f7264296c16e2f7438b85f00b4525143779865d9ac130
+fb04a38bf2596242707d624ee6a2f7daff826b3ddd71dfa4cecd0f764616
+7620bbe87b4838289d7991abecf828fe28a352b3be2409a164399dc27b7f
+06cd4f2cdec29a7e0b23ea0bd517dccaa30d377aebb070a20434350dfef8
+bb62a9e95c982cb681c6c7a9227372b2983ffbe4b62c5dadc0377d296b1b
+ae4f65fbe742f89ab039fc3b60489f99438e27582745b8c32ccc8485ff61
+f515ff3281abdf0aa4dced680517d45b84660493830482a2d6dc098e0f3a
+0504ad01fcecc49e051cd51870aa10e52c901b23414a42616effcf3ebd5c
+57027de4f953adbd523f747c07fbdb49808b33b7398e85dbf879ecaef177
+fad8f0b6c111fdb94bf6eb694159d9cc6357d8627dda63bb1b6d3d885dc6
+1514c0e0c165d8e4bbb57ed9ae5cb3c22eaa4306ee030e987db4c03daea4
+542e5e0516503d232f488224903218a37696e477f6e6a23688ba904d6218
+1e0a3a21e1eac12ede4fd80654a0042c067911aee0735686a21282e1a883
+9bb7ee50c127e284dd7f173c39c9a5a160> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/KCEFWV+TTE235F498t00 findfont /Encoding get
+dup 2 /g68 put
+pop
+(\002) show
+87.1165 830.96 m
+
+systemdict begin
+/KCEFWV+TTE235F498t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g81 
+<10bf31704ab2afd5f1b54819cfbaca9220276cff0f2dc081c19970f2ac30
+1b6acf9f08bcccb3e73a2b483674e2f8dc2ef500b2b130afcc7db05b910d
+e344ce84776a8d5185fbafe4caa303d48313d0ae9b1c72b2e88d02099327
+4b5014030b9c5e4dc94a2ecb86e7273f976d8deb27a8b81267021f9227d0
+27d5039f25836d5772cd31fe1f808a5513961165923944a86ffa62b7a894
+b3427fdfc47b4e5128ff0441c7f35781b099ed1555e88082a9eab52d56b1
+0f12597e9b4562df033d43b5e6cd48958823c7b6cad6e1ffa1521632ccc0
+762e86d9147ea139b2093cfe90329a1507f24b44f532f7cc3adda71fcf55
+f0ab5bfa744cbd5caf5f51a403fbd1b8b065f985ad9a3ee387c07dbe5fb4
+589cb26939b30f7fcd6aa8965f6500319c8c11dc477c98be4c580a70f777
+67ee6255f104aafc552be9304086ad311e744d4f45de8a10d7c94412815f
+2cd431a7c0f980a85101c1edb9ed915213e97799db8747f1fd856a91fffd
+3a04> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/KCEFWV+TTE235F498t00 findfont /Encoding get
+dup 10 /g81 put
+pop
+(\n) show
+93.1159 830.96 m
+
+systemdict begin
+/KCEFWV+TTE235F498t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g87 
+<10bf317040cdc07a85e9a99245c621786b88df5105d88937ec7816a07c16
+1b94ed9f9fe9f0f65fe3824eec4acf132a9e3bd36bb9809ac8fb9db23109
+f9fcf5158b4b85baa80614018ecf8cd092d020ee25dc41c5c58727e5a14f
+c35a3a5528de524ce44be4644926712047d6c0a7d3865b0bb3faa53e040b
+6f8a40543506b25b7a6ffb0972ccfc17ae6e5db3e62961bffb4c8c87a350
+56c20c092427bfd739bcf8ecf6be8498b2c4eca2c948d55775025d613133
+4253284a5c413a3a616c9068401783daa87f555e392b6f3200baa7ecc926
+48f018064e3b53104c93c608e1f1d70ffc65dcec10e0dd74a1c89005bf> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/KCEFWV+TTE235F498t00 findfont /Encoding get
+dup 11 /g87 put
+pop
+(\013) show
+96.5955 830.96 m
+
+systemdict begin
+/KCEFWV+TTE235F498t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g72 
+<10bf31704c109c45d55d6177631a4bf30862619d06a286abdf4f0a0f473d
+cdb3acc814687c386f2647501682f0f95c30d4126a65a6134be2708bb87e
+eaf7a3576530627a7cedaf4ba5b1fa4970ed02ffb940d30a494ac7eeeb45
+361f5385cea5afbbb8883dd7e9acd8529eebf4311f49d840f5b7b1c8a30d
+0cec116ebdf1f021964df3dc3afa296e01584c8182e7040392593a841322
+fdf03063fbbb6173baf2c98657a583b29de353d81457ec210f611dd0c10d
+72e950c5d946e5e46db124458920206aacf9f636123df27e9d08e795fe4e
+cb6748abf547e9379a2d8f0664fb491ce9c6e0ff71b7240b773cbfd1528e
+b078142386bcb9f426302888d4cbfdc0e1de02891a94a13530> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/KCEFWV+TTE235F498t00 findfont /Encoding get
+dup 5 /g72 put
+pop
+(\005) show
+100.675 830.96 m
+
+systemdict begin
+/KCEFWV+TTE235F498t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g3 
+<10bf317079c757bf91> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/KCEFWV+TTE235F498t00 findfont /Encoding get
+dup 6 /g3 put
+pop
+(\006) show
+104.155 830.96 m
+
+systemdict begin
+/KCEFWV+TTE235F498t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g83 
+<10bf317009c18c6bdaef5ee31a2c75d060add7353a007bef722b14c6a6df
+2153970efcf10049e668811ef5ecc57d9d30aa5ee3f4fbafb2c022ad8840
+b09be4013129174efa4e6071ff06ccf9df05482f151c1db4d4e3bb5f0b43
+10042c6bf2ce07b107e17a9d275dd0c70a949bbf439b8e8015cd2e5808b7
+bca4e104f4f6ee943690070f01c70609a99109d1b48dea913f063435e219
+9dc6d89b80ebc71943803373ebfc5debcb18338eb9b68a8cc24d3f0cd0a1
+4cef85a46080fbda8c3591bd8b2954433c5c7f8455b4d3ee54cd2ed4f87a
+b664b07c409bc9ed709df4a1ba969a8794758b1bce5c0ec95a99e3e2adb3
+ffed9b8a031d7ed4ac581837ae6b7127e928675a840b8c63e1ae6ad451f9
+93029b442ac1607108dfff62fe590577ee2fe8f4cd2912193b4f0b1f4899
+38e7bb9934a1be8ee9e5deebb49d196a385e10ca4256070cc4ff4b9c28b9
+22fddb69f77859872a793b1c142ffa411af293d3ea8a75211d635d628b58
+1d9c8049ef85d89d567568192661d79131eec9273963471b546c9f255797
+5ea95467e4debc49ffd37533624811d8b26362579785273cf0680e46569a
+d63910fd7e6b1ff1197946004db6e0dc3c65b5c3caddc83ca67c77041597
+b4922d5658f02145d3def97e53514bfb6f4654c4b51ed20f0b9d034aaf10
+1f24cc46ad0e3ec31404b1b5be4b15a724f07c> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/KCEFWV+TTE235F498t00 findfont /Encoding get
+dup 16 /g83 put
+pop
+(\020) show
+109.914 830.96 m
+(\002) show
+115.673 830.96 m
+(\021) show
+119.873 830.96 m
+(\006) show
+123.352 830.96 m
+
+systemdict begin
+/KCEFWV+TTE235F498t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g47 
+<10bf31707ffede2b312f5dd78817813fe3db3cbb8c445cd65e0d1b502f5b
+0acd05c359a960429b271501b0636a5f962523c3c8ae408ecfaa6605597a
+c200dcc7a2e4228c24c46294b9c29f3e2c9edb4426a07f375f3ca1459ca0
+92c19bf1b5370e55da50c449b7c07ad4ce2514e70e3fff9d6cb66cec87ec
+8330d3101bf497bb665875665d764b76b09321f3df1cdaedfe7efc7ceadf
+366b3c67d51ef53076c6ef339cfba5dfa59ceb311eae68e3fc58433aa4ea
+6dd68aa24df55d3d3f23b71d1829b404801f2a2b545d4a86a6b99318eee1
+ed745e8be077a8289eafb28f617a77e28889e175f10b72f05da02481dff9
+25080d59af4dbd8fed4f26954eac39e25e6425b29785be74976b634cef8b
+691876900ed268900b231fee5f70c36212dd45fa10dbaadb69a2d6492b2a
+beb7> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/KCEFWV+TTE235F498t00 findfont /Encoding get
+dup 38 /g47 put
+pop
+(&) show
+132.231 830.96 m
+(\005) show
+136.311 830.96 m
+(\020) show
+142.07 830.96 m
+
+systemdict begin
+/KCEFWV+TTE235F498t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g76 
+<10bf317042207a28e5bba450d18d284fd7ecced4919c491b1215ea0a8de7
+03301d6a4a1dc1ccee9b061444151795abf97bc339fd9ad547b5fc75d3ba
+b2d1b512137904786ea0b48a4e867b10f53546664fa4613515ccace7edcd
+3e214ad94e66212792346bf413ab8cc5e933ec081712583fd76ae2935aeb
+777e735e9061e1abbbeb5f28e6816fe9f8dbcdf7aabcaf0d7e93a5fae014
+f0264fc69a4ed225d8e3ca1d2f55329878634393ed9495a9ca9cbf93449f
+068d32d978ffb182e79605fd9c4fdbd70ce12e68f86057b4472b44b38ebe
+b74622d3cb19b7b78eda5f3b4c7d7389af9bd9dffb70308d590d8477e621
+9079986b06fd4abfc7eb5d562eede8f670d8c023f2e17d89f399aa7a9e58
+d43c1de1> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/KCEFWV+TTE235F498t00 findfont /Encoding get
+dup 26 /g76 put
+pop
+(\032) show
+145.31 830.96 m
+(\n) show
+151.309 830.96 m
+(\005) show
+Q
+Q
+q
+q
+8.3333 0 0 8.3333 0 0 cm
+[/DeviceGray] cs 0 sc
+57.48 374.72 m
+/N18 [14.0306 0 0 14.04 0 0] Tf
+(\t) show
+66.239 374.72 m
+(\007) show
+71.1584 374.72 m
+(\024) show
+77.1577 374.72 m
+(\021) show
+81.3572 374.72 m
+(\002) show
+87.1165 374.72 m
+(\n) show
+93.1159 374.72 m
+(\013) show
+96.5955 374.72 m
+(\005) show
+100.675 374.72 m
+(\006) show
+104.155 374.72 m
+(\020) show
+109.914 374.72 m
+(\002) show
+115.673 374.72 m
+(\021) show
+119.873 374.72 m
+(\006) show
+123.352 374.72 m
+
+systemdict begin
+/KCEFWV+TTE235F498t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g71 
+<10bf317045ba2a30b06ca54c78b8adfcfea9e6b74a75b4fea9d25e081dc6
+580f95945f19c67def762dac649271d2067546fbdb6c6f8982dfd50af924
+41ee629c1ea62436a671221d5306fed93c9deae476319ad592da968a99d5
+e18129e049a89bf54a403473e48c946dc109cd65e9c3b64210e86cc7dd03
+bfe23c716d9f58dee23b651b1ec7371d055b77bb8194100513c7bd182de4
+3caac09072ad2450d5021ae27d32485e5d55571a73adb02d98e02e600cae
+ccafb916bd9de96fe1d78cf77d6bd76ee76343303f889dd3bf91702cff04
+d45bb881d9fed9edb4e2907c532f6e3eb740b2f93acb746f423d234bc1fe
+6077ed0b157c02901442660bf7ce973bd8c535cdaf6d314f222163a54b32
+8347b2ae44bce84818ee836e6cd01d59f8c74bb30982155384fd87f600a0
+7a8ca565058e1aa442e99abfcaab065557ff45028ed70d79888bf514a56c
+fd562395283bd48825f7d1737aea5b21d46941da4e> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/KCEFWV+TTE235F498t00 findfont /Encoding get
+dup 18 /g71 put
+pop
+(\022) show
+129.112 374.72 m
+(\005) show
+133.191 374.72 m
+(\006) show
+136.671 374.72 m
+
+systemdict begin
+/KCEFWV+TTE235F498t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g48 
+<10bf3170802cdde7b8dff7d1cc13b044d920b25f9769e810a604a7dcaa90
+c94b7bfbf1308109efd96778b32e77f64e9643e6a2edeb083e01b64c36b8
+b673940d01be7dd47b36fcd1455c9ea91962b4f0f709c52c35a558ea528c
+cb02b04ed905e4b17634e052d463e5492f7858ce5ccbfb0f315554ab576f
+3099e061b8ede280275a657692b15d3b0b02da73bc23b9705c804c918e06
+4f54d30d11081d3705c051465779348b36bb2fc36e4587cb1dd133a0dcbf
+eda015243deface26389d69f7defcd894e78a3e298d2268b8272ba8f48e1
+230e9bdf555052c9ef783b2aa81c2c38f70becab9b9ea1059168c8fdc2d2
+6361fa7246e7513ccfbe472bb1ca9ff833e6e2e2a08747b482a132eb4fec
+ef421f400499e2d7be405cfcae0fca43e18ae3191786776dc7efd2116e75
+5aee823e1c255d4b2116b6bfeaafeb779efd0b22a81019dffc9a6a955c1e
+7a2d1f784ba82c03b8c1851bba3039d22c02bbd52e343a8f18acb8a74c5c
+e2c66b46065577d02c84ab5bb88dd5ffb5b9deb3df60a00a35b76b8dfe18
+3c402a55723916aa7b06e7257e2abb7da00049907d0119c4cae0bb094a76
+a5cce48b2176844ba0b09bbf5adb0f9d7869009b671cd24d259903ff5fc9
+476aff45ce45014e690d19b487d4a96cbbe57d1529fd6405a5bcc21266a3
+e58432d43ee682bcb9eafb697aec788e5a12e8db90a8f9a867739f40eb64
+45d5d1cd015480e991815199265a9a9920ae154418fdc602c1c456bf0b7e
+a638cb6728fd4a3c7bdaa0c7e8dfaa4d34ce8ae578401f302f3b868671cd
+ef38900ad2f5e9d241d60f6001d89b68abbb54932c88a25bb85832ac2c60
+03fd5ec6da30e8a0e3f383d1236e0d419c54db67f2316b11a8f2309b7876
+28b37b3bdb5fd472b91895101f5c406405c743d8b4> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/KCEFWV+TTE235F498t00 findfont /Encoding get
+dup 21 /g48 put
+pop
+(\025) show
+148.189 374.72 m
+(\007) show
+153.109 374.72 m
+
+systemdict begin
+/KCEFWV+TTE235F498t00 
+findfont dup
+/Private get begin
+/CharStrings get begin
+systemdict /gcheck known {currentglobal currentdict gcheck setglobal} if
+/g92 
+<10bf3170098b1e1dc7135a608f732c3e0d2d8d421c2bbd8fed0af7d02284
+973e099f4ed342a5f2e2c32ea45123b7a7ea74b833615af6c19c7d18f761
+71715518e9f93561a2754b3ab7f534f2064933bfdde728e6421e4953bc22
+9b7003e68c981594496ba2be39deada71a982020196e84f6eb3a972f273f
+d2893f9231667622bd752e0d868efae3bbc470a3eae936db946964aba228
+0785054ba485909f815ca6e65da18d999933a172d5bb921138fe8e6bedf3
+6ae9b0edf920ef847c5600f991b1050558508aa2ac8d00f6910762177d2d
+c1b8bc915a707c81c8daab6e21dec505de808675e8f06a7136098c5e778e
+4d7a729a67aab2d1f4f762eb94a32ea029a8c29d77744511f563908a472f
+888652f41e4022210a8a817307d41e3285b59a2d8a273fd4177bb34c34a5
+ebe81efa9fb34d8efce0dbdb870ef7ab150b73f1e112aa09b24553500966
+c3b88490c88abaef6977> ND 
+systemdict /gcheck known {setglobal} if end end
+end
+/KCEFWV+TTE235F498t00 findfont /Encoding get
+dup 22 /g92 put
+pop
+(\026) show
+Q
+Q
+Q
+PDFVars/TermAll get exec end end
+userdict /pgsave get restore
+showpage
+%%PageTrailer
+%%EndPage
+%%Trailer
+%%DocumentProcessColors: Black
+%%EOF

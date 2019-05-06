@@ -5,18 +5,11 @@
  */
 package scorereader;
 
-import java.awt.Desktop;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Base64;
-import java.util.HashMap;
-import javax.imageio.ImageIO;
-import scorereader.abc.Parser;
-import scorereader.server.Server;
+import org.bytedeco.javacpp.opencv_core;
 import scorereader.structure.Elemento;
-import scorereader.structure.JSONParser;
 
 /**
  *
@@ -32,43 +25,40 @@ public class ScoreReader {
         try {
 
             //Carregar imagem
-            File fi = new File("C:\\tcc\\ScoreReader\\fragment\\bill.JPG");
+            File fi = new File("C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\repository\\original.JPG");
             byte[] imageData = Files.readAllBytes(fi.toPath());
 
-            //Segmentar imagem
-            ArrayList<Elemento> preProcessados = segmentar(imageData);
+            //Remove linhas da pauta
+            imageData = Utilities.removerLinhasDaPauta(imageData);
+            opencv_core.IplImage imagemOriginal = Utilities.bufferedImageToIplImage(imageData);
+            opencv_core.IplImage imagemCinza = Utilities.binarizar(imagemOriginal.clone());
+            opencv_core.IplImage imageCopy = imagemCinza.clone();
+
+            ArrayList<Elemento> segmentados = Utilities.segmentar(imagemCinza, imageCopy);
 
             //Reconhecer os elementos
             ArrayList<Elemento> processados = new ArrayList<Elemento>();
-            for (Elemento elemento : preProcessados) {
-                String encoded = Base64.getEncoder().encodeToString(elemento.getImage());
-                BufferedImage image = ImageIO.read(fi);
-                HashMap<String, Object> params = new HashMap<>();
-                params.put("width", image.getWidth());
-                params.put("height", image.getHeight());
-                params.put("image64", encoded);
-
-                String retorno = Server.callServerPython("analiseImage", params);
-                processados.add(JSONParser.jsonToElement(retorno));
-
+            int qt = 0;
+            for (Elemento segmentado : segmentados) {
+                if (qt > 3) {
+                    break;
+                }
+                processados.add(Utilities.classificar(segmentado));
+                System.out.println(processados.get(qt).getTipo());
+                qt++;
             }
-            //Compilar os elementos
-            Parser parser = new Parser();
-            String scoreDir = parser.compile(processados);
+            /*
+             //Compilar os elementos
+             Parser parser = new Parser();
+             String scoreDir = parser.compile(processados);
 
-            //Mostrar score
-            if (!scoreDir.isEmpty()) {
-                Desktop.getDesktop().open(new File(scoreDir));
-            }
-
+             //Mostrar score
+             if (!scoreDir.isEmpty()) {
+             Desktop.getDesktop().open(new File(scoreDir));
+             }*/
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private static ArrayList<Elemento> segmentar(byte[] imageData) {
-        //Chamar rotina do Mauricenz segmentacao
-        return new ArrayList<>();
     }
 
 }

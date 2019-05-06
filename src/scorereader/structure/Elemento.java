@@ -12,10 +12,13 @@ package scorereader.structure;
 public class Elemento {
 
     public byte[] image;
+    public String base64Image;
     public String tipo;
 
-    public Elemento(byte[] image, String tipo) {
+    public Elemento(byte[] image, String base64Image, String tipo) {
+
         this.image = image;
+        this.base64Image = base64Image;
         this.tipo = tipo;
     }
 
@@ -25,6 +28,14 @@ public class Elemento {
 
     public byte[] getImage() {
         return image;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getBase64Image() {
+        return base64Image;
     }
 
 }
