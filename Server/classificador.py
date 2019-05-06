@@ -9,21 +9,10 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import classification_report
 from muscima.io import parse_cropobject_list
 
-class MuscimaTests(object):  
+class Classificador(object):  
   
-  def __init__(self):
-      self.caminho = 'C:/Users/ascarneiro/Desktop/TCC/ScoreReader/Server/MUSCIMA/'  
-      
-      self.CROPOBJECT_DIR = os.path.join(self.caminho, 'data/cropobjects_manual')
-      self.cropobject_fnames = [os.path.join(self.CROPOBJECT_DIR, f) for f in os.listdir(self.CROPOBJECT_DIR)]
-      self.docs = [parse_cropobject_list(f) for f in self.cropobject_fnames]
-      self.Q_LABEL = 1
-      self.H_LABEL = 0
-
-
   # Bear in mind that the outlinks are integers, only valid within the same document.
-# Therefore, we define a function per-document, not per-dataset.
-
+  # Therefore, we define a function per-document, not per-dataset.
   def extrairNotas(self, cropobjects):
     """Finds all ``(full-notehead, stem)`` pairs that form
     quarter or half notes. Returns two lists of CropObject tuples:
@@ -58,7 +47,7 @@ class MuscimaTests(object):
     half_notes = [(n, s) for n, s in notes if n.clsname == 'notehead-empty']
     return quarter_notes, half_notes
 
-  def formatarImagens(self, cropobjects, margin=1):
+  def addNotesOnCanvasMatrix(self, cropobjects, margin=1):
     """Paste the cropobjects' mask onto a shared canvas.
     There will be a given margin of background on the edges."""
 
@@ -85,27 +74,7 @@ class MuscimaTests(object):
     canvas[canvas > 0] = 1
     return canvas
 
-  def show_mask(self, mask):
-    plt.imshow(mask, cmap='gray', interpolation='nearest')
-    plt.show()
-
-  def show_masks(self, masks, row_length=5):
-    n_masks = len(masks)
-    n_rows = n_masks // row_length + 1
-    n_cols = min(n_masks, row_length)
-    fig = plt.figure()
-    for i, mask in enumerate(masks):
-        plt.subplot(n_rows, n_cols, i+1)
-        plt.imshow(mask, cmap='gray', interpolation='nearest')
-    # Let's remove the axis labels, they clutter the image.
-    for ax in fig.axes:
-        ax.set_yticklabels([])
-        ax.set_xticklabels([])
-        ax.set_yticks([])
-        ax.set_xticks([])
-    plt.show()
-
-  def adjustImages(self):
+  def resizeImages40X10AndBinarize(self):
     self.qn_resized = [resize(self.qn, (40, 10)) for self.qn in self.qn_images]
     self.hn_resized = [resize(self.hn, (40, 10)) for self.hn in self.hn_images]
 
@@ -115,7 +84,7 @@ class MuscimaTests(object):
     for self.hn in self.hn_resized:
         self.hn[self.hn > 0] = 1
 
-  def classify(self):
+  def train(self):
     # Randomly pick an equal number of quarter-notes.
     self.n_hn = len(self.hn_resized)
     random.shuffle(self.qn_resized)
@@ -129,6 +98,7 @@ class MuscimaTests(object):
     self.notes_flattened = [n.flatten() for n in self.notes]
     self.labels = self.qn_labels + self.hn_labels
 
+    #25% corresponde ao tamanho do teste
     self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(
                 self.notes_flattened,
                 self.labels,
@@ -137,6 +107,10 @@ class MuscimaTests(object):
                stratify=self.labels
                )
     self.K=5
+    
+    
+  #Algoritmo de classificacao
+  def classifyTest(self):
     # Trying the defaults first.
     clf = KNeighborsClassifier(n_neighbors=self.K)
     clf.fit(self.X_train, self.y_train)
@@ -152,27 +126,45 @@ class MuscimaTests(object):
           )
     self.y_test_pred = clf.predict(self.X_test)
     print(classification_report(self.y_test, self.y_test_pred, target_names=['half', 'quarter']))
-    
- 
-  def main(self):
+
+
+  def load(self):
+    #Extrai notas do DataSet
     qns_and_hns = [self.extrairNotas(self.cropobjects) for self.cropobjects in self.docs]
+
+    #Some operation
     self.qns = list(itertools.chain(*[self.qn for self.qn, self.hn in qns_and_hns]))
     self.hns = list(itertools.chain(*[self.hn for self.qn, self.hn in qns_and_hns]))
   
     print(len(self.qns))
     print(len(self.hns))
 
-    self.qn_images = [self.formatarImagens(self.qn) for self.qn in self.qns]
-    self.hn_images = [self.formatarImagens(self.hn) for self.hn in self.hns]
+    #Coloca imagem no canvas
+    self.qn_images = [self.addNotesOnCanvasMatrix(self.qn) for self.qn in self.qns]
+    self.hn_images = [self.addNotesOnCanvasMatrix(self.hn) for self.hn in self.hns]
 
-    #self.show_masks(self.qn_images[:25])
-    #self.show_masks(self.hn_images[:25])
+    #Redimenciona em 40 X 10 e transforma em matriz de 0 e 1
+    self.resizeImages40X10AndBinarize()
 
-    self.adjustImages()
-    #self.show_masks(self.qn_resized[:25])
-    #self.show_masks(self.hn_resized[-25:])
+    #Treina modelo
+    self.train()
 
-    self.classify()
+    #Classifica usando os dados do proprio modelo
+    self.classifyTest()
 
+    def classify(self, mask):
+      print(mask)
 
+    #Construtor
+    def __init__(self):
+      self.caminho = 'C:/Users/ascarneiro/Desktop/TCC/ScoreReader/Server/MUSCIMA/'  
+      
+      self.CROPOBJECT_DIR = os.path.join(self.caminho, 'data/cropobjects_manual')
+      self.cropobject_fnames = [os.path.join(self.CROPOBJECT_DIR, f) for f in os.listdir(self.CROPOBJECT_DIR)]
+      self.docs = [parse_cropobject_list(f) for f in self.cropobject_fnames]
+      self.Q_LABEL = 1
+      self.H_LABEL = 0
+      
+      #Load everything.......
+      load()
 
