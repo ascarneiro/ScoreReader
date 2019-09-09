@@ -11,6 +11,12 @@ from muscima.io import parse_cropobject_list
 
 class Classificador(object):  
   
+  #Construtor
+  def __init__(self):
+    self.caminho = 'C:/Users/ascarneiro/Desktop/TCC/ScoreReader/Server/MUSCIMA/'  
+    self.K=5 #Numero de vizinhos a consultar
+    self.clf = None
+    
   # Bear in mind that the outlinks are integers, only valid within the same document.
   # Therefore, we define a function per-document, not per-dataset.
   def extrairNotas(self, cropobjects):
@@ -97,6 +103,7 @@ class Classificador(object):
     # Flatten data
     self.notes_flattened = [n.flatten() for n in self.notes]
     self.labels = self.qn_labels + self.hn_labels
+  
 
     #25% corresponde ao tamanho do teste
     self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(
@@ -106,65 +113,77 @@ class Classificador(object):
                 random_state=42,
                stratify=self.labels
                )
-    self.K=5
     
-    
+ 
   #Algoritmo de classificacao
-  def classifyTest(self):
-    # Trying the defaults first.
-    clf = KNeighborsClassifier(n_neighbors=self.K)
-    clf.fit(self.X_train, self.y_train)
+  def classify(self):
 
-    KNeighborsClassifier(
-          algorithm='auto',
-          leaf_size=30,
-          metric='minkowski',
-          metric_params=None,
-          n_jobs=1,
-          n_neighbors=5, p=2,
-          weights='uniform'
-          )
-    self.y_test_pred = clf.predict(self.X_test)
+    print(self.qn_selected[:1])
+    print(self.hn_resized[:1])
+    # Trying the defaults first.
+    self.clf = KNeighborsClassifier(n_neighbors=self.K)
+    self.clf.fit(self.X_train, self.y_train)
+    self.y_test_pred = self.clf.predict(self.X_test)
+
     print(classification_report(self.y_test, self.y_test_pred, target_names=['half', 'quarter']))
 
 
+  def myclassify(self, strArray):
+      X_new = numpy.fromstring(strArray, dtype=int, sep=' ')
+      """X_new = numpy.array([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+                            0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0,
+                            0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+                            0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+                            0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+                            0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+                            1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0,
+                            0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0,
+                            0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
+                            0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
+                            0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0,
+                            0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1,
+                            0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0,
+                            1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0,
+                            0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]])"""
+      print(X_new)
+      print(self.clf.predict(X_new))
+      print('Passou classificacao')
+
+
   def load(self):
+    #self.CROPOBJECT_DIR = os.path.join(self.caminho, 'data/cropobjects_manual')
+    #self.cropobject_fnames = [os.path.join(self.CROPOBJECT_DIR, f) for f in os.listdir(self.CROPOBJECT_DIR)]
+    #self.docs = [parse_cropobject_list(f) for f in self.cropobject_fnames]
+    self.Q_LABEL = 1
+    self.H_LABEL = 0
+
+  def main(self):
+
+    self.load()
     #Extrai notas do DataSet
-    qns_and_hns = [self.extrairNotas(self.cropobjects) for self.cropobjects in self.docs]
+    #qns_and_hns = [self.extrairNotas(self.cropobjects) for self.cropobjects in self.docs]
 
     #Some operation
-    self.qns = list(itertools.chain(*[self.qn for self.qn, self.hn in qns_and_hns]))
-    self.hns = list(itertools.chain(*[self.hn for self.qn, self.hn in qns_and_hns]))
+    #self.qns = list(itertools.chain(*[self.qn for self.qn, self.hn in qns_and_hns]))
+    #self.hns = list(itertools.chain(*[self.hn for self.qn, self.hn in qns_and_hns]))
   
-    print(len(self.qns))
-    print(len(self.hns))
+    #print(len(self.qns))
+    #print(len(self.hns))
 
     #Coloca imagem no canvas
-    self.qn_images = [self.addNotesOnCanvasMatrix(self.qn) for self.qn in self.qns]
-    self.hn_images = [self.addNotesOnCanvasMatrix(self.hn) for self.hn in self.hns]
+    #self.qn_images = [self.addNotesOnCanvasMatrix(self.qn) for self.qn in self.qns]
+    #self.hn_images = [self.addNotesOnCanvasMatrix(self.hn) for self.hn in self.hns]
 
     #Redimenciona em 40 X 10 e transforma em matriz de 0 e 1
-    self.resizeImages40X10AndBinarize()
+   # self.resizeImages40X10AndBinarize()
 
     #Treina modelo
-    self.train()
+    #self.train()
 
     #Classifica usando os dados do proprio modelo
-    self.classifyTest()
+    #self.classify()
 
-    def classify(self, mask):
-      print(mask)
-
-    #Construtor
-    def __init__(self):
-      self.caminho = 'C:/Users/ascarneiro/Desktop/TCC/ScoreReader/Server/MUSCIMA/'  
-      
-      self.CROPOBJECT_DIR = os.path.join(self.caminho, 'data/cropobjects_manual')
-      self.cropobject_fnames = [os.path.join(self.CROPOBJECT_DIR, f) for f in os.listdir(self.CROPOBJECT_DIR)]
-      self.docs = [parse_cropobject_list(f) for f in self.cropobject_fnames]
-      self.Q_LABEL = 1
-      self.H_LABEL = 0
-      
-      #Load everything.......
-      load()
-
+c = Classificador()
+c.main()

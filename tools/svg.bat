@@ -1,0 +1,1 @@
+%1\abcm2ps.exe %2 -O %3 -X

@@ -1,0 +1,1 @@
+%1\abc2midi.exe %2 -o %3

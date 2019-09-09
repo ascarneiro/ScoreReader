@@ -5,11 +5,18 @@
  */
 package scorereader;
 
+import java.awt.Desktop;
+import java.awt.geom.Point2D;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import org.bytedeco.javacpp.opencv_core;
-import scorereader.structure.Elemento;
+import scorereader.abc.NomeNota;
+import scorereader.abc.Parser;
+import scorereader.structure.Figura;
+import scorereader.structure.Linha;
+import scorereader.structure.Pauta;
+import scorereader.structure.Nota;
 
 /**
  *
@@ -25,37 +32,66 @@ public class ScoreReader {
         try {
 
             //Carregar imagem
-            File fi = new File("C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\repository\\original.JPG");
-            byte[] imageData = Files.readAllBytes(fi.toPath());
+            File fi = new File("C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\repository\\OneBar.png");
+            byte[] originalImage = Files.readAllBytes(fi.toPath());
 
             //Remove linhas da pauta
-            imageData = Utilities.removerLinhasDaPauta(imageData);
-            opencv_core.IplImage imagemOriginal = Utilities.bufferedImageToIplImage(imageData);
-            opencv_core.IplImage imagemCinza = Utilities.binarizar(imagemOriginal.clone());
+            byte[] imageData = Utilities.removerLinhasDaPauta(originalImage);
+            opencv_core.IplImage imagemSemLinhas = Utilities.bufferedImageToIplImage(imageData);
+            opencv_core.IplImage imagemCinza = Utilities.binarizar(imagemSemLinhas.clone());
             opencv_core.IplImage imageCopy = imagemCinza.clone();
 
-            ArrayList<Elemento> segmentados = Utilities.segmentar(imagemCinza, imageCopy);
+            ArrayList<Figura> figuras = Utilities.segmentar(imagemCinza, imageCopy);
+            ArrayList<Pauta> pautas = Utilities.obterInformacoesPautas(originalImage);
+            ArrayList<Nota> notas = Utilities.detectarAlturaNotas(imagemSemLinhas);
 
             //Reconhecer os elementos
-            ArrayList<Elemento> processados = new ArrayList<Elemento>();
-            int qt = 0;
-            for (Elemento segmentado : segmentados) {
-                if (qt > 3) {
-                    break;
-                }
-                processados.add(Utilities.classificar(segmentado));
-                System.out.println(processados.get(qt).getTipo());
-                qt++;
-            }
-            /*
-             //Compilar os elementos
-             Parser parser = new Parser();
-             String scoreDir = parser.compile(processados);
+            ArrayList<Figura> processados = new ArrayList<Figura>();
 
-             //Mostrar score
-             if (!scoreDir.isEmpty()) {
-             Desktop.getDesktop().open(new File(scoreDir));
-             }*/
+            for (Pauta pauta : pautas) {
+                int size = pauta.getLinhas().size();
+                for (int i = size; i > 0; i--) {
+                    Linha linha = pauta.getLinha(String.valueOf(i));
+                    for (int j = 0; j < figuras.size(); j++) {
+                        Figura figura = figuras.get(j);
+                        for (Nota nota : notas) {
+                            double distance = Point2D.distance(figura.x, figura.y, nota.x, nota.y);
+
+                            if (distance < 300) {
+                                String nome = NomeNota._DO;
+                                if (linha.index == 1) {
+
+                                    nome = NomeNota._FA;
+                                } else if (linha.index == 2) {
+                                    nome = NomeNota._RE;
+                                } else if (linha.index == 3) {
+                                    nome = NomeNota._SI;
+                                } else if (linha.index == 4) {
+                                    nome = NomeNota._SOL;
+                                } else if (linha.index == 5) {
+                                    nome = NomeNota._MI;
+
+                                }
+                                nota.nome = nome;
+                                figura.setNota(nota);
+
+                            }
+                        }
+                    }
+                }
+            }
+
+            //Compilar os elementos
+            Parser parser = new Parser();
+            String[] scoreDir = parser.compile(processados);
+
+            for (String dir : scoreDir) {
+                //Mostrar score
+                if (!dir.isEmpty()) {
+                    Desktop.getDesktop().open(new File(dir));
+                }
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

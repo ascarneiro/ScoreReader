@@ -8,11 +8,13 @@ import base64
 import io
 import cStringIO
 import pickle
+import classificador as clf
+import identificadornotas as utils
+import json
 
 from PIL import Image as pil_image
 from gamera.core import *
 from gamera.plugins import pil_io
-from gamera.plugins import numpy_io
 from gamera.toolkits.musicstaves import musicstaves_rl_simple
 from numpy import fft
 
@@ -23,6 +25,7 @@ class Server(object):
     self.DIR = 'C:/Users/ascarneiro/Desktop/TCC/ScoreReader/repository/'
     self.array = None
     self.debug = False
+    self.classificador = clf.Classificador()
 
   def encodeImageStr(self, image):
     nparr = image.to_numpy()
@@ -59,21 +62,49 @@ class Server(object):
     pilImage = self.convertToPilImage(imageEncoded)
     gameraImage = self.convertToGameraImage(pilImage)
     ms = musicstaves_rl_simple.MusicStaves_rl_simple(gameraImage)
-    ms.remove_staves(crossing_symbols = 'bars')
+    ms.remove_staves(crossing_symbols = 'bars', num_lines=5)
 
-    staves = ms.get_staffpos()
-    for staff in staves:
-        print "Staff %d has %d staves:" % (staff.staffno, len(staff.yposlist))
-        for index, y in enumerate(staff.yposlist):
-            print "    %d. line at y-position:" % (index+1), y
+    #Printar quantas pautas tem
+    if self.debug:
+      pautas = ms.get_staffpos()
+      for pauta in pautas:
+          print "Staff %d has %d staves:" % (pauta.staffno, len(pauta.yposlist))
+          for index, y in enumerate(pauta.yposlist):
+              print "    %d. line at y-position:" % (index+1), y
 
     ms.image.image_save(self.DIR + 'staffless.png', 'PNG')
+
     imageEncoded = self.encodeImageStr(ms.image)
     if self.debug:
         print(imageEncoded)
 
     return imageEncoded
-  
+
+  @cherrypy.expose
+  def obterInformacoesPautas(self, imageEncoded):
+    retorno = []
+    pilImage = self.convertToPilImage(imageEncoded)
+    gameraImage = self.convertToGameraImage(pilImage)
+    ms = musicstaves_rl_simple.MusicStaves_rl_simple(gameraImage)
+    ms.remove_staves(crossing_symbols='bars', num_lines=5)
+    pautas = ms.get_staffpos()
+    for pauta in pautas:
+      linhas = []
+      for index, y in enumerate(pauta.yposlist):
+        linhas.append({"linha": {"index": (index + 1), "y": y}})
+
+      retorno.append({"pauta": {"index": pauta.staffno, "linhas":linhas, "yposlist": pauta.yposlist}})
+
+    return json.dumps(retorno)
+
+  @cherrypy.expose
+  def detectarAlturaNotas(self, imageEncoded):
+
+    image = self.convertToCvImage(imageEncoded)
+    identificaNotas = utils.IdentificaNotas()
+    image = identificaNotas.melhorarImagem(image)
+    return json.dumps(identificaNotas.detectarPontosNotas(image))
+
   def binarizeAndRotateImageMatrix(self, cvImage):
     #Tom de cinza
     ret, thresh_img = cv2.threshold(cvImage, 127, 255, cv2.THRESH_BINARY)
@@ -110,7 +141,6 @@ class Server(object):
     return np.array_str(binarized)
 
 
-  @cherrypy.expose
-  def plotImage(self):
-    np.savetxt(self.DIR + 'arrayImageBinary.txt', self.array, delimiter=' ', newline='\n', fmt='%i')  
+
 cherrypy.quickstart(Server())
+

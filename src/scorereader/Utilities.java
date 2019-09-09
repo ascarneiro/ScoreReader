@@ -5,6 +5,9 @@
  */
 package scorereader;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -32,7 +35,11 @@ import org.bytedeco.javacv.Java2DFrameConverter;
 import org.bytedeco.javacv.OpenCVFrameConverter;
 import static scorereader.image.Prototipo.CV_LOAD_IMAGE_ANYCOLOR;
 import scorereader.server.Server;
-import scorereader.structure.Elemento;
+import scorereader.structure.Crop;
+import scorereader.structure.Figura;
+import scorereader.structure.Linha;
+import scorereader.structure.Pauta;
+import scorereader.structure.Nota;
 
 /**
  *
@@ -76,9 +83,9 @@ public class Utilities {
      * @param bb
      * @return
      */
-    public static ArrayList<opencv_core.IplImage> cropElements(opencv_core.IplImage imagemCinza, opencv_core.IplImage imagemBB) {
+    public static ArrayList<Crop> cropElements(opencv_core.IplImage imagemCinza, opencv_core.IplImage imagemBB) {
 
-        ArrayList<opencv_core.IplImage> elements = new ArrayList<>();
+        ArrayList<Crop> elements = new ArrayList<Crop>();
 
         opencv_core.CvMemStorage storage = opencv_core.CvMemStorage.create();
         opencv_core.CvSeq contours = new opencv_core.CvContour();
@@ -105,7 +112,7 @@ public class Utilities {
                 opencv_core.Rect rectCrop = new opencv_core.Rect(bb.x(), bb.y(), bb.width(), bb.height());
                 opencv_core.Mat croppedImage = new opencv_core.Mat(new opencv_core.Mat(imagemBB), rectCrop);
                 opencv_core.IplImage crop = new opencv_core.IplImage(croppedImage);
-                elements.add(crop);
+                elements.add(new Crop(bb.x(), bb.y(), bb.width(), bb.height(), crop));
 
                 if (DEBUG) {
                     cvSaveImage(DIR_DEBUG + "crop" + System.currentTimeMillis() + ".png", crop);
@@ -176,27 +183,26 @@ public class Utilities {
         return null;
     }
 
-    public static ArrayList<Elemento> segmentar(opencv_core.IplImage imagemCinza, opencv_core.IplImage imageCopy) {
+    public static ArrayList<Figura> segmentar(opencv_core.IplImage imagemCinza, opencv_core.IplImage imageCopy) {
 
         cvAdaptiveThreshold(imagemCinza, imagemCinza, 255,
                 CV_ADAPTIVE_THRESH_MEAN_C, CV_THRESH_BINARY_INV, 11, 5);
 
-        ArrayList<Elemento> elementos = new ArrayList<Elemento>();
-
-        opencv_core.IplImage bounded = drawBoundBoxes(imagemCinza, imageCopy);
+        ArrayList<Figura> elementos = new ArrayList<Figura>();
 
         if (DEBUG) {
+            opencv_core.IplImage bounded = drawBoundBoxes(imagemCinza, imageCopy);
             cvSaveImage(DIR_DEBUG + "bounded.png", new opencv_core.IplImage(bounded));
         }
 
-        ArrayList<opencv_core.IplImage> cropElements = cropElements(imagemCinza, imageCopy);
+        ArrayList<Crop> cropElements = cropElements(imagemCinza, imageCopy);
 
-        for (opencv_core.IplImage cropElement : cropElements) {
-            BufferedImage image = IplImageToBufferedImage(cropElement);
-            byte[] imageData = bufferedImageToByteArray(image);
-            String base64Image = Base64.getEncoder().encodeToString(imageData);
+        for (Crop crop : cropElements) {
+            BufferedImage image = IplImageToBufferedImage(crop.getImage());
+            byte[] data = bufferedImageToByteArray(image);
+            String base64Image = Base64.getEncoder().encodeToString(data);
 
-            elementos.add(new Elemento(imageData, base64Image, "undefined-yet"));
+            elementos.add(new Figura(crop.x, crop.y, crop.h, crop.w, data, base64Image, "undefined-yet"));
         }
         return elementos;
     }
@@ -212,12 +218,73 @@ public class Utilities {
         return null;
     }
 
-    public static Elemento classificar(Elemento segmentado) {
+    public static Figura classificar(Figura segmentado) {
         String encoded = Base64.getEncoder().encodeToString(segmentado.getImage());
         HashMap<String, Object> params = new HashMap<>();
         params.put("imageEncoded", encoded);
         String retorno = Server.callServerPython("classificar", params);
         segmentado.tipo = retorno;
         return segmentado;
+    }
+
+    public static ArrayList<Nota> detectarAlturaNotas(opencv_core.IplImage imagemCinza) {
+        byte[] image = bufferedImageToByteArray(IplImageToBufferedImage(imagemCinza));
+        String encoded = Base64.getEncoder().encodeToString(image);
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("imageEncoded", encoded);
+        String json = Server.callServerPython("detectarAlturaNotas", params);
+        ArrayList<Nota> pontos = new ArrayList<Nota>();
+        JsonParser parser = new JsonParser();
+        JsonArray array = parser.parse(json).getAsJsonArray();
+
+        for (int i = 0; i < array.size(); i++) {
+            JsonObject rootObj = (JsonObject) array.get(0);
+            JsonObject ponto = rootObj.getAsJsonObject("ponto");
+
+            double x = ponto.get("x").getAsDouble();
+            double y = ponto.get("y").getAsDouble();
+            double raio = ponto.get("raio").getAsDouble();
+            int index = ponto.get("index").getAsInt();
+            pontos.add(new Nota(index, x, y, raio));
+        }
+
+        return pontos;
+
+    }
+
+    public static ArrayList<Pauta> obterInformacoesPautas(byte[] image) {
+        String encoded = Base64.getEncoder().encodeToString(image);
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("imageEncoded", encoded);
+        String json = Server.callServerPython("obterInformacoesPautas", params);
+        JsonParser parser = new JsonParser();
+        JsonArray array = parser.parse(json).getAsJsonArray();
+
+        ArrayList<Pauta> pautas = new ArrayList<Pauta>();
+        for (int i = 0; i < array.size(); i++) {
+            JsonObject rootObj = (JsonObject) array.get(i);
+            JsonObject pautaJson = rootObj.getAsJsonObject("pauta");
+
+            int indexPauta = pautaJson.get("index").getAsInt();
+            JsonArray linhasJson = pautaJson.get("linhas").getAsJsonArray();
+
+            Pauta pauta = new Pauta(indexPauta);
+            for (int j = 0; j < linhasJson.size(); j++) {
+                JsonObject o = (JsonObject) linhasJson.get(j);
+                JsonObject linhaJson = (JsonObject) o.getAsJsonObject("linha");
+                int indexLinha = linhaJson.get("index").getAsInt();
+                double y = linhaJson.get("y").getAsDouble();
+                Linha linhaPauta = new Linha(indexLinha, y);
+                pauta.addLinha(String.valueOf(indexLinha), linhaPauta);
+            }
+            pautas.add(pauta);
+        }
+
+        return pautas;
+
+    }
+
+    public void detectarPentagrama() {
+
     }
 }
