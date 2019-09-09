@@ -21,6 +21,8 @@ import static org.bytedeco.javacpp.helper.opencv_core.CV_RGB;
 import static org.bytedeco.javacpp.helper.opencv_imgcodecs.cvLoadImage;
 import static org.bytedeco.javacpp.helper.opencv_imgcodecs.cvSaveImage;
 import org.bytedeco.javacpp.opencv_core;
+import org.bytedeco.javacpp.opencv_core.Point;
+import org.bytedeco.javacpp.opencv_imgproc;
 import static org.bytedeco.javacpp.opencv_imgproc.CV_ADAPTIVE_THRESH_MEAN_C;
 import static org.bytedeco.javacpp.opencv_imgproc.CV_CHAIN_APPROX_NONE;
 import static org.bytedeco.javacpp.opencv_imgproc.CV_RETR_CCOMP;
@@ -33,6 +35,9 @@ import static org.bytedeco.javacpp.opencv_imgproc.cvRectangleR;
 import static org.bytedeco.javacpp.opencv_imgproc.cvThreshold;
 import org.bytedeco.javacv.Java2DFrameConverter;
 import org.bytedeco.javacv.OpenCVFrameConverter;
+import org.opencv.core.Core;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
 import static scorereader.image.Prototipo.CV_LOAD_IMAGE_ANYCOLOR;
 import scorereader.server.Server;
 import scorereader.structure.Crop;
@@ -71,6 +76,17 @@ public class Utilities {
                 bb.width(bb.width() + 10);
                 bb.height(bb.height() + 10);
                 cvRectangleR(imagemBB, bb, CV_RGB(0, 255, 0), 1, 8, 0);
+                // Adding Text
+
+                opencv_core.CvScalar c = CV_RGB(0, 0, 0);
+                opencv_imgproc.cvPutText(
+                        imagemBB, // Matrix obj of the image
+                        "(" + bb.x() + " , " + bb.y() + ")", // Text to be added
+                        new opencv_core.CvPoint(bb.x(), bb.y() - 25), // point
+                        opencv_imgproc.cvFont(1), // front face
+                        c // Scalar object for color
+                );
+
             }
         }
         return imagemBB;
@@ -195,15 +211,18 @@ public class Utilities {
             cvSaveImage(DIR_DEBUG + "bounded.png", new opencv_core.IplImage(bounded));
         }
 
-        ArrayList<Crop> cropElements = cropElements(imagemCinza, imageCopy);
+        if (DEBUG) {
+            ArrayList<Crop> cropElements = cropElements(imagemCinza, imageCopy);
 
-        for (Crop crop : cropElements) {
-            BufferedImage image = IplImageToBufferedImage(crop.getImage());
-            byte[] data = bufferedImageToByteArray(image);
-            String base64Image = Base64.getEncoder().encodeToString(data);
+            for (Crop crop : cropElements) {
+                BufferedImage image = IplImageToBufferedImage(crop.getImage());
+                byte[] data = bufferedImageToByteArray(image);
+                String base64Image = Base64.getEncoder().encodeToString(data);
 
-            elementos.add(new Figura(crop.x, crop.y, crop.h, crop.w, data, base64Image, "undefined-yet"));
+                elementos.add(new Figura(crop.x, crop.y, crop.h, crop.w, data, base64Image, "undefined-yet"));
+            }
         }
+
         return elementos;
     }
 

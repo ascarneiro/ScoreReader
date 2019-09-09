@@ -72,9 +72,9 @@ class Server(object):
           for index, y in enumerate(pauta.yposlist):
               print "    %d. line at y-position:" % (index+1), y
 
+    imageEncoded = self.encodeImageStr(ms.image)
     ms.image.image_save(self.DIR + 'staffless.png', 'PNG')
 
-    imageEncoded = self.encodeImageStr(ms.image)
     if self.debug:
         print(imageEncoded)
 
@@ -88,12 +88,20 @@ class Server(object):
     ms = musicstaves_rl_simple.MusicStaves_rl_simple(gameraImage)
     ms.remove_staves(crossing_symbols='bars', num_lines=5)
     pautas = ms.get_staffpos()
+
+
+    cv2.imwrite(self.DIR + 'posicaoLinhas.png', self.convertToCvImage(imageEncoded))
+    img = cv2.imread(self.DIR + 'posicaoLinhas.png')
+
     for pauta in pautas:
       linhas = []
       for index, y in enumerate(pauta.yposlist):
         linhas.append({"linha": {"index": (index + 1), "y": y}})
+        cv2.putText(img, "y(" + str(y) +")", (520, int(y)), cv2.FONT_HERSHEY_TRIPLEX,0.4, (0, 0, 255), 1, cv2.LINE_AA)
 
       retorno.append({"pauta": {"index": pauta.staffno, "linhas":linhas, "yposlist": pauta.yposlist}})
+
+    cv2.imwrite(self.DIR + 'posicaoLinhas.png', img)
 
     return json.dumps(retorno)
 

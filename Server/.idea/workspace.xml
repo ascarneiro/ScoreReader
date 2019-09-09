@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/identificadornotas.py" line="48" mnemonic="1" />
+    <bookmark url="file://$PROJECT_DIR$/server.py" line="102" mnemonic="1" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df176199-7e82-4001-a2bd-aa7f5aacb6c8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/classificador.py" beforeDir="false" afterPath="$PROJECT_DIR$/classificador.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fix python 2.7.reg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/musicstavestest.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/promissores.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/identificadornotas.py" beforeDir="false" afterPath="$PROJECT_DIR$/identificadornotas.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../nbproject/private/private.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nbproject/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../nbproject/project.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../repository/original.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../repository/staffless.png" beforeDir="false" afterPath="$PROJECT_DIR$/../repository/staffless.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repository/alturaNotas.png" beforeDir="false" afterPath="$PROJECT_DIR$/../repository/alturaNotas.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/scorereader/ScoreReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/ScoreReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/Utilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/Utilities.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/abc/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/abc/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/abc/Tipo.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/abc/NomeNota.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/structure/Elemento.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/structure/Figura.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,8 +22,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="624">
-              <caret line="146" selection-start-line="146" selection-end-line="146" />
+            <state relative-caret-position="192">
+              <caret line="99" column="100" selection-start-line="99" selection-start-column="100" selection-end-line="99" selection-end-column="100" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -41,25 +32,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/identificadornotas.py">
+        <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/_cpdispatch.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="47" column="48" selection-start-line="47" selection-start-column="48" selection-end-line="47" selection-end-column="48" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/classificador.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="157" column="5" selection-start-line="157" selection-start-column="5" selection-end-line="157" selection-end-column="5" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="256">
+              <caret line="59" column="33" selection-start-line="59" selection-start-column="33" selection-end-line="59" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -124,8 +100,8 @@
         <option value="$PROJECT_DIR$/venv/Utils.py" />
         <option value="$PROJECT_DIR$/removed" />
         <option value="$PROJECT_DIR$/DataView.py" />
-        <option value="$PROJECT_DIR$/server.py" />
         <option value="$PROJECT_DIR$/classificador.py" />
+        <option value="$PROJECT_DIR$/server.py" />
         <option value="$PROJECT_DIR$/identificadornotas.py" />
       </list>
     </option>
@@ -153,6 +129,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -173,11 +150,11 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../circle-detection-opencv" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
@@ -331,7 +308,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.325315" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49867234" visible="true" weight="0.534937" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49867234" weight="0.534937" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Terminal" order="6" sideWeight="0.4992034" weight="0.62657505" />
@@ -365,6 +342,20 @@
                 </list>
               </option>
             </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
           </value>
         </entry>
       </map>
@@ -478,28 +469,10 @@
     <entry file="file://$PROJECT_DIR$/venv/pyvenv.cfg">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/fix python 2.7.reg">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tst.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/musicstavestest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/promissores.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/fix python 2.7.reg" />
+    <entry file="file://$PROJECT_DIR$/tst.py" />
+    <entry file="file://$PROJECT_DIR$/musicstavestest.py" />
+    <entry file="file://$PROJECT_DIR$/promissores.txt" />
     <entry file="file://$PROJECT_DIR$/arquivo.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -509,25 +482,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DataView.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IdentificaNotas.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="3" column="21" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/DataView.py" />
+    <entry file="file://$PROJECT_DIR$/IdentificaNotas.py" />
     <entry file="file://$PROJECT_DIR$/removed">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -549,16 +505,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/_cpdispatch.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="54" selection-start-line="54" selection-end-line="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/classificador.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
+        <state relative-caret-position="3552">
           <caret line="157" column="5" selection-start-line="157" selection-start-column="5" selection-end-line="157" selection-end-column="5" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -568,8 +517,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="146" selection-start-line="146" selection-end-line="146" />
+        <state relative-caret-position="192">
+          <caret line="99" column="100" selection-start-line="99" selection-start-column="100" selection-end-line="99" selection-end-column="100" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
@@ -578,11 +527,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/identificadornotas.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="47" column="48" selection-start-line="47" selection-start-column="48" selection-end-line="47" selection-end-column="48" />
+        <state relative-caret-position="131">
+          <caret line="51" column="138" selection-start-line="51" selection-start-column="138" selection-end-line="51" selection-end-column="138" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/_cpdispatch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="59" column="33" selection-start-line="59" selection-start-column="33" selection-end-line="59" selection-end-column="33" />
         </state>
       </provider>
     </entry>

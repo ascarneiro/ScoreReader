@@ -46,6 +46,11 @@ class IdentificaNotas(object):
             #Elimina partes que nao estao dentro dos padroes
             if r >= 20 and r <= 24:
                 cv2.circle(image, center, r, (0, 255, 0), 3)
+                if self.debugMode:
+                  #pinta coordenadas
+                  #cv2.putText(image, "(" + str(x) + ","+ str(y) + ")", (int(x), int(y)), cv2.FONT_HERSHEY_SIMPLEX, 1, 5)
+                  cv2.putText(image, "(" + str(x) + " , "+ str(y) + ")", (int(x) - 100, int(y + 100)), cv2.FONT_HERSHEY_TRIPLEX, 0.4, (255, 0, 0), 1, cv2.LINE_AA)
+
                 figuras.append({"ponto": {"index": index, "x": x, "y":y, "center": center, "raio": r}})
 
             index = index + 1

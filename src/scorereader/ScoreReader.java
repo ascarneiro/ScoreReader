@@ -81,7 +81,7 @@ public class ScoreReader {
                 }
             }
 
-            //Compilar os elementos
+//            //Compilar os elementos
             Parser parser = new Parser();
             String[] scoreDir = parser.compile(processados);
 
