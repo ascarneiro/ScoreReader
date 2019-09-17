@@ -97,7 +97,7 @@ class Server(object):
       linhas = []
       for index, y in enumerate(pauta.yposlist):
         linhas.append({"linha": {"index": (index + 1), "y": y}})
-        cv2.putText(img, "y(" + str(y) +")", (520, int(y)), cv2.FONT_HERSHEY_TRIPLEX,0.4, (0, 0, 255), 1, cv2.LINE_AA)
+        cv2.putText(img, "y(" + str(y) +")", (520, int(y)), cv2.FONT_HERSHEY_TRIPLEX,0.4, (0, 0, 255  ), 1, cv2.LINE_AA)
 
       retorno.append({"pauta": {"index": pauta.staffno, "linhas":linhas, "yposlist": pauta.yposlist}})
 

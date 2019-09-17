@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/server.py" line="102" mnemonic="1" />
+    <bookmark url="file://$PROJECT_DIR$/identificadornotas.py" line="62" mnemonic="1" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df176199-7e82-4001-a2bd-aa7f5aacb6c8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/identificadornotas.py" beforeDir="false" afterPath="$PROJECT_DIR$/identificadornotas.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../output/1568010349292.abc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../output/1568010349292.midi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../output/1568010349292.xhtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../output/1568010545397.abc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../output/1568010545397.midi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../output/1568010545397.xhtml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../repository/alturaNotas.png" beforeDir="false" afterPath="$PROJECT_DIR$/../repository/alturaNotas.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repository/posicaoLinhas.png" beforeDir="false" afterPath="$PROJECT_DIR$/../repository/posicaoLinhas.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/scorereader/ScoreReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/ScoreReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/Utilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/Utilities.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,8 +30,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="99" column="100" selection-start-line="99" selection-start-column="100" selection-end-line="99" selection-end-column="100" />
+            <state relative-caret-position="-262">
+              <caret line="97" column="9" lean-forward="true" selection-start-line="97" selection-start-column="9" selection-end-line="97" selection-end-column="9" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -31,7 +39,51 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-313451744/builtins.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="94">
+              <caret line="1068" column="8" selection-start-line="1068" selection-start-column="8" selection-end-line="1068" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/arquivo.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/classificador.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="575">
+              <caret line="157" column="5" selection-start-line="157" selection-start-column="5" selection-end-line="157" selection-end-column="5" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/identificadornotas.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="56" column="30" selection-start-line="56" selection-start-column="30" selection-end-line="56" selection-end-column="30" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/_cpdispatch.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="256">
@@ -129,7 +181,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -150,6 +201,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -299,19 +351,19 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12301166" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.08748404" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.325315" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49867234" weight="0.534937" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49867234" visible="true" weight="0.5339105" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Terminal" order="6" sideWeight="0.4992034" weight="0.62657505" />
+      <window_info anchor="bottom" id="Terminal" order="6" sideWeight="0.4992034" weight="0.6262626" />
       <window_info anchor="bottom" id="TODO" order="7" sideWeight="0.4992034" weight="0.32875144" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49973446" weight="0.32646048" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5013277" side_tool="true" weight="0.6296296" />
@@ -473,15 +525,6 @@
     <entry file="file://$PROJECT_DIR$/tst.py" />
     <entry file="file://$PROJECT_DIR$/musicstavestest.py" />
     <entry file="file://$PROJECT_DIR$/promissores.txt" />
-    <entry file="file://$PROJECT_DIR$/arquivo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DataView.py" />
     <entry file="file://$PROJECT_DIR$/IdentificaNotas.py" />
     <entry file="file://$PROJECT_DIR$/removed">
@@ -507,7 +550,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/classificador.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3552">
+        <state relative-caret-position="575">
           <caret line="157" column="5" selection-start-line="157" selection-start-column="5" selection-end-line="157" selection-end-column="5" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -515,22 +558,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.py">
+    <entry file="file://$PROJECT_DIR$/arquivo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="99" column="100" selection-start-line="99" selection-start-column="100" selection-end-line="99" selection-end-column="100" />
+        <state>
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/identificadornotas.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="51" column="138" selection-start-line="51" selection-start-column="138" selection-end-line="51" selection-end-column="138" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -539,6 +571,33 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="256">
           <caret line="59" column="33" selection-start-line="59" selection-start-column="33" selection-end-line="59" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-313451744/builtins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="94">
+          <caret line="1068" column="8" selection-start-line="1068" selection-start-column="8" selection-end-line="1068" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-262">
+          <caret line="97" column="9" lean-forward="true" selection-start-line="97" selection-start-column="9" selection-end-line="97" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/identificadornotas.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="56" column="30" selection-start-line="56" selection-start-column="30" selection-end-line="56" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

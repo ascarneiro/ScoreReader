@@ -5,8 +5,6 @@
  */
 package scorereader;
 
-import java.awt.Desktop;
-import java.awt.geom.Point2D;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -47,50 +45,54 @@ public class ScoreReader {
 
             //Reconhecer os elementos
             ArrayList<Figura> processados = new ArrayList<Figura>();
-
-            for (Pauta pauta : pautas) {
-                int size = pauta.getLinhas().size();
-                for (int i = size; i > 0; i--) {
-                    Linha linha = pauta.getLinha(String.valueOf(i));
-                    for (int j = 0; j < figuras.size(); j++) {
-                        Figura figura = figuras.get(j);
-                        for (Nota nota : notas) {
-                            double distance = Point2D.distance(figura.x, figura.y, nota.x, nota.y);
-
-                            if (distance < 300) {
-                                String nome = NomeNota._DO;
-                                if (linha.index == 1) {
-
-                                    nome = NomeNota._FA;
-                                } else if (linha.index == 2) {
-                                    nome = NomeNota._RE;
-                                } else if (linha.index == 3) {
-                                    nome = NomeNota._SI;
-                                } else if (linha.index == 4) {
-                                    nome = NomeNota._SOL;
-                                } else if (linha.index == 5) {
-                                    nome = NomeNota._MI;
-
-                                }
-                                nota.nome = nome;
-                                figura.setNota(nota);
-
-                            }
-                        }
-                    }
-                }
-            }
-
-//            //Compilar os elementos
+//
+//            for (Pauta pauta : pautas) {
+//                int size = pauta.getLinhas().size();
+//                for (int i = size; i > 0; i--) {
+//                    Linha linha = pauta.getLinha(String.valueOf(i));
+//                    for (Nota nota : notas) {
+//
+//                        int diff = (int) (nota.y - linha.y);
+//                        diff = Math.abs(diff);
+//                        if (diff >= 0 && diff <= 4) {
+//                            diff = (int) (figura.y - figura.y);
+//                            diff = Math.abs(diff);
+//                            if (diff >= 0 && diff <= 13) {
+//                                String nome = NomeNota._DO;
+//                                if (linha.index == 1) {
+//
+//                                    nome = NomeNota._FA;
+//                                } else if (linha.index == 2) {
+//                                    nome = NomeNota._RE;
+//                                } else if (linha.index == 3) {
+//                                    nome = NomeNota._SI;
+//                                } else if (linha.index == 4) {
+//                                    nome = NomeNota._SOL;
+//                                } else if (linha.index == 5) {
+//                                    nome = NomeNota._MI;
+//
+//                                }
+//                                nota.nome = nome;
+//                                figura.setNota(nota);
+//                                processados.add(figura);
+//                            }
+//
+//                        }
+//                    }
+//
+//                }
+//            }
+//
+////            //Compilar os elementos
             Parser parser = new Parser();
-            String[] scoreDir = parser.compile(processados);
-
-            for (String dir : scoreDir) {
-                //Mostrar score
-                if (!dir.isEmpty()) {
-                    Desktop.getDesktop().open(new File(dir));
-                }
-            }
+//            String[] scoreDir = parser.compile(processados);
+//
+//            for (String dir : scoreDir) {
+//                //Mostrar score
+//                if (!dir.isEmpty()) {
+//                    Desktop.getDesktop().open(new File(dir));
+//                }
+//            }
 
         } catch (Exception e) {
             e.printStackTrace();

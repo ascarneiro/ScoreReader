@@ -41,17 +41,26 @@ class IdentificaNotas(object):
         index = 1
         for c in contours:
             (x, y), r = cv2.minEnclosingCircle(c)
-            center = (int(x), int(y))
+
+            center = (x, y)
             r = int(r)
             #Elimina partes que nao estao dentro dos padroes
             if r >= 20 and r <= 24:
-                cv2.circle(image, center, r, (0, 255, 0), 3)
-                if self.debugMode:
-                  #pinta coordenadas
-                  #cv2.putText(image, "(" + str(x) + ","+ str(y) + ")", (int(x), int(y)), cv2.FONT_HERSHEY_SIMPLEX, 1, 5)
-                  cv2.putText(image, "(" + str(x) + " , "+ str(y) + ")", (int(x) - 100, int(y + 100)), cv2.FONT_HERSHEY_TRIPLEX, 0.4, (255, 0, 0), 1, cv2.LINE_AA)
+                #cv2.circle(image, center, r, (0, 255, 0), 3)
 
-                figuras.append({"ponto": {"index": index, "x": x, "y":y, "center": center, "raio": r}})
+                M = cv2.moments(c)
+                cX = (M["m10"] / M["m00"])
+                cY = ((M["m01"] / M["m00"]))#fator diferenca
+
+                fator = 107.79240779230769230769230769231
+                #real = (cY / fator) * 100
+                real = cY - 14
+                cv2.circle(image, (int(cX), int(cY)), 5, (255, 255, 255), -1)
+                if self.debugMode:
+                    cv2.putText(image, "(" + str(0) + " , " + str(int(real)) + ")", (int(cX) - 100, int(cY + 100)),
+                                cv2.FONT_HERSHEY_TRIPLEX, 0.4, (255, 0, 0), 1, cv2.LINE_AA)
+
+                figuras.append({"ponto": {"index": index, "x": cX, "y":(int(real)), "center": center, "raio": r}})
 
             index = index + 1
 

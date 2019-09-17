@@ -21,7 +21,6 @@ import static org.bytedeco.javacpp.helper.opencv_core.CV_RGB;
 import static org.bytedeco.javacpp.helper.opencv_imgcodecs.cvLoadImage;
 import static org.bytedeco.javacpp.helper.opencv_imgcodecs.cvSaveImage;
 import org.bytedeco.javacpp.opencv_core;
-import org.bytedeco.javacpp.opencv_core.Point;
 import org.bytedeco.javacpp.opencv_imgproc;
 import static org.bytedeco.javacpp.opencv_imgproc.CV_ADAPTIVE_THRESH_MEAN_C;
 import static org.bytedeco.javacpp.opencv_imgproc.CV_CHAIN_APPROX_NONE;
@@ -35,9 +34,9 @@ import static org.bytedeco.javacpp.opencv_imgproc.cvRectangleR;
 import static org.bytedeco.javacpp.opencv_imgproc.cvThreshold;
 import org.bytedeco.javacv.Java2DFrameConverter;
 import org.bytedeco.javacv.OpenCVFrameConverter;
-import org.opencv.core.Core;
-import org.opencv.core.Scalar;
-import org.opencv.imgproc.Imgproc;
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.Point;
+import org.opencv.imgproc.Moments;
 import static scorereader.image.Prototipo.CV_LOAD_IMAGE_ANYCOLOR;
 import scorereader.server.Server;
 import scorereader.structure.Crop;
@@ -71,21 +70,30 @@ public class Utilities {
             opencv_core.CvRect r = cvBoundingRect(contours, 0);
             if ((r.height() * r.width()) > 10) { //se a area do contorno for maior que a area minima
                 opencv_core.CvRect bb = cvBoundingRect(contours, 0);
+
+                opencv_core.Mat m = new opencv_core.Mat(contours);
+                opencv_core.Moments p = opencv_imgproc.moments(m, false);
+                int meioX = (int) ((p.m10() / p.m00()));
+                int meioY = (int) ((p.m01() / p.m00()));
+
                 bb.x(bb.x() - 5);
                 bb.y(bb.y() - 5);
                 bb.width(bb.width() + 10);
                 bb.height(bb.height() + 10);
                 cvRectangleR(imagemBB, bb, CV_RGB(0, 255, 0), 1, 8, 0);
-                // Adding Text
 
+                // Adding Text
                 opencv_core.CvScalar c = CV_RGB(0, 0, 0);
                 opencv_imgproc.cvPutText(
                         imagemBB, // Matrix obj of the image
-                        "(" + bb.x() + " , " + bb.y() + ")", // Text to be added
-                        new opencv_core.CvPoint(bb.x(), bb.y() - 25), // point
+                        "(" + meioX + " , " + meioY + ")", // Text to be added
+                        new opencv_core.CvPoint(meioX, meioY - 100), // point
                         opencv_imgproc.cvFont(1), // front face
                         c // Scalar object for color
                 );
+
+                opencv_core.CvScalar rgb = CV_RGB(195, 10, 0);
+                opencv_imgproc.cvCircle(imagemBB, new opencv_core.CvPoint(meioX, meioY), 20, rgb);
 
             }
         }
@@ -120,17 +128,25 @@ public class Utilities {
             opencv_core.CvRect r = cvBoundingRect(c, 0);
             if ((r.height() * r.width()) > 10) { //se a area do contorno for maior que a area minima
                 opencv_core.CvRect bb = cvBoundingRect(c, 0);
+
                 bb.x(bb.x() - 5);
                 bb.y(bb.y() - 5);
                 bb.width(bb.width() + 10);
                 bb.height(bb.height() + 10);
+
+                opencv_core.Mat m = new opencv_core.Mat(contours);
+                opencv_core.Moments p = opencv_imgproc.moments(m, true);
+                int meioX = (int) (p.m10() / p.m00());
+                int meioY = (int) (p.m01() / p.m00());
+
                 cvRectangleR(imagemBB, bb, CV_RGB(0, 255, 0), 1, 8, 0);
                 opencv_core.Rect rectCrop = new opencv_core.Rect(bb.x(), bb.y(), bb.width(), bb.height());
                 opencv_core.Mat croppedImage = new opencv_core.Mat(new opencv_core.Mat(imagemBB), rectCrop);
                 opencv_core.IplImage crop = new opencv_core.IplImage(croppedImage);
-                elements.add(new Crop(bb.x(), bb.y(), bb.width(), bb.height(), crop));
 
-                if (DEBUG) {
+                elements.add(new Crop(meioX, meioY, bb.width(), bb.height(), crop));
+
+                if (true) {
                     cvSaveImage(DIR_DEBUG + "crop" + System.currentTimeMillis() + ".png", crop);
                 }
             }
@@ -206,12 +222,10 @@ public class Utilities {
 
         ArrayList<Figura> elementos = new ArrayList<Figura>();
 
-        if (DEBUG) {
-            opencv_core.IplImage bounded = drawBoundBoxes(imagemCinza, imageCopy);
-            cvSaveImage(DIR_DEBUG + "bounded.png", new opencv_core.IplImage(bounded));
-        }
+        opencv_core.IplImage bounded = drawBoundBoxes(imagemCinza, imageCopy);
+        cvSaveImage(DIR_DEBUG + "..\\repository\\bounded.png", new opencv_core.IplImage(bounded));
 
-        if (DEBUG) {
+       
             ArrayList<Crop> cropElements = cropElements(imagemCinza, imageCopy);
 
             for (Crop crop : cropElements) {
@@ -221,7 +235,7 @@ public class Utilities {
 
                 elementos.add(new Figura(crop.x, crop.y, crop.h, crop.w, data, base64Image, "undefined-yet"));
             }
-        }
+        
 
         return elementos;
     }
