@@ -16,6 +16,7 @@ import scorereader.structure.Figura;
  */
 public class Parser {
 
+    private static final int quebrarEmCompassos = 3;
     private String PATHTOFILE = "C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\output\\";
     private String PATHTOTOOLS = "C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\tools\\";
 
@@ -70,8 +71,8 @@ public class Parser {
         return fileName;
     }
 
-    public String[] compile(ArrayList<Figura> elementos) {
-        StringBuilder score = make(elementos);
+    public String[] compile(String filename, ArrayList<Figura> elementos) {
+        StringBuilder score = make(filename, elementos);
         String abcFile = makeABCFile(score);
         String fileSvg = exportXHTML(abcFile);
         String fileMidi = exportMIDI(abcFile);
@@ -79,21 +80,21 @@ public class Parser {
         return new String[]{fileSvg, fileMidi};
     }
 
-    private StringBuilder make(ArrayList<Figura> elementos) {
+    private StringBuilder make(String fileName, ArrayList<Figura> elementos) {
         score = new StringBuilder();
-        score.append("X: 1").append(getTitulo(elementos)).append("\n");
-        score.append(NomeNota.TITULO).append(" ").append(getTitulo(elementos)).append("\n");
-        score.append(NomeNota.COMPOSITOR).append(" ").append(getCompositor(elementos)).append("\n");
-        score.append(NomeNota.TONALIDADE).append(" ").append(getTonalidade(elementos)).append("\n");
-        score.append(NomeNota.MEDIDA).append(" ").append(getMedida(elementos)).append("\n");
+        score.append("X: 1").append(getTitulo(fileName)).append("\n");
+        score.append(ABC_NOTATION.TITULO).append(" ").append(getTitulo(fileName)).append("\n");
+        score.append(ABC_NOTATION.COMPOSITOR).append(" ").append(getCompositor(elementos)).append("\n");
+        score.append(ABC_NOTATION.TONALIDADE).append(" ").append(getTonalidade(elementos)).append("\n");
+        score.append(ABC_NOTATION.MEDIDA).append(" ").append(getMedida(elementos)).append("\n");
         score.append(getMusica(elementos));
 
         return score;
     }
 
     //Fixo por enquanto testar compilador
-    private String getTitulo(ArrayList<Figura> elementos) {
-        return "Twinkle Twinkle, Litlle Star";
+    private String getTitulo(String dsTitulo) {
+        return dsTitulo.replace(".png", "");
     }
 
     private String getCompositor(ArrayList<Figura> elementos) {
@@ -112,6 +113,30 @@ public class Parser {
 
     //Fixo por enquanto testar compilador
     private String getMusica(ArrayList<Figura> elementos) {
-        return "D2D2A2A2|B2B2A4|G2G2F2F2|";
+        StringBuilder abcCode = new StringBuilder();
+
+        int quebrarEmCompasssos = Parser.quebrarEmCompassos;
+        int tempo = 4;
+        for (int i = 1; i < elementos.size(); i++) {
+            Figura elemento = elementos.get(i);
+            if (tempo == 0) {
+                tempo = 4;
+            } else {
+                tempo--;
+            }
+            abcCode.append(elemento.getNota().nome).append(ABC_NOTATION.SEMINIMA);
+            if (tempo == 0) {
+                abcCode.append(ABC_NOTATION.BARRA_COMPASSO);
+                quebrarEmCompasssos--;
+            }
+
+            if (quebrarEmCompasssos == 0) {
+                abcCode.append("\n");
+                quebrarEmCompasssos = Parser.quebrarEmCompassos;
+            }
+        }
+        abcCode.append(ABC_NOTATION.FINAL);
+
+        return abcCode.toString();
     }
 }

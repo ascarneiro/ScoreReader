@@ -9,21 +9,23 @@ package scorereader.structure;
  *
  * @author ascarneiro
  */
-public class Nota {
+public class Espaco {
 
-    public int ordem = 0;
-    public double x = 0;
+    public int index = 0;
     public double y = 0;
-    public double raio = 0;
-    public String nome = "undefined";
+  
 
-    public Nota(int ordem, double x, double y, double raio) {
-        this.ordem = ordem;
-        this.x = x;
+    public Espaco(int numero, double y) {
+        this.index = numero;
         this.y = y;
-        this.raio = raio;
     }
 
-    
-    
+    public int getIndex() {
+        return index;
+    }
+
+    public double getY() {
+        return y;
+    }
+
 }

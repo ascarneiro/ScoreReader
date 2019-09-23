@@ -9,7 +9,7 @@ package scorereader.abc;
  *
  * @author ascarneiro
  */
-public class NomeNota {
+public class ABC_NOTATION {
 
     //SUPLEMENTARES INFERIORES
     public static final String __LA = "A,";
@@ -52,10 +52,11 @@ public class NomeNota {
     public static final String MEDIDA = "M:";
     public static final String COMPOSITOR = "C:";
 
-    public static final String SEMINIMA = "4";
-    public static final String MINIMA = "2";
+    public static final String SEMINIMA = "2";
+    public static final String MINIMA = "4";
 
     public static final String BARRA_COMPASSO = "|";
+    public static final String FINAL = "]";
     public static final String BARRA_INICIO_RETONELLO = "|:";
     public static final String BARRA_FIM_RETONELO = ":|";
 

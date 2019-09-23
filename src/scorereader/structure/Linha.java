@@ -11,11 +11,14 @@ package scorereader.structure;
  */
 public class Linha {
 
+    public static String[] idLinha = new String[]{"5", "4", "3", "2", "1"};
     public int index = 0;
     public double y = 0;
+    public double yEspacoAcima = 0;
+    public double yEspacoAbaixo = 0;
 
-    public Linha(int numero, double y) {
-        this.index = numero;
+    public Linha(int index, double y) {
+        this.index = Integer.valueOf(idLinha[index - 1]);
         this.y = y;
     }
 

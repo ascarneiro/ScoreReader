@@ -57,12 +57,8 @@ public class Figura {
         this.y = y;
     }
 
-    public void setNote(boolean note) {
-        this.note = note;
-    }
-
-    public boolean isNote() {
-        return note;
+    public boolean isNotaMusical() {
+        return nota != null;
     }
 
     public int getY() {

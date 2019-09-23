@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 
+
 class IdentificaNotas(object):
     def __init__(self):
         self.debugMode = True;
@@ -54,13 +55,18 @@ class IdentificaNotas(object):
 
                 fator = 107.79240779230769230769230769231
                 #real = (cY / fator) * 100
-                real = cY - 14
+                realX = cX - 14
+                realY = cY - 14
+                add = 50;
+                if index % 2 == 0:
+                    add = -50
+
                 cv2.circle(image, (int(cX), int(cY)), 5, (255, 255, 255), -1)
                 if self.debugMode:
-                    cv2.putText(image, "(" + str(0) + " , " + str(int(real)) + ")", (int(cX) - 100, int(cY + 100)),
+                    cv2.putText(image, "(" + str(int(realX)) + " , " + str(int(realY)) + ")", (int(cX), int(cY + add)),
                                 cv2.FONT_HERSHEY_TRIPLEX, 0.4, (255, 0, 0), 1, cv2.LINE_AA)
 
-                figuras.append({"ponto": {"index": index, "x": cX, "y":(int(real)), "center": center, "raio": r}})
+                figuras.append({"ponto": {"index": index, "x": (int(realX)), "y":(int(realY)), "center": center, "raio": r}})
 
             index = index + 1
 

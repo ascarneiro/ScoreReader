@@ -24,7 +24,7 @@ class Server(object):
     init_gamera()
     self.DIR = 'C:/Users/ascarneiro/Desktop/TCC/ScoreReader/repository/'
     self.array = None
-    self.debug = False
+    self.debug = True
     self.classificador = clf.Classificador()
 
   def encodeImageStr(self, image):

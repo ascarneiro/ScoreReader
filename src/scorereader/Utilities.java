@@ -42,8 +42,9 @@ import scorereader.server.Server;
 import scorereader.structure.Crop;
 import scorereader.structure.Figura;
 import scorereader.structure.Linha;
-import scorereader.structure.Pauta;
+import scorereader.structure.claves.Clave;
 import scorereader.structure.Nota;
+import scorereader.structure.claves.ClaveSol;
 
 /**
  *
@@ -66,9 +67,14 @@ public class Utilities {
         cvFindContours(imagemCinza, storage, contours, Loader.sizeof(opencv_core.CvContour.class),
                 CV_RETR_CCOMP, CV_CHAIN_APPROX_NONE, new opencv_core.CvPoint(0, 0));
 
+        int index = 0;
         for (; contours != null; contours = contours.h_next()) {
             opencv_core.CvRect r = cvBoundingRect(contours, 0);
             if ((r.height() * r.width()) > 10) { //se a area do contorno for maior que a area minima
+                int add = -100;
+                if (index % 2 == 0) {
+                    add = -100;
+                }
                 opencv_core.CvRect bb = cvBoundingRect(contours, 0);
 
                 opencv_core.Mat m = new opencv_core.Mat(contours);
@@ -87,7 +93,7 @@ public class Utilities {
                 opencv_imgproc.cvPutText(
                         imagemBB, // Matrix obj of the image
                         "(" + meioX + " , " + meioY + ")", // Text to be added
-                        new opencv_core.CvPoint(meioX, meioY - 100), // point
+                        new opencv_core.CvPoint(meioX, meioY + add), // point
                         opencv_imgproc.cvFont(1), // front face
                         c // Scalar object for color
                 );
@@ -96,6 +102,7 @@ public class Utilities {
                 opencv_imgproc.cvCircle(imagemBB, new opencv_core.CvPoint(meioX, meioY), 20, rgb);
 
             }
+            index++;
         }
         return imagemBB;
     }
@@ -129,15 +136,15 @@ public class Utilities {
             if ((r.height() * r.width()) > 10) { //se a area do contorno for maior que a area minima
                 opencv_core.CvRect bb = cvBoundingRect(c, 0);
 
+                opencv_core.Mat m = new opencv_core.Mat(c);
+                opencv_core.Moments p = opencv_imgproc.moments(m, false);
+                int meioX = (int) ((p.m10() / p.m00()));
+                int meioY = (int) ((p.m01() / p.m00()));
+
                 bb.x(bb.x() - 5);
                 bb.y(bb.y() - 5);
                 bb.width(bb.width() + 10);
                 bb.height(bb.height() + 10);
-
-                opencv_core.Mat m = new opencv_core.Mat(contours);
-                opencv_core.Moments p = opencv_imgproc.moments(m, true);
-                int meioX = (int) (p.m10() / p.m00());
-                int meioY = (int) (p.m01() / p.m00());
 
                 cvRectangleR(imagemBB, bb, CV_RGB(0, 255, 0), 1, 8, 0);
                 opencv_core.Rect rectCrop = new opencv_core.Rect(bb.x(), bb.y(), bb.width(), bb.height());
@@ -146,7 +153,7 @@ public class Utilities {
 
                 elements.add(new Crop(meioX, meioY, bb.width(), bb.height(), crop));
 
-                if (true) {
+                if (DEBUG) {
                     cvSaveImage(DIR_DEBUG + "crop" + System.currentTimeMillis() + ".png", crop);
                 }
             }
@@ -225,17 +232,15 @@ public class Utilities {
         opencv_core.IplImage bounded = drawBoundBoxes(imagemCinza, imageCopy);
         cvSaveImage(DIR_DEBUG + "..\\repository\\bounded.png", new opencv_core.IplImage(bounded));
 
-       
-            ArrayList<Crop> cropElements = cropElements(imagemCinza, imageCopy);
+        ArrayList<Crop> cropElements = cropElements(imagemCinza, imageCopy);
 
-            for (Crop crop : cropElements) {
-                BufferedImage image = IplImageToBufferedImage(crop.getImage());
-                byte[] data = bufferedImageToByteArray(image);
-                String base64Image = Base64.getEncoder().encodeToString(data);
+        for (Crop crop : cropElements) {
+            BufferedImage image = IplImageToBufferedImage(crop.getImage());
+            byte[] data = bufferedImageToByteArray(image);
+            String base64Image = Base64.getEncoder().encodeToString(data);
 
-                elementos.add(new Figura(crop.x, crop.y, crop.h, crop.w, data, base64Image, "undefined-yet"));
-            }
-        
+            elementos.add(new Figura(crop.x, crop.y, crop.h, crop.w, data, base64Image, "undefined-yet"));
+        }
 
         return elementos;
     }
@@ -271,7 +276,7 @@ public class Utilities {
         JsonArray array = parser.parse(json).getAsJsonArray();
 
         for (int i = 0; i < array.size(); i++) {
-            JsonObject rootObj = (JsonObject) array.get(0);
+            JsonObject rootObj = (JsonObject) array.get(i);
             JsonObject ponto = rootObj.getAsJsonObject("ponto");
 
             double x = ponto.get("x").getAsDouble();
@@ -285,7 +290,7 @@ public class Utilities {
 
     }
 
-    public static ArrayList<Pauta> obterInformacoesPautas(byte[] image) {
+    public static ArrayList<Clave> obterInformacoesPautas(byte[] image) {
         String encoded = Base64.getEncoder().encodeToString(image);
         HashMap<String, Object> params = new HashMap<>();
         params.put("imageEncoded", encoded);
@@ -293,7 +298,7 @@ public class Utilities {
         JsonParser parser = new JsonParser();
         JsonArray array = parser.parse(json).getAsJsonArray();
 
-        ArrayList<Pauta> pautas = new ArrayList<Pauta>();
+        ArrayList<Clave> pautas = new ArrayList<Clave>();
         for (int i = 0; i < array.size(); i++) {
             JsonObject rootObj = (JsonObject) array.get(i);
             JsonObject pautaJson = rootObj.getAsJsonObject("pauta");
@@ -301,20 +306,28 @@ public class Utilities {
             int indexPauta = pautaJson.get("index").getAsInt();
             JsonArray linhasJson = pautaJson.get("linhas").getAsJsonArray();
 
-            Pauta pauta = new Pauta(indexPauta);
+            Clave pauta = new ClaveSol(indexPauta);
             for (int j = 0; j < linhasJson.size(); j++) {
                 JsonObject o = (JsonObject) linhasJson.get(j);
                 JsonObject linhaJson = (JsonObject) o.getAsJsonObject("linha");
                 int indexLinha = linhaJson.get("index").getAsInt();
                 double y = linhaJson.get("y").getAsDouble();
                 Linha linhaPauta = new Linha(indexLinha, y);
-                pauta.addLinha(String.valueOf(indexLinha), linhaPauta);
+                pauta.addLinha(indexLinha, linhaPauta);
             }
             pautas.add(pauta);
         }
 
         return pautas;
 
+    }
+
+    public static boolean isNegativo(int diff) {
+        return diff < 0;
+    }
+    
+    public static boolean isPositivo(int diff) {
+        return diff > 0;
     }
 
     public void detectarPentagrama() {
