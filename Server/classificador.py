@@ -96,8 +96,13 @@ class Classificador(object):
             ax.set_xticks([])
         plt.show()
 
-    def carregar_data_source(self):
+    def carregar_data_source(self, caminho, data_source):
         try:
+            print("DataSource :" + data_source)
+            self.caminho = caminho
+            self.CROPOBJECT_DIR = os.path.join(self.caminho, data_source)
+            self.cropobject_fnames = [os.path.join(self.CROPOBJECT_DIR, f) for f in os.listdir(self.CROPOBJECT_DIR)]
+
             self.data_source = [parse_cropobject_list(f) for f in self.cropobject_fnames]
             self.minimas_e_seminimas = [self.extrair_figuras_modelo(self.modelo) for self.modelo in self.data_source]
 
@@ -134,18 +139,27 @@ class Classificador(object):
                 self.figuras_array_linha, self.rotulos_classe, test_size=0.25, random_state=42,
                 stratify=self.rotulos_classe)
 
-            self.KNN = KNeighborsClassifier(n_neighbors=self.K_VIZINHOS_PROXIMOS)
-            self.KNN.fit(self.X_conjunto_treino, self.Y_conjunto_treino)
+            self.load_knn()
+
             self.data_source_carregado = True
         except:
             print("Erro ao carregar DataSource")
             self.data_source_carregado = False
 
 
+    def load_knn(self):
+        self.KNN = KNeighborsClassifier(n_neighbors=self.K_VIZINHOS_PROXIMOS)
+        self.KNN.fit(self.X_conjunto_treino, self.Y_conjunto_treino)
+
     def isDataSourceCarregado(self):
         return self.data_source_carregado
 
-    def classificar(self, img):
+    def classificar(self, img, K):
+
+        if self.K_VIZINHOS_PROXIMOS != K:
+            self.K_VIZINHOS_PROXIMOS = K
+            self.load_knn()
+
         img = img.resize((self.LARGURA, self.ALTURA))
         cinza = img.convert('L')  # converte para escala cinza
         cinza = cinza.point(lambda x: 0 if (x < 128) else 255, '1')  # binariza imagem
@@ -155,7 +169,11 @@ class Classificador(object):
         encontrado = self.KNN.predict([elemento_teste])
         return classes[encontrado[0]];
 
-    def classificar_debug(self):
+    def classificar_debug(self, K):
+        if self.K_VIZINHOS_PROXIMOS != K:
+            self.K_VIZINHOS_PROXIMOS = K
+            self.load_knn()
+
         retorno = []
         for index in range(0, 12):
             nome = str(index) + '.png';
@@ -178,10 +196,6 @@ class Classificador(object):
           self.ALTURA = 40  # altura da figura
           self.K_VIZINHOS_PROXIMOS = 5;  # numero de vizinhos proximos a verificar no KNN
 
-          self.ROTULO_MINIMA = 0
-          self.ROTULO_SEMINIMA = 1
-
-          self.caminho = 'C:/Users/ascarneiro/Desktop/TCC/ScoreReader/Server/MUSCIMA/'
-          self.CROPOBJECT_DIR = os.path.join(self.caminho, 'data/cropobjects_manual')
-          self.cropobject_fnames = [os.path.join(self.CROPOBJECT_DIR, f) for f in os.listdir(self.CROPOBJECT_DIR)]
+          self.ROTULO_MINIMA = 1
+          self.ROTULO_SEMINIMA = 0
 

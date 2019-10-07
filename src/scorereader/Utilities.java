@@ -262,25 +262,28 @@ public class Utilities {
         return null;
     }
 
-    public static Figura classificar(Figura segmentado) throws Exception {
+    public static Figura classificar(Figura segmentado, int k) throws Exception {
         String encoded = Base64.getEncoder().encodeToString(segmentado.getImage());
         HashMap<String, Object> params = new HashMap<>();
         params.put("imageEncoded", encoded);
+        params.put("K", k);
         String retorno = Server.callServerPython("classificar", params);
         segmentado.tipo = retorno;
         return segmentado;
     }
 
-    public static void carregarDataSource() throws Exception {
+    public static void carregarDataSource(String caminho, String dataSource, String resetar) throws Exception {
         HashMap<String, Object> params = new HashMap<>();
-        params.put("param", "");
+        params.put("caminho", caminho);
+        params.put("data_source", dataSource);
+        params.put("resetar", dataSource);
         Server.callServerPython("carregarDataSource", params);
     }
 
-    public static ArrayList<String> classificarDebug() throws Exception {
+    public static ArrayList<String> classificarDebug(int k) throws Exception {
         ArrayList<String> retorno = new ArrayList<>();
         HashMap<String, Object> params = new HashMap<>();
-        params.put("param", "");
+        params.put("K", k);
         String json = Server.callServerPython("classificarDebug", params);
         JsonParser parser = new JsonParser();
         JsonArray array = parser.parse(json).getAsJsonArray();

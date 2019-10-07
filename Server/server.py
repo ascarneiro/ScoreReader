@@ -118,23 +118,29 @@ class Server(object):
       print(status)
 
   @cherrypy.expose
-  def carregarDataSource(self, param):
-    if not self.loaddingDataSource and \
-            not self.classificador.isDataSourceCarregado():
-      self.loaddingDataSource = True
-      self.classificador.carregar_data_source()
+  def carregarDataSource(self, caminho, data_source, resetar):
+    if "S" == resetar:
       self.loaddingDataSource = False
 
-  @cherrypy.expose
-  def classificarDebug(self, param):
-    self.doVerificaCarregouDataSource()
-    return json.dumps(self.classificador.classificar_debug())
+
+    if not self.loaddingDataSource and \
+            (not self.classificador.isDataSourceCarregado() or "S" == resetar):
+      print("Carregando dataSource MUSCIMA...")
+      self.loaddingDataSource = True
+      self.classificador.carregar_data_source(caminho, data_source)
+      self.loaddingDataSource = False
+      print("DataSource MUSCIMA Carregado...")
 
   @cherrypy.expose
-  def classificar(self, imageEncoded):
+  def classificarDebug(self, K):
+    self.doVerificaCarregouDataSource()
+    return json.dumps(self.classificador.classificar_debug(int(K)))
+
+  @cherrypy.expose
+  def classificar(self, imageEncoded, K):
     self.doVerificaCarregouDataSource()
     img = self.convertToPilImage(imageEncoded)
-    return self.classificador.classificar(img)
+    return self.classificador.classificar(img, int(K))
 
 cherrypy.quickstart(Server())
 
