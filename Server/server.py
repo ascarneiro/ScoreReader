@@ -1,17 +1,12 @@
 import cherrypy
 import cv2
-import glob
 import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
 import base64
 import io
 import cStringIO
-import pickle
 import classificador as clf
 import identificadornotas as utils
 import json
-
 from PIL import Image as pil_image
 from gamera.core import *
 from gamera.plugins import pil_io
@@ -21,7 +16,9 @@ from numpy import fft
 
 class Server(object):  
   def __init__(self):
+    self.loaddingDataSource = False;
     init_gamera()
+    self.data_carregado = False
     self.DIR = 'C:/Users/ascarneiro/Desktop/TCC/ScoreReader/repository/'
     self.array = None
     self.debug = True
@@ -113,42 +110,31 @@ class Server(object):
     image = identificaNotas.melhorarImagem(image)
     return json.dumps(identificaNotas.detectarPontosNotas(image))
 
-  def binarizeAndRotateImageMatrix(self, cvImage):
-    #Tom de cinza
-    ret, thresh_img = cv2.threshold(cvImage, 127, 255, cv2.THRESH_BINARY)
-    binarized = np.array(thresh_img)
 
-    if self.debug:
-        img = pil_image.fromarray(self.array)
-        img.show()
+  def doVerificaCarregouDataSource(self):
+    status = "Aguarde carregando dataSource.."
+    while not self.classificador.isDataSourceCarregado():
+      status = status + "."
+      print(status)
 
-    #converte valores > 0 para1 caso for 0 entao 0
-    binarized = np.where(binarized > 0, 1, 0)
-    unidm = np.concatenate(binarized, axis=1)
+  @cherrypy.expose
+  def carregarDataSource(self, param):
+    if not self.loaddingDataSource and \
+            not self.classificador.isDataSourceCarregado():
+      self.loaddingDataSource = True
+      self.classificador.carregar_data_source()
+      self.loaddingDataSource = False
 
-    #Inverte matriz, devido imagem invertida
-    unidm = unidm[::-1]
-
-    #rotaciona a matriz 270 graus para imagem ficar em "Pe"
-    unidm =  np.rot90(unidm)
-    unidm =  np.rot90(unidm)
-    unidm = np.rot90(unidm)
-    return unidm
+  @cherrypy.expose
+  def classificarDebug(self, param):
+    self.doVerificaCarregouDataSource()
+    return json.dumps(self.classificador.classificar_debug())
 
   @cherrypy.expose
   def classificar(self, imageEncoded):
-    pilImage = self.convertToPilImage(imageEncoded)
-    gameraImage = self.convertToGameraImage(pilImage)
-    nestedlist = gameraImage.to_nested_list()
-
-    cvImage = self.convertToCvImage(imageEncoded)
-
-    #Converte imagem em sequencia de 0 e 1
-    binarized = self.binarizeAndRotateImageMatrix(cvImage) 
-    self.array = binarized  
-    return np.array_str(binarized)
-
-
+    self.doVerificaCarregouDataSource()
+    img = self.convertToPilImage(imageEncoded)
+    return self.classificador.classificar(img)
 
 cherrypy.quickstart(Server())
 

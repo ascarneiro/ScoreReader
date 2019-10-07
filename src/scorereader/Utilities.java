@@ -6,8 +6,10 @@
 package scorereader;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -34,9 +36,6 @@ import static org.bytedeco.javacpp.opencv_imgproc.cvRectangleR;
 import static org.bytedeco.javacpp.opencv_imgproc.cvThreshold;
 import org.bytedeco.javacv.Java2DFrameConverter;
 import org.bytedeco.javacv.OpenCVFrameConverter;
-import org.opencv.core.MatOfPoint;
-import org.opencv.core.Point;
-import org.opencv.imgproc.Moments;
 import static scorereader.image.Prototipo.CV_LOAD_IMAGE_ANYCOLOR;
 import scorereader.server.Server;
 import scorereader.structure.Crop;
@@ -52,7 +51,8 @@ import scorereader.structure.claves.ClaveSol;
  */
 public class Utilities {
 
-    public static boolean DEBUG = false;
+    public static boolean DEBUG_IMAGES = false;
+    public static boolean DEBUG_VALUES = false;
     public static String DIR_DEBUG = "C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\debug\\";
 
     /**
@@ -82,24 +82,28 @@ public class Utilities {
                 int meioX = (int) ((p.m10() / p.m00()));
                 int meioY = (int) ((p.m01() / p.m00()));
 
-                bb.x(bb.x() - 5);
-                bb.y(bb.y() - 5);
-                bb.width(bb.width() + 10);
-                bb.height(bb.height() + 10);
-                cvRectangleR(imagemBB, bb, CV_RGB(0, 255, 0), 1, 8, 0);
+                bb.x(bb.x());
+                bb.y(bb.y());
+                bb.width(bb.width());
+                bb.height(bb.height());
+                if (DEBUG_VALUES) {
+                    cvRectangleR(imagemBB, bb, CV_RGB(0, 255, 0), 1, 8, 0);
+                }
 
-                // Adding Text
-                opencv_core.CvScalar c = CV_RGB(0, 0, 0);
-                opencv_imgproc.cvPutText(
-                        imagemBB, // Matrix obj of the image
-                        "(" + meioX + " , " + meioY + ")", // Text to be added
-                        new opencv_core.CvPoint(meioX, meioY + add), // point
-                        opencv_imgproc.cvFont(1), // front face
-                        c // Scalar object for color
-                );
+                if (DEBUG_VALUES) {
+                    // Adding Text
+                    opencv_core.CvScalar c = CV_RGB(0, 0, 0);
+                    opencv_imgproc.cvPutText(
+                            imagemBB, // Matrix obj of the image
+                            "(" + meioX + " , " + meioY + ")", // Text to be added
+                            new opencv_core.CvPoint(meioX, meioY + add), // point
+                            opencv_imgproc.cvFont(1), // front face
+                            c // Scalar object for color
+                    );
 
-                opencv_core.CvScalar rgb = CV_RGB(195, 10, 0);
-                opencv_imgproc.cvCircle(imagemBB, new opencv_core.CvPoint(meioX, meioY), 20, rgb);
+                    opencv_core.CvScalar rgb = CV_RGB(195, 10, 0);
+                    opencv_imgproc.cvCircle(imagemBB, new opencv_core.CvPoint(meioX, meioY), 20, rgb);
+                }
 
             }
             index++;
@@ -141,19 +145,21 @@ public class Utilities {
                 int meioX = (int) ((p.m10() / p.m00()));
                 int meioY = (int) ((p.m01() / p.m00()));
 
-                bb.x(bb.x() - 5);
-                bb.y(bb.y() - 5);
-                bb.width(bb.width() + 10);
-                bb.height(bb.height() + 10);
+                bb.x(bb.x());
+                bb.y(bb.y());
+                bb.width(bb.width());
+                bb.height(bb.height());
 
-                cvRectangleR(imagemBB, bb, CV_RGB(0, 255, 0), 1, 8, 0);
+                if (DEBUG_VALUES) {
+                    cvRectangleR(imagemBB, bb, CV_RGB(0, 255, 0), 1, 8, 0);
+                }
                 opencv_core.Rect rectCrop = new opencv_core.Rect(bb.x(), bb.y(), bb.width(), bb.height());
                 opencv_core.Mat croppedImage = new opencv_core.Mat(new opencv_core.Mat(imagemBB), rectCrop);
                 opencv_core.IplImage crop = new opencv_core.IplImage(croppedImage);
 
                 elements.add(new Crop(meioX, meioY, bb.width(), bb.height(), crop));
 
-                if (DEBUG) {
+                if (DEBUG_IMAGES) {
                     cvSaveImage(DIR_DEBUG + "crop" + System.currentTimeMillis() + ".png", crop);
                 }
             }
@@ -191,7 +197,7 @@ public class Utilities {
         return imagem;
     }
 
-    public static byte[] removerLinhasDaPauta(byte[] imageData) {
+    public static byte[] removerLinhasDaPauta(byte[] imageData) throws Exception {
 
         String encoded = Base64.getEncoder().encodeToString(imageData);
         HashMap<String, Object> params = new HashMap<>();
@@ -256,7 +262,7 @@ public class Utilities {
         return null;
     }
 
-    public static Figura classificar(Figura segmentado) {
+    public static Figura classificar(Figura segmentado) throws Exception {
         String encoded = Base64.getEncoder().encodeToString(segmentado.getImage());
         HashMap<String, Object> params = new HashMap<>();
         params.put("imageEncoded", encoded);
@@ -265,7 +271,27 @@ public class Utilities {
         return segmentado;
     }
 
-    public static ArrayList<Nota> detectarAlturaNotas(opencv_core.IplImage imagemCinza) {
+    public static void carregarDataSource() throws Exception {
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("param", "");
+        Server.callServerPython("carregarDataSource", params);
+    }
+
+    public static ArrayList<String> classificarDebug() throws Exception {
+        ArrayList<String> retorno = new ArrayList<>();
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("param", "");
+        String json = Server.callServerPython("classificarDebug", params);
+        JsonParser parser = new JsonParser();
+        JsonArray array = parser.parse(json).getAsJsonArray();
+        for (int i = 0; i < array.size(); i++) {
+            JsonPrimitive get = (JsonPrimitive) array.get(i);
+            retorno.add(get.getAsString());
+        }
+        return retorno;
+    }
+
+    public static ArrayList<Nota> detectarAlturaNotas(opencv_core.IplImage imagemCinza) throws Exception {
         byte[] image = bufferedImageToByteArray(IplImageToBufferedImage(imagemCinza));
         String encoded = Base64.getEncoder().encodeToString(image);
         HashMap<String, Object> params = new HashMap<>();
@@ -290,7 +316,7 @@ public class Utilities {
 
     }
 
-    public static ArrayList<Clave> obterInformacoesPautas(byte[] image) {
+    public static ArrayList<Clave> obterInformacoesPautas(byte[] image) throws Exception {
         String encoded = Base64.getEncoder().encodeToString(image);
         HashMap<String, Object> params = new HashMap<>();
         params.put("imageEncoded", encoded);
@@ -325,7 +351,7 @@ public class Utilities {
     public static boolean isNegativo(int diff) {
         return diff < 0;
     }
-    
+
     public static boolean isPositivo(int diff) {
         return diff > 0;
     }

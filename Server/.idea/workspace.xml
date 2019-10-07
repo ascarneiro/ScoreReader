@@ -1,28 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/identificadornotas.py" line="68" mnemonic="1" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="df176199-7e82-4001-a2bd-aa7f5aacb6c8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../src/scorereader/structure/Espaco.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/3.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/identificadornotas.py" beforeDir="false" afterPath="$PROJECT_DIR$/identificadornotas.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/arquivo.py" beforeDir="false" afterPath="$PROJECT_DIR$/arquivo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classificador.py" beforeDir="false" afterPath="$PROJECT_DIR$/classificador.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../repository/alturaNotas.png" beforeDir="false" afterPath="$PROJECT_DIR$/../repository/alturaNotas.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../repository/bounded.png" beforeDir="false" afterPath="$PROJECT_DIR$/../repository/bounded.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../repository/erodidaDilatada.png" beforeDir="false" afterPath="$PROJECT_DIR$/../repository/erodidaDilatada.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../repository/original1.png" beforeDir="false" afterPath="$PROJECT_DIR$/../repository/original1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../repository/posicaoLinhas.png" beforeDir="false" afterPath="$PROJECT_DIR$/../repository/posicaoLinhas.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../repository/staffless.png" beforeDir="false" afterPath="$PROJECT_DIR$/../repository/staffless.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/ScoreReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/ScoreReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nbproject/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../nbproject/project.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/ScoreReader.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/scorereader/Utilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/Utilities.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/abc/NomeNota.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/abc/ABC_NOTATION.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/scorereader/abc/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/abc/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/structure/Figura.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/structure/Figura.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/structure/Linha.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/structure/Linha.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/structure/Nota.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/structure/Nota.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/structure/Pauta.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/structure/claves/Clave.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,11 +20,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+            <state relative-caret-position="2265">
+              <caret line="130" selection-start-line="130" selection-end-line="130" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -44,36 +32,13 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/arquivo.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/classificador.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="575">
-              <caret line="157" column="5" selection-start-line="157" selection-start-column="5" selection-end-line="157" selection-end-column="5" />
+            <state relative-caret-position="240">
+              <caret line="178" column="37" lean-forward="true" selection-start-line="178" selection-start-column="37" selection-end-line="178" selection-end-column="37" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/identificadornotas.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="6" column="29" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="29" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -90,17 +55,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>operadorMutacao</find>
-      <find>appen</find>
-      <find>codificaCromossomo</find>
-      <find>ver</find>
-      <find>aptida</find>
-      <find>metodoDoisQueCalculaOTotalDeAptidaoDeCadaCromossomo</find>
-      <find>geraMatrizD</find>
-      <find>self.dist</find>
-      <find>calculateFitness</find>
-      <find>population</find>
-      <find>iteracoes</find>
       <find>index</find>
       <find>resha</find>
       <find>role</find>
@@ -120,10 +74,26 @@
       <find>to_one</find>
       <find>classificar</find>
       <find>json</find>
+      <find>predic</find>
+      <find>qn_resized[1].show()</find>
+      <find>qn_resized</find>
+      <find>get_image</find>
+      <find>Q_LABEL</find>
+      <find>H_LABEL</find>
+      <find>labels_seminimas</find>
+      <find>labels_minimas</find>
+      <find>stem_obj</find>
+      <find>K_VIZINHOS_PROXIMOS=K</find>
+      <find>binarizeAndRotateImageMatrix</find>
     </findStrings>
     <replaceStrings>
       <replace>matrizInicial</replace>
       <replace>geraMatrizDistancia</replace>
+      <replace>LABEL_SEMINIMA</replace>
+      <replace>LABEL_MINIMA</replace>
+      <replace>rotulos_seminimas</replace>
+      <replace>rotulos_minimas</replace>
+      <replace>objeto_com_haste</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -139,20 +109,13 @@
         <option value="$PROJECT_DIR$/venv/Utils.py" />
         <option value="$PROJECT_DIR$/removed" />
         <option value="$PROJECT_DIR$/DataView.py" />
-        <option value="$PROJECT_DIR$/classificador.py" />
         <option value="$PROJECT_DIR$/identificadornotas.py" />
+        <option value="$PROJECT_DIR$/arquivo.py" />
+        <option value="$PROJECT_DIR$/2.py" />
+        <option value="$PROJECT_DIR$/3.py" />
+        <option value="$PROJECT_DIR$/1.py" />
+        <option value="$PROJECT_DIR$/classificador.py" />
         <option value="$PROJECT_DIR$/server.py" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
-      <list>
-        <option value="$PROJECT_DIR$/.idea/Server.iml" />
-        <option value="$PROJECT_DIR$/.idea/misc.xml" />
-        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
-        <option value="$PROJECT_DIR$/.idea/modules.xml" />
-        <option value="$PROJECT_DIR$/../circle-detection-opencv/.idea/circle-detection-opencv.iml" />
       </list>
     </option>
   </component>
@@ -189,10 +152,13 @@
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../circle-detection-opencv" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/2.py" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ascarneiro\Desktop\TCC\ScoreReader\Server" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\ascarneiro\Desktop\TCC\ScoreReader\Server" />
       <recent name="C:\Users\ascarneiro\Desktop\TCC\ScoreReader\Server\MUSCIMA" />
@@ -211,6 +177,27 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.server">
+    <configuration name="1" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Server" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\ProgramData\Anaconda3\envs\IA2\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="AlgGen" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Server" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -296,6 +283,7 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.1" />
       <item itemvalue="Python.AlgGen" />
       <item itemvalue="Python.DataView" />
       <item itemvalue="Python.classificador" />
@@ -304,6 +292,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.server" />
+        <item itemvalue="Python.1" />
         <item itemvalue="Python.DataView" />
         <item itemvalue="Python.AlgGen" />
         <item itemvalue="Python.classificador" />
@@ -336,16 +325,16 @@
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21839081" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.34418902" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.325315" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49867234" visible="true" weight="0.4040404" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.7070707" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49867234" visible="true" weight="0.35064936" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Terminal" order="6" sideWeight="0.4992034" weight="0.6262626" />
+      <window_info anchor="bottom" id="Terminal" order="6" sideWeight="0.4992034" weight="0.74458873" />
       <window_info anchor="bottom" id="TODO" order="7" sideWeight="0.4992034" weight="0.32875144" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49973446" weight="0.32646048" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5013277" side_tool="true" weight="0.6296296" />
@@ -400,7 +389,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/classificador.py</url>
-          <line>131</line>
+          <line>187</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
@@ -409,11 +398,28 @@
       <configuration name="PythonConfigurationType">
         <watch expression="strMatrix" language="Python" />
         <watch expression="ms" language="Python" />
+        <watch expression="X_test[0]" language="Python" />
+        <watch expression="clf.predict(X_test[0])" language="Python" />
       </configuration>
     </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
+      <expression>
+        <expression-string>clf.predict(X_test[0])</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>X_test[0]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>X_test[0][0]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>ms</expression-string>
         <language-id>Python</language-id>
@@ -427,37 +433,57 @@
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
-        <expression-string>self.debugMode = True</expression-string>
+        <expression-string>KNN.predict([elemento_teste])</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>classe[index[0]]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>classe[index[0]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>index[0]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>clf.predict([figura])</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>clf.predict(figura)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>print(clf.predict([hn_resized[10].flatten()]))</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>print(clf.predict([hn_resized[1].flatten()]))</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>print(clf.predict([qn_selected[10].flatten()]))</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cheroot/workers/threadpool.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="113" selection-start-line="113" selection-end-line="113" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="662">
-          <caret line="1134" selection-start-line="1134" selection-end-line="1134" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Downloads/AlgGen (2).py" />
     <entry file="file://$USER_HOME$/Downloads/AlgGen (3).py" />
     <entry file="file://$USER_HOME$/Downloads/Trabalho2_Guilherme.py" />
-    <entry file="file://$PROJECT_DIR$/../../../trabalho/AlgGen.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-132">
-          <caret line="237" column="25" selection-start-line="237" selection-start-column="25" selection-end-line="237" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../trabalho/AlgGen.py" />
     <entry file="file://C:/ProgramData/Anaconda3/Lib/codecs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="797">
@@ -472,34 +498,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/_cptree.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7320">
-          <caret line="312" selection-start-line="312" selection-end-line="312" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/_cpwsgi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="253" selection-start-line="253" selection-end-line="253" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cheroot/server.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-457">
-          <caret line="948" column="44" selection-start-line="948" selection-start-column="44" selection-end-line="948" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cheroot/wsgi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="152" selection-start-line="152" selection-end-line="152" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/pyvenv.cfg">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -509,6 +507,108 @@
     <entry file="file://$PROJECT_DIR$/promissores.txt" />
     <entry file="file://$PROJECT_DIR$/DataView.py" />
     <entry file="file://$PROJECT_DIR$/IdentificaNotas.py" />
+    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-313451744/builtins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="94">
+          <caret line="1068" column="8" selection-start-line="1068" selection-start-column="8" selection-end-line="1068" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/skimage/transform/_warps.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="104" selection-start-line="104" selection-end-line="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/identificadornotas.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="55" column="57" lean-forward="true" selection-start-line="55" selection-start-column="57" selection-end-line="55" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/matplotlib/image.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="658" column="33" selection-start-line="658" selection-start-column="33" selection-end-line="658" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/sklearn/metrics/classification.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-432" />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-313451744/itertools.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="100" column="8" selection-start-line="100" selection-start-column="8" selection-end-line="100" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/PIL/Image.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="1796" selection-start-line="1796" selection-end-line="1796" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/skimage/transform/_warps.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="1134" selection-start-line="1134" selection-end-line="1134" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1986">
+          <caret line="158" lean-forward="true" selection-start-line="158" selection-end-line="158" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/sklearn/utils/validation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="236" selection-start-line="236" selection-end-line="236" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="458">
+          <caret line="158" lean-forward="true" selection-start-line="158" selection-end-line="158" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="106" selection-start-line="106" selection-end-line="106" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/arquivo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="5" column="36" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/removed">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -516,10 +616,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/_cprequest.py">
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/threading.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="690" column="18" lean-forward="true" selection-start-line="690" selection-start-column="18" selection-end-line="690" selection-end-column="18" />
+        <state relative-caret-position="218">
+          <caret line="800" selection-start-line="800" selection-end-line="800" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/_cpdispatch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
         </state>
       </provider>
     </entry>
@@ -530,55 +637,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/_cpdispatch.py">
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/_cpwsgi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="59" column="33" selection-start-line="59" selection-start-column="33" selection-end-line="59" selection-end-column="33" />
+        <state relative-caret-position="126">
+          <caret line="450" selection-start-line="450" selection-end-line="450" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/classificador.py">
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/_cptree.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="157" column="5" selection-start-line="157" selection-start-column="5" selection-end-line="157" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="212">
+          <caret line="312" selection-start-line="312" selection-end-line="312" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-313451744/builtins.py">
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cheroot/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="94">
-          <caret line="1068" column="8" selection-start-line="1068" selection-start-column="8" selection-end-line="1068" selection-end-column="8" />
+        <state relative-caret-position="96">
+          <caret line="142" selection-start-line="142" selection-end-line="142" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/arquivo.py">
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cheroot/workers/threadpool.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="816">
+          <caret line="113" selection-start-line="113" selection-end-line="113" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/identificadornotas.py">
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cheroot/server.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="6" column="29" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="126">
+          <caret line="1272" selection-start-line="1272" selection-end-line="1272" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/_cprequest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="595" selection-start-line="595" selection-end-line="595" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+        <state relative-caret-position="2265">
+          <caret line="130" selection-start-line="130" selection-end-line="130" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classificador.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="178" column="37" lean-forward="true" selection-start-line="178" selection-start-column="37" selection-end-line="178" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>

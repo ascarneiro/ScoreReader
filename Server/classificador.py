@@ -1,189 +1,187 @@
 import os
 import itertools
-import random
 import numpy
 import matplotlib.pyplot as plt
 from skimage.transform import resize
+import random
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import classification_report
+from PIL import Image
 from muscima.io import parse_cropobject_list
 
-class Classificador(object):  
-  
-  #Construtor
-  def __init__(self):
-    self.caminho = 'C:/Users/ascarneiro/Desktop/TCC/ScoreReader/Server/MUSCIMA/'  
-    self.K=5 #Numero de vizinhos a consultar
-    self.clf = None
-    
-  # Bear in mind that the outlinks are integers, only valid within the same document.
-  # Therefore, we define a function per-document, not per-dataset.
-  def extrairNotas(self, cropobjects):
-    """Finds all ``(full-notehead, stem)`` pairs that form
-    quarter or half notes. Returns two lists of CropObject tuples:
-    one for quarter notes, one of half notes.
 
-    :returns: quarter_notes, half_notes
-    """
-    _cropobj_dict = {c.objid: c for c in cropobjects}
-    notes = []
-    for c in cropobjects:
-        if (c.clsname == 'notehead-full') or (c.clsname == 'notehead-empty'):
-            _has_stem = False
-            _has_beam_or_flag = False
-            stem_obj = None
-            for o in c.outlinks:
-                _o_obj = _cropobj_dict[o]
-                if _o_obj.clsname == 'stem':
-                    _has_stem = True
-                    stem_obj = _o_obj
-                elif _o_obj.clsname == 'beam':
-                    _has_beam_or_flag = True
-                elif _o_obj.clsname.endswith('flag'):
-                    _has_beam_or_flag = True
-            if _has_stem and (not _has_beam_or_flag):
-                # We also need to check against quarter-note chords.
-                # Stems only have inlinks from noteheads, so checking
-                # for multiple inlinks will do the trick.
-                if len(stem_obj.inlinks) == 1:
-                    notes.append((c, stem_obj))
+class Classificador(object):
+    # imprimir classe das notas
+    def printClasses(self, cropobjects):
+        _cropobj_dict = {c.objid: c for c in cropobjects}
+        output = set()
+        for x in cropobjects:
+            output.add(x.clsname)
 
-    quarter_notes = [(n, s) for n, s in notes if n.clsname == 'notehead-full']
-    half_notes = [(n, s) for n, s in notes if n.clsname == 'notehead-empty']
-    return quarter_notes, half_notes
+        for c in output:
+            print(c)
 
-  def addNotesOnCanvasMatrix(self, cropobjects, margin=1):
-    """Paste the cropobjects' mask onto a shared canvas.
-    There will be a given margin of background on the edges."""
+    def extrair_figuras_modelo(self, modelo):
+        _modelo_dict = {elem.objid: elem for elem in modelo}
+        figuras = []
+        for c in modelo:
+            if (c.clsname == 'notehead-full') or \
+                    (c.clsname == 'notehead-empty'):
 
-    # Get the bounding box into which all the objects fit
-    top = min([c.top for c in cropobjects])
-    left = min([c.left for c in cropobjects])
-    bottom = max([c.bottom for c in cropobjects])
-    right = max([c.right for c in cropobjects])
+                possui_haste = False
+                possui_viga_ou_bandeira = False
+                objeto_com_haste = None
+                for o in c.outlinks:
+                    _o_obj = _modelo_dict[o]
+                    if _o_obj.clsname == 'stem':
+                        possui_haste = True
+                        objeto_com_haste = _o_obj
+                    elif _o_obj.clsname == 'beam':
+                        possui_viga_ou_bandeira = True
+                    elif _o_obj.clsname.endswith('flag'):
+                        possui_viga_ou_bandeira = True
+                if possui_haste and (not possui_viga_ou_bandeira):
+                    # Tambem precisamos verificar os acordes de seminima.
+                    # As hastes tem apenas inlinks de notas, portanto, verificar
+                    # para varios inlinks fara o procedimento.
+                    if len(objeto_com_haste.inlinks) == 1:
+                        figuras.append((c, objeto_com_haste))
 
-    # Create the canvas onto which the masks will be pasted
-    height = bottom - top + 2 * margin
-    width = right - left + 2 * margin
-    canvas = numpy.zeros((height, width), dtype='uint8')
+        notas_seminimas = [(n, s) for n, s in figuras if n.clsname == 'notehead-full']
+        notas_minimas = [(n, s) for n, s in figuras if n.clsname == 'notehead-empty']
+        return notas_minimas, notas_seminimas
 
-    for c in cropobjects:
-        # Get coordinates of upper left corner of the CropObject
-        # relative to the canvas
-        _pt = c.top - top + margin
-        _pl = c.left - left + margin
-        # We have to add the mask, so as not to overwrite
-        # previous nonzeros when symbol bounding boxes overlap.
-        canvas[_pt:_pt+c.height, _pl:_pl+c.width] += c.mask
+    def extrair_imagem(self, elementos, margin=1):
 
-    canvas[canvas > 0] = 1
-    return canvas
+        # Get the bounding box into which all the objects fit
+        top = min([c.top for c in elementos])
+        left = min([c.left for c in elementos])
+        bottom = max([c.bottom for c in elementos])
+        right = max([c.right for c in elementos])
 
-  def resizeImages40X10AndBinarize(self):
-    self.qn_resized = [resize(self.qn, (40, 10)) for self.qn in self.qn_images]
-    self.hn_resized = [resize(self.hn, (40, 10)) for self.hn in self.hn_images]
+        # Create the canvas onto which the masks will be pasted
+        height = bottom - top + 2 * margin
+        width = right - left + 2 * margin
+        canvas = numpy.zeros((height, width), dtype='uint8')
 
-    # And re-binarize, to compensate for interpolation effects
-    for self.qn in self.qn_resized:
-        self.qn[self.qn > 0] = 1
-    for self.hn in self.hn_resized:
-        self.hn[self.hn > 0] = 1
+        for c in elementos:
+            # Get coordinates of upper left corner of the CropObject
+            # relative to the canvas
+            _pt = c.top - top + margin
+            _pl = c.left - left + margin
+            # We have to add the mask, so as not to overwrite
+            # previous nonzeros when symbol bounding boxes overlap.
+            canvas[_pt:_pt + c.height, _pl:_pl + c.width] += c.mask
 
-  def train(self):
-    # Randomly pick an equal number of quarter-notes.
-    self.n_hn = len(self.hn_resized)
-    random.shuffle(self.qn_resized)
-    self.qn_selected = self.qn_resized[:self.n_hn]
-    self.qn_labels = [self.Q_LABEL for _ in self.qn_selected]
-    self.hn_labels = [self.H_LABEL for _ in self.hn_resized]
+        canvas[canvas > 0] = 1
+        return canvas
 
+    def plotar_imagem(self, mask):
+        plt.imshow(mask, cmap='gray', interpolation='nearest')
+        plt.show()
 
-    self.notes = self.qn_selected + self.hn_resized
-    # Flatten data
-    self.notes_flattened = [n.flatten() for n in self.notes]
-    self.labels = self.qn_labels + self.hn_labels
-  
+    def plotar_imagens(self, masks, row_length=5):
+        n_masks = len(masks)
+        n_rows = n_masks // row_length + 1
+        n_cols = min(n_masks, row_length)
+        fig = plt.figure()
+        for i, mask in enumerate(masks):
+            plt.subplot(n_rows, n_cols, i + 1)
+            plt.imshow(mask, cmap='gray', interpolation='nearest')
+        # Let's remove the axis labels, they clutter the image.
+        for ax in fig.axes:
+            ax.set_yticklabels([])
+            ax.set_xticklabels([])
+            ax.set_yticks([])
+            ax.set_xticks([])
+        plt.show()
 
-    #25% corresponde ao tamanho do teste
-    self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(
-                self.notes_flattened,
-                self.labels,
-                test_size=0.25,
-                random_state=42,
-               stratify=self.labels
-               )
-    
- 
-  #Algoritmo de classificacao
-  def classify(self):
+    def carregar_data_source(self):
+        try:
+            self.data_source = [parse_cropobject_list(f) for f in self.cropobject_fnames]
+            self.minimas_e_seminimas = [self.extrair_figuras_modelo(self.modelo) for self.modelo in self.data_source]
 
-    print(self.qn_selected[:1])
-    print(self.hn_resized[:1])
-    # Trying the defaults first.
-    self.clf = KNeighborsClassifier(n_neighbors=self.K)
-    self.clf.fit(self.X_train, self.y_train)
-    self.y_test_pred = self.clf.predict(self.X_test)
+            self.seminimas = list(itertools.chain(*[sm for sm, mn in self.minimas_e_seminimas]))
+            self.minimas = list(itertools.chain(*[mn for sm, mn in self.minimas_e_seminimas]))
 
-    print(classification_report(self.y_test, self.y_test_pred, target_names=['half', 'quarter']))
+            self.img_seminimas = [self.extrair_imagem(sm) for sm in self.seminimas]
+            self.img_minimas = [self.extrair_imagem(mn) for mn in self.minimas]
 
+            self.img_red_seminimas = [resize(sm, (self.ALTURA, self.LARGURA)) for sm in self.img_seminimas]
+            self.img_red_minimas = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in self.img_minimas]
 
-  def myclassify(self, strArray):
-      X_new = numpy.fromstring(strArray, dtype=int, sep=' ')
-      """X_new = numpy.array([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                            1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0,
-                            0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
-                            0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,
-                            0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0,
-                            1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0,
-                            0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0,
-                            0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
-                            0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
-                            0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0,
-                            0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1,
-                            0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0,
-                            1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0,
-                            0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]])"""
-      print(X_new)
-      print(self.clf.predict(X_new))
-      print('Passou classificacao')
+            # And re-binarize, to compensate for interpolation effects
+            for self.sm in self.img_red_seminimas:
+                self.sm[self.sm > 0] = 1
+            for self.mn in self.img_red_minimas:
+                self.mn[self.mn > 0] = 1
+
+            # Randomly pick an equal number of quarter-notes.
+
+            self.size = len(self.img_red_minimas)
+            random.shuffle(self.img_red_seminimas)
+            self.seminimas_selecionadas = self.img_red_seminimas[:self.size]
+
+            self.rotulos_seminimas = [self.ROTULO_SEMINIMA for _ in self.seminimas_selecionadas]
+            self.rotulos_minimas = [self.ROTULO_MINIMA for _ in self.img_red_minimas]
+
+            self.misturadas = self.seminimas_selecionadas + self.img_red_minimas
+            # converte imagem em matrix unidimencional
+            self.figuras_array_linha = [nota.flatten() for nota in self.misturadas]
+            self.rotulos_classe = self.rotulos_minimas + self.rotulos_seminimas
+
+            self.X_conjunto_treino, self.X_conjunto_teste, self.Y_conjunto_treino, self.Y_conjunto_teste = train_test_split(
+                self.figuras_array_linha, self.rotulos_classe, test_size=0.25, random_state=42,
+                stratify=self.rotulos_classe)
+
+            self.KNN = KNeighborsClassifier(n_neighbors=self.K_VIZINHOS_PROXIMOS)
+            self.KNN.fit(self.X_conjunto_treino, self.Y_conjunto_treino)
+            self.data_source_carregado = True
+        except:
+            print("Erro ao carregar DataSource")
+            self.data_source_carregado = False
 
 
-  def load(self):
-    #self.CROPOBJECT_DIR = os.path.join(self.caminho, 'data/cropobjects_manual')
-    #self.cropobject_fnames = [os.path.join(self.CROPOBJECT_DIR, f) for f in os.listdir(self.CROPOBJECT_DIR)]
-    #self.docs = [parse_cropobject_list(f) for f in self.cropobject_fnames]
-    self.Q_LABEL = 1
-    self.H_LABEL = 0
+    def isDataSourceCarregado(self):
+        return self.data_source_carregado
 
-  def main(self):
+    def classificar(self, img):
+        img = img.resize((self.LARGURA, self.ALTURA))
+        cinza = img.convert('L')  # converte para escala cinza
+        cinza = cinza.point(lambda x: 0 if (x < 128) else 255, '1')  # binariza imagem
+        elemento_teste = numpy.array(cinza, dtype='uint8').flatten()  # converte em array e achata imagem
 
-    self.load()
-    #Extrai notas do DataSet
-    #qns_and_hns = [self.extrairNotas(self.cropobjects) for self.cropobjects in self.docs]
+        classes = ['Minima', 'Seminima']
+        encontrado = self.KNN.predict([elemento_teste])
+        return classes[encontrado[0]];
 
-    #Some operation
-    #self.qns = list(itertools.chain(*[self.qn for self.qn, self.hn in qns_and_hns]))
-    #self.hns = list(itertools.chain(*[self.hn for self.qn, self.hn in qns_and_hns]))
-  
-    #print(len(self.qns))
-    #print(len(self.hns))
+    def classificar_debug(self):
+        retorno = []
+        for index in range(0, 12):
+            nome = str(index) + '.png';
+            img = Image.open(self.caminho + '/../../notas/' + nome)  # Le a imagem a comparar
+            img = img.resize((self.LARGURA, self.ALTURA))
+            cinza = img.convert('L')  # converte para escala cinza
+            cinza = cinza.point(lambda x: 0 if (x < 128) else 255, '1')  # binariza imagem
+            elemento_teste = numpy.array(cinza, dtype='uint8').flatten()  # converte em array e achata imagem
 
-    #Coloca imagem no canvas
-    #self.qn_images = [self.addNotesOnCanvasMatrix(self.qn) for self.qn in self.qns]
-    #self.hn_images = [self.addNotesOnCanvasMatrix(self.hn) for self.hn in self.hns]
+            classes = ['Minima', 'Seminima']
+            encontrado = self.KNN.predict([elemento_teste])
+            mensagem = 'A nota ' + nome + ' parece com uma : ' + classes[encontrado[0]];
+            retorno.append(mensagem)
+            print(mensagem)
+        return retorno
 
-    #Redimenciona em 40 X 10 e transforma em matriz de 0 e 1
-   # self.resizeImages40X10AndBinarize()
+    def __init__(self):
+          self.data_source_carregado = False
+          self.LARGURA = 10  # Largura da figura
+          self.ALTURA = 40  # altura da figura
+          self.K_VIZINHOS_PROXIMOS = 5;  # numero de vizinhos proximos a verificar no KNN
 
-    #Treina modelo
-    #self.train()
+          self.ROTULO_MINIMA = 0
+          self.ROTULO_SEMINIMA = 1
 
-    #Classifica usando os dados do proprio modelo
-    #self.classify()
+          self.caminho = 'C:/Users/ascarneiro/Desktop/TCC/ScoreReader/Server/MUSCIMA/'
+          self.CROPOBJECT_DIR = os.path.join(self.caminho, 'data/cropobjects_manual')
+          self.cropobject_fnames = [os.path.join(self.CROPOBJECT_DIR, f) for f in os.listdir(self.CROPOBJECT_DIR)]
 
-c = Classificador()
-c.main()
