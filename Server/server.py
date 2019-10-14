@@ -118,29 +118,41 @@ class Server(object):
       print(status)
 
   @cherrypy.expose
-  def carregarDataSource(self, caminho, data_source, resetar):
+  def treinarKnnPadrao(self, nome, caminho, data_source, resetar):
     if "S" == resetar:
       self.loaddingDataSource = False
 
 
     if not self.loaddingDataSource and \
             (not self.classificador.isDataSourceCarregado() or "S" == resetar):
-      print("Carregando dataSource MUSCIMA...")
+      print("Treinando Modelo...")
       self.loaddingDataSource = True
-      self.classificador.carregar_data_source(caminho, data_source)
+      nome = self.classificador.treinar_knn_padrao(nome, caminho, data_source)
       self.loaddingDataSource = False
-      print("DataSource MUSCIMA Carregado...")
+      print("Modelo treinado e carregado...")
+      return nome
+
+  @cherrypy.expose
+  def carregarModelo(self, nome):
+    print("Carregando Modelo...")
+    self.classificador.carregar_modelo(nome)
+    print("Modelo carregado...")
+
 
   @cherrypy.expose
   def classificarDebug(self, K):
-    self.doVerificaCarregouDataSource()
+    #self.doVerificaCarregouDataSource()
     return json.dumps(self.classificador.classificar_debug(int(K)))
 
   @cherrypy.expose
   def classificar(self, imageEncoded, K):
-    self.doVerificaCarregouDataSource()
+    #self.doVerificaCarregouDataSource()
     img = self.convertToPilImage(imageEncoded)
     return self.classificador.classificar(img, int(K))
 
-cherrypy.quickstart(Server())
+
+
+s = Server()
+s.socket_port = 8090
+cherrypy.quickstart(s)
 

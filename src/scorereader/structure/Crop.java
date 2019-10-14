@@ -13,6 +13,7 @@ import org.bytedeco.javacpp.opencv_core;
  */
 public class Crop {
 
+    public String fileName;
     public int x;
     public int y;
     public int w;

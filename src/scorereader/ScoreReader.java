@@ -7,21 +7,17 @@ package scorereader;
 
 import java.awt.Color;
 import java.awt.Desktop;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import org.bytedeco.javacpp.opencv_core;
-import static scorereader.Utilities.DIR_DEBUG;
 import scorereader.abc.Parser;
+import scorereader.components.ScrollDemo;
 import scorereader.server.Server;
 import scorereader.structure.Figura;
 import scorereader.structure.Linha;
@@ -34,7 +30,18 @@ import scorereader.structure.claves.Clave;
  */
 public class ScoreReader extends javax.swing.JFrame {
 
+    private ScrollDemo boundedPanel = new ScrollDemo();
+    private ScrollDemo barPanel = new ScrollDemo();
+    private ScrollDemo notesPanel = new ScrollDemo();
+    private ScrollDemo originalPanel = new ScrollDemo();
+    private ScrollDemo individualPanel = new ScrollDemo();
+    private ScrollDemo segmentadosPanel = new ScrollDemo();
+
     public static String CAMINHO_DEFAULT = "C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\repository\\";
+    public static String CAMINHO_TREINAMENTO = "C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\treinamentos\\";
+    public static String CAMINHO_DEBUG = "C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\debug\\";
+    public static String CAMINHO_REPOSITORY = "C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\repository\\";
+    public static String CAMINHO_NOTAS = "C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\notas\\";
     public String[] scoreDir = new String[]{""};
     public String resetar = "S";
     //Reconhecer os elementos
@@ -49,7 +56,8 @@ public class ScoreReader extends javax.swing.JFrame {
      */
     public ScoreReader() {
         initComponents();
-        inicializar();
+        loadPanels();
+        addImagemOriginal(FILE_NAME.getText());
 
     }
 
@@ -63,55 +71,133 @@ public class ScoreReader extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel4 = new javax.swing.JPanel();
+        jSplitPane1 = new javax.swing.JSplitPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        CONSOLE = new javax.swing.JTextArea();
         Panels = new javax.swing.JTabbedPane();
         Main = new javax.swing.JPanel();
         jToggleButton2 = new javax.swing.JToggleButton();
         FILE_NAME = new javax.swing.JTextField();
-        processar = new javax.swing.JToggleButton();
-        A = new javax.swing.JToggleButton();
-        B = new javax.swing.JToggleButton();
-        D = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
         SERVER = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        Compilar = new javax.swing.JToggleButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        CONSOLE = new javax.swing.JTextArea();
-        jLabel3 = new javax.swing.JLabel();
         FATOR = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         debugFIles = new javax.swing.JCheckBox();
         debugImages = new javax.swing.JCheckBox();
-        C = new javax.swing.JToggleButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jToggleButton10 = new javax.swing.JToggleButton();
-        STATUS = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        caminho = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jToggleButton4 = new javax.swing.JToggleButton();
+        jLabel9 = new javax.swing.JLabel();
+        MODELO = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        processar = new javax.swing.JToggleButton();
+        Compilar = new javax.swing.JToggleButton();
+        jLabel6 = new javax.swing.JLabel();
+        A = new javax.swing.JToggleButton();
+        B = new javax.swing.JToggleButton();
         E = new javax.swing.JToggleButton();
-        jToggleButton3 = new javax.swing.JToggleButton();
+        C = new javax.swing.JToggleButton();
+        D = new javax.swing.JToggleButton();
+        original = new javax.swing.JPanel();
+        jToggleButton10 = new javax.swing.JToggleButton();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        Container = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        segmentados = new javax.swing.JPanel();
+        notes = new javax.swing.JPanel();
+        bounded = new javax.swing.JPanel();
+        bars = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        individual = new javax.swing.JPanel();
+        fragmentos = new javax.swing.JPanel();
+        treinamento = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
         CAMINHO = new javax.swing.JTextField();
+        STATUS = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         DS_NAME = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jToggleButton4 = new javax.swing.JToggleButton();
-        jToggleButton5 = new javax.swing.JToggleButton();
-        jLabel10 = new javax.swing.JLabel();
+        jToggleButton3 = new javax.swing.JToggleButton();
         K = new javax.swing.JTextField();
-        fragmentos = new javax.swing.JPanel();
-        grid = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        bounded = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
+        jLabel10 = new javax.swing.JLabel();
+        jToggleButton5 = new javax.swing.JToggleButton();
+        jButton2 = new javax.swing.JButton();
+        SEMIBREVE_SL = new javax.swing.JSlider();
+        jLabel12 = new javax.swing.JLabel();
+        SEMIBREVE = new javax.swing.JSpinner();
+        jLabel13 = new javax.swing.JLabel();
+        MINIMA = new javax.swing.JSpinner();
+        MINIMA_SL = new javax.swing.JSlider();
+        SEMINIMA_SL = new javax.swing.JSlider();
+        jLabel15 = new javax.swing.JLabel();
+        SEMINIMA = new javax.swing.JSpinner();
+        COLCHEIA_SL = new javax.swing.JSlider();
+        COLCHEIA = new javax.swing.JSpinner();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        FUSA_SL = new javax.swing.JSlider();
+        FUSA = new javax.swing.JSpinner();
+        SEMIFUSA = new javax.swing.JSpinner();
+        jLabel19 = new javax.swing.JLabel();
+        SEMIFUSA_SL = new javax.swing.JSlider();
+        jLabel20 = new javax.swing.JLabel();
+        CLAVE_SOL_SL = new javax.swing.JSlider();
+        CLAVE_SOL = new javax.swing.JSpinner();
+        CLAVE_FA = new javax.swing.JSpinner();
+        CLAVE_FA_SL = new javax.swing.JSlider();
+        jLabel21 = new javax.swing.JLabel();
+        CLAVE_DO = new javax.swing.JSpinner();
+        CLAVE_DO_SL = new javax.swing.JSlider();
+        jLabel22 = new javax.swing.JLabel();
+        FERMATA = new javax.swing.JSpinner();
+        jLabel24 = new javax.swing.JLabel();
+        jSpinner12 = new javax.swing.JSpinner();
+        FERMATA_SL = new javax.swing.JSlider();
+        PAUSA_SEMIBREVE = new javax.swing.JCheckBox();
+        PAUSA_MINIMAS = new javax.swing.JCheckBox();
+        PAUSA_SEMINIMA = new javax.swing.JCheckBox();
+        PAUSA_COLCHEIA = new javax.swing.JCheckBox();
+        PAUSA_FUSA = new javax.swing.JCheckBox();
+        PAUSA_SEMIFUSA = new javax.swing.JCheckBox();
+        jLabel25 = new javax.swing.JLabel();
+        LIGADURA = new javax.swing.JSpinner();
+        LIGADURA_SL = new javax.swing.JSlider();
+        jLabel23 = new javax.swing.JLabel();
+        SEMICOLCHEIA = new javax.swing.JSpinner();
+        SEMICOLCHEIA_SL = new javax.swing.JSlider();
+        PAUSA_SEMICOLCHEIA = new javax.swing.JCheckBox();
+        jButton3 = new javax.swing.JButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        NOME_MODELO = new javax.swing.JComboBox();
+        fragments2 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Score Reader 1.0.0");
+        setMaximumSize(new java.awt.Dimension(1024, 768));
 
         jPanel4.setLayout(new java.awt.BorderLayout());
 
+        jSplitPane1.setDividerLocation(830);
+        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+
+        CONSOLE.setColumns(20);
+        CONSOLE.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        CONSOLE.setRows(5);
+        CONSOLE.setToolTipText("Console de erros e mensagens");
+        jScrollPane1.setViewportView(CONSOLE);
+
+        jSplitPane1.setBottomComponent(jScrollPane1);
+
         Panels.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+        Panels.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         Panels.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 PanelsStateChanged(evt);
@@ -134,42 +220,6 @@ public class ScoreReader extends javax.swing.JFrame {
         FILE_NAME.setToolTipText("Caminho do arquivo de imagem de partitura");
         Main.add(FILE_NAME, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 370, -1));
 
-        processar.setText("Processar Conteudo Partitura");
-        processar.setToolTipText("Faz o processamento dos elementos da pauta");
-        processar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                processarActionPerformed(evt);
-            }
-        });
-        Main.add(processar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, 250, 30));
-
-        A.setText("ABC");
-        A.setToolTipText("Abre arquivo ABC gerado");
-        A.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AActionPerformed(evt);
-            }
-        });
-        Main.add(A, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 70, 30));
-
-        B.setText("XHTML");
-        B.setToolTipText("Abre arquivo XHTML gerado");
-        B.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BActionPerformed(evt);
-            }
-        });
-        Main.add(B, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 70, 30));
-
-        D.setText("MIDI");
-        D.setToolTipText("Abre arquivo MIDI gerado");
-        D.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DActionPerformed(evt);
-            }
-        });
-        Main.add(D, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 310, 90, 30));
-
         jLabel1.setText("Arquivo:");
         Main.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 49, -1));
 
@@ -180,41 +230,17 @@ public class ScoreReader extends javax.swing.JFrame {
         jLabel2.setText("Fator Distancia:");
         Main.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, -1, 20));
 
-        Compilar.setText("Compilar");
-        Compilar.setToolTipText("Compila o codigo ABC gerado pela acao do botao processar nos formatos (XHTML, SVG, PDF e MIDI)");
-        Compilar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CompilarActionPerformed(evt);
-            }
-        });
-        Main.add(Compilar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, 120, 30));
-
-        CONSOLE.setColumns(20);
-        CONSOLE.setRows(5);
-        CONSOLE.setToolTipText("Console de erros e mensagens");
-        jScrollPane1.setViewportView(CONSOLE);
-
-        Main.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, 370, 150));
-
-        jLabel3.setText("Console:");
-        Main.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, -1, -1));
-
         FATOR.setText("2");
         FATOR.setToolTipText("Informe aqui um fator para calulo da altura das linhas");
         Main.add(FATOR, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 20, -1));
 
-        jLabel5.setText("Caminho:");
-        Main.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
-
         jLabel4.setText("Debug:");
         Main.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 50, -1));
-
-        jLabel6.setText("Abrir:");
-        Main.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, 10));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setToolTipText("Determina se serao geradas imagens para fins de debug e analise profunda");
 
+        debugFIles.setSelected(true);
         debugFIles.setText("Files");
         debugFIles.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -256,37 +282,70 @@ public class ScoreReader extends javax.swing.JFrame {
         );
 
         Main.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 370, 40));
-
-        C.setText("PDF");
-        C.setToolTipText("Abre arquivo PDF gerado");
-        C.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CActionPerformed(evt);
-            }
-        });
-        Main.add(C, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 310, 70, 30));
         Main.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
 
-        jToggleButton10.setText("clear");
-        jToggleButton10.setToolTipText("Limpa o console");
-        jToggleButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton10ActionPerformed(evt);
-            }
-        });
-        Main.add(jToggleButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 350, 60, 30));
+        jLabel8.setText("Servidor:");
+        Main.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
-        STATUS.setEditable(false);
-        STATUS.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        STATUS.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        STATUS.setText("D.S");
-        STATUS.setToolTipText("Quanto estiver verde o DataSource esta carregado. Caso contrario clique em  Carregar e Aguarde");
-        STATUS.addActionListener(new java.awt.event.ActionListener() {
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+
+        jLabel11.setText("Caminho");
+
+        jButton1.setText("...");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                STATUSActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-        Main.add(STATUS, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, 60, 50));
+
+        jToggleButton4.setText("...");
+        jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton4ActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Score Reader 1.0.0");
+
+        MODELO.setText("__KNN_PADRAO");
+
+        jLabel3.setText("Modelo");
+
+        processar.setText("Processar Conteudo Partitura");
+        processar.setToolTipText("Faz o processamento dos elementos da pauta");
+        processar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                processarActionPerformed(evt);
+            }
+        });
+
+        Compilar.setText("Compilar");
+        Compilar.setToolTipText("Compila o codigo ABC gerado pela acao do botao processar nos formatos (XHTML, SVG, PDF e MIDI)");
+        Compilar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CompilarActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Abrir:");
+
+        A.setText("ABC");
+        A.setToolTipText("Abre arquivo ABC gerado");
+        A.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AActionPerformed(evt);
+            }
+        });
+
+        B.setText("XHTML");
+        B.setToolTipText("Abre arquivo XHTML gerado");
+        B.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BActionPerformed(evt);
+            }
+        });
 
         E.setText("SVG");
         E.setToolTipText("Abre arquivo SVG gerado");
@@ -295,16 +354,192 @@ public class ScoreReader extends javax.swing.JFrame {
                 EActionPerformed(evt);
             }
         });
-        Main.add(E, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 70, 30));
 
-        jToggleButton3.setText("CLF");
-        jToggleButton3.setToolTipText("Teste rapido de classificacao");
-        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
+        C.setText("PDF");
+        C.setToolTipText("Abre arquivo PDF gerado");
+        C.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton3ActionPerformed(evt);
+                CActionPerformed(evt);
             }
         });
-        Main.add(jToggleButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 60, -1));
+
+        D.setText("MIDI");
+        D.setToolTipText("Abre arquivo MIDI gerado");
+        D.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(MODELO, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(caminho, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(70, 70, 70))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(processar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Compilar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(23, 23, 23)
+                        .addComponent(A, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(B, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(E, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(C, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(D, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(MODELO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jToggleButton4))
+                .addGap(7, 7, 7)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(caminho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(jButton1))
+                .addGap(115, 115, 115)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(processar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Compilar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(A, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(B, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(E, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(C, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(D, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(327, Short.MAX_VALUE))
+        );
+
+        Main.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 540, 630));
+
+        original.setBackground(new java.awt.Color(255, 255, 255));
+        original.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "Imagem original ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
+        original.setMaximumSize(new java.awt.Dimension(10, 10));
+        original.setOpaque(false);
+        original.setPreferredSize(new java.awt.Dimension(10, 10));
+        original.setLayout(new java.awt.BorderLayout());
+        Main.add(original, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 10, 980, 630));
+
+        jToggleButton10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jToggleButton10.setText("Clear console");
+        jToggleButton10.setToolTipText("Limpa o console");
+        jToggleButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton10ActionPerformed(evt);
+            }
+        });
+        Main.add(jToggleButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 130, 30));
+
+        Panels.addTab("Image", Main);
+
+        jPanel5.setLayout(new java.awt.BorderLayout());
+
+        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        Container.setMaximumSize(new java.awt.Dimension(10, 10));
+        Container.setMinimumSize(new java.awt.Dimension(10, 10));
+        Container.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+        segmentados.setBackground(new java.awt.Color(255, 255, 255));
+        segmentados.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "2) Segmentar  elementos musicais encontradas ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
+        segmentados.setMaximumSize(new java.awt.Dimension(5, 5));
+        segmentados.setMinimumSize(new java.awt.Dimension(5, 5));
+        segmentados.setOpaque(false);
+        segmentados.setPreferredSize(new java.awt.Dimension(5, 5));
+        segmentados.setLayout(new java.awt.BorderLayout());
+        jScrollPane4.setViewportView(segmentados);
+        segmentados.getAccessibleContext().setAccessibleName("");
+
+        Container.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 1520, 430));
+
+        notes.setBackground(new java.awt.Color(255, 255, 255));
+        notes.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "5) Detectar som musical dos elementos que parecem notas ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
+        notes.setMaximumSize(new java.awt.Dimension(10, 10));
+        notes.setOpaque(false);
+        notes.setPreferredSize(new java.awt.Dimension(10, 10));
+        notes.setLayout(new java.awt.BorderLayout());
+        Container.add(notes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1790, 1520, 460));
+
+        bounded.setBackground(new java.awt.Color(255, 255, 255));
+        bounded.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "1) Remover Linhas da pauta - Detectar  elementos musicais contidos na imagem ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
+        bounded.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        bounded.setMaximumSize(new java.awt.Dimension(10, 10));
+        bounded.setOpaque(false);
+        bounded.setPreferredSize(new java.awt.Dimension(10, 10));
+        bounded.setLayout(new java.awt.BorderLayout());
+        Container.add(bounded, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1520, 440));
+        bounded.getAccessibleContext().setAccessibleName("");
+
+        bars.setBackground(new java.awt.Color(255, 255, 255));
+        bars.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "3) Detectar altura das linhas da pauta ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
+        bars.setMaximumSize(new java.awt.Dimension(10, 10));
+        bars.setOpaque(false);
+        bars.setPreferredSize(new java.awt.Dimension(10, 10));
+        bars.setLayout(new java.awt.BorderLayout());
+        Container.add(bars, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 900, 1508, 437));
+
+        jScrollPane5.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+        individual.setBackground(new java.awt.Color(255, 255, 255));
+        individual.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "4) Segmentar possiveis figuras encontradas ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
+        individual.setMaximumSize(new java.awt.Dimension(5, 5));
+        individual.setMinimumSize(new java.awt.Dimension(5, 5));
+        individual.setOpaque(false);
+        individual.setPreferredSize(new java.awt.Dimension(5, 5));
+        individual.setLayout(new java.awt.BorderLayout());
+        jScrollPane5.setViewportView(individual);
+        individual.getAccessibleContext().setAccessibleName("3) Segmentar figuras que se parecem com notas musicais ");
+
+        Container.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1350, 1520, 430));
+
+        jScrollPane3.setViewportView(Container);
+
+        jPanel5.add(jScrollPane3, java.awt.BorderLayout.CENTER);
+
+        Panels.addTab("Etapas", jPanel5);
+
+        fragmentos.setLayout(new java.awt.BorderLayout());
+
+        treinamento.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setText("Caminho:");
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
         CAMINHO.setText("C:/Users/ascarneiro/Desktop/TCC/ScoreReader/Server/MUSCIMA/");
         CAMINHO.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -317,10 +552,22 @@ public class ScoreReader extends javax.swing.JFrame {
                 CAMINHOKeyPressed(evt);
             }
         });
-        Main.add(CAMINHO, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 370, -1));
+        jPanel3.add(CAMINHO, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 370, -1));
+
+        STATUS.setEditable(false);
+        STATUS.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        STATUS.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        STATUS.setText("D.S");
+        STATUS.setToolTipText("Quanto estiver verde o DataSource esta carregado. Caso contrario clique em  Carregar e Aguarde");
+        STATUS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                STATUSActionPerformed(evt);
+            }
+        });
+        jPanel3.add(STATUS, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 60, 30));
 
         jLabel7.setText("DataSource:");
-        Main.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 60, -1));
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
         DS_NAME.setText("data/cropobjects_manual");
         DS_NAME.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -333,25 +580,29 @@ public class ScoreReader extends javax.swing.JFrame {
                 DS_NAMEKeyPressed(evt);
             }
         });
-        Main.add(DS_NAME, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 370, -1));
+        jPanel3.add(DS_NAME, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 370, -1));
 
-        jLabel8.setText("Servidor:");
-        Main.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("Score Reader 1.0.0");
-        Main.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 220, -1));
-
-        jToggleButton4.setText("Forcar Reinicializacao");
-        jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
+        jToggleButton3.setText("Testar");
+        jToggleButton3.setToolTipText("Teste rapido de classificacao");
+        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton4ActionPerformed(evt);
+                jToggleButton3ActionPerformed(evt);
             }
         });
-        Main.add(jToggleButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 510, 370, 30));
+        jPanel3.add(jToggleButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 480, 140, 30));
 
-        jToggleButton5.setText("Carregar DataSource MUSCIMA");
+        K.setText("5");
+        K.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                KActionPerformed(evt);
+            }
+        });
+        jPanel3.add(K, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, 90, -1));
+
+        jLabel10.setText("K-vizinhos:");
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, 150, 20));
+
+        jToggleButton5.setText("Customizado");
         jToggleButton5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jToggleButton5MouseClicked(evt);
@@ -362,45 +613,220 @@ public class ScoreReader extends javax.swing.JFrame {
                 jToggleButton5ActionPerformed(evt);
             }
         });
-        Main.add(jToggleButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 233, 370, 30));
+        jPanel3.add(jToggleButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 480, 130, 30));
 
-        jLabel10.setText("K-vizinhos:");
-        Main.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, -1, 20));
-
-        K.setText("5");
-        K.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setText("Salvar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                KActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
-        Main.add(K, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 50, -1));
+        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 480, 140, 30));
 
-        Panels.addTab("Image", Main);
+        SEMIBREVE_SL.setValue(3);
+        SEMIBREVE_SL.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SEMIBREVE_SLStateChanged(evt);
+            }
+        });
+        jPanel3.add(SEMIBREVE_SL, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 360, -1));
 
-        fragmentos.setLayout(new java.awt.BorderLayout());
+        jLabel12.setText("Semibreve:");
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 60, 20));
+        jPanel3.add(SEMIBREVE, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 60, -1));
 
-        grid.setLayout(new java.awt.GridLayout(1, 0));
+        jLabel13.setText("Minimas:");
+        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 50, 20));
+        jPanel3.add(MINIMA, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 60, -1));
 
-        jScrollPane3.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jScrollPane3.setOpaque(false);
-        grid.add(jScrollPane3);
+        MINIMA_SL.setValue(3);
+        MINIMA_SL.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                MINIMA_SLStateChanged(evt);
+            }
+        });
+        jPanel3.add(MINIMA_SL, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 360, -1));
 
-        fragmentos.add(grid, java.awt.BorderLayout.CENTER);
+        SEMINIMA_SL.setValue(3);
+        SEMINIMA_SL.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SEMINIMA_SLStateChanged(evt);
+            }
+        });
+        jPanel3.add(SEMINIMA_SL, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 360, -1));
 
-        Panels.addTab("Fragmentos", fragmentos);
+        jLabel15.setText("Seminimas:");
+        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 60, 20));
+        jPanel3.add(SEMINIMA, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 60, -1));
 
-        bounded.setLayout(new java.awt.BorderLayout());
+        COLCHEIA_SL.setValue(3);
+        COLCHEIA_SL.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                COLCHEIA_SLStateChanged(evt);
+            }
+        });
+        jPanel3.add(COLCHEIA_SL, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 360, -1));
+        jPanel3.add(COLCHEIA, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 60, -1));
 
-        jScrollPane4.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jScrollPane4.setOpaque(false);
-        jScrollPane4.setViewport(null);
-        bounded.add(jScrollPane4, java.awt.BorderLayout.CENTER);
+        jLabel17.setText("Colcheias:");
+        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 50, 20));
 
-        Panels.addTab("Bounded", bounded);
+        jLabel18.setText("Fusas:");
+        jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 40, 20));
 
-        jPanel4.add(Panels, java.awt.BorderLayout.CENTER);
+        FUSA_SL.setValue(3);
+        FUSA_SL.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                FUSA_SLStateChanged(evt);
+            }
+        });
+        jPanel3.add(FUSA_SL, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 360, -1));
+        jPanel3.add(FUSA, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, 60, -1));
+        jPanel3.add(SEMIFUSA, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 60, -1));
+
+        jLabel19.setText("Semifusas:");
+        jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 60, 20));
+
+        SEMIFUSA_SL.setValue(3);
+        SEMIFUSA_SL.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SEMIFUSA_SLStateChanged(evt);
+            }
+        });
+        jPanel3.add(SEMIFUSA_SL, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 360, -1));
+
+        jLabel20.setText("Clave Sol:");
+        jPanel3.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 50, 20));
+
+        CLAVE_SOL_SL.setValue(3);
+        CLAVE_SOL_SL.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                CLAVE_SOL_SLStateChanged(evt);
+            }
+        });
+        jPanel3.add(CLAVE_SOL_SL, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, 360, -1));
+        jPanel3.add(CLAVE_SOL, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, 60, -1));
+        jPanel3.add(CLAVE_FA, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, 60, -1));
+
+        CLAVE_FA_SL.setValue(3);
+        CLAVE_FA_SL.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                CLAVE_FA_SLStateChanged(evt);
+            }
+        });
+        jPanel3.add(CLAVE_FA_SL, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 360, 360, -1));
+
+        jLabel21.setText("Clave Fa:");
+        jPanel3.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 50, 20));
+        jPanel3.add(CLAVE_DO, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 390, 60, -1));
+
+        CLAVE_DO_SL.setValue(3);
+        CLAVE_DO_SL.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                CLAVE_DO_SLStateChanged(evt);
+            }
+        });
+        jPanel3.add(CLAVE_DO_SL, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, 360, -1));
+
+        jLabel22.setText("Clave Do:");
+        jPanel3.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, 50, 20));
+        jPanel3.add(FERMATA, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 420, 60, -1));
+
+        jLabel24.setText("Fermatas:");
+        jPanel3.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, 50, 20));
+        jPanel3.add(jSpinner12, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 420, 60, -1));
+
+        FERMATA_SL.setValue(3);
+        FERMATA_SL.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                FERMATA_SLStateChanged(evt);
+            }
+        });
+        jPanel3.add(FERMATA_SL, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 420, 360, -1));
+
+        PAUSA_SEMIBREVE.setText("Incluir pausas");
+        jPanel3.add(PAUSA_SEMIBREVE, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, -1, -1));
+
+        PAUSA_MINIMAS.setText("Incluir pausas");
+        jPanel3.add(PAUSA_MINIMAS, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 150, -1, -1));
+
+        PAUSA_SEMINIMA.setText("Incluir pausas");
+        jPanel3.add(PAUSA_SEMINIMA, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 180, -1, -1));
+
+        PAUSA_COLCHEIA.setText("Incluir pausas");
+        jPanel3.add(PAUSA_COLCHEIA, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 210, -1, -1));
+
+        PAUSA_FUSA.setText("Incluir pausas");
+        jPanel3.add(PAUSA_FUSA, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, -1, -1));
+
+        PAUSA_SEMIFUSA.setText("Incluir pausas");
+        jPanel3.add(PAUSA_SEMIFUSA, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, -1, -1));
+
+        jLabel25.setText("Ligaduras:");
+        jPanel3.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 50, 20));
+        jPanel3.add(LIGADURA, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, 60, -1));
+
+        LIGADURA_SL.setValue(3);
+        LIGADURA_SL.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                LIGADURA_SLStateChanged(evt);
+            }
+        });
+        jPanel3.add(LIGADURA_SL, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 450, 360, -1));
+
+        jLabel23.setText("Semi Colcheias:");
+        jPanel3.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 80, 20));
+        jPanel3.add(SEMICOLCHEIA, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 60, -1));
+
+        SEMICOLCHEIA_SL.setValue(3);
+        SEMICOLCHEIA_SL.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SEMICOLCHEIA_SLStateChanged(evt);
+            }
+        });
+        jPanel3.add(SEMICOLCHEIA_SL, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 360, -1));
+
+        PAUSA_SEMICOLCHEIA.setText("Incluir pausas");
+        jPanel3.add(PAUSA_SEMICOLCHEIA, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, -1, -1));
+
+        jButton3.setText("Padrao");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 480, 140, 30));
+
+        jCheckBox1.setSelected(true);
+        jCheckBox1.setText("KNN");
+        jPanel3.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, -1));
+
+        NOME_MODELO.setEditable(true);
+        NOME_MODELO.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "__KNN_PADRAO" }));
+        jPanel3.add(NOME_MODELO, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, 140, -1));
+
+        treinamento.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 710, 570));
+
+        fragments2.setBackground(new java.awt.Color(255, 255, 255));
+        fragments2.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        fragments2.setMaximumSize(new java.awt.Dimension(10, 10));
+        fragments2.setOpaque(false);
+        fragments2.setPreferredSize(new java.awt.Dimension(10, 10));
+        fragments2.setLayout(new java.awt.GridLayout());
+        treinamento.add(fragments2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 90, 790, 570));
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("Treinamento");
+        treinamento.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 40, 220, -1));
+
+        fragmentos.add(treinamento, java.awt.BorderLayout.CENTER);
+
+        Panels.addTab("Treinamento", fragmentos);
+
+        jSplitPane1.setTopComponent(Panels);
+
+        jPanel4.add(jSplitPane1, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(jPanel4, java.awt.BorderLayout.CENTER);
 
@@ -414,8 +840,9 @@ public class ScoreReader extends javax.swing.JFrame {
             JFileChooser jfc = new JFileChooser(CAMINHO_DEFAULT);
             if (jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                 FILE_NAME.setText(jfc.getSelectedFile().toPath().toString());
-                inicializar();
+                addImagemOriginal(new File(FILE_NAME.getText()).getAbsolutePath());
             }
+
         } catch (Exception e) {
             log_console("Falha ao carregar arquivos :\n" + e.getMessage());
             e.printStackTrace();
@@ -429,8 +856,21 @@ public class ScoreReader extends javax.swing.JFrame {
         D.setEnabled(habilitar);
         E.setEnabled(habilitar);
         fragmentos.setVisible(habilitar);
-        bounded.setVisible(habilitar);
         Compilar.setEnabled(habilitar);
+
+        MINIMA.setValue(3);
+        SEMIBREVE.setValue(3);
+        SEMINIMA.setValue(3);
+        COLCHEIA.setValue(3);
+        SEMICOLCHEIA.setValue(3);
+        FUSA.setValue(3);
+        SEMIFUSA.setValue(3);
+        CLAVE_DO.setValue(3);
+        CLAVE_FA.setValue(3);
+        CLAVE_SOL.setValue(3);
+        FERMATA.setValue(3);
+        LIGADURA.setValue(3);
+
     }
 
     private void processarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processarActionPerformed
@@ -452,6 +892,7 @@ public class ScoreReader extends javax.swing.JFrame {
                 //Etapa de segmentacao
                 ArrayList<Figura> figuras = Utilities.segmentar(imagemCinza, imageCopy);
                 for (Figura figura : figuras) {
+                    addImagemSegmentados(figura.fileName);
                     Figura classificada = Utilities.classificar(figura, Integer.parseInt(K.getText()));
                     figura.setTipo(classificada.getTipo());
                 }
@@ -605,10 +1046,6 @@ public class ScoreReader extends javax.swing.JFrame {
         CONSOLE.setText("");
     }//GEN-LAST:event_jToggleButton10ActionPerformed
 
-    private void STATUSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_STATUSActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_STATUSActionPerformed
-
     private void EActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EActionPerformed
         try {
             String dir = parser.getFileSvg();
@@ -620,6 +1057,97 @@ public class ScoreReader extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_EActionPerformed
+
+    private void debugFIlesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_debugFIlesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_debugFIlesActionPerformed
+
+    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
+        try {
+            log_console("Carregando modelo " + MODELO.getText());
+            Utilities.carregarModelo(MODELO.getText());
+            log_console("Modelo ");
+        } catch (Exception e) {
+            log_console("Falha ao ler modelo " + MODELO.getText());
+        }
+    }//GEN-LAST:event_jToggleButton4ActionPerformed
+
+    private void PanelsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_PanelsStateChanged
+
+
+    }//GEN-LAST:event_PanelsStateChanged
+
+    private void SEMICOLCHEIA_SLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SEMICOLCHEIA_SLStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SEMICOLCHEIA_SLStateChanged
+
+    private void LIGADURA_SLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_LIGADURA_SLStateChanged
+        LIGADURA.setValue(LIGADURA_SL.getValue() * 3);
+    }//GEN-LAST:event_LIGADURA_SLStateChanged
+
+    private void FERMATA_SLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_FERMATA_SLStateChanged
+        FERMATA.setValue(CLAVE_DO_SL.getValue() * 3);
+    }//GEN-LAST:event_FERMATA_SLStateChanged
+
+    private void CLAVE_DO_SLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_CLAVE_DO_SLStateChanged
+        CLAVE_DO.setValue(CLAVE_DO_SL.getValue() * 3);
+    }//GEN-LAST:event_CLAVE_DO_SLStateChanged
+
+    private void CLAVE_FA_SLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_CLAVE_FA_SLStateChanged
+        CLAVE_FA.setValue(CLAVE_FA_SL.getValue() * 3);
+    }//GEN-LAST:event_CLAVE_FA_SLStateChanged
+
+    private void CLAVE_SOL_SLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_CLAVE_SOL_SLStateChanged
+        CLAVE_SOL.setValue(CLAVE_SOL_SL.getValue() * 3);
+    }//GEN-LAST:event_CLAVE_SOL_SLStateChanged
+
+    private void SEMIFUSA_SLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SEMIFUSA_SLStateChanged
+        SEMIFUSA.setValue(SEMIFUSA_SL.getValue() * 3);
+    }//GEN-LAST:event_SEMIFUSA_SLStateChanged
+
+    private void FUSA_SLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_FUSA_SLStateChanged
+        FUSA.setValue(FUSA_SL.getValue() * 3);
+    }//GEN-LAST:event_FUSA_SLStateChanged
+
+    private void COLCHEIA_SLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_COLCHEIA_SLStateChanged
+        COLCHEIA.setValue(COLCHEIA_SL.getValue() * 3);
+    }//GEN-LAST:event_COLCHEIA_SLStateChanged
+
+    private void SEMINIMA_SLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SEMINIMA_SLStateChanged
+        SEMINIMA.setValue(SEMINIMA_SL.getValue() * 3);
+    }//GEN-LAST:event_SEMINIMA_SLStateChanged
+
+    private void MINIMA_SLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_MINIMA_SLStateChanged
+        MINIMA.setValue(MINIMA_SL.getValue() * 3);
+    }//GEN-LAST:event_MINIMA_SLStateChanged
+
+    private void SEMIBREVE_SLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SEMIBREVE_SLStateChanged
+        SEMIBREVE.setValue(SEMIBREVE_SL.getValue() * 3);
+    }//GEN-LAST:event_SEMIBREVE_SLStateChanged
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jToggleButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton5ActionPerformed
+
+    private void jToggleButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton5MouseClicked
+        try {
+            Server.server = SERVER.getText();
+        } catch (Exception e) {
+            processar.setEnabled(false);
+            STATUS.setBackground(Color.ORANGE);
+            log_console("Falha ao carregar dataSource, verifique se o servidor esta acessivel ou \n "
+                    + " se ocorreu algum erro o log do servidor");
+
+        }
+    }//GEN-LAST:event_jToggleButton5MouseClicked
+
+    private void KActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_KActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
         try {
@@ -634,56 +1162,77 @@ public class ScoreReader extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
-    private void debugFIlesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_debugFIlesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_debugFIlesActionPerformed
-
-    private void CAMINHOKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CAMINHOKeyPressed
-        resetar = "S";
-    }//GEN-LAST:event_CAMINHOKeyPressed
-
     private void DS_NAMEKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DS_NAMEKeyPressed
         resetar = "S";
-
     }//GEN-LAST:event_DS_NAMEKeyPressed
 
     private void DS_NAMEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DS_NAMEMouseClicked
         resetar = "S";
     }//GEN-LAST:event_DS_NAMEMouseClicked
 
+    private void STATUSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_STATUSActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_STATUSActionPerformed
+
+    private void CAMINHOKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CAMINHOKeyPressed
+        resetar = "S";
+    }//GEN-LAST:event_CAMINHOKeyPressed
+
     private void CAMINHOMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CAMINHOMouseClicked
         resetar = "S";
     }//GEN-LAST:event_CAMINHOMouseClicked
 
-    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
-        inicializar();
-    }//GEN-LAST:event_jToggleButton4ActionPerformed
-
-    private void jToggleButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton5MouseClicked
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            Server.server = SERVER.getText();
-            inicializar();
+            JFileChooser jfc = new JFileChooser(CAMINHO_TREINAMENTO);
+            if (jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                CAMINHO.setText(jfc.getSelectedFile().toPath().toString());
+            }
         } catch (Exception e) {
-            processar.setEnabled(false);
+            log_console("Falha ao carregar arquivo de treinamento :\n" + e.getMessage());
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
             STATUS.setBackground(Color.ORANGE);
-            log_console("Falha ao carregar dataSource, verifique se o servidor esta acessivel ou \n "
-                    + " se ocorreu algum erro o log do servidor");
+            fragmentos.setBackground(Color.WHITE);
+            habilitarDesabilitarBotoes(false);
+
+            Server.server = SERVER.getText();
+            Thread t = new Thread() {
+
+                @Override
+                public void run() {
+                    try {
+                        log_console("Treinando modelo...");
+                        String modelo = Utilities.treinarKnnPadrao(NOME_MODELO.getSelectedItem().toString(), CAMINHO.getText(), DS_NAME.getText(), "S");
+                        STATUS.setBackground(Color.GREEN);
+                        processar.setEnabled(true);
+                        resetar = "N";
+                        log_console("Arquivo gerado: !" + modelo);
+                        log_console("Modelo treinado e carregado com sucesso!");
+                    } catch (Exception e) {
+                        resetar = "S";
+                        STATUS.setBackground(Color.ORANGE);
+                        processar.setEnabled(false);
+                    }
+                }
+
+            };
+            t.start();
+
+        } catch (Exception e) {
+            STATUS.setBackground(Color.ORANGE);
+            processar.setEnabled(false);
+            log_console("Falha ao carregar dataSource, verifique se \n"
+                    + "o servidor esta acessivel ou se ocorreu \n"
+                    + "algum erro o log do servidor");
 
         }
-    }//GEN-LAST:event_jToggleButton5MouseClicked
 
-    private void jToggleButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton5ActionPerformed
-
-    private void KActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_KActionPerformed
-
-    private void PanelsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_PanelsStateChanged
-
-
-    }//GEN-LAST:event_PanelsStateChanged
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -717,8 +1266,9 @@ public class ScoreReader extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 ScoreReader sc = new ScoreReader();
-                sc.setSize(600, 620);
+                sc.setSize(1024, 768);
                 sc.setLocationRelativeTo(null);
+                sc.setExtendedState(6);
                 sc.setVisible(true);
 
             }
@@ -726,7 +1276,7 @@ public class ScoreReader extends javax.swing.JFrame {
     }
 
     public void log_console(String texto) {
-        consoleContent.append(texto);
+        consoleContent.append("---  " + texto);
         CONSOLE.setText(consoleContent.append("\n").toString());
     }
 
@@ -735,26 +1285,81 @@ public class ScoreReader extends javax.swing.JFrame {
     private javax.swing.JToggleButton B;
     private javax.swing.JToggleButton C;
     private javax.swing.JTextField CAMINHO;
+    private javax.swing.JSpinner CLAVE_DO;
+    private javax.swing.JSlider CLAVE_DO_SL;
+    private javax.swing.JSpinner CLAVE_FA;
+    private javax.swing.JSlider CLAVE_FA_SL;
+    private javax.swing.JSpinner CLAVE_SOL;
+    private javax.swing.JSlider CLAVE_SOL_SL;
+    private javax.swing.JSpinner COLCHEIA;
+    private javax.swing.JSlider COLCHEIA_SL;
     private javax.swing.JTextArea CONSOLE;
     private javax.swing.JToggleButton Compilar;
+    private javax.swing.JPanel Container;
     private javax.swing.JToggleButton D;
     private javax.swing.JTextField DS_NAME;
     private javax.swing.JToggleButton E;
     private javax.swing.JTextField FATOR;
+    private javax.swing.JSpinner FERMATA;
+    private javax.swing.JSlider FERMATA_SL;
     private javax.swing.JTextField FILE_NAME;
+    private javax.swing.JSpinner FUSA;
+    private javax.swing.JSlider FUSA_SL;
     private javax.swing.JTextField K;
+    private javax.swing.JSpinner LIGADURA;
+    private javax.swing.JSlider LIGADURA_SL;
+    private javax.swing.JSpinner MINIMA;
+    private javax.swing.JSlider MINIMA_SL;
+    private javax.swing.JTextField MODELO;
     private javax.swing.JPanel Main;
+    private javax.swing.JComboBox NOME_MODELO;
+    private javax.swing.JCheckBox PAUSA_COLCHEIA;
+    private javax.swing.JCheckBox PAUSA_FUSA;
+    private javax.swing.JCheckBox PAUSA_MINIMAS;
+    private javax.swing.JCheckBox PAUSA_SEMIBREVE;
+    private javax.swing.JCheckBox PAUSA_SEMICOLCHEIA;
+    private javax.swing.JCheckBox PAUSA_SEMIFUSA;
+    private javax.swing.JCheckBox PAUSA_SEMINIMA;
     private javax.swing.JTabbedPane Panels;
+    private javax.swing.JSpinner SEMIBREVE;
+    private javax.swing.JSlider SEMIBREVE_SL;
+    private javax.swing.JSpinner SEMICOLCHEIA;
+    private javax.swing.JSlider SEMICOLCHEIA_SL;
+    private javax.swing.JSpinner SEMIFUSA;
+    private javax.swing.JSlider SEMIFUSA_SL;
+    private javax.swing.JSpinner SEMINIMA;
+    private javax.swing.JSlider SEMINIMA_SL;
     private javax.swing.JTextField SERVER;
     private javax.swing.JTextField STATUS;
+    private javax.swing.JPanel bars;
     private javax.swing.JPanel bounded;
+    private javax.swing.JTextField caminho;
     private javax.swing.JCheckBox debugFIles;
     private javax.swing.JCheckBox debugImages;
     private javax.swing.JPanel fragmentos;
-    private javax.swing.JPanel grid;
+    private javax.swing.JPanel fragments2;
+    private javax.swing.JPanel individual;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -763,68 +1368,46 @@ public class ScoreReader extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JSpinner jSpinner12;
+    private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JToggleButton jToggleButton10;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JToggleButton jToggleButton4;
     private javax.swing.JToggleButton jToggleButton5;
+    private javax.swing.JPanel notes;
+    private javax.swing.JPanel original;
     private javax.swing.JToggleButton processar;
+    private javax.swing.JPanel segmentados;
+    private javax.swing.JPanel treinamento;
     // End of variables declaration//GEN-END:variables
 
-    private void inicializar() {
-        try {
-            STATUS.setBackground(Color.ORANGE);
-            bounded.setBackground(Color.WHITE);
-            fragmentos.setBackground(Color.WHITE);
-            habilitarDesabilitarBotoes(false);
-
-            Server.server = SERVER.getText();
-            Thread t = new Thread() {
-
-                @Override
-                public void run() {
-                    try {
-                        log_console("Carregando DataSource MUSCIMA, aguarde...");
-                        Utilities.carregarDataSource(CAMINHO.getText(), DS_NAME.getText(), resetar);
-                        STATUS.setBackground(Color.GREEN);
-                        processar.setEnabled(true);
-                        resetar = "N";
-                        log_console("DataSource MUSCIMA carregado com sucesso!");
-                    } catch (Exception e) {
-                        resetar = "S";
-                        STATUS.setBackground(Color.ORANGE);
-                        processar.setEnabled(false);
-                    }
-                }
-
-            };
-            t.start();
-
-        } catch (Exception e) {
-            STATUS.setBackground(Color.ORANGE);
-            processar.setEnabled(false);
-            log_console("Falha ao carregar dataSource, verifique se \n"
-                    + "o servidor esta acessivel ou se ocorreu \n"
-                    + "algum erro o log do servidor");
-
-        }
-    }
-
     private void loadBounded() {
-        String s = DIR_DEBUG + "..\\repository\\bounded.png";
-        JLabel label = new JLabel(new ImageIcon(s));
-        bounded.add(label);
+
+        String s = CAMINHO_REPOSITORY + "\\bounded.png";
+        addImagemBounded(new File(s).getAbsolutePath());
+
+        s = CAMINHO_REPOSITORY + "\\posicaoLinhas.png";
+        addImagemBar(new File(s).getAbsolutePath());
+
+        s = CAMINHO_REPOSITORY + "\\alturaNotas.png";
+        addImagemNotes(new File(s).getAbsolutePath());
     }
 
     private void loadFragments() {
         try {
+
+            individualPanel.limpar();
             int qt = (processados.size() / 2) - 1;
-            grid.setLayout(new GridLayout(qt, qt));
             for (int i = 0; i < processados.size(); i++) {
                 Figura processado = processados.get(i);
                 String s = "Index: " + i + " Nota: " + processado.nota.nome + " Tipo: " + processado.tipo;
@@ -834,13 +1417,60 @@ public class ScoreReader extends javax.swing.JFrame {
                 if (processado.isNotaMusical()) {
                     ByteArrayInputStream bais = new ByteArrayInputStream(processado.getImage());
                     BufferedImage read = ImageIO.read(bais);
-                    ImageIO.write(read, "PNG", new File(Utilities.DIR_DEBUG + "../notas//" + i + ".png"));
+                    File f = new File(CAMINHO_NOTAS + i + ".png");
+                    ImageIO.write(read, "PNG", f);
+                    addImagemIndividual(f.getAbsolutePath());
                 }
-                JLabel label = new JLabel(new ImageIcon(Utilities.DIR_DEBUG + "../notas//" + i + ".png"));
-                grid.add(label);
             }
         } catch (Exception e) {
             log_console("Falha ao carregar imagens");
         }
+    }
+
+    private void addImagemBounded(String caminho) {
+        boundedPanel.addImagem(caminho, true);
+
+    }
+
+    private void addImagemBar(String caminho) {
+        barPanel.addImagem(caminho, true);
+    }
+
+    private void addImagemNotes(String caminho) {
+        notesPanel.addImagem(caminho, true);
+    }
+
+    private void addImagemOriginal(String caminho) {
+        originalPanel.addImagem(caminho, true);
+    }
+
+    private void addImagemIndividual(String caminho) {
+        individualPanel.addImagem(caminho, false);
+    }
+
+    private void addImagemSegmentados(String caminho) {
+        segmentadosPanel.addImagem(caminho, false);
+    }
+
+    private void loadPanels() {
+        boundedPanel.setOpaque(true);
+        barPanel.setOpaque(true);
+        barPanel.setOpaque(true);
+        notesPanel.setOpaque(true);
+        originalPanel.setOpaque(true);
+        individualPanel.setOpaque(true);
+        segmentadosPanel.setOpaque(true);
+        addImagemBounded(null);
+        addImagemBar(null);
+        addImagemNotes(null);
+        addImagemOriginal(null);
+        addImagemIndividual(null);
+        addImagemSegmentados(null);
+        bounded.add(boundedPanel);
+        bars.add(barPanel);
+        notes.add(notesPanel);
+        original.add(originalPanel);
+        individual.add(individualPanel);
+        segmentados.add(segmentadosPanel);
     }
 }

@@ -8,6 +8,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from PIL import Image
 from muscima.io import parse_cropobject_list
+from sklearn.externals import joblib
+from sklearn.neighbors import kneighbors_graph
 
 
 class Classificador(object):
@@ -96,7 +98,7 @@ class Classificador(object):
             ax.set_xticks([])
         plt.show()
 
-    def carregar_data_source(self, caminho, data_source):
+    def treinar_knn_padrao(self, nome, caminho, data_source):
         try:
             print("DataSource :" + data_source)
             self.caminho = caminho
@@ -141,10 +143,16 @@ class Classificador(object):
 
             self.load_knn()
 
+            print("Salvando Modelo...")
+            nome = self.salvar_modelo(nome)
+            print("Modelo salvo...")
+            self.plot_modelo()
             self.data_source_carregado = True
+            return nome
         except:
             print("Erro ao carregar DataSource")
             self.data_source_carregado = False
+            return "erro"
 
 
     def load_knn(self):
@@ -190,7 +198,22 @@ class Classificador(object):
             print(mensagem)
         return retorno
 
+    def salvar_modelo(self, nome):
+        s = self.DIR_TREINAMENTO + nome + '.pkl';
+        joblib.dump(self.KNN, s);
+        return s;
+
+    def plot_modelo(self):
+        self.X_train = self.X_conjunto_treino[:10]
+        A = kneighbors_graph(self.X_conjunto_treino, 9, 'distance')
+        plt.spy(A)
+        plt.show()
+
+    def carregar_modelo(self, nome):
+        self.KNN = joblib.load(self.DIR_TREINAMENTO + nome + '.pkl')
+
     def __init__(self):
+          self.DIR_TREINAMENTO = 'C:/Users/ascarneiro/Desktop/TCC/ScoreReader/treinamento/'
           self.data_source_carregado = False
           self.LARGURA = 10  # Largura da figura
           self.ALTURA = 40  # altura da figura
@@ -198,4 +221,6 @@ class Classificador(object):
 
           self.ROTULO_MINIMA = 1
           self.ROTULO_SEMINIMA = 0
+
+
 

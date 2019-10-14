@@ -86,24 +86,24 @@ public class Utilities {
                 bb.y(bb.y());
                 bb.width(bb.width());
                 bb.height(bb.height());
-                if (DEBUG_VALUES) {
-                    cvRectangleR(imagemBB, bb, CV_RGB(0, 255, 0), 1, 8, 0);
-                }
+//                if (DEBUG_VALUES) {
+                cvRectangleR(imagemBB, bb, CV_RGB(0, 255, 0), 1, 8, 0);
+//                }
 
-                if (DEBUG_VALUES) {
-                    // Adding Text
-                    opencv_core.CvScalar c = CV_RGB(0, 0, 0);
-                    opencv_imgproc.cvPutText(
-                            imagemBB, // Matrix obj of the image
-                            "(" + meioX + " , " + meioY + ")", // Text to be added
-                            new opencv_core.CvPoint(meioX, meioY + add), // point
-                            opencv_imgproc.cvFont(1), // front face
-                            c // Scalar object for color
-                    );
+//                if (DEBUG_VALUES) {
+                // Adding Text
+                opencv_core.CvScalar c = CV_RGB(0, 0, 0);
+                opencv_imgproc.cvPutText(
+                        imagemBB, // Matrix obj of the image
+                        "(" + meioX + " , " + meioY + ")", // Text to be added
+                        new opencv_core.CvPoint(meioX, meioY + add), // point
+                        opencv_imgproc.cvFont(1), // front face
+                        c // Scalar object for color
+                );
 
-                    opencv_core.CvScalar rgb = CV_RGB(195, 10, 0);
-                    opencv_imgproc.cvCircle(imagemBB, new opencv_core.CvPoint(meioX, meioY), 20, rgb);
-                }
+                opencv_core.CvScalar rgb = CV_RGB(195, 10, 0);
+                opencv_imgproc.cvCircle(imagemBB, new opencv_core.CvPoint(meioX, meioY), 20, rgb);
+//                }
 
             }
             index++;
@@ -150,18 +150,19 @@ public class Utilities {
                 bb.width(bb.width());
                 bb.height(bb.height());
 
-                if (DEBUG_VALUES) {
-                    cvRectangleR(imagemBB, bb, CV_RGB(0, 255, 0), 1, 8, 0);
-                }
+                cvRectangleR(imagemBB, bb, CV_RGB(0, 255, 0), 1, 8, 0);
+
                 opencv_core.Rect rectCrop = new opencv_core.Rect(bb.x(), bb.y(), bb.width(), bb.height());
                 opencv_core.Mat croppedImage = new opencv_core.Mat(new opencv_core.Mat(imagemBB), rectCrop);
                 opencv_core.IplImage crop = new opencv_core.IplImage(croppedImage);
 
-                elements.add(new Crop(meioX, meioY, bb.width(), bb.height(), crop));
+                Crop cr = new Crop(meioX, meioY, bb.width(), bb.height(), crop);
+                String s = DIR_DEBUG + "crop" + System.currentTimeMillis() + ".png";
+                cr.fileName = s;
 
-                if (DEBUG_IMAGES) {
-                    cvSaveImage(DIR_DEBUG + "crop" + System.currentTimeMillis() + ".png", crop);
-                }
+                cvSaveImage(s, crop);
+                elements.add(cr);
+
             }
         }
         return elements;
@@ -206,6 +207,14 @@ public class Utilities {
         return Base64.getDecoder().decode(retorno);
 
     }
+    
+    
+    public static String carregarModelo(String nome) throws Exception {
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("nome", nome);
+        String retorno = Server.callServerPython("carregarModelo", params);
+        return retorno;
+    }
 
     public static opencv_core.IplImage bufferedImageToIplImage(byte[] imageData) throws Exception {
         //ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
@@ -245,7 +254,9 @@ public class Utilities {
             byte[] data = bufferedImageToByteArray(image);
             String base64Image = Base64.getEncoder().encodeToString(data);
 
-            elementos.add(new Figura(crop.x, crop.y, crop.h, crop.w, data, base64Image, "undefined-yet"));
+            Figura fig = new Figura(crop.x, crop.y, crop.h, crop.w, data, base64Image, "undefined-yet");
+            fig.fileName = crop.fileName;
+            elementos.add(fig);
         }
 
         return elementos;
@@ -272,12 +283,13 @@ public class Utilities {
         return segmentado;
     }
 
-    public static void carregarDataSource(String caminho, String dataSource, String resetar) throws Exception {
+    public static String treinarKnnPadrao(String nome, String caminho, String dataSource, String resetar) throws Exception {
         HashMap<String, Object> params = new HashMap<>();
+        params.put("nome", nome);
         params.put("caminho", caminho);
         params.put("data_source", dataSource);
         params.put("resetar", dataSource);
-        Server.callServerPython("carregarDataSource", params);
+        return Server.callServerPython("treinarKnnPadrao", params);
     }
 
     public static ArrayList<String> classificarDebug(int k) throws Exception {

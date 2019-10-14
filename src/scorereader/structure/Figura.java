@@ -21,6 +21,7 @@ public class Figura {
     public String tipo;
     public boolean note = false;
     public Nota nota = null;
+    public String fileName = "";
 
     public Figura(int x, int y, int w, int h, byte[] image, String base64Image, String tipo) {
 
