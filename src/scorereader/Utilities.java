@@ -31,6 +31,8 @@ import static org.bytedeco.javacpp.opencv_imgproc.CV_THRESH_BINARY;
 import static org.bytedeco.javacpp.opencv_imgproc.CV_THRESH_BINARY_INV;
 import static org.bytedeco.javacpp.opencv_imgproc.cvAdaptiveThreshold;
 import static org.bytedeco.javacpp.opencv_imgproc.cvBoundingRect;
+import static org.bytedeco.javacpp.opencv_imgproc.cvDilate;
+import static org.bytedeco.javacpp.opencv_imgproc.cvErode;
 import static org.bytedeco.javacpp.opencv_imgproc.cvFindContours;
 import static org.bytedeco.javacpp.opencv_imgproc.cvRectangleR;
 import static org.bytedeco.javacpp.opencv_imgproc.cvThreshold;
@@ -207,8 +209,7 @@ public class Utilities {
         return Base64.getDecoder().decode(retorno);
 
     }
-    
-    
+
     public static String carregarModelo(String nome) throws Exception {
         HashMap<String, Object> params = new HashMap<>();
         params.put("nome", nome);
@@ -222,8 +223,10 @@ public class Utilities {
 
         String path = "C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\repository\\staffless.png";
         //ImageIO.write(bfImage, "PNG", new File(path));
-
-        return cvLoadImage(path, CV_LOAD_IMAGE_ANYCOLOR);
+        opencv_core.IplImage cvLoadImage = cvLoadImage(path, CV_LOAD_IMAGE_ANYCOLOR);
+        cvErode(cvLoadImage, cvLoadImage, null, 1);
+//        cvDilate(cvLoadImage, cvLoadImage, null, 2);
+        return cvLoadImage;
     }
 
     public static BufferedImage IplImageToBufferedImage(opencv_core.IplImage src) {
@@ -304,6 +307,12 @@ public class Utilities {
             retorno.add(get.getAsString());
         }
         return retorno;
+    }
+    
+    public static void treinarCustomizado(HashMap parametros) throws Exception {
+        String json = Server.callServerPython("treinarCustomizado", parametros);
+        JsonParser parser = new JsonParser();
+        JsonArray array = parser.parse(json).getAsJsonArray();
     }
 
     public static ArrayList<Nota> detectarAlturaNotas(opencv_core.IplImage imagemCinza) throws Exception {

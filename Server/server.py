@@ -151,8 +151,52 @@ class Server(object):
     return self.classificador.classificar(img, int(K))
 
 
+  @cherrypy.expose
+  def treinarCustomizado(self,
+                         QT_SEMIBREVE,
+                         QT_MINIMA,
+                         QT_SEMINIMA,
+                         QT_COLCHEIA,
+                         QT_SEMICOLCHEIA,
+                         QT_FUSA,
+                         QT_SEMIFUSA,
+                         QT_CLAVESOL,
+                         QT_CLAVEFA,
+                         QT_CLAVEDO,
+                         QT_FERMATA,
+                         QT_LIGADURA,
+                         PAUSA_SEMIBREVE,
+                         PAUSA_MINIMA,
+                         PAUSA_SEMINIMA,
+                         PAUSA_COLCHEIA,
+                         PAUSA_SEMICOLCHEIA,
+                         PAUSA_FUSA,
+                         PAUSA_SEMIFUSA):
+
+        self.classificador.treinar_customizado(self,
+                            QT_SEMIBREVE,
+                            QT_MINIMA,
+                            QT_SEMINIMA,
+                            QT_COLCHEIA,
+                            QT_SEMICOLCHEIA,
+                            QT_FUSA,
+                            QT_SEMIFUSA,
+                            QT_CLAVESOL,
+                            QT_CLAVEFA,
+                            QT_CLAVEDO,
+                            QT_FERMATA,
+                            QT_LIGADURA,
+                            PAUSA_SEMIBREVE,
+                            PAUSA_MINIMA,
+                            PAUSA_SEMINIMA,
+                            PAUSA_COLCHEIA,
+                            PAUSA_SEMICOLCHEIA,
+                            PAUSA_FUSA,
+                            PAUSA_SEMIFUSA)
+
+
 
 s = Server()
-s.socket_port = 8090
+cherrypy.config.update({'server.socket_port': 8090})
 cherrypy.quickstart(s)
 

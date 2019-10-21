@@ -195,25 +195,23 @@ public class Parser {
     private String getMusica(ArrayList<Figura> elementos) {
         StringBuilder abcCode = new StringBuilder();
 
-        int quebrarEmCompasssos = Parser.quebrarEmCompassos;
-        int tempo = 4;
+//        int quebrarEmCompasssos = Parser.quebrarEmCompassos;
+//        int tempo = 4;
         for (int i = 1; i < elementos.size(); i++) {
             Figura elemento = elementos.get(i);
-            if (tempo == 0) {
-                tempo = 4;
-            } else {
-                tempo--;
-            }
-            abcCode.append(elemento.getNota().nome).append(getTipo(elemento));
-            if (tempo == 0) {
-                abcCode.append(ABC_NOTATION.BARRA_COMPASSO);
-                quebrarEmCompasssos--;
-            }
 
-            if (quebrarEmCompasssos == 0) {
-                abcCode.append("\n");
-                quebrarEmCompasssos = Parser.quebrarEmCompassos;
-            }
+//            tempo--;
+            abcCode.append(elemento.getNota().nome).append(getTipo(elemento));
+//            if (tempo == 0) {
+//                abcCode.append(ABC_NOTATION.BARRA_COMPASSO);
+//                quebrarEmCompasssos--;
+//                tempo = 4;
+//            }
+
+//            if (quebrarEmCompasssos == 0) {
+//                abcCode.append("\n");
+//                quebrarEmCompasssos = Parser.quebrarEmCompassos;
+//            }
         }
         abcCode.append(ABC_NOTATION.FINAL);
 
@@ -225,6 +223,8 @@ public class Parser {
             return ABC_NOTATION.MINIMA;
         } else if ("Seminima".equalsIgnoreCase(elemento.tipo)) {
             return ABC_NOTATION.SEMINIMA;
+        } else if ("BarraCompasso".equalsIgnoreCase(elemento.tipo)) {
+            return ABC_NOTATION.BARRA_COMPASSO;
         }
         return "Desconhecido";
     }

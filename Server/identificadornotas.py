@@ -12,7 +12,7 @@ class IdentificaNotas(object):
     def melhorarImagem(self, img):
         kernel = np.ones((2, 2), np.uint8)
         #Tentativa e erro no gimp numero de iteracoes
-        img = cv2.erode(img, kernel, iterations=11)
+        img = cv2.erode(img, kernel, iterations=9)
         img = cv2.dilate(img, kernel, iterations=13)
         img = cv2.erode(img, kernel, iterations=4)
         if self.debugMode:

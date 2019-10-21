@@ -12,6 +12,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -36,6 +37,7 @@ public class ScoreReader extends javax.swing.JFrame {
     private ScrollDemo originalPanel = new ScrollDemo();
     private ScrollDemo individualPanel = new ScrollDemo();
     private ScrollDemo segmentadosPanel = new ScrollDemo();
+    private ScrollDemo chartPanel = new ScrollDemo();
 
     public static String CAMINHO_DEFAULT = "C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\repository\\";
     public static String CAMINHO_TREINAMENTO = "C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\treinamentos\\";
@@ -181,7 +183,6 @@ public class ScoreReader extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Score Reader 1.0.0");
-        setMaximumSize(new java.awt.Dimension(1024, 768));
 
         jPanel4.setLayout(new java.awt.BorderLayout());
 
@@ -225,6 +226,11 @@ public class ScoreReader extends javax.swing.JFrame {
 
         SERVER.setText("http://localhost:8080/");
         SERVER.setToolTipText("Informe aqui o endereco do servidor onde roda o Classificador");
+        SERVER.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SERVERActionPerformed(evt);
+            }
+        });
         Main.add(SERVER, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 140, -1));
 
         jLabel2.setText("Fator Distancia:");
@@ -288,6 +294,8 @@ public class ScoreReader extends javax.swing.JFrame {
         Main.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+
+        caminho.setText("C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\repository\\Twinkle Twinkle Litlle Star Uma Barra de Compasso.png");
 
         jLabel11.setText("Caminho");
 
@@ -398,14 +406,19 @@ public class ScoreReader extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addComponent(processar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
                         .addComponent(Compilar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(23, 23, 23)
                         .addComponent(A, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
                         .addComponent(B, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
                         .addComponent(E, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
                         .addComponent(C, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
                         .addComponent(D, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -468,7 +481,6 @@ public class ScoreReader extends javax.swing.JFrame {
         jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         Container.setMaximumSize(new java.awt.Dimension(10, 10));
-        Container.setMinimumSize(new java.awt.Dimension(10, 10));
         Container.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -812,7 +824,7 @@ public class ScoreReader extends javax.swing.JFrame {
         fragments2.setMaximumSize(new java.awt.Dimension(10, 10));
         fragments2.setOpaque(false);
         fragments2.setPreferredSize(new java.awt.Dimension(10, 10));
-        fragments2.setLayout(new java.awt.GridLayout());
+        fragments2.setLayout(new java.awt.GridLayout(1, 0));
         treinamento.add(fragments2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 90, 790, 570));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -875,6 +887,7 @@ public class ScoreReader extends javax.swing.JFrame {
 
     private void processarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processarActionPerformed
 
+        processados.clear();
         Server.server = SERVER.getText();
         if (!FILE_NAME.getText().isEmpty()) {
             try {
@@ -913,6 +926,7 @@ public class ScoreReader extends javax.swing.JFrame {
                         }
                     }
                 }
+
                 //Determina o meio dos espacos da pauta
                 for (Clave clave : pautas) {
                     clave.calcularEspacos();//Pocessa espacos
@@ -989,7 +1003,7 @@ public class ScoreReader extends javax.swing.JFrame {
         try {
             scoreDir = parser.compile(FILE_NAME.getText(), processados);
             log_console("Codigo compilado com sucesso");
-            habilitarDesabilitarBotoes(true);
+            //habilitarDesabilitarBotoes(true);
         } catch (Exception e) {
             log_console("Falha ao Compilar Codigo ABC: \n" + e.getMessage());
         }
@@ -1066,7 +1080,7 @@ public class ScoreReader extends javax.swing.JFrame {
         try {
             log_console("Carregando modelo " + MODELO.getText());
             Utilities.carregarModelo(MODELO.getText());
-            log_console("Modelo ");
+            log_console("Modelo carregado");
         } catch (Exception e) {
             log_console("Falha ao ler modelo " + MODELO.getText());
         }
@@ -1130,7 +1144,31 @@ public class ScoreReader extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jToggleButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton5ActionPerformed
-        // TODO add your handling code here:
+        try {
+            HashMap parametros = new HashMap();
+            parametros.put("QT_SEMIBREVE", SEMIBREVE.getValue().toString());
+            parametros.put("QT_MINIMA", MINIMA.getValue().toString());
+            parametros.put("QT_SEMINIMA", SEMINIMA.getValue().toString());
+            parametros.put("QT_COLCHEIA", COLCHEIA.getValue().toString());
+            parametros.put("QT_SEMICOLCHEIA", SEMICOLCHEIA.getValue().toString());
+            parametros.put("QT_FUSA", FUSA.getValue().toString());
+            parametros.put("QT_SEMIFUSA", SEMIFUSA.getValue().toString());
+            parametros.put("QT_CLAVESOL", CLAVE_SOL.getValue().toString());
+            parametros.put("QT_CLAVEFA", CLAVE_FA.getValue().toString());
+            parametros.put("QT_CLAVEDO", CLAVE_DO.getValue().toString());
+            parametros.put("QT_FERMATA", FERMATA.getValue().toString());
+            parametros.put("QT_LIGADURA", LIGADURA.getValue().toString());
+            parametros.put("PAUSA_SEMIBREVE", PAUSA_SEMIBREVE.isSelected() ? "S" : "N");
+            parametros.put("PAUSA_MINIMA", PAUSA_MINIMAS.isSelected() ? "S" : "N");
+            parametros.put("PAUSA_SEMINIMA", PAUSA_SEMINIMA.isSelected() ? "S" : "N");
+            parametros.put("PAUSA_COLCHEIA", PAUSA_COLCHEIA.isSelected() ? "S" : "N");
+            parametros.put("PAUSA_SEMICOLCHEIA", PAUSA_SEMICOLCHEIA.isSelected() ? "S" : "N");
+            parametros.put("PAUSA_FUSA", PAUSA_FUSA.isSelected() ? "S" : "N");
+            parametros.put("PAUSA_SEMIFUSA", PAUSA_SEMIFUSA.isSelected() ? "S" : "N");
+            Utilities.treinarCustomizado(parametros);
+        } catch (Exception e) {
+            log_console(e.getMessage());
+        }
     }//GEN-LAST:event_jToggleButton5ActionPerformed
 
     private void jToggleButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton5MouseClicked
@@ -1146,7 +1184,7 @@ public class ScoreReader extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton5MouseClicked
 
     private void KActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_KActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
@@ -1211,6 +1249,7 @@ public class ScoreReader extends javax.swing.JFrame {
                         STATUS.setBackground(Color.GREEN);
                         processar.setEnabled(true);
                         resetar = "N";
+                        addImagemChart(CAMINHO_TREINAMENTO + "chart.png");
                         log_console("Arquivo gerado: !" + modelo);
                         log_console("Modelo treinado e carregado com sucesso!");
                     } catch (Exception e) {
@@ -1233,6 +1272,10 @@ public class ScoreReader extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void SERVERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SERVERActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SERVERActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1452,6 +1495,10 @@ public class ScoreReader extends javax.swing.JFrame {
         segmentadosPanel.addImagem(caminho, false);
     }
 
+    private void addImagemChart(String caminho) {
+        chartPanel.addImagem(caminho, true);
+    }
+
     private void loadPanels() {
         boundedPanel.setOpaque(true);
         barPanel.setOpaque(true);
@@ -1460,17 +1507,20 @@ public class ScoreReader extends javax.swing.JFrame {
         originalPanel.setOpaque(true);
         individualPanel.setOpaque(true);
         segmentadosPanel.setOpaque(true);
+        chartPanel.setOpaque(true);
         addImagemBounded(null);
         addImagemBar(null);
         addImagemNotes(null);
         addImagemOriginal(null);
         addImagemIndividual(null);
         addImagemSegmentados(null);
+        addImagemChart(null);
         bounded.add(boundedPanel);
         bars.add(barPanel);
         notes.add(notesPanel);
         original.add(originalPanel);
         individual.add(individualPanel);
         segmentados.add(segmentadosPanel);
+        fragments2.add(chartPanel);
     }
 }

@@ -4,9 +4,6 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="Score Reader 1.0.0"/>
-    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1024, 768]"/>
-    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -149,6 +146,9 @@
                         <Property name="text" type="java.lang.String" value="http://localhost:8080/"/>
                         <Property name="toolTipText" type="java.lang.String" value="Informe aqui o endereco do servidor onde roda o Classificador"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SERVERActionPerformed"/>
+                      </Events>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                           <AbsoluteConstraints x="100" y="130" width="140" height="-1"/>
@@ -312,15 +312,20 @@
                                       <Group type="102" attributes="0">
                                           <EmptySpace min="50" pref="50" max="-2" attributes="0"/>
                                           <Component id="processar" min="-2" pref="250" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                           <Component id="Compilar" min="-2" pref="120" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
                                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="23" pref="23" max="-2" attributes="0"/>
                                           <Component id="A" min="-2" pref="70" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                           <Component id="B" min="-2" pref="70" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                           <Component id="E" min="-2" pref="70" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                           <Component id="C" min="-2" pref="70" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                           <Component id="D" min="-2" pref="90" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -369,6 +374,9 @@
                       </Layout>
                       <SubComponents>
                         <Component class="javax.swing.JTextField" name="caminho">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="C:\u005cUsers\u005cascarneiro\u005cDesktop\u005cTCC\u005cScoreReader\u005crepository\u005cTwinkle Twinkle Litlle Star Uma Barra de Compasso.png" containsInvalidXMLChars="true"/>
+                          </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel11">
                           <Properties>
@@ -556,9 +564,6 @@
                         <Container class="javax.swing.JPanel" name="Container">
                           <Properties>
                             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                              <Dimension value="[10, 10]"/>
-                            </Property>
-                            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[10, 10]"/>
                             </Property>
                           </Properties>
