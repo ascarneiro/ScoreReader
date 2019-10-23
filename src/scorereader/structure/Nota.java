@@ -15,7 +15,7 @@ public class Nota {
     public double x = 0;
     public double y = 0;
     public double raio = 0;
-    public String nome = "undefined";
+    public String nome = "indeterminada";
 
     public Nota(int ordem, double x, double y, double raio) {
         this.ordem = ordem;

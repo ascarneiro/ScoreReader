@@ -107,7 +107,6 @@ class Server(object):
 
     image = self.convertToCvImage(imageEncoded)
     identificaNotas = utils.IdentificaNotas()
-    image = identificaNotas.melhorarImagem(image)
     return json.dumps(identificaNotas.detectarPontosNotas(image))
 
 

@@ -20,6 +20,7 @@ public class Figura {
     public String base64Image;
     public String tipo;
     public boolean note = false;
+    public int diff = 0;
     public Nota nota = null;
     public String fileName = "";
 

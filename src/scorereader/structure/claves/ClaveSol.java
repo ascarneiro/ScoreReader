@@ -8,6 +8,7 @@ package scorereader.structure.claves;
 import java.util.HashMap;
 import java.util.Map;
 import scorereader.abc.ABC_NOTATION;
+import scorereader.structure.Figura;
 import scorereader.structure.Linha;
 
 /**
@@ -75,6 +76,13 @@ public class ClaveSol extends Clave {
 
     @Override
     public void addLinha(int numero, Linha linha) {
+        if (linha.y < minimo) {
+            minimo = linha.y;
+        }
+
+        if (linha.y > maximo) {
+            maximo = linha.y;
+        }
         linhas.put(Linha.idLinha[numero - 1], linha);
     }
 
@@ -82,5 +90,6 @@ public class ClaveSol extends Clave {
     public Linha getLinha(String numero) {
         return linhas.get(numero);
     }
+
 
 }

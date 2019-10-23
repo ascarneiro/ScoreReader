@@ -21,6 +21,7 @@ import org.apache.batik.transcoder.TranscoderOutput;
 import org.apache.fop.svg.PDFTranscoder;
 
 import scorereader.structure.Figura;
+import scorereader.structure.claves.Clave;
 
 public class Parser {
 
@@ -149,8 +150,8 @@ public class Parser {
         return fileXHTML;
     }
 
-    public String[] compile(String filename, ArrayList<Figura> elementos) {
-        StringBuilder score = make(filename, elementos);
+    public String[] compile(String filename, ArrayList<Clave> pautas) {
+        StringBuilder score = make(filename, pautas);
         abcFile = makeABCFile(score);
         fileSvg = exportSVG(abcFile);
         fileXHTML = exportXHTML(abcFile);
@@ -160,14 +161,14 @@ public class Parser {
         return new String[]{abcFile, fileSvg, fileMidi};
     }
 
-    private StringBuilder make(String fileName, ArrayList<Figura> elementos) {
+    private StringBuilder make(String fileName, ArrayList<Clave> pautas) {
         score = new StringBuilder();
         score.append("X: 1").append(getTitulo(fileName)).append("\n");
         score.append(ABC_NOTATION.TITULO).append(" ").append(getTitulo(fileName)).append("\n");
-        score.append(ABC_NOTATION.COMPOSITOR).append(" ").append(getCompositor(elementos)).append("\n");
-        score.append(ABC_NOTATION.TONALIDADE).append(" ").append(getTonalidade(elementos)).append("\n");
-        score.append(ABC_NOTATION.MEDIDA).append(" ").append(getMedida(elementos)).append("\n");
-        score.append(getMusica(elementos));
+        score.append(ABC_NOTATION.COMPOSITOR).append(" ").append(getCompositor()).append("\n");
+        score.append(ABC_NOTATION.TONALIDADE).append(" ").append(getTonalidade()).append("\n");
+        score.append(ABC_NOTATION.MEDIDA).append(" ").append(getMedida()).append("\n");
+        score.append(getMusica(pautas));
 
         return score;
     }
@@ -177,42 +178,30 @@ public class Parser {
         return dsTitulo.replace(".png", "").substring(0, 50);
     }
 
-    private String getCompositor(ArrayList<Figura> elementos) {
+    private String getCompositor() {
         return "Trasncrypt by ScoreReader";
     }
 
     //Fixo por enquanto testar compilador
-    private String getMedida(ArrayList<Figura> elementos) {
+    private String getMedida() {
         return "4/4";
     }
 
     //Fixo por enquanto testar compilador
-    private String getTonalidade(ArrayList<Figura> elementos) {
+    private String getTonalidade() {
         return "D";
     }
 
     //Fixo por enquanto testar compilador
-    private String getMusica(ArrayList<Figura> elementos) {
+    private String getMusica(ArrayList<Clave> pautas) {
         StringBuilder abcCode = new StringBuilder();
 
-//        int quebrarEmCompasssos = Parser.quebrarEmCompassos;
-//        int tempo = 4;
-        for (int i = 1; i < elementos.size(); i++) {
-            Figura elemento = elementos.get(i);
-
-//            tempo--;
-            abcCode.append(elemento.getNota().nome).append(getTipo(elemento));
-//            if (tempo == 0) {
-//                abcCode.append(ABC_NOTATION.BARRA_COMPASSO);
-//                quebrarEmCompasssos--;
-//                tempo = 4;
-//            }
-
-//            if (quebrarEmCompasssos == 0) {
-//                abcCode.append("\n");
-//                quebrarEmCompasssos = Parser.quebrarEmCompassos;
-//            }
+        for (Clave pauta : pautas) {
+            for (Figura elemento : pauta.getFigurasPauta()) {
+                abcCode.append(elemento.getNota().nome).append(getTipo(elemento));
+            }
         }
+
         abcCode.append(ABC_NOTATION.FINAL);
 
         return abcCode.toString();

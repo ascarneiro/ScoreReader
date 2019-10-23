@@ -46,8 +46,7 @@ public class ScoreReader extends javax.swing.JFrame {
     public static String CAMINHO_NOTAS = "C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\notas\\";
     public String[] scoreDir = new String[]{""};
     public String resetar = "S";
-    //Reconhecer os elementos
-    ArrayList<Figura> processados = new ArrayList<Figura>();
+    private ArrayList<Clave> pautas = new ArrayList<>();
     //Compilar os elementos
     Parser parser = new Parser();
 
@@ -60,6 +59,7 @@ public class ScoreReader extends javax.swing.JFrame {
         initComponents();
         loadPanels();
         addImagemOriginal(FILE_NAME.getText());
+        loadModelo();
 
     }
 
@@ -91,9 +91,6 @@ public class ScoreReader extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        caminho = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jToggleButton4 = new javax.swing.JToggleButton();
         jLabel9 = new javax.swing.JLabel();
         MODELO = new javax.swing.JTextField();
@@ -217,14 +214,14 @@ public class ScoreReader extends javax.swing.JFrame {
         });
         Main.add(jToggleButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 210, 60, -1));
 
-        FILE_NAME.setText("C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\repository\\Twinkle Twinkle Litlle Star Uma Barra de Compasso.png");
+        FILE_NAME.setText("C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\repository\\Twinkle Twinkle Litlle Star 2 Barras.png");
         FILE_NAME.setToolTipText("Caminho do arquivo de imagem de partitura");
         Main.add(FILE_NAME, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 370, -1));
 
         jLabel1.setText("Arquivo:");
         Main.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 49, -1));
 
-        SERVER.setText("http://localhost:8080/");
+        SERVER.setText("http://localhost:8090/");
         SERVER.setToolTipText("Informe aqui o endereco do servidor onde roda o Classificador");
         SERVER.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,7 +233,7 @@ public class ScoreReader extends javax.swing.JFrame {
         jLabel2.setText("Fator Distancia:");
         Main.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, -1, 20));
 
-        FATOR.setText("2");
+        FATOR.setText("3");
         FATOR.setToolTipText("Informe aqui um fator para calulo da altura das linhas");
         Main.add(FATOR, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 20, -1));
 
@@ -259,6 +256,7 @@ public class ScoreReader extends javax.swing.JFrame {
             }
         });
 
+        debugImages.setSelected(true);
         debugImages.setText("Imagens");
         debugImages.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -294,17 +292,7 @@ public class ScoreReader extends javax.swing.JFrame {
         Main.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
-
-        caminho.setText("C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\repository\\Twinkle Twinkle Litlle Star Uma Barra de Compasso.png");
-
-        jLabel11.setText("Caminho");
-
-        jButton1.setText("...");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jToggleButton4.setText("...");
         jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -312,14 +300,18 @@ public class ScoreReader extends javax.swing.JFrame {
                 jToggleButton4ActionPerformed(evt);
             }
         });
+        jPanel2.add(jToggleButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 83, 57, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Score Reader 1.0.0");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 13, 390, -1));
 
         MODELO.setText("__KNN_PADRAO");
+        jPanel2.add(MODELO, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 84, 370, -1));
 
         jLabel3.setText("Modelo");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 87, -1, -1));
 
         processar.setText("Processar Conteudo Partitura");
         processar.setToolTipText("Faz o processamento dos elementos da pauta");
@@ -328,6 +320,7 @@ public class ScoreReader extends javax.swing.JFrame {
                 processarActionPerformed(evt);
             }
         });
+        jPanel2.add(processar, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 223, 250, 30));
 
         Compilar.setText("Compilar");
         Compilar.setToolTipText("Compila o codigo ABC gerado pela acao do botao processar nos formatos (XHTML, SVG, PDF e MIDI)");
@@ -336,8 +329,10 @@ public class ScoreReader extends javax.swing.JFrame {
                 CompilarActionPerformed(evt);
             }
         });
+        jPanel2.add(Compilar, new org.netbeans.lib.awtextra.AbsoluteConstraints(339, 223, 120, 30));
 
         jLabel6.setText("Abrir:");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 273, -1, 10));
 
         A.setText("ABC");
         A.setToolTipText("Abre arquivo ABC gerado");
@@ -346,6 +341,7 @@ public class ScoreReader extends javax.swing.JFrame {
                 AActionPerformed(evt);
             }
         });
+        jPanel2.add(A, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 263, 70, 30));
 
         B.setText("XHTML");
         B.setToolTipText("Abre arquivo XHTML gerado");
@@ -354,6 +350,7 @@ public class ScoreReader extends javax.swing.JFrame {
                 BActionPerformed(evt);
             }
         });
+        jPanel2.add(B, new org.netbeans.lib.awtextra.AbsoluteConstraints(159, 263, 70, 30));
 
         E.setText("SVG");
         E.setToolTipText("Abre arquivo SVG gerado");
@@ -362,6 +359,7 @@ public class ScoreReader extends javax.swing.JFrame {
                 EActionPerformed(evt);
             }
         });
+        jPanel2.add(E, new org.netbeans.lib.awtextra.AbsoluteConstraints(229, 263, 70, 30));
 
         C.setText("PDF");
         C.setToolTipText("Abre arquivo PDF gerado");
@@ -370,6 +368,7 @@ public class ScoreReader extends javax.swing.JFrame {
                 CActionPerformed(evt);
             }
         });
+        jPanel2.add(C, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 263, 70, 30));
 
         D.setText("MIDI");
         D.setToolTipText("Abre arquivo MIDI gerado");
@@ -378,83 +377,9 @@ public class ScoreReader extends javax.swing.JFrame {
                 DActionPerformed(evt);
             }
         });
+        jPanel2.add(D, new org.netbeans.lib.awtextra.AbsoluteConstraints(369, 263, 90, 30));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(MODELO, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(caminho, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(70, 70, 70))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(processar, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(Compilar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(23, 23, 23)
-                        .addComponent(A, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(B, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(E, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(C, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(D, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(MODELO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jToggleButton4))
-                .addGap(7, 7, 7)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(caminho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11)
-                    .addComponent(jButton1))
-                .addGap(115, 115, 115)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(processar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Compilar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(A, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(B, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(E, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(C, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(D, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(327, Short.MAX_VALUE))
-        );
-
-        Main.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 540, 630));
+        Main.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 540, 580));
 
         original.setBackground(new java.awt.Color(255, 255, 255));
         original.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "Imagem original ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
@@ -462,7 +387,7 @@ public class ScoreReader extends javax.swing.JFrame {
         original.setOpaque(false);
         original.setPreferredSize(new java.awt.Dimension(10, 10));
         original.setLayout(new java.awt.BorderLayout());
-        Main.add(original, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 10, 980, 630));
+        Main.add(original, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 10, 980, 580));
 
         jToggleButton10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jToggleButton10.setText("Clear console");
@@ -472,7 +397,7 @@ public class ScoreReader extends javax.swing.JFrame {
                 jToggleButton10ActionPerformed(evt);
             }
         });
-        Main.add(jToggleButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 130, 30));
+        Main.add(jToggleButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 590, 130, 30));
 
         Panels.addTab("Image", Main);
 
@@ -847,7 +772,6 @@ public class ScoreReader extends javax.swing.JFrame {
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
         try {
-            processados.clear();
             //Carregar imagem   
             JFileChooser jfc = new JFileChooser(CAMINHO_DEFAULT);
             if (jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
@@ -887,14 +811,13 @@ public class ScoreReader extends javax.swing.JFrame {
 
     private void processarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processarActionPerformed
 
-        processados.clear();
         Server.server = SERVER.getText();
         if (!FILE_NAME.getText().isEmpty()) {
             try {
                 int fator = Integer.parseInt(FATOR.getText());
                 byte[] originalImage = Files.readAllBytes(new File(FILE_NAME.getText()).toPath());
 
-                //Remove linhas da pauta
+                //Remove linhas da pauta    
                 byte[] imageData = Utilities.removerLinhasDaPauta(originalImage);
 
                 //Converte 
@@ -906,67 +829,47 @@ public class ScoreReader extends javax.swing.JFrame {
                 ArrayList<Figura> figuras = Utilities.segmentar(imagemCinza, imageCopy);
                 for (Figura figura : figuras) {
                     addImagemSegmentados(figura.fileName);
-                    Figura classificada = Utilities.classificar(figura, Integer.parseInt(K.getText()));
-                    figura.setTipo(classificada.getTipo());
                 }
 
                 //Etapa obtem informacoes relativas a pauta, Linhas, Posicao das linhas etc
-                ArrayList<Clave> pautas = Utilities.obterInformacoesPautas(originalImage);
-                ArrayList<Nota> notas = Utilities.detectarAlturaNotas(imagemSemLinhas);
-
-                //Determina se trata-se de uma nota musical ou n?o com base na posi??o X das notas musicais
-                for (Figura figura : figuras) {
-                    for (Nota nota : notas) {
-                        //Determina a distancia entre os pontos
-                        int diff = Math.abs((int) (nota.x - figura.x));
-                        //Caso a tolerancia seja
-                        if (diff < 3) {
-                            figura.nota = nota;
-                            break;
-                        }
-                    }
-                }
+                this.pautas = Utilities.obterInformacoesPautas(originalImage);
 
                 //Determina o meio dos espacos da pauta
                 for (Clave clave : pautas) {
                     clave.calcularEspacos();//Pocessa espacos
                 }
 
-                for (Figura figura : figuras) {
-                    if (figura.isNotaMusical()) {
-                        for (Clave pauta : pautas) {
-
-                            for (int i = 1; i <= pauta.getLinhas().size(); i++) {
-
-                                Linha linha = pauta.getLinha(String.valueOf(i));
-                                int diff = ((int) (figura.nota.y - linha.y));
-                                int variacao = Math.abs(diff);
-                                if (variacao < fator) {//Diferenca for de menos de 2 pixels
-                                    figura.nota.nome = pauta.getNomeNota(linha.index);
-                                    processados.add(figura);
-                                } else {
-                                    diff = ((int) (figura.nota.y - linha.yEspacoAbaixo));
-                                    variacao = Math.abs(diff);
-                                    if (variacao < fator) {
-                                        //Pegar nota acima da pauta
-                                        figura.nota.nome = pauta.getNomeNotaAbaixo(linha.index);
-                                        processados.add(figura);
-                                    } else {
-                                        diff = ((int) (figura.nota.y - linha.yEspacoAcima));
-                                        variacao = Math.abs(diff);
-                                        //Pegar nota acima da pauta
-                                        if (variacao < fator) {
-                                            figura.nota.nome = pauta.getNomeNotaAcima(linha.index);
-                                            processados.add(figura);
-                                        }
-                                    }
-                                }
-                            }
-
+                //Adiciona as figuras que pertencem a pauta
+                for (Clave pauta : pautas) {
+                    for (Figura figura : figuras) {
+                        if (pauta.figuraDentroDaPauta(figura)) {
+                            pauta.addFiguraPauta(figura);
                         }
                     }
+                }
+
+                ArrayList<Nota> notas = Utilities.detectarAlturaNotas(imagemSemLinhas);
+                for (Clave pauta : pautas) {
+                    for (Nota nota : notas) {
+                        if (pauta.notaDentroDaPauta(nota)) {
+                            pauta.addNotaPauta(nota);
+                        }
+                    }
+                }
+
+                for (Clave clave : pautas) {
+                    clave.determinarNotasPauta();
 
                 }
+
+                for (Clave clave : pautas) {
+                    clave.determinarAlturaNotasPauta();
+                }
+                
+                for (Clave clave : pautas) {
+                    clave.classificarFiguras(K.getText());
+                }
+                
 
                 loadFragments();
                 loadBounded();
@@ -975,6 +878,7 @@ public class ScoreReader extends javax.swing.JFrame {
                 log_console("Partitura processada com sucesso....");
 
             } catch (Exception e) {
+                e.printStackTrace();
                 habilitarDesabilitarBotoes(false);
                 STATUS.setBackground(Color.ORANGE);
                 log_console("Falha ao processar elementos da partitura: \n" + e.getMessage());
@@ -1001,7 +905,7 @@ public class ScoreReader extends javax.swing.JFrame {
 
     private void CompilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompilarActionPerformed
         try {
-            scoreDir = parser.compile(FILE_NAME.getText(), processados);
+            scoreDir = parser.compile(FILE_NAME.getText(), pautas);
             log_console("Codigo compilado com sucesso");
             //habilitarDesabilitarBotoes(true);
         } catch (Exception e) {
@@ -1077,13 +981,7 @@ public class ScoreReader extends javax.swing.JFrame {
     }//GEN-LAST:event_debugFIlesActionPerformed
 
     private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
-        try {
-            log_console("Carregando modelo " + MODELO.getText());
-            Utilities.carregarModelo(MODELO.getText());
-            log_console("Modelo carregado");
-        } catch (Exception e) {
-            log_console("Falha ao ler modelo " + MODELO.getText());
-        }
+        loadModelo();
     }//GEN-LAST:event_jToggleButton4ActionPerformed
 
     private void PanelsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_PanelsStateChanged
@@ -1219,18 +1117,6 @@ public class ScoreReader extends javax.swing.JFrame {
     private void CAMINHOMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CAMINHOMouseClicked
         resetar = "S";
     }//GEN-LAST:event_CAMINHOMouseClicked
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            JFileChooser jfc = new JFileChooser(CAMINHO_TREINAMENTO);
-            if (jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                CAMINHO.setText(jfc.getSelectedFile().toPath().toString());
-            }
-        } catch (Exception e) {
-            log_console("Falha ao carregar arquivo de treinamento :\n" + e.getMessage());
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
@@ -1376,19 +1262,16 @@ public class ScoreReader extends javax.swing.JFrame {
     private javax.swing.JTextField STATUS;
     private javax.swing.JPanel bars;
     private javax.swing.JPanel bounded;
-    private javax.swing.JTextField caminho;
     private javax.swing.JCheckBox debugFIles;
     private javax.swing.JCheckBox debugImages;
     private javax.swing.JPanel fragmentos;
     private javax.swing.JPanel fragments2;
     private javax.swing.JPanel individual;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -1450,22 +1333,29 @@ public class ScoreReader extends javax.swing.JFrame {
         try {
 
             individualPanel.limpar();
-            int qt = (processados.size() / 2) - 1;
-            for (int i = 0; i < processados.size(); i++) {
-                Figura processado = processados.get(i);
-                String s = "Index: " + i + " Nota: " + processado.nota.nome + " Tipo: " + processado.tipo;
-                System.out.println(s);
+            int i = 0;
+            for (Clave pauta : pautas) {
 
-                log_console(s);
-                if (processado.isNotaMusical()) {
-                    ByteArrayInputStream bais = new ByteArrayInputStream(processado.getImage());
-                    BufferedImage read = ImageIO.read(bais);
-                    File f = new File(CAMINHO_NOTAS + i + ".png");
-                    ImageIO.write(read, "PNG", f);
-                    addImagemIndividual(f.getAbsolutePath());
+                for (Figura figura : pauta.getFigurasPauta()) {
+                    if (figura.isNotaMusical()) {
+                        String s = "Index: " + i + " Nota: " + figura.nota.nome + " Tipo: " + figura.tipo;
+                        System.out.println(s);
+
+                        log_console(s);
+                        if (figura.isNotaMusical()) {
+                            ByteArrayInputStream bais = new ByteArrayInputStream(figura.getImage());
+                            BufferedImage read = ImageIO.read(bais);
+                            File f = new File(CAMINHO_NOTAS + i + ".png");
+                            ImageIO.write(read, "PNG", f);
+                            addImagemIndividual(f.getAbsolutePath());
+                        }
+                        i++;
+                    }
                 }
+
             }
         } catch (Exception e) {
+            e.printStackTrace();
             log_console("Falha ao carregar imagens");
         }
     }
@@ -1522,5 +1412,17 @@ public class ScoreReader extends javax.swing.JFrame {
         individual.add(individualPanel);
         segmentados.add(segmentadosPanel);
         fragments2.add(chartPanel);
+    }
+
+    private void loadModelo() {
+        try {
+            Server.server = SERVER.getText();
+            log_console("Carregando modelo " + MODELO.getText());
+            Utilities.carregarModelo(MODELO.getText());
+            log_console("Modelo carregado");
+        } catch (Exception e) {
+            log_console("Falha ao ler modelo " + MODELO.getText());
+        }
+
     }
 }

@@ -89,7 +89,7 @@ public class Utilities {
                 bb.width(bb.width());
                 bb.height(bb.height());
 //                if (DEBUG_VALUES) {
-                cvRectangleR(imagemBB, bb, CV_RGB(0, 255, 0), 1, 8, 0);
+               // cvRectangleR(imagemBB, bb, CV_RGB(0, 255, 0), 1, 8, 0);
 //                }
 
 //                if (DEBUG_VALUES) {
@@ -224,8 +224,9 @@ public class Utilities {
         String path = "C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\repository\\staffless.png";
         //ImageIO.write(bfImage, "PNG", new File(path));
         opencv_core.IplImage cvLoadImage = cvLoadImage(path, CV_LOAD_IMAGE_ANYCOLOR);
-        cvErode(cvLoadImage, cvLoadImage, null, 1);
-//        cvDilate(cvLoadImage, cvLoadImage, null, 2);
+        cvErode(cvLoadImage, cvLoadImage, null, 2);
+        cvDilate(cvLoadImage, cvLoadImage, null, 1);
+        cvSaveImage(path, new opencv_core.IplImage(cvLoadImage));
         return cvLoadImage;
     }
 
@@ -257,7 +258,7 @@ public class Utilities {
             byte[] data = bufferedImageToByteArray(image);
             String base64Image = Base64.getEncoder().encodeToString(data);
 
-            Figura fig = new Figura(crop.x, crop.y, crop.h, crop.w, data, base64Image, "undefined-yet");
+            Figura fig = new Figura(crop.x, crop.y, crop.h, crop.w, data, base64Image, "indeterminada");
             fig.fileName = crop.fileName;
             elementos.add(fig);
         }
