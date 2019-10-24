@@ -184,10 +184,10 @@ public class Parser {
     private String getElementos(ArrayList<Clave> pautas) {
         StringBuilder abcCode = new StringBuilder();
 
-        int qt = 0;
+        int qtQuebra = 0;
         for (Clave pauta : pautas) {
 
-            String armaduraClave = getElementoArmaduraClave(pauta.getFigurasPauta());
+            String armaduraClave = getElementoArmaduraClave(pauta);
             abcCode.append(armaduraClave);
 
             for (Figura elemento : pauta.getFigurasPauta()) {
@@ -200,11 +200,11 @@ public class Parser {
                         tipo = getTipoFigura(elemento);
                     }
                     abcCode.append(tipo);
-                    qt++;
+                    qtQuebra++;
                 }
-                if (qt == 3) {
+                if (qtQuebra == 3) {
                     abcCode.append("\n");
-                    qt = 0;
+                    qtQuebra = 0;
                 }
 
             }
@@ -230,7 +230,7 @@ public class Parser {
         return ABC_NOTATION.PAUSA_COLCHEIA;
     }
 
-    private String getElementoArmaduraClave(ArrayList<Figura> figuras) {
+    private String getElementoArmaduraClave(Clave pauta) {
         StringBuilder armadura = new StringBuilder();
         int qtSustenidos = 0;
         int qtBemois = 0;
@@ -238,7 +238,7 @@ public class Parser {
         String clave = "C";
         String tonalidade = "C";
 
-        for (Figura figura : figuras) {
+        for (Figura figura : pauta.getFigurasPauta()) {
             //Quando encontrar a primeira nota musical cai fora pois acabou a armadura
             if (figura.isNotaMusical()) {
                 break;
@@ -255,7 +255,7 @@ public class Parser {
                 qtBemois++;
             } else if ("tempo".equalsIgnoreCase(figura.tipo)) {
                 //Ver regra tempo, fracao e caracter C
-                tempo = "4/4";
+                tempo = "4/4"; //Seguir nomenclatura fracoes
             }
         }
 
