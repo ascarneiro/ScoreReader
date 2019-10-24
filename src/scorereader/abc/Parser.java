@@ -262,7 +262,7 @@ public class Parser {
         if (qtSustenidos > qtBemois) {
             tonalidade = ABC_NOTATION.TONALIDADE_SUSTENIDO[qtSustenidos];
         } else {
-            tonalidade = ABC_NOTATION.TONALIDADE_BEMOL[qtSustenidos];
+            tonalidade = ABC_NOTATION.TONALIDADE_BEMOL[qtBemois];
         }
 
         armadura.append(ABC_NOTATION.TONALIDADE_E_CLAVE).append(ABC_NOTATION.TONALIDADE_SUSTENIDO[0]);//Do Maior

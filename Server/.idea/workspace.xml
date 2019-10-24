@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df176199-7e82-4001-a2bd-aa7f5aacb6c8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/abc/ABC_NOTATION.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/abc/ABC_NOTATION.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/abc/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/abc/Parser.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -322,7 +323,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.36507937" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49867234" visible="true" weight="0.40206185" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49867234" weight="0.40206185" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Terminal" order="6" sideWeight="0.4992034" weight="0.74458873" />
