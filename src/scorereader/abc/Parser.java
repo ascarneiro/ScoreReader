@@ -179,7 +179,7 @@ public class Parser {
     }
 
     private String getCompositor() {
-        return "Trasncrypt by ScoreReader";
+        return "Transcrito por prototipo Score Reader \n Alan Soares Carneiro";
     }
 
     //Fixo por enquanto testar compilador
@@ -196,9 +196,20 @@ public class Parser {
     private String getMusica(ArrayList<Clave> pautas) {
         StringBuilder abcCode = new StringBuilder();
 
+        int qt = 0;
         for (Clave pauta : pautas) {
             for (Figura elemento : pauta.getFigurasPauta()) {
-                abcCode.append(elemento.getNota().nome).append(getTipo(elemento));
+                if (elemento.isNotaMusical()) {
+                    abcCode.append(elemento.getNota().nome).append(getTipo(elemento));
+                } else {
+                    abcCode.append(ABC_NOTATION.BARRA_COMPASSO);
+                    qt++;
+                }
+                if (qt == 3) {
+                    abcCode.append("\n");
+                    qt = 0;
+                }
+
             }
         }
 
@@ -214,8 +225,10 @@ public class Parser {
             return ABC_NOTATION.SEMINIMA;
         } else if ("BarraCompasso".equalsIgnoreCase(elemento.tipo)) {
             return ABC_NOTATION.BARRA_COMPASSO;
+        } else if ("PausaColcheia".equalsIgnoreCase(elemento.tipo)) {
+            return ABC_NOTATION.BARRA_COMPASSO;
         }
-        return "Desconhecido";
+        return ABC_NOTATION.BARRA_COMPASSO;
     }
 
 }

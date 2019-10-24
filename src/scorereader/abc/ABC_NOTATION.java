@@ -55,7 +55,10 @@ public class ABC_NOTATION {
     public static final String SEMINIMA = "2";
     public static final String MINIMA = "4";
 
+    public static final String PAUSA_COLCHEIA = "z2";
+    
     public static final String BARRA_COMPASSO = "|";
+    public static final String INICIO = "[";
     public static final String FINAL = "]";
     public static final String BARRA_INICIO_RETONELLO = "|:";
     public static final String BARRA_FIM_RETONELO = ":|";
