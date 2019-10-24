@@ -166,16 +166,14 @@ public class Parser {
         score.append("X: 1").append(getTitulo(fileName)).append("\n");
         score.append(ABC_NOTATION.TITULO).append(" ").append(getTitulo(fileName)).append("\n");
         score.append(ABC_NOTATION.COMPOSITOR).append(" ").append(getCompositor()).append("\n");
-        score.append(ABC_NOTATION.TONALIDADE).append(" ").append(getTonalidade()).append("\n");
-        score.append(ABC_NOTATION.MEDIDA).append(" ").append(getMedida()).append("\n");
-        score.append(getMusica(pautas));
+        score.append(getElementos(pautas));
 
         return score;
     }
 
     //Fixo por enquanto testar compilador
     private String getTitulo(String dsTitulo) {
-        return dsTitulo.replace(".png", "").substring(0, 50);
+        return "Exemplo ScoreReader";
     }
 
     private String getCompositor() {
@@ -183,26 +181,25 @@ public class Parser {
     }
 
     //Fixo por enquanto testar compilador
-    private String getMedida() {
-        return "4/4";
-    }
-
-    //Fixo por enquanto testar compilador
-    private String getTonalidade() {
-        return "D";
-    }
-
-    //Fixo por enquanto testar compilador
-    private String getMusica(ArrayList<Clave> pautas) {
+    private String getElementos(ArrayList<Clave> pautas) {
         StringBuilder abcCode = new StringBuilder();
 
         int qt = 0;
         for (Clave pauta : pautas) {
+
+            String armaduraClave = getElementoArmaduraClave(pauta.getFigurasPauta());
+            abcCode.append(armaduraClave);
+
             for (Figura elemento : pauta.getFigurasPauta()) {
                 if (elemento.isNotaMusical()) {
-                    abcCode.append(elemento.getNota().nome).append(getTipo(elemento));
+                    abcCode.append(elemento.getNota().nome).append(getTipoNota(elemento));
                 } else {
-                    abcCode.append(ABC_NOTATION.BARRA_COMPASSO);
+
+                    String tipo = getTipoPausa(elemento);
+                    if (tipo.isEmpty()) {
+                        tipo = getTipoFigura(elemento);
+                    }
+                    abcCode.append(tipo);
                     qt++;
                 }
                 if (qt == 3) {
@@ -218,17 +215,90 @@ public class Parser {
         return abcCode.toString();
     }
 
-    private String getTipo(Figura elemento) {
-        if ("Minima".equalsIgnoreCase(elemento.tipo)) {
+    private String getTipoPausa(Figura elemento) {
+        if ("PausaSemibreve".equalsIgnoreCase(elemento.tipo)) {
+            return ABC_NOTATION.PAUSA_SEMIBREVE;
+        } else if ("PausaMinima".equalsIgnoreCase(elemento.tipo)) {
+            return ABC_NOTATION.PAUSA_MINIMA;
+        } else if ("PausaSeminima".equalsIgnoreCase(elemento.tipo)) {
+            return ABC_NOTATION.PAUSA_SEMINIMA;
+        } else if ("PausaColcheia".equalsIgnoreCase(elemento.tipo)) {
+            return ABC_NOTATION.PAUSA_COLCHEIA;
+        } else if ("PausaSemiColcheia".equalsIgnoreCase(elemento.tipo)) {
+            return ABC_NOTATION.PAUSA_SEMICOLCHEIA;
+        }
+        return ABC_NOTATION.PAUSA_COLCHEIA;
+    }
+
+    private String getElementoArmaduraClave(ArrayList<Figura> figuras) {
+        StringBuilder armadura = new StringBuilder();
+        int qtSustenidos = 0;
+        int qtBemois = 0;
+        String tempo = "4/4";
+        String clave = "C";
+        String tonalidade = "C";
+
+        for (Figura figura : figuras) {
+            //Quando encontrar a primeira nota musical cai fora pois acabou a armadura
+            if (figura.isNotaMusical()) {
+                break;
+            }
+            if ("claveSol".equalsIgnoreCase(figura.tipo)) {
+                clave = ABC_NOTATION.CLAVE_SOL;
+            } else if ("claveFa".equalsIgnoreCase(figura.tipo)) {
+                clave = ABC_NOTATION.CLAVE_FA;
+            } else if ("claveDo".equalsIgnoreCase(figura.tipo)) {
+                clave = ABC_NOTATION.CLAVE_DO;
+            } else if ("sustenido".equalsIgnoreCase(figura.tipo)) {
+                qtSustenidos++;
+            } else if ("Bemol".equalsIgnoreCase(figura.tipo)) {
+                qtBemois++;
+            } else if ("tempo".equalsIgnoreCase(figura.tipo)) {
+                //Ver regra tempo, fracao e caracter C
+                tempo = "4/4";
+            }
+        }
+
+        if (qtSustenidos > qtBemois) {
+            tonalidade = ABC_NOTATION.TONALIDADE_SUSTENIDO[qtSustenidos];
+        } else {
+            tonalidade = ABC_NOTATION.TONALIDADE_BEMOL[qtSustenidos];
+        }
+
+        armadura.append(ABC_NOTATION.TONALIDADE_E_CLAVE).append(ABC_NOTATION.TONALIDADE_SUSTENIDO[0]);//Do Maior
+        armadura.append("[").append(ABC_NOTATION.TONALIDADE_E_CLAVE).append(tonalidade).append(" ").append(clave).append("]");
+        armadura.append(ABC_NOTATION.MEDIDA).append(tempo);
+
+        return armadura.toString();
+    }
+
+    private String getTipoFigura(Figura elemento) {
+        if ("BarraCompasso".equalsIgnoreCase(elemento.tipo)) {
+            return ABC_NOTATION.BARRA_COMPASSO;
+        } else if ("Sustenido".equalsIgnoreCase(elemento.tipo)) {
+            return ABC_NOTATION.SUSTENIDO;
+        } else if ("Bemol".equalsIgnoreCase(elemento.tipo)) {
+            return ABC_NOTATION.BEMOL;
+        } else if ("Bequadro".equalsIgnoreCase(elemento.tipo)) {
+            return ABC_NOTATION.BEQUADRO;
+
+        }
+        return "";
+    }
+
+    private String getTipoNota(Figura elemento) {
+        if ("Semibreve".equalsIgnoreCase(elemento.tipo)) {
+            return ABC_NOTATION.SEMIBREVE;
+        } else if ("Minima".equalsIgnoreCase(elemento.tipo)) {
             return ABC_NOTATION.MINIMA;
         } else if ("Seminima".equalsIgnoreCase(elemento.tipo)) {
             return ABC_NOTATION.SEMINIMA;
-        } else if ("BarraCompasso".equalsIgnoreCase(elemento.tipo)) {
-            return ABC_NOTATION.BARRA_COMPASSO;
-        } else if ("PausaColcheia".equalsIgnoreCase(elemento.tipo)) {
-            return ABC_NOTATION.BARRA_COMPASSO;
+        } else if ("Colcheia".equalsIgnoreCase(elemento.tipo)) {
+            return ABC_NOTATION.COLCHEIA;
+        } else if ("SemiColcheia".equalsIgnoreCase(elemento.tipo)) {
+            return ABC_NOTATION.SEMICOLCHEIA;
         }
-        return ABC_NOTATION.BARRA_COMPASSO;
+        return ABC_NOTATION.SEMINIMA;
     }
 
 }

@@ -11,6 +11,13 @@ package scorereader.abc;
  */
 public class ABC_NOTATION {
 
+    public static final String[] TONALIDADE_SUSTENIDO = new String[]{"C", "G", "D", "A", "E", "B", "F#", "C#"};
+    public static final String[] TONALIDADE_BEMOL = new String[]{"C", "F", "Bb", "Eb", "Ab", "Db", "Gb", "Cb"};
+    
+    public static final String CLAVE_SOL = "treble";
+    public static final String CLAVE_FA = "bass";
+    public static final String CLAVE_DO = "alto";
+    
     //SUPLEMENTARES INFERIORES
     public static final String __LA = "A,";
     public static final String __SI = "B,";
@@ -48,14 +55,26 @@ public class ABC_NOTATION {
     public static final String SOL__ = "g'";
 
     public static final String TITULO = "T:";
-    public static final String TONALIDADE = "K:";
+    public static final String TONALIDADE_E_CLAVE = "K:";
     public static final String MEDIDA = "M:";
     public static final String COMPOSITOR = "C:";
 
+    public static final String SEMIBREVE = "1";
     public static final String SEMINIMA = "2";
     public static final String MINIMA = "4";
+    public static final String COLCHEIA = "8";
+    public static final String SEMICOLCHEIA = "16";
 
-    public static final String PAUSA_COLCHEIA = "z2";
+    public static final String PAUSA_SEMIBREVE = "z1";
+    public static final String PAUSA_SEMINIMA = "z2";
+    public static final String PAUSA_MINIMA = "z4";
+    public static final String PAUSA_COLCHEIA = "z8";
+    public static final String PAUSA_SEMICOLCHEIA = "z16";
+
+
+    public static final String BEMOL = "_";
+    public static final String SUSTENIDO = "^";
+    public static final String BEQUADRO = "=";
     
     public static final String BARRA_COMPASSO = "|";
     public static final String INICIO = "[";
