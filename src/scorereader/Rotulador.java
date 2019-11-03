@@ -6,6 +6,10 @@
 package scorereader;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -13,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ListModel;
 import javax.swing.border.EmptyBorder;
 import scorereader.components.list.FiguraRenderer;
 import scorereader.structure.Figura;
@@ -32,6 +37,7 @@ public class Rotulador extends javax.swing.JFrame {
     private ArrayList<Figura> minimas = new ArrayList<Figura>();
     private ArrayList<Figura> seminimas = new ArrayList<Figura>();
     private ArrayList<Figura> colcheias = new ArrayList<Figura>();
+    private ArrayList<Figura> senicolcheias = new ArrayList<Figura>();
     private ArrayList<Figura> barraCompasso = new ArrayList<Figura>();
     private ArrayList<Figura> pausaSemibreve = new ArrayList<Figura>();
     private ArrayList<Figura> pausaMinima = new ArrayList<Figura>();
@@ -47,9 +53,11 @@ public class Rotulador extends javax.swing.JFrame {
     private JList<Figura> minimasJL;
     private JList<Figura> seminimasJL;
     private JList<Figura> colcheiasJL;
+    private JList<Figura> semiColcheiasJL;
     private JList<Figura> barraCompassoJL;
     private JList<Figura> sustenidosJL;
     private JList<Figura> bemoisJL;
+    private JList<Figura> selectedJList;
 
     private JList<Figura> pausaSemibreveJL;
     private JList<Figura> pausaMinimaJL;
@@ -63,7 +71,7 @@ public class Rotulador extends javax.swing.JFrame {
      * Creates new form Rotulador
      */
     public Rotulador(ArrayList<Figura> rotular) {
-        this.rotular = rotular;
+        this.rotular = new ArrayList<Figura>(rotular);
         initComponents();
         rotularJL = getJlist(rotular);
         semibreveJL = getJlist(semibreve);
@@ -147,7 +155,7 @@ public class Rotulador extends javax.swing.JFrame {
         PAUSA_SEMINIMA_P = new javax.swing.JPanel();
         PAUSA_COLCHEIA_P = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
@@ -218,6 +226,11 @@ public class Rotulador extends javax.swing.JFrame {
         jPanel1.add(CLAVE_FA, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 10, 110, 33));
 
         REMOVER.setText("Remover");
+        REMOVER.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                REMOVERActionPerformed(evt);
+            }
+        });
         jPanel1.add(REMOVER, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 10, 120, 33));
 
         IE_PAUSA.setText("Pausa");
@@ -446,24 +459,53 @@ public class Rotulador extends javax.swing.JFrame {
     private void ADICIONARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ADICIONARActionPerformed
 
         List<Figura> selecionados = getSelecionadosRotular();
-        if (selecionado.equalsIgnoreCase("Semibreve")) {
-        } else if (selecionado.equalsIgnoreCase("Minima")) {
-            minimas.addAll(selecionados);
-            recarregar(minimas, minimasJL);
-        } else if (selecionado.equalsIgnoreCase("Seminima")) {
-            seminimas.addAll(selecionados);
-            recarregar(seminimas, seminimasJL);
-        } else if (selecionado.equalsIgnoreCase("Colcheia")) {
-            colcheias.addAll(colcheias);
-            recarregar(colcheias, colcheiasJL);
-        } else if (selecionado.equalsIgnoreCase("Semi Colcheia")) {
-        } else if (selecionado.equalsIgnoreCase("Barra Compasso")) {
-            barraCompasso.addAll(selecionados);
-            recarregar(barraCompasso, barraCompassoJL);
-        } else if (selecionado.equalsIgnoreCase("Clave Sol")) {
-        } else if (selecionado.equalsIgnoreCase("Clave Fa")) {
-        } else if (selecionado.equalsIgnoreCase("Clave Do")) {
+        if (IE_PAUSA.isSelected()) {
+            if (selecionado.equalsIgnoreCase("Semibreve")) {
+                pausaSemibreve.addAll(selecionados);
+                recarregar(pausaSemibreve, pausaSemibreveJL);
+            } else if (selecionado.equalsIgnoreCase("Minima")) {
 
+                pausaMinima.addAll(selecionados);
+                recarregar(pausaMinima, pausaMinimaJL);
+            } else if (selecionado.equalsIgnoreCase("Seminima")) {
+                pausaSeminima.addAll(selecionados);
+                recarregar(pausaSeminima, pausaSeminimaJL);
+            } else if (selecionado.equalsIgnoreCase("Colcheia")) {
+                pausaColcheia.addAll(selecionados);
+                recarregar(pausaColcheia, pausaColcheiaJL);
+            }
+        } else {
+            if (selecionado.equalsIgnoreCase("Semibreve")) {
+                semibreve.addAll(selecionados);
+                recarregar(semibreve, semibreveJL);
+            } else if (selecionado.equalsIgnoreCase("Minima")) {
+                minimas.addAll(selecionados);
+                recarregar(minimas, minimasJL);
+            } else if (selecionado.equalsIgnoreCase("Seminima")) {
+                seminimas.addAll(selecionados);
+                recarregar(seminimas, seminimasJL);
+            } else if (selecionado.equalsIgnoreCase("Colcheia")) {
+                colcheias.addAll(selecionados);
+                recarregar(colcheias, colcheiasJL);
+            } else if (selecionado.equalsIgnoreCase("Barra Compasso")) {
+                barraCompasso.addAll(selecionados);
+                recarregar(barraCompasso, barraCompassoJL);
+            } else if (selecionado.equalsIgnoreCase("Clave Sol")) {
+                claveSol.addAll(selecionados);
+                recarregar(claveSol, claveSolJL);
+            } else if (selecionado.equalsIgnoreCase("Clave Fa")) {
+                claveFa.addAll(selecionados);
+                recarregar(claveFa, claveFaJL);
+            } else if (selecionado.equalsIgnoreCase("Clave Do")) {
+                claveDo.addAll(selecionados);
+                recarregar(claveDo, claveDoJL);
+            } else if (selecionado.equalsIgnoreCase("Sustenidos")) {
+                sustenidos.addAll(selecionados);
+                recarregar(sustenidos, sustenidosJL);
+            } else if (selecionado.equalsIgnoreCase("Bemois")) {
+                bemois.addAll(selecionados);
+                recarregar(bemois, bemoisJL);
+            }
         }
 
     }//GEN-LAST:event_ADICIONARActionPerformed
@@ -475,6 +517,59 @@ public class Rotulador extends javax.swing.JFrame {
     private void BEMOISActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BEMOISActionPerformed
         setSelecionado(BEMOIS);
     }//GEN-LAST:event_BEMOISActionPerformed
+
+    private void REMOVERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_REMOVERActionPerformed
+
+        if (selectedJList != null
+                && selectedJList != rotularJL) {
+            List<Figura> selecionados = selectedJList.getSelectedValuesList();
+            rotular.addAll(selecionados);
+
+            List<Figura> remover = selectedJList.getSelectedValuesList();
+            ArrayList<Figura> lista = getRespectivoArray(selectedJList);
+            for (Figura r : remover) {
+                lista.remove(r);
+            }
+            
+            recarregar(lista, selectedJList);
+            recarregar(rotular, rotularJL);
+            selectedJList.repaint();
+            rotularJL.repaint();
+        }
+    }//GEN-LAST:event_REMOVERActionPerformed
+
+    public ArrayList<Figura> getRespectivoArray(JList<Figura> lista) {
+        if (lista == semibreveJL) {
+            return semibreve;
+
+        } else if (lista == minimasJL) {
+            return minimas;
+        } else if (lista == seminimasJL) {
+            return seminimas;
+        } else if (lista == colcheiasJL) {
+            return colcheias;
+        } else if (lista == pausaSemibreveJL) {
+            return senicolcheias;
+        } else if (lista == pausaMinimaJL) {
+            return pausaMinima;
+        } else if (lista == pausaSeminimaJL) {
+            return pausaSeminima;
+        } else if (selectedJList == pausaColcheiaJL) {
+            return pausaColcheia;
+        } else if (lista == sustenidosJL) {
+            return sustenidos;
+        } else if (lista == bemoisJL) {
+            return bemois;
+        } else if (lista == claveSolJL) {
+            return claveSol;
+        } else if (lista == claveFaJL) {
+            return claveFa;
+        } else if (lista == claveDoJL) {
+            return claveDo;
+
+        }
+        return new ArrayList<Figura>();
+    }
 
     public void setSelecionado(JButton jb) {
         this.selecionado = jb.getText();
@@ -515,6 +610,15 @@ public class Rotulador extends javax.swing.JFrame {
 
         // create JList with model
         JList<Figura> list = new JList<Figura>(model);
+        list.addFocusListener(new FocusAdapter() {
+
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                selectedJList = (JList<Figura>) e.getComponent();
+            }
+
+        });
         list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
         list.setVisibleRowCount(-1);
         // set cell renderer

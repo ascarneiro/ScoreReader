@@ -67,7 +67,7 @@ public class ScoreReader extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //addImagemOriginal(FILE_NAME.getText());
+        addImagemOriginal(FILE_NAME.getText());
         loadModelo();
         loadTrainValues();
 //        jButton1ActionPerformed(null);
@@ -454,7 +454,7 @@ public class ScoreReader extends javax.swing.JFrame {
         jScrollPane4.setViewportView(segmentados);
         segmentados.getAccessibleContext().setAccessibleName("");
 
-        Container.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 1520, 430));
+        Container.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 1520, 370));
 
         notes.setBackground(new java.awt.Color(255, 255, 255));
         notes.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "5) Detectar som musical dos elementos que parecem notas ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N

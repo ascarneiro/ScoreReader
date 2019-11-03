@@ -1,39 +1,9 @@
-/*
- * Copyright (c) 1995, 2011, Oracle and/or its affiliates. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- *   - Redistributions of source code must retain the above copyright
- *     notice, this list of conditions and the following disclaimer.
- *
- *   - Redistributions in binary form must reproduce the above copyright
- *     notice, this list of conditions and the following disclaimer in the
- *     documentation and/or other materials provided with the distribution.
- *
- *   - Neither the name of Oracle or the names of its
- *     contributors may be used to endorse or promote products derived
- *     from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
- * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
 package scorereader.components.images;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
 import javax.swing.*;
+import scorereader.Utilities;
 
 /* 
  * ScrollDemo.java requires these files:
@@ -44,31 +14,43 @@ import javax.swing.*;
  */
 public class ScrollDemo extends JPanel
         implements ItemListener {
-    
+
+    private double zoom = 100;
     private Rule columnView;
     private Rule rowView;
     private JToggleButton isMetric;
     private ScrollablePicture picture;
     private JPanel j = new JPanel();
+    private ImageIcon image;
     JScrollPane j2 = new JScrollPane();
-    
+
     public ScrollDemo() {
+
         add(j2);
         setLayout(new BorderLayout());
-        
+
         j.setLayout(new BoxLayout(j, BoxLayout.LINE_AXIS));
+
     }
-    
+
     public void limpar() {
         j.removeAll();
     }
-    
+
     public void addImagem(String caminhoImagem, boolean limpar) {
         //Get the image to use.
-        ImageIcon image = createImageIcon(caminhoImagem);
+        ImageIcon im = createImageIcon(caminhoImagem);
+
+        ImageIcon image = im;
+        if (im != null
+                && limpar) {
+            image = Utilities.redimencionarImagem(im, 970, 970);
+
+        }
         addImagem(image, limpar);
+
     }
-    
+
     public void atualizarImagem(ImageIcon image, boolean limpar) {
         picture.setIcon(image);
         picture.repaint();
@@ -82,10 +64,11 @@ public class ScrollDemo extends JPanel
         //Create the row and column headers.
         columnView = new Rule(Rule.HORIZONTAL, true);
         rowView = new Rule(Rule.VERTICAL, true);
-        
+
         if (image != null) {
             columnView.setPreferredWidth(image.getIconWidth());
             rowView.setPreferredHeight(image.getIconHeight());
+            this.image = image;
         } else {
             columnView.setPreferredWidth(320);
             rowView.setPreferredHeight(480);
@@ -101,27 +84,23 @@ public class ScrollDemo extends JPanel
 
         //Set up the scroll pane.
         picture = new ScrollablePicture(image, columnView.getIncrement());
+
         JScrollPane pictureScrollPane = new JScrollPane(picture);
+
         pictureScrollPane.setPreferredSize(new Dimension(300, 250));
         pictureScrollPane.setViewportBorder(
                 BorderFactory.createLineBorder(new Color(210, 239, 239)));
-        
+
         pictureScrollPane.setColumnHeaderView(columnView);
         pictureScrollPane.setRowHeaderView(rowView);
 
-        //Set the corners.
-        //In theory, to support internationalization you would change
-        //UPPER_LEFT_CORNER to UPPER_LEADING_CORNER,
-        //LOWER_LEFT_CORNER to LOWER_LEADING_CORNER, and
-        //UPPER_RIGHT_CORNER to UPPER_TRAILING_CORNER.  In practice,
-        //bug #4467063 makes that impossible (in 1.4, at least).
         pictureScrollPane.setCorner(JScrollPane.UPPER_LEFT_CORNER,
                 buttonCorner);
         pictureScrollPane.setCorner(JScrollPane.LOWER_LEFT_CORNER,
                 new Corner());
         pictureScrollPane.setCorner(JScrollPane.UPPER_RIGHT_CORNER,
                 new Corner());
-        
+
         pictureScrollPane.setBorder(null);
         //Put it in this panel.
         j.add(pictureScrollPane);
@@ -131,7 +110,7 @@ public class ScrollDemo extends JPanel
         add(j2);
         updateUI();
     }
-    
+
     public void itemStateChanged(ItemEvent e) {
         if (e.getStateChange() == ItemEvent.SELECTED) {
             //Turn it to metric.
@@ -156,5 +135,12 @@ public class ScrollDemo extends JPanel
             return null;
         }
     }
-    
+
+    public double getZoom() {
+        return zoom;
+    }
+
+    public void setZoom(double zoom) {
+        this.zoom = zoom;
+    }
 }

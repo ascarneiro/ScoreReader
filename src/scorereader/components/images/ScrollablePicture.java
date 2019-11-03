@@ -27,8 +27,7 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */ 
-
+ */
 package scorereader.components.images;
 
 import java.awt.*;
@@ -37,13 +36,16 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 /* ScrollablePicture.java is used by ScrollDemo.java. */
-
 public class ScrollablePicture extends JLabel
-                               implements Scrollable,
-                                          MouseMotionListener {
+        implements Scrollable,
+        MouseMotionListener {
 
     private int maxUnitIncrement = 1;
     private boolean missingPicture = false;
+
+    public void init() {
+
+    }
 
     public ScrollablePicture(ImageIcon i, int m) {
         super(i);
@@ -54,17 +56,20 @@ public class ScrollablePicture extends JLabel
             setOpaque(true);
             setFont(new Font("Tahoma", 0, 24));
             setBackground(Color.white);
-            
+
         }
         maxUnitIncrement = m;
 
         //Let the user scroll by dragging to outside the window.
         setAutoscrolls(true); //enable synthetic drag events
         addMouseMotionListener(this); //handle mouse drags
+        init();
     }
 
     //Methods required by the MouseMotionListener interface:
-    public void mouseMoved(MouseEvent e) { }
+    public void mouseMoved(MouseEvent e) {
+    }
+
     public void mouseDragged(MouseEvent e) {
         //The user is dragging us, so scroll!
         Rectangle r = new Rectangle(e.getX(), e.getY(), 1, 1);
@@ -84,8 +89,8 @@ public class ScrollablePicture extends JLabel
     }
 
     public int getScrollableUnitIncrement(Rectangle visibleRect,
-                                          int orientation,
-                                          int direction) {
+            int orientation,
+            int direction) {
         //Get the current position.
         int currentPosition = 0;
         if (orientation == SwingConstants.HORIZONTAL) {
@@ -97,20 +102,20 @@ public class ScrollablePicture extends JLabel
         //Return the number of pixels between currentPosition
         //and the nearest tick mark in the indicated direction.
         if (direction < 0) {
-            int newPosition = currentPosition -
-                             (currentPosition / maxUnitIncrement)
-                              * maxUnitIncrement;
+            int newPosition = currentPosition
+                    - (currentPosition / maxUnitIncrement)
+                    * maxUnitIncrement;
             return (newPosition == 0) ? maxUnitIncrement : newPosition;
         } else {
             return ((currentPosition / maxUnitIncrement) + 1)
-                   * maxUnitIncrement
-                   - currentPosition;
+                    * maxUnitIncrement
+                    - currentPosition;
         }
     }
 
     public int getScrollableBlockIncrement(Rectangle visibleRect,
-                                           int orientation,
-                                           int direction) {
+            int orientation,
+            int direction) {
         if (orientation == SwingConstants.HORIZONTAL) {
             return visibleRect.width - maxUnitIncrement;
         } else {

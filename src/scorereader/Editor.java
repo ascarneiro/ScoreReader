@@ -32,7 +32,9 @@ public class Editor extends javax.swing.JFrame {
         this.imagemSemAlteracoes = image;
         editor.setOpaque(true);
         BufferedImage IplImageToBufferedImage = Utilities.IplImageToBufferedImage(imagemSemAlteracoes);
-        editor.addImagem(new ImageIcon(Utilities.bufferedImageToByteArray(IplImageToBufferedImage)), true);
+        ImageIcon imageIcon = new ImageIcon(Utilities.bufferedImageToByteArray(IplImageToBufferedImage));
+        imageIcon = Utilities.redimencionarImagem(imageIcon, 970, 970);
+        editor.addImagem(imageIcon, true);
         containerEditor.add(editor);
         editor.repaint();
         containerEditor.repaint();
@@ -154,7 +156,10 @@ public class Editor extends javax.swing.JFrame {
                 imagemEdicao = imagemSemAlteracoes.clone();
                 cvErode(imagemEdicao, imagemEdicao, null, ERODE_SL.getValue());
                 BufferedImage IplImageToBufferedImage = Utilities.IplImageToBufferedImage(imagemEdicao);
-                editor.atualizarImagem(new ImageIcon(Utilities.bufferedImageToByteArray(IplImageToBufferedImage)), true);
+
+                ImageIcon imageIcon = new ImageIcon(Utilities.bufferedImageToByteArray(IplImageToBufferedImage));
+                imageIcon = Utilities.redimencionarImagem(imageIcon, 970, 970);
+                editor.atualizarImagem(imageIcon, true);
             }
         };
         t.start();
@@ -170,7 +175,10 @@ public class Editor extends javax.swing.JFrame {
                 imagemEdicao = imagemSemAlteracoes.clone();
                 cvDilate(imagemEdicao, imagemEdicao, null, Integer.valueOf(DILATAR.getValue().toString()));
                 BufferedImage IplImageToBufferedImage = Utilities.IplImageToBufferedImage(imagemEdicao);
-                editor.atualizarImagem(new ImageIcon(Utilities.bufferedImageToByteArray(IplImageToBufferedImage)), true);
+
+                ImageIcon imageIcon = new ImageIcon(Utilities.bufferedImageToByteArray(IplImageToBufferedImage));
+                imageIcon = Utilities.redimencionarImagem(imageIcon, 970, 970);
+                editor.atualizarImagem(imageIcon, true);
             }
 
         };
@@ -193,7 +201,9 @@ public class Editor extends javax.swing.JFrame {
                     String path = "C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\repository\\staffless.png";
                     BufferedImage read = ImageIO.read(new File(path));
                     imagemSemAlteracoes = Utilities.bufferedImageToIplImage(Utilities.bufferedImageToByteArray(read));
-                    editor.atualizarImagem(new ImageIcon(Utilities.bufferedImageToByteArray(read)), true);
+                    ImageIcon imageIcon = new ImageIcon(Utilities.bufferedImageToByteArray(read));
+                    imageIcon = Utilities.redimencionarImagem(imageIcon, 970, 970);
+                    editor.atualizarImagem(imageIcon, true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
