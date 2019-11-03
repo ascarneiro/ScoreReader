@@ -24,7 +24,7 @@ class Classificador(object):
         for c in output:
             print(c)
 
-    def extrair_elementos(self, modelo):
+    def extrair_elementos(self, modelo, parametros):
 
         minimas = []
         seminimas = []
@@ -46,6 +46,7 @@ class Classificador(object):
         fermata = []
         ligadura = []
         barracompasso = []
+
 
         _modelo_dict = {elem.objid: elem for elem in modelo}
         figuras = []
@@ -70,32 +71,55 @@ class Classificador(object):
                     # As hastes tem apenas inlinks de notas, portanto, verificar
                     # para varios inlinks fara o procedimento.
                     if len(objeto_com_haste.inlinks) == 1:
-                        figuras.append((c, objeto_com_haste))
+                        if c.clsname == 'notehead-full' and parametros.QT_SEMINIMA > 0:
+                            figuras.append((c, objeto_com_haste))
+                            parametros.QT_SEMINIMA = parametros.QT_SEMINIMA -1
+                        elif c.clsname == 'notehead-empty' and parametros.QT_MINIMA > 0:
+                            figuras.append((c, objeto_com_haste))
+                            parametros.QT_MINIMA = parametros.QT_MINIMA - 1
             else:
-                for o in c.outlinks:
-                    if c.clsname == 'tie':
-                        figuras.append((c, _modelo_dict[o]))
-                    elif c.clsname == 'g-clef':
-                        figuras.append((c, _modelo_dict[o]))
-                    elif c.clsname == 'f-clef':
-                        figuras.append((c, _modelo_dict[o]))
-                    elif c.clsname == 'c-clef':
-                        figuras.append((c, _modelo_dict[o]))
-                    elif c.clsname == '8th_rest':
-                        figuras.append((c, _modelo_dict[o]))
-                    elif c.clsname == '16th_rest':
-                        figuras.append((c, _modelo_dict[o]))
-                    elif c.clsname == 'quarter_rest':
-                        figuras.append((c, _modelo_dict[o]))
-                    elif c.clsname == 'half_rest':
-                        figuras.append((c, _modelo_dict[o]))
-                    elif c.clsname == 'whole_rest':
-                        figuras.append((c, _modelo_dict[o]))
-                    elif c.clsname == 'thin_barline':
-                        figuras.append((c, _modelo_dict[o]))
+                if c.clsname == 'tie' and parametros.QT_LIGADURA > 0:
+                    figuras.append((c, c))
+                    parametros.QT_LIGADURA = parametros.QT_LIGADURA - 1
 
-        minimas = [(n, s) for n, s in figuras if n.clsname == 'notehead-full']
-        seminimas = [(n, s) for n, s in figuras if n.clsname == 'notehead-empty']
+                elif c.clsname == 'g-clef' and parametros.QT_CLAVESOL > 0:
+                    figuras.append((c, c))
+                    parametros.QT_CLAVESOL = parametros.QT_CLAVESOL - 1
+
+                elif c.clsname == 'f-clef' and parametros.QT_CLAVEFA > 0:
+                    figuras.append((c, c))
+                    parametros.QT_CLAVEFA = parametros.QT_CLAVEFA - 1
+
+                elif c.clsname == 'c-clef' and parametros.QT_CLAVEDO > 0:
+                    figuras.append((c, c))
+                    parametros.QT_CLAVEDO = parametros.QT_CLAVEDO - 1
+
+                elif c.clsname == '8th_rest' and parametros.QT_PAUSA_COLCHEIA > 0:
+                    figuras.append((c, c))
+                    parametros.QT_PAUSA_COLCHEIA = parametros.QT_PAUSA_COLCHEIA - 1
+
+                elif c.clsname == '16th_rest' and parametros.QT_PAUSA_SEMICOLCHEIA > 0:
+                    figuras.append((c, c))
+                    parametros.QT_PAUSA_SEMICOLCHEIA = parametros.QT_PAUSA_SEMICOLCHEIA - 1
+
+                elif c.clsname == 'quarter_rest' and parametros.QT_PAUSA_SEMINIMA > 0:
+                    figuras.append((c, c))
+                    parametros.QT_PAUSA_SEMINIMA = parametros.QT_PAUSA_SEMINIMA - 1
+
+                elif c.clsname == 'half_rest' and parametros.QT_PAUSA_MINIMA > 0:
+                    figuras.append((c, c))
+                    parametros.QT_PAUSA_MINIMA = parametros.QT_PAUSA_MINIMA - 1
+
+                elif c.clsname == 'whole_rest' and parametros.QT_PAUSA_SEMIBREVE > 0:
+                    figuras.append((c, c))
+                    parametros.QT_PAUSA_SEMIBREVE = parametros.QT_PAUSA_SEMIBREVE - 1
+
+                elif c.clsname == 'thin_barline' and parametros.QT_BARRAS_COMPASSO > 0:
+                    figuras.append((c, c))
+                    parametros.QT_BARRAS_COMPASSO = parametros.QT_BARRAS_COMPASSO - 1;
+
+        seminimas = [(n, s) for n, s in figuras if n.clsname == 'notehead-full']
+        minimas = [(n, s) for n, s in figuras if n.clsname == 'notehead-empty']
         ligadura = [(n, s) for n, s in figuras if n.clsname == 'tie']
         clavesol = [(n, s) for n, s in figuras if n.clsname == 'g-clef']
         clavefa = [(n, s) for n, s in figuras if n.clsname == 'f-clef']
@@ -158,17 +182,24 @@ class Classificador(object):
             ax.set_xticks([])
         plt.show()
 
-    def treinar_knn_padrao(self, nome, caminho, data_source):
+    def treinar_knn(self, nome, caminho, data_source, parametros, ie_dump):
         #try:
             print("DataSource :" + data_source)
             self.caminho = caminho
-            self.CROPOBJECT_DIR = os.path.join(self.caminho, data_source)
-            self.cropobject_fnames = [os.path.join(self.CROPOBJECT_DIR, f) for f in os.listdir(self.CROPOBJECT_DIR)]
 
-            self.data_source = [parse_cropobject_list(f) for f in self.cropobject_fnames]
+            if ie_dump == "S":
+                self.data_source = self.carregar_objeto()
+            else:
+                self.CROPOBJECT_DIR = os.path.join(self.caminho, data_source)
+                self.cropobject_fnames = [os.path.join(self.CROPOBJECT_DIR, f) for f in os.listdir(self.CROPOBJECT_DIR)]
+                self.data_source = [parse_cropobject_list(f) for f in self.cropobject_fnames]
+                self.salvar_objeto(self.data_source)
+
+
+
 
             #self.f = [self.printClasses(self.modelo) for self.modelo in self.data_source]
-            self.figuras = [self.extrair_elementos(self.modelo) for self.modelo in self.data_source]
+            self.figuras = [self.extrair_elementos(self.modelo, parametros) for self.modelo in self.data_source]
 
 
 
@@ -180,123 +211,119 @@ class Classificador(object):
             print("Modelo salvo...")
             print("sucesso...")
             return nome
-        #except:
-         #   print("Erro ao carregar DataSource")
-          #  self.data_source_carregado = False
-          #  return "erro"
 
     def treinar(self, figuras):
-        self.seminimas = list(itertools.chain(*[s for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
-        self.minimas = list(itertools.chain(*[m for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
-        self.ligaduras = list(itertools.chain(*[l for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
-        self.clavesol = list(itertools.chain(*[g for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
-        self.clavefa = list(itertools.chain(*[f for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
-        self.clavedo = list(itertools.chain(*[c for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
-        self.pausaseminima = list(itertools.chain(*[ps for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
-        self.pausacolcheia = list(itertools.chain(*[pc for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
-        self.pausasemicolcheia = list(itertools.chain(*[psm for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
-        self.pausaminima = list(itertools.chain(*[pm for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
-        self.pausasemibreve = list(itertools.chain(*[psb for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
-        self.barracompasso = list(itertools.chain(*[bc for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
+        seminimas = list(itertools.chain(*[s for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
+        minimas = list(itertools.chain(*[m for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
+        ligaduras = list(itertools.chain(*[l for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
+        clavesol = list(itertools.chain(*[g for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
+        clavefa = list(itertools.chain(*[f for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
+        clavedo = list(itertools.chain(*[c for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
+        pausaseminima = list(itertools.chain(*[ps for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
+        pausacolcheia = list(itertools.chain(*[pc for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
+        pausasemicolcheia = list(itertools.chain(*[psm for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
+        pausaminima = list(itertools.chain(*[pm for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
+        pausasemibreve = list(itertools.chain(*[psb for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
+        barracompasso = list(itertools.chain(*[bc for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
 
-        self.img_seminimas = [self.extrair_imagem(s) for s in self.seminimas]
-        self.img_minimas = [self.extrair_imagem(m) for m in self.minimas]
-        self.img_ligaduras = [self.extrair_imagem(l) for l in self.ligaduras]
-        self.img_clavesol = [self.extrair_imagem(g) for g in self.clavesol]
-        self.img_clavefa = [self.extrair_imagem(f) for f in self.clavefa]
-        self.img_clavedo = [self.extrair_imagem(c) for c in self.clavedo]
-        self.img_pausaseminima = [self.extrair_imagem(ps) for ps in self.pausaseminima]
-        self.img_pausacolcheia = [self.extrair_imagem(pc) for pc in self.pausacolcheia]
-        self.img_pausasemicolcheia = [self.extrair_imagem(psm) for psm in self.pausasemicolcheia]
-        self.img_pausaminima = [self.extrair_imagem(pm) for pm in self.pausaminima]
-        self.img_pausasemibreve = [self.extrair_imagem(psb) for psb in self.pausasemibreve]
-        self.img_barracompasso = [self.extrair_imagem(bc) for bc in self.barracompasso]
+        img_seminimas = [self.extrair_imagem(s) for s in seminimas]
+        img_minimas = [self.extrair_imagem(m) for m in minimas]
+        img_ligaduras = [self.extrair_imagem(l) for l in ligaduras]
+        img_clavesol = [self.extrair_imagem(g) for g in clavesol]
+        img_clavefa = [self.extrair_imagem(f) for f in clavefa]
+        img_clavedo = [self.extrair_imagem(c) for c in clavedo]
+        img_pausaseminima = [self.extrair_imagem(ps) for ps in pausaseminima]
+        img_pausacolcheia = [self.extrair_imagem(pc) for pc in pausacolcheia]
+        img_pausasemicolcheia = [self.extrair_imagem(psm) for psm in pausasemicolcheia]
+        img_pausaminima = [self.extrair_imagem(pm) for pm in pausaminima]
+        img_pausasemibreve = [self.extrair_imagem(psb) for psb in pausasemibreve]
+        img_barracompasso = [self.extrair_imagem(bc) for bc in barracompasso]
 
-        self.img_seminimas = [resize(sm, (self.ALTURA, self.LARGURA)) for sm in self.img_seminimas]
-        self.img_minimas = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in self.img_minimas]
-        self.img_ligaduras = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in self.img_ligaduras]
-        self.img_clavesol = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in self.img_clavesol]
-        self.img_clavefa = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in self.img_clavefa]
-        self.img_clavedo = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in self.img_clavedo]
-        self.img_pausaseminima = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in self.img_pausaseminima]
-        self.img_pausacolcheia = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in self.img_pausacolcheia]
-        self.img_pausasemicolcheia = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in self.img_pausasemicolcheia]
-        self.img_pausaminima = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in self.img_pausaminima]
-        self.img_pausasemibreve = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in self.img_pausasemibreve]
-        self.img_barracompasso = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in self.img_barracompasso]
+        img_seminimas = [resize(sm, (self.ALTURA, self.LARGURA)) for sm in img_seminimas]
+        img_minimas = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_minimas]
+        img_ligaduras = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_ligaduras]
+        img_clavesol = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_clavesol]
+        img_clavefa = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_clavefa]
+        img_clavedo = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_clavedo]
+        img_pausaseminima = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_pausaseminima]
+        img_pausacolcheia = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_pausacolcheia]
+        img_pausasemicolcheia = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_pausasemicolcheia]
+        img_pausaminima = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_pausaminima]
+        img_pausasemibreve = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_pausasemibreve]
+        img_barracompasso = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_barracompasso]
 
 
         # And re-binarize, to compensate for interpolation effects
-        for self.im in self.img_seminimas:
-            self.im[self.im > 0] = 1
-        for self.im in self.img_minimas:
-            self.im[self.im > 0] = 1
-        for self.im in self.img_ligaduras:
-            self.im[self.im > 0] = 1
-        for self.im in self.img_clavesol:
-            self.im[self.im > 0] = 1
-        for self.im in self.img_clavefa:
-            self.im[self.im > 0] = 1
-        for self.im in self.img_clavedo:
-            self.im[self.im > 0] = 1
-        for self.im in self.img_pausaseminima:
-            self.im[self.im > 0] = 1
-        for self.im in self.img_pausacolcheia:
-            self.im[self.im > 0] = 1
-        for self.im in self.img_pausasemicolcheia:
-            self.im[self.im > 0] = 1
-        for self.im in self.img_pausaminima:
-            self.im[self.im > 0] = 1
-        for self.im in self.img_pausasemibreve:
-            self.im[self.im > 0] = 1
-        for self.im in self.img_barracompasso:
-            self.im[self.im > 0] = 1
+        for im in img_seminimas:
+            im[im > 0] = 1
+        for im in img_minimas:
+            im[im > 0] = 1
+        for im in img_ligaduras:
+            im[im > 0] = 1
+        for im in img_clavesol:
+            im[im > 0] = 1
+        for im in img_clavefa:
+            im[im > 0] = 1
+        for im in img_clavedo:
+            im[im > 0] = 1
+        for im in img_pausaseminima:
+            im[im > 0] = 1
+        for im in img_pausacolcheia:
+            im[im > 0] = 1
+        for im in img_pausasemicolcheia:
+            im[im > 0] = 1
+        for im in img_pausaminima:
+            im[im > 0] = 1
+        for im in img_pausasemibreve:
+            im[im > 0] = 1
+        for im in img_barracompasso:
+            im[im > 0] = 1
 
-        self.rotulos_seminimas = [self.ROTULO_SEMINIMA for _ in self.img_seminimas]
-        self.rotulos_minimas = [self.ROTULO_MINIMA for _ in self.img_minimas]
-        self.rotulos_ligaduras = [self.ROTULO_LIGADURA for _ in self.img_ligaduras]
-        self.rotulos_clavesol = [self.ROTULO_CLAVESOL for _ in self.img_clavesol]
-        self.rotulos_clavefa = [self.ROTULO_CLAVEFA for _ in self.img_clavefa]
-        self.rotulos_clavedo = [self.ROTULO_CLAVEDO for _ in self.img_clavedo]
-        self.rotulos_pausaseminima = [self.ROTULO_PAUSASEMINIMA for _ in self.img_pausaseminima]
-        self.rotulos_pausacolcheia = [self.ROTULO_PAUSACOLCHEIA for _ in self.img_pausacolcheia]
-        self.rotulos_pausasemicolcheia = [self.ROTULO_PAUSASEMICOLCHEIA for _ in self.img_pausasemicolcheia]
-        self.rotulos_pausaminima = [self.ROTULO_PAUSAMINIMA for _ in self.img_pausaminima]
-        self.rotulos_pausasemibreve = [self.ROTULO_PAUSASEMIBREVE for _ in self.img_pausasemibreve]
-        self.rotulos_barracompasso = [self.ROTULO_BARRACOMPASSO for _ in self.img_barracompasso]
+        rotulos_seminimas = [self.ROTULO_SEMINIMA for _ in img_seminimas]
+        rotulos_minimas = [self.ROTULO_MINIMA for _ in img_minimas]
+        rotulos_ligaduras = [self.ROTULO_LIGADURA for _ in img_ligaduras]
+        rotulos_clavesol = [self.ROTULO_CLAVESOL for _ in img_clavesol]
+        rotulos_clavefa = [self.ROTULO_CLAVEFA for _ in img_clavefa]
+        rotulos_clavedo = [self.ROTULO_CLAVEDO for _ in img_clavedo]
+        rotulos_pausaseminima = [self.ROTULO_PAUSASEMINIMA for _ in img_pausaseminima]
+        rotulos_pausacolcheia = [self.ROTULO_PAUSACOLCHEIA for _ in img_pausacolcheia]
+        rotulos_pausasemicolcheia = [self.ROTULO_PAUSASEMICOLCHEIA for _ in img_pausasemicolcheia]
+        rotulos_pausaminima = [self.ROTULO_PAUSAMINIMA for _ in img_pausaminima]
+        rotulos_pausasemibreve = [self.ROTULO_PAUSASEMIBREVE for _ in img_pausasemibreve]
+        rotulos_barracompasso = [self.ROTULO_BARRACOMPASSO for _ in img_barracompasso]
 
 
-        self.misturadas = self.img_seminimas +\
-                          self.img_minimas + \
-                          self.img_ligaduras + \
-                          self.img_clavesol + \
-                          self.img_clavefa + \
-                          self.img_clavedo + \
-                          self.img_pausaminima + \
-                          self.img_pausacolcheia + \
-                          self.img_pausasemicolcheia + \
-                          self.img_pausaseminima + \
-                          self.img_pausasemibreve + \
-                          self.img_barracompasso
+        misturadas = img_seminimas +\
+                          img_minimas + \
+                          img_ligaduras + \
+                          img_clavesol + \
+                          img_clavefa + \
+                          img_clavedo + \
+                          img_pausaminima + \
+                          img_pausacolcheia + \
+                          img_pausasemicolcheia + \
+                          img_pausaseminima + \
+                          img_pausasemibreve + \
+                          img_barracompasso
 
             # converte imagem em matrix unidimencional
-        self.figuras_array_linha = [n.flatten() for n in self.misturadas]
-        self.rotulos_classe = self.rotulos_seminimas + \
-                              self.rotulos_minimas + \
-                              self.rotulos_ligaduras + \
-                              self.rotulos_clavesol + \
-                              self.rotulos_clavefa + \
-                              self.rotulos_clavedo + \
-                              self.rotulos_pausaseminima + \
-                              self.rotulos_pausacolcheia + \
-                              self.rotulos_pausasemicolcheia + \
-                              self.rotulos_pausaminima + \
-                              self.rotulos_pausasemibreve + \
-                              self.rotulos_barracompasso
+        figuras_array_linha = [n.flatten() for n in misturadas]
+        rotulos_classe = rotulos_seminimas + \
+                              rotulos_minimas + \
+                              rotulos_ligaduras + \
+                              rotulos_clavesol + \
+                              rotulos_clavefa + \
+                              rotulos_clavedo + \
+                              rotulos_pausaseminima + \
+                              rotulos_pausacolcheia + \
+                              rotulos_pausasemicolcheia + \
+                              rotulos_pausaminima + \
+                              rotulos_pausasemibreve + \
+                              rotulos_barracompasso
 
         self.X_conjunto_treino, self.X_conjunto_teste, self.Y_conjunto_treino, self.Y_conjunto_teste = train_test_split(
-            self.figuras_array_linha, self.rotulos_classe, test_size=0.25, random_state=42,
-            stratify=self.rotulos_classe)
+            figuras_array_linha, rotulos_classe, test_size=0.25, random_state=42,
+            stratify=rotulos_classe)
 
         self.KNN = KNeighborsClassifier(n_neighbors=self.K_VIZINHOS_PROXIMOS)
         self.KNN.fit(self.X_conjunto_treino, self.Y_conjunto_treino)
@@ -316,7 +343,7 @@ class Classificador(object):
         cinza = cinza.point(lambda x: 0 if (x < 128) else 255, '1')  # binariza imagem
         elemento_teste = numpy.array(cinza, dtype='uint8').flatten()  # converte em array e achata imagem
 
-        classes = ['Minima', 'Seminima', 'ClaveDo', 'ClaveFa', 'ClaveSol', 'Ligadura', 'PausaSeminima',
+        classes = ['Seminima', 'Minima', 'ClaveDo', 'ClaveFa', 'ClaveSol', 'Ligadura', 'PausaSeminima',
                    'PausaColcheia', 'PausaSemiColcheia', 'PausaSemiBreve', 'PausaMinima', 'BarraCompasso']
         encontrado = self.KNN.predict([elemento_teste])
         return classes[encontrado[0]];
@@ -331,7 +358,7 @@ class Classificador(object):
             cinza = cinza.point(lambda x: 0 if (x < 128) else 255, '1')  # binariza imagem
             elemento_teste = numpy.array(cinza, dtype='uint8').flatten()  # converte em array e achata imagem
 
-            classes = ['Minima', 'Seminima', 'ClaveDo', 'ClaveFa', 'ClaveSol', 'Ligadura', 'PausaSeminima',
+            classes = ['Seminima', 'Minima', 'ClaveDo', 'ClaveFa', 'ClaveSol', 'Ligadura', 'PausaSeminima',
                        'PausaColcheia', 'PausaSemiColcheia', 'PausaSemiBreve', 'PausaMinima', 'BarraCompasso']
             encontrado = self.KNN.predict([elemento_teste])
             mensagem = 'A nota ' + nome + ' parece com uma : ' + classes[encontrado[0]];
@@ -343,6 +370,14 @@ class Classificador(object):
         s = self.DIR_TREINAMENTO + nome + '.pkl';
         joblib.dump(self.KNN, s)
         return s
+
+    def salvar_objeto(self, o):
+        s = self.DIR_TREINAMENTO + 'dict.pkl';
+        joblib.dump(o, s)
+        return s
+
+    def carregar_objeto(self):
+        return joblib.load(self.DIR_TREINAMENTO + 'dict.pkl')
 
     def plot_classification_report(self, cr, title='Classification report ', with_avg_total=False, cmap=plt.cm.Blues):
 
@@ -380,29 +415,6 @@ class Classificador(object):
 
     def carregar_modelo(self, nome):
         self.KNN = joblib.load(self.DIR_TREINAMENTO + nome + '.pkl')
-
-    def treinar_customizado(self,
-                           QT_SEMIBREVE,
-                           QT_MINIMA,
-                           QT_SEMINIMA,
-                           QT_COLCHEIA,
-                           QT_SEMICOLCHEIA,
-                           QT_FUSA,
-                           QT_SEMIFUSA,
-                           QT_CLAVESOL,
-                           QT_CLAVEFA,
-                           QT_CLAVEDO,
-                           QT_FERMATA,
-                           QT_LIGADURA,
-                           PAUSA_SEMIBREVE,
-                           PAUSA_MINIMA,
-                           PAUSA_SEMINIMA,
-                           PAUSA_COLCHEIA,
-                           PAUSA_SEMICOLCHEIA,
-                           PAUSA_FUSA,
-                           PAUSA_SEMIFUSA):
-        print('')
-
 
 
 

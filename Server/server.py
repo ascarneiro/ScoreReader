@@ -6,6 +6,7 @@ import io
 import cStringIO
 import classificador as clf
 import identificadornotas as utils
+import parametros as params
 import json
 from PIL import Image as pil_image
 from gamera.core import *
@@ -14,7 +15,7 @@ from gamera.toolkits.musicstaves import musicstaves_rl_simple
 from numpy import fft
 
 
-class Server(object):  
+class Server(object):
   def __init__(self):
     self.loaddingDataSource = False;
     init_gamera()
@@ -116,20 +117,6 @@ class Server(object):
       status = status + "."
       print(status)
 
-  @cherrypy.expose
-  def treinarKnnPadrao(self, nome, caminho, data_source, resetar):
-    if "S" == resetar:
-      self.loaddingDataSource = False
-
-
-    if not self.loaddingDataSource and \
-            (not self.classificador.isDataSourceCarregado() or "S" == resetar):
-      print("Treinando Modelo...")
-      self.loaddingDataSource = True
-      nome = self.classificador.treinar_knn_padrao(nome, caminho, data_source)
-      self.loaddingDataSource = False
-      print("Modelo treinado e carregado...")
-      return nome
 
   @cherrypy.expose
   def carregarModelo(self, nome):
@@ -149,9 +136,21 @@ class Server(object):
     img = self.convertToPilImage(imageEncoded)
     return self.classificador.classificar(img, int(K))
 
+  @cherrypy.expose
+  def treinarKnnPadrao(self, nome, caminho, data_source, ie_dump):
+
+      parametros = params.Parametros()
+      #if not self.loaddingDataSource and \
+      #        (not self.classificador.isDataSourceCarregado()):
+      #   print("Treinando Modelo...")
+      self.loaddingDataSource = True
+      nome = self.classificador.treinar_knn(nome, caminho, data_source, parametros, ie_dump)
+      self.loaddingDataSource = False
+      print("Modelo treinado e carregado...")
+      return nome
 
   @cherrypy.expose
-  def treinarCustomizado(self,
+  def treinarCustomizado(self, nome, caminho, data_source,
                          QT_SEMIBREVE,
                          QT_MINIMA,
                          QT_SEMINIMA,
@@ -170,28 +169,51 @@ class Server(object):
                          PAUSA_COLCHEIA,
                          PAUSA_SEMICOLCHEIA,
                          PAUSA_FUSA,
-                         PAUSA_SEMIFUSA):
+                         PAUSA_SEMIFUSA,
+                         QT_BARRAS_COMPASSO,
+                         IE_DUMP):
 
-        self.classificador.treinar_customizado(self,
-                            QT_SEMIBREVE,
-                            QT_MINIMA,
-                            QT_SEMINIMA,
-                            QT_COLCHEIA,
-                            QT_SEMICOLCHEIA,
-                            QT_FUSA,
-                            QT_SEMIFUSA,
-                            QT_CLAVESOL,
-                            QT_CLAVEFA,
-                            QT_CLAVEDO,
-                            QT_FERMATA,
-                            QT_LIGADURA,
-                            PAUSA_SEMIBREVE,
-                            PAUSA_MINIMA,
-                            PAUSA_SEMINIMA,
-                            PAUSA_COLCHEIA,
-                            PAUSA_SEMICOLCHEIA,
-                            PAUSA_FUSA,
-                            PAUSA_SEMIFUSA)
+      parametros = params.Parametros()
+      parametros.QT_SEMIBREVE = int(QT_SEMIBREVE)
+      parametros.QT_MINIMA = int(QT_MINIMA)
+      parametros.QT_SEMINIMA = int(QT_SEMINIMA)
+      parametros.QT_COLCHEIA = int(QT_COLCHEIA)
+      parametros.QT_SEMICOLCHEIA = int(QT_SEMICOLCHEIA)
+      parametros.QT_FUSA = int(QT_FUSA)
+      parametros.QT_SEMIFUSA = int(QT_SEMIFUSA)
+      parametros.QT_CLAVESOL = int(QT_CLAVESOL)
+      parametros.QT_CLAVEFA = int(QT_CLAVEFA)
+      parametros.QT_CLAVEDO = int(QT_CLAVEDO)
+      parametros.QT_FERMATA = int(QT_FERMATA)
+      parametros.QT_LIGADURA = int(QT_LIGADURA)
+      parametros.QT_BARRAS_COMPASSO = int(QT_BARRAS_COMPASSO)
+
+      if (PAUSA_SEMIBREVE == "S") :
+          parametros.QT_PAUSA_SEMIBREVE = int(QT_SEMIBREVE)
+      if (PAUSA_MINIMA == "S"):
+          parametros.QT_PAUSA_MINIMA = int(QT_MINIMA)
+      if (PAUSA_SEMINIMA == "S"):
+          parametros.QT_PAUSA_SEMINIMA = int(QT_SEMINIMA)
+      if (PAUSA_COLCHEIA == "S"):
+          parametros.QT_PAUSA_COLCHEIA = int(QT_COLCHEIA)
+      if (PAUSA_SEMICOLCHEIA == "S"):
+          parametros.QT_PAUSA_SEMICOLCHEIA = int(QT_SEMICOLCHEIA)
+      if (PAUSA_FUSA == "S"):
+          parametros.QT_PAUSA_FUSA = int(0)
+      if (PAUSA_SEMIFUSA == "S"):
+          parametros.QT_PAUSA_SEMIFUSA = int(0)
+
+      if not self.loaddingDataSource and \
+              (not self.classificador.isDataSourceCarregado()):
+          print("Treinando Modelo customizado...")
+          self.loaddingDataSource = True
+          nome = self.classificador.treinar_knn(nome, caminho, data_source, parametros, IE_DUMP)
+          self.loaddingDataSource = False
+          print("Modelo customizado treinado e carregado...")
+          return nome
+      else:
+          return "Erro"
+
 
 
 

@@ -5,7 +5,6 @@
  */
 package scorereader.abc;
 
-import static java.awt.SystemColor.text;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -298,7 +297,7 @@ public class Parser {
         } else if ("SemiColcheia".equalsIgnoreCase(elemento.tipo)) {
             return ABC_NOTATION.SEMICOLCHEIA;
         }
-        return ABC_NOTATION.SEMINIMA;
+        return "Indeterminada";
     }
 
 }

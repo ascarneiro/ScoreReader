@@ -6,23 +6,28 @@
 package scorereader;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import static org.bytedeco.javacpp.helper.opencv_imgcodecs.cvLoadImage;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import org.bytedeco.javacpp.Loader;
 import static org.bytedeco.javacpp.helper.opencv_core.CV_RGB;
-import static org.bytedeco.javacpp.helper.opencv_imgcodecs.cvLoadImage;
 import static org.bytedeco.javacpp.helper.opencv_imgcodecs.cvSaveImage;
 import org.bytedeco.javacpp.opencv_core;
+import org.bytedeco.javacpp.opencv_core.IplImage;
 import org.bytedeco.javacpp.opencv_imgproc;
 import static org.bytedeco.javacpp.opencv_imgproc.CV_ADAPTIVE_THRESH_MEAN_C;
 import static org.bytedeco.javacpp.opencv_imgproc.CV_CHAIN_APPROX_NONE;
@@ -38,6 +43,7 @@ import static org.bytedeco.javacpp.opencv_imgproc.cvRectangleR;
 import static org.bytedeco.javacpp.opencv_imgproc.cvThreshold;
 import org.bytedeco.javacv.Java2DFrameConverter;
 import org.bytedeco.javacv.OpenCVFrameConverter;
+import org.bytedeco.javacv.OpenCVFrameConverter.ToIplImage;
 import static scorereader.image.Prototipo.CV_LOAD_IMAGE_ANYCOLOR;
 import scorereader.server.Server;
 import scorereader.structure.Crop;
@@ -89,7 +95,7 @@ public class Utilities {
                 bb.width(bb.width());
                 bb.height(bb.height());
 //                if (DEBUG_VALUES) {
-               // cvRectangleR(imagemBB, bb, CV_RGB(0, 255, 0), 1, 8, 0);
+                // cvRectangleR(imagemBB, bb, CV_RGB(0, 255, 0), 1, 8, 0);
 //                }
 
 //                if (DEBUG_VALUES) {
@@ -217,10 +223,22 @@ public class Utilities {
         return retorno;
     }
 
+    public static opencv_core.IplImage bufferedImageToIplImage2(byte[] imageData) throws Exception {
+        //Loader.load(opencv_core.class);
+        ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+        BufferedImage bfImage = ImageIO.read(bis);
+
+        ToIplImage iplConverter = new OpenCVFrameConverter.ToIplImage();
+        Java2DFrameConverter java2dConverter = new Java2DFrameConverter();
+        IplImage iplImage = iplConverter.convert(java2dConverter.convert(bfImage));
+
+        return iplImage;
+    }
+
     public static opencv_core.IplImage bufferedImageToIplImage(byte[] imageData) throws Exception {
+
         //ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
         //BufferedImage bfImage = ImageIO.read(bis);
-
         String path = "C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\repository\\staffless.png";
         //ImageIO.write(bfImage, "PNG", new File(path));
         opencv_core.IplImage cvLoadImage = cvLoadImage(path, CV_LOAD_IMAGE_ANYCOLOR);
@@ -228,6 +246,18 @@ public class Utilities {
         cvDilate(cvLoadImage, cvLoadImage, null, 1);
         cvSaveImage(path, new opencv_core.IplImage(cvLoadImage));
         return cvLoadImage;
+//        String path = "C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\repository\\staffless.png";
+//        Loader.load(opencv_core.class);
+//        ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+//        BufferedImage bfImage = ImageIO.read(bis);
+//
+//        ToIplImage iplConverter = new OpenCVFrameConverter.ToIplImage();
+//        Java2DFrameConverter java2dConverter = new Java2DFrameConverter();
+//        IplImage cvLoadImage = iplConverter.convert(java2dConverter.convert(bfImage));
+//        cvErode(cvLoadImage, cvLoadImage, null, 2);
+//        cvDilate(cvLoadImage, cvLoadImage, null, 1);
+//        cvSaveImage(path, new opencv_core.IplImage(cvLoadImage));
+//        return cvLoadImage;
     }
 
     public static BufferedImage IplImageToBufferedImage(opencv_core.IplImage src) {
@@ -287,12 +317,12 @@ public class Utilities {
         return segmentado;
     }
 
-    public static String treinarKnnPadrao(String nome, String caminho, String dataSource, String resetar) throws Exception {
+    public static String treinarKnnPadrao(String nome, String caminho, String dataSource, String resetar, String ieDump) throws Exception {
         HashMap<String, Object> params = new HashMap<>();
         params.put("nome", nome);
         params.put("caminho", caminho);
         params.put("data_source", dataSource);
-        params.put("resetar", dataSource);
+        params.put("ie_dump", ieDump);
         return Server.callServerPython("treinarKnnPadrao", params);
     }
 
@@ -309,11 +339,35 @@ public class Utilities {
         }
         return retorno;
     }
-    
-    public static void treinarCustomizado(HashMap parametros) throws Exception {
-        String json = Server.callServerPython("treinarCustomizado", parametros);
-        JsonParser parser = new JsonParser();
-        JsonArray array = parser.parse(json).getAsJsonArray();
+
+    public static String treinarKnnCustomizado(String nome, String caminho, String dataSource, String resetar, HashMap parametros, String ieDump) throws Exception {
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("nome", nome);
+        params.put("caminho", caminho);
+        params.put("data_source", dataSource);
+
+        params.put("QT_SEMIBREVE", parametros.get("QT_SEMIBREVE"));
+        params.put("QT_MINIMA", parametros.get("QT_MINIMA"));
+        params.put("QT_SEMINIMA", parametros.get("QT_SEMINIMA"));
+        params.put("QT_COLCHEIA", parametros.get("QT_COLCHEIA"));
+        params.put("QT_SEMICOLCHEIA", parametros.get("QT_SEMICOLCHEIA"));
+        params.put("QT_FUSA", parametros.get("QT_FUSA"));
+        params.put("QT_SEMIFUSA", parametros.get("QT_SEMIFUSA"));
+        params.put("QT_CLAVESOL", parametros.get("QT_CLAVESOL"));
+        params.put("QT_CLAVEFA", parametros.get("QT_CLAVEFA"));
+        params.put("QT_CLAVEDO", parametros.get("QT_CLAVEDO"));
+        params.put("QT_FERMATA", parametros.get("QT_FERMATA"));
+        params.put("QT_LIGADURA", parametros.get("QT_LIGADURA"));
+        params.put("PAUSA_SEMIBREVE", parametros.get("PAUSA_SEMIBREVE"));
+        params.put("PAUSA_MINIMA", parametros.get("PAUSA_MINIMA"));
+        params.put("PAUSA_SEMINIMA", parametros.get("PAUSA_SEMINIMA"));
+        params.put("PAUSA_COLCHEIA", parametros.get("PAUSA_COLCHEIA"));
+        params.put("PAUSA_SEMICOLCHEIA", parametros.get("PAUSA_SEMICOLCHEIA"));
+        params.put("PAUSA_FUSA", parametros.get("PAUSA_FUSA"));
+        params.put("PAUSA_SEMIFUSA", parametros.get("PAUSA_SEMIFUSA"));
+        params.put("QT_BARRAS_COMPASSO", parametros.get("QT_BARRAS_COMPASSO"));
+        params.put("IE_DUMP", ieDump);
+        return Server.callServerPython("treinarCustomizado", params);
     }
 
     public static ArrayList<Nota> detectarAlturaNotas(opencv_core.IplImage imagemCinza) throws Exception {
@@ -383,5 +437,46 @@ public class Utilities {
 
     public void detectarPentagrama() {
 
+    }
+
+    public static ImageIcon redimencionarImagem(ImageIcon imageIcon, int maxHeight, int maxWidth) {
+        int newHeight = 0, newWidth = 0;        // Variables for the new height and width
+        int priorHeight = 0, priorWidth = 0;
+
+        BufferedImage image = new BufferedImage(
+                imageIcon.getIconWidth(),
+                imageIcon.getIconHeight(),
+                BufferedImage.TYPE_INT_RGB);
+
+        Graphics g = image.createGraphics();
+        imageIcon.paintIcon(null, g, 0, 0);
+        g.dispose();
+
+        if (imageIcon != null) {
+            priorHeight = imageIcon.getIconHeight();
+            priorWidth = imageIcon.getIconWidth();
+        }
+
+        // Calculate the correct new height and width
+        if ((float) priorHeight / (float) priorWidth > (float) maxHeight / (float) maxWidth) {
+            newHeight = maxHeight;
+            newWidth = (int) (((float) priorWidth / (float) priorHeight) * (float) newHeight);
+        } else {
+            newWidth = maxWidth;
+            newHeight = (int) (((float) priorHeight / (float) priorWidth) * (float) newWidth);
+        }
+
+        // Resize the image
+        // 1. Create a new Buffered Image and Graphic2D object
+        BufferedImage resizedImg = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = resizedImg.createGraphics();
+
+        // 2. Use the Graphic object to draw a new image to the image in the buffer
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2.drawImage(image, 0, 0, newWidth, newHeight, null);
+        g2.dispose();
+
+        // 3. Convert the buffered image into an ImageIcon for return
+        return (new ImageIcon(resizedImg));
     }
 }

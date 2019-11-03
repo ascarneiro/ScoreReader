@@ -15,13 +15,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.bytedeco.javacpp.opencv_core;
 import scorereader.abc.Parser;
-import scorereader.components.ScrollDemo;
+import scorereader.components.images.ScrollDemo;
+import scorereader.components.list.JListCustomRenderer;
 import scorereader.server.Server;
 import scorereader.structure.Figura;
-import scorereader.structure.Linha;
 import scorereader.structure.Nota;
 import scorereader.structure.claves.Clave;
 
@@ -31,6 +32,7 @@ import scorereader.structure.claves.Clave;
  */
 public class ScoreReader extends javax.swing.JFrame {
 
+    private static int incremento = 20;
     private ScrollDemo boundedPanel = new ScrollDemo();
     private ScrollDemo barPanel = new ScrollDemo();
     private ScrollDemo notesPanel = new ScrollDemo();
@@ -47,8 +49,11 @@ public class ScoreReader extends javax.swing.JFrame {
     public String[] scoreDir = new String[]{""};
     public String resetar = "S";
     private ArrayList<Clave> pautas = new ArrayList<>();
+    private ArrayList<Figura> rotular = new ArrayList<>();
     //Compilar os elementos
     Parser parser = new Parser();
+
+    private byte[] originalImage = null;
 
     private StringBuilder consoleContent = new StringBuilder();
 
@@ -58,8 +63,16 @@ public class ScoreReader extends javax.swing.JFrame {
     public ScoreReader() {
         initComponents();
         loadPanels();
-        addImagemOriginal(FILE_NAME.getText());
+
+        try {
+            originalImage = Utilities.bufferedImageToByteArray(ImageIO.read(new File(FILE_NAME.getText())));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //addImagemOriginal(FILE_NAME.getText());
         loadModelo();
+        loadTrainValues();
+//        jButton1ActionPerformed(null);
 
     }
 
@@ -103,6 +116,8 @@ public class ScoreReader extends javax.swing.JFrame {
         E = new javax.swing.JToggleButton();
         C = new javax.swing.JToggleButton();
         D = new javax.swing.JToggleButton();
+        jButton1 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         original = new javax.swing.JPanel();
         jToggleButton10 = new javax.swing.JToggleButton();
         jPanel5 = new javax.swing.JPanel();
@@ -175,6 +190,10 @@ public class ScoreReader extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
         NOME_MODELO = new javax.swing.JComboBox();
+        DUMP = new javax.swing.JCheckBox();
+        jLabel26 = new javax.swing.JLabel();
+        QT_BARRAS_COMPASSO = new javax.swing.JSpinner();
+        BARRAS_COMPASSO_SL = new javax.swing.JSlider();
         fragments2 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
 
@@ -320,7 +339,7 @@ public class ScoreReader extends javax.swing.JFrame {
                 processarActionPerformed(evt);
             }
         });
-        jPanel2.add(processar, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 223, 250, 30));
+        jPanel2.add(processar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 180, 30));
 
         Compilar.setText("Compilar");
         Compilar.setToolTipText("Compila o codigo ABC gerado pela acao do botao processar nos formatos (XHTML, SVG, PDF e MIDI)");
@@ -329,10 +348,10 @@ public class ScoreReader extends javax.swing.JFrame {
                 CompilarActionPerformed(evt);
             }
         });
-        jPanel2.add(Compilar, new org.netbeans.lib.awtextra.AbsoluteConstraints(339, 223, 120, 30));
+        jPanel2.add(Compilar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 190, 30));
 
         jLabel6.setText("Abrir:");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 273, -1, 10));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, 10));
 
         A.setText("ABC");
         A.setToolTipText("Abre arquivo ABC gerado");
@@ -341,7 +360,7 @@ public class ScoreReader extends javax.swing.JFrame {
                 AActionPerformed(evt);
             }
         });
-        jPanel2.add(A, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 263, 70, 30));
+        jPanel2.add(A, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, 70, 30));
 
         B.setText("XHTML");
         B.setToolTipText("Abre arquivo XHTML gerado");
@@ -350,7 +369,7 @@ public class ScoreReader extends javax.swing.JFrame {
                 BActionPerformed(evt);
             }
         });
-        jPanel2.add(B, new org.netbeans.lib.awtextra.AbsoluteConstraints(159, 263, 70, 30));
+        jPanel2.add(B, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, 70, 30));
 
         E.setText("SVG");
         E.setToolTipText("Abre arquivo SVG gerado");
@@ -359,7 +378,7 @@ public class ScoreReader extends javax.swing.JFrame {
                 EActionPerformed(evt);
             }
         });
-        jPanel2.add(E, new org.netbeans.lib.awtextra.AbsoluteConstraints(229, 263, 70, 30));
+        jPanel2.add(E, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, 70, 30));
 
         C.setText("PDF");
         C.setToolTipText("Abre arquivo PDF gerado");
@@ -368,7 +387,7 @@ public class ScoreReader extends javax.swing.JFrame {
                 CActionPerformed(evt);
             }
         });
-        jPanel2.add(C, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 263, 70, 30));
+        jPanel2.add(C, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, 70, 30));
 
         D.setText("MIDI");
         D.setToolTipText("Abre arquivo MIDI gerado");
@@ -377,7 +396,23 @@ public class ScoreReader extends javax.swing.JFrame {
                 DActionPerformed(evt);
             }
         });
-        jPanel2.add(D, new org.netbeans.lib.awtextra.AbsoluteConstraints(369, 263, 90, 30));
+        jPanel2.add(D, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 290, 90, 30));
+
+        jButton1.setText("Abrir Editor Imagens");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 180, 30));
+
+        jButton4.setText("Rotulador");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 190, 30));
 
         Main.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 540, 580));
 
@@ -464,7 +499,7 @@ public class ScoreReader extends javax.swing.JFrame {
 
         jScrollPane3.setViewportView(Container);
 
-        jPanel5.add(jScrollPane3, java.awt.BorderLayout.CENTER);
+        jPanel5.add(jScrollPane3, java.awt.BorderLayout.LINE_END);
 
         Panels.addTab("Etapas", jPanel5);
 
@@ -501,7 +536,7 @@ public class ScoreReader extends javax.swing.JFrame {
                 STATUSActionPerformed(evt);
             }
         });
-        jPanel3.add(STATUS, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 60, 30));
+        jPanel3.add(STATUS, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, 60, 30));
 
         jLabel7.setText("DataSource:");
         jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
@@ -526,7 +561,7 @@ public class ScoreReader extends javax.swing.JFrame {
                 jToggleButton3ActionPerformed(evt);
             }
         });
-        jPanel3.add(jToggleButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 480, 140, 30));
+        jPanel3.add(jToggleButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 520, 140, 30));
 
         K.setText("5");
         K.addActionListener(new java.awt.event.ActionListener() {
@@ -550,7 +585,7 @@ public class ScoreReader extends javax.swing.JFrame {
                 jToggleButton5ActionPerformed(evt);
             }
         });
-        jPanel3.add(jToggleButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 480, 130, 30));
+        jPanel3.add(jToggleButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 520, 130, 30));
 
         jButton2.setText("Salvar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -558,7 +593,7 @@ public class ScoreReader extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 480, 140, 30));
+        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 520, 140, 30));
 
         SEMIBREVE_SL.setValue(3);
         SEMIBREVE_SL.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -700,8 +735,8 @@ public class ScoreReader extends javax.swing.JFrame {
         jPanel3.add(PAUSA_SEMIFUSA, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, -1, -1));
 
         jLabel25.setText("Ligaduras:");
-        jPanel3.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 50, 20));
-        jPanel3.add(LIGADURA, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, 60, -1));
+        jPanel3.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 480, 50, 20));
+        jPanel3.add(LIGADURA, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 480, 60, -1));
 
         LIGADURA_SL.setValue(3);
         LIGADURA_SL.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -709,7 +744,7 @@ public class ScoreReader extends javax.swing.JFrame {
                 LIGADURA_SLStateChanged(evt);
             }
         });
-        jPanel3.add(LIGADURA_SL, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 450, 360, -1));
+        jPanel3.add(LIGADURA_SL, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 480, 360, -1));
 
         jLabel23.setText("Semi Colcheias:");
         jPanel3.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 80, 20));
@@ -732,7 +767,7 @@ public class ScoreReader extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 480, 140, 30));
+        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 520, 140, 30));
 
         jCheckBox1.setSelected(true);
         jCheckBox1.setText("KNN");
@@ -741,6 +776,22 @@ public class ScoreReader extends javax.swing.JFrame {
         NOME_MODELO.setEditable(true);
         NOME_MODELO.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "__KNN_PADRAO" }));
         jPanel3.add(NOME_MODELO, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, 140, -1));
+
+        DUMP.setSelected(true);
+        DUMP.setText("Dump e Load DataSource");
+        jPanel3.add(DUMP, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, -1, -1));
+
+        jLabel26.setText("Barra compasso");
+        jPanel3.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 80, 20));
+        jPanel3.add(QT_BARRAS_COMPASSO, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, 60, -1));
+
+        BARRAS_COMPASSO_SL.setValue(3);
+        BARRAS_COMPASSO_SL.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                BARRAS_COMPASSO_SLStateChanged(evt);
+            }
+        });
+        jPanel3.add(BARRAS_COMPASSO_SL, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 450, 360, -1));
 
         treinamento.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 710, 570));
 
@@ -794,19 +845,6 @@ public class ScoreReader extends javax.swing.JFrame {
         fragmentos.setVisible(habilitar);
         Compilar.setEnabled(habilitar);
 
-        MINIMA.setValue(3);
-        SEMIBREVE.setValue(3);
-        SEMINIMA.setValue(3);
-        COLCHEIA.setValue(3);
-        SEMICOLCHEIA.setValue(3);
-        FUSA.setValue(3);
-        SEMIFUSA.setValue(3);
-        CLAVE_DO.setValue(3);
-        CLAVE_FA.setValue(3);
-        CLAVE_SOL.setValue(3);
-        FERMATA.setValue(3);
-        LIGADURA.setValue(3);
-
     }
 
     private void processarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processarActionPerformed
@@ -815,7 +853,7 @@ public class ScoreReader extends javax.swing.JFrame {
         if (!FILE_NAME.getText().isEmpty()) {
             try {
                 int fator = Integer.parseInt(FATOR.getText());
-                byte[] originalImage = Files.readAllBytes(new File(FILE_NAME.getText()).toPath());
+                originalImage = Files.readAllBytes(new File(FILE_NAME.getText()).toPath());
 
                 //Remove linhas da pauta    
                 byte[] imageData = Utilities.removerLinhasDaPauta(originalImage);
@@ -827,8 +865,11 @@ public class ScoreReader extends javax.swing.JFrame {
 
                 //Etapa de segmentacao
                 ArrayList<Figura> figuras = Utilities.segmentar(imagemCinza, imageCopy);
+                segmentadosPanel.limpar();
+                rotular.clear();
                 for (Figura figura : figuras) {
                     addImagemSegmentados(figura.fileName);
+                    rotular.add(figura);
                 }
 
                 //Etapa obtem informacoes relativas a pauta, Linhas, Posicao das linhas etc
@@ -865,11 +906,10 @@ public class ScoreReader extends javax.swing.JFrame {
                 for (Clave clave : pautas) {
                     clave.determinarAlturaNotasPauta();
                 }
-                
+
                 for (Clave clave : pautas) {
                     clave.classificarFiguras(K.getText());
                 }
-                
 
                 loadFragments();
                 loadBounded();
@@ -994,47 +1034,47 @@ public class ScoreReader extends javax.swing.JFrame {
     }//GEN-LAST:event_SEMICOLCHEIA_SLStateChanged
 
     private void LIGADURA_SLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_LIGADURA_SLStateChanged
-        LIGADURA.setValue(LIGADURA_SL.getValue() * 3);
+        LIGADURA.setValue(LIGADURA_SL.getValue() * incremento);
     }//GEN-LAST:event_LIGADURA_SLStateChanged
 
     private void FERMATA_SLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_FERMATA_SLStateChanged
-        FERMATA.setValue(CLAVE_DO_SL.getValue() * 3);
+        FERMATA.setValue(CLAVE_DO_SL.getValue() * incremento);
     }//GEN-LAST:event_FERMATA_SLStateChanged
 
     private void CLAVE_DO_SLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_CLAVE_DO_SLStateChanged
-        CLAVE_DO.setValue(CLAVE_DO_SL.getValue() * 3);
+        CLAVE_DO.setValue(CLAVE_DO_SL.getValue() * incremento);
     }//GEN-LAST:event_CLAVE_DO_SLStateChanged
 
     private void CLAVE_FA_SLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_CLAVE_FA_SLStateChanged
-        CLAVE_FA.setValue(CLAVE_FA_SL.getValue() * 3);
+        CLAVE_FA.setValue(CLAVE_FA_SL.getValue() * incremento);
     }//GEN-LAST:event_CLAVE_FA_SLStateChanged
 
     private void CLAVE_SOL_SLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_CLAVE_SOL_SLStateChanged
-        CLAVE_SOL.setValue(CLAVE_SOL_SL.getValue() * 3);
+        CLAVE_SOL.setValue(CLAVE_SOL_SL.getValue() * incremento);
     }//GEN-LAST:event_CLAVE_SOL_SLStateChanged
 
     private void SEMIFUSA_SLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SEMIFUSA_SLStateChanged
-        SEMIFUSA.setValue(SEMIFUSA_SL.getValue() * 3);
+        SEMIFUSA.setValue(SEMIFUSA_SL.getValue() * incremento);
     }//GEN-LAST:event_SEMIFUSA_SLStateChanged
 
     private void FUSA_SLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_FUSA_SLStateChanged
-        FUSA.setValue(FUSA_SL.getValue() * 3);
+        FUSA.setValue(FUSA_SL.getValue() * incremento);
     }//GEN-LAST:event_FUSA_SLStateChanged
 
     private void COLCHEIA_SLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_COLCHEIA_SLStateChanged
-        COLCHEIA.setValue(COLCHEIA_SL.getValue() * 3);
+        COLCHEIA.setValue(COLCHEIA_SL.getValue() * incremento);
     }//GEN-LAST:event_COLCHEIA_SLStateChanged
 
     private void SEMINIMA_SLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SEMINIMA_SLStateChanged
-        SEMINIMA.setValue(SEMINIMA_SL.getValue() * 3);
+        SEMINIMA.setValue(SEMINIMA_SL.getValue() * incremento);
     }//GEN-LAST:event_SEMINIMA_SLStateChanged
 
     private void MINIMA_SLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_MINIMA_SLStateChanged
-        MINIMA.setValue(MINIMA_SL.getValue() * 3);
+        MINIMA.setValue(MINIMA_SL.getValue() * incremento);
     }//GEN-LAST:event_MINIMA_SLStateChanged
 
     private void SEMIBREVE_SLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SEMIBREVE_SLStateChanged
-        SEMIBREVE.setValue(SEMIBREVE_SL.getValue() * 3);
+        SEMIBREVE.setValue(SEMIBREVE_SL.getValue() * incremento);
     }//GEN-LAST:event_SEMIBREVE_SLStateChanged
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1043,30 +1083,72 @@ public class ScoreReader extends javax.swing.JFrame {
 
     private void jToggleButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton5ActionPerformed
         try {
-            HashMap parametros = new HashMap();
-            parametros.put("QT_SEMIBREVE", SEMIBREVE.getValue().toString());
-            parametros.put("QT_MINIMA", MINIMA.getValue().toString());
-            parametros.put("QT_SEMINIMA", SEMINIMA.getValue().toString());
-            parametros.put("QT_COLCHEIA", COLCHEIA.getValue().toString());
-            parametros.put("QT_SEMICOLCHEIA", SEMICOLCHEIA.getValue().toString());
-            parametros.put("QT_FUSA", FUSA.getValue().toString());
-            parametros.put("QT_SEMIFUSA", SEMIFUSA.getValue().toString());
-            parametros.put("QT_CLAVESOL", CLAVE_SOL.getValue().toString());
-            parametros.put("QT_CLAVEFA", CLAVE_FA.getValue().toString());
-            parametros.put("QT_CLAVEDO", CLAVE_DO.getValue().toString());
-            parametros.put("QT_FERMATA", FERMATA.getValue().toString());
-            parametros.put("QT_LIGADURA", LIGADURA.getValue().toString());
-            parametros.put("PAUSA_SEMIBREVE", PAUSA_SEMIBREVE.isSelected() ? "S" : "N");
-            parametros.put("PAUSA_MINIMA", PAUSA_MINIMAS.isSelected() ? "S" : "N");
-            parametros.put("PAUSA_SEMINIMA", PAUSA_SEMINIMA.isSelected() ? "S" : "N");
-            parametros.put("PAUSA_COLCHEIA", PAUSA_COLCHEIA.isSelected() ? "S" : "N");
-            parametros.put("PAUSA_SEMICOLCHEIA", PAUSA_SEMICOLCHEIA.isSelected() ? "S" : "N");
-            parametros.put("PAUSA_FUSA", PAUSA_FUSA.isSelected() ? "S" : "N");
-            parametros.put("PAUSA_SEMIFUSA", PAUSA_SEMIFUSA.isSelected() ? "S" : "N");
-            Utilities.treinarCustomizado(parametros);
+            STATUS.setBackground(Color.ORANGE);
+            fragmentos.setBackground(Color.WHITE);
+            habilitarDesabilitarBotoes(false);
+
+            Server.server = SERVER.getText();
+            Thread t = new Thread() {
+
+                @Override
+                public void run() {
+                    try {
+                        log_console("Treinando modelo customizado...");
+                        HashMap parametros = new HashMap();
+                        parametros.put("QT_SEMIBREVE", SEMIBREVE.getValue().toString());
+                        parametros.put("QT_MINIMA", MINIMA.getValue().toString());
+                        parametros.put("QT_SEMINIMA", SEMINIMA.getValue().toString());
+                        parametros.put("QT_COLCHEIA", COLCHEIA.getValue().toString());
+                        parametros.put("QT_SEMICOLCHEIA", SEMICOLCHEIA.getValue().toString());
+                        parametros.put("QT_FUSA", FUSA.getValue().toString());
+                        parametros.put("QT_SEMIFUSA", SEMIFUSA.getValue().toString());
+                        parametros.put("QT_CLAVESOL", CLAVE_SOL.getValue().toString());
+                        parametros.put("QT_CLAVEFA", CLAVE_FA.getValue().toString());
+                        parametros.put("QT_CLAVEDO", CLAVE_DO.getValue().toString());
+                        parametros.put("QT_FERMATA", FERMATA.getValue().toString());
+                        parametros.put("QT_LIGADURA", LIGADURA.getValue().toString());
+                        parametros.put("PAUSA_SEMIBREVE", PAUSA_SEMIBREVE.isSelected() ? "S" : "N");
+                        parametros.put("PAUSA_MINIMA", PAUSA_MINIMAS.isSelected() ? "S" : "N");
+                        parametros.put("PAUSA_SEMINIMA", PAUSA_SEMINIMA.isSelected() ? "S" : "N");
+                        parametros.put("PAUSA_COLCHEIA", PAUSA_COLCHEIA.isSelected() ? "S" : "N");
+                        parametros.put("PAUSA_SEMICOLCHEIA", PAUSA_SEMICOLCHEIA.isSelected() ? "S" : "N");
+                        parametros.put("PAUSA_FUSA", PAUSA_FUSA.isSelected() ? "S" : "N");
+                        parametros.put("PAUSA_SEMIFUSA", PAUSA_SEMIFUSA.isSelected() ? "S" : "N");
+                        parametros.put("QT_BARRAS_COMPASSO", QT_BARRAS_COMPASSO.getValue().toString());
+
+                        String modelo = Utilities.treinarKnnCustomizado(
+                                NOME_MODELO.getSelectedItem().toString(),
+                                CAMINHO.getText(),
+                                DS_NAME.getText(),
+                                "S",
+                                parametros,
+                                DUMP.isSelected() ? "S" : "N");
+
+                        STATUS.setBackground(Color.GREEN);
+                        processar.setEnabled(true);
+                        resetar = "N";
+                        addImagemChart(CAMINHO_TREINAMENTO + "chart.png");
+                        log_console("Arquivo gerado: !" + modelo);
+                        log_console("Modelo customizado treinado e carregado com sucesso!");
+                    } catch (Exception e) {
+                        resetar = "S";
+                        STATUS.setBackground(Color.ORANGE);
+                        processar.setEnabled(false);
+                    }
+                }
+
+            };
+            t.start();
+
         } catch (Exception e) {
-            log_console(e.getMessage());
+            STATUS.setBackground(Color.ORANGE);
+            processar.setEnabled(false);
+            log_console("Falha ao carregar dataSource, verifique se \n"
+                    + "o servidor esta acessivel ou se ocorreu \n"
+                    + "algum erro o log do servidor");
+
         }
+
     }//GEN-LAST:event_jToggleButton5ActionPerformed
 
     private void jToggleButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton5MouseClicked
@@ -1131,7 +1213,14 @@ public class ScoreReader extends javax.swing.JFrame {
                 public void run() {
                     try {
                         log_console("Treinando modelo...");
-                        String modelo = Utilities.treinarKnnPadrao(NOME_MODELO.getSelectedItem().toString(), CAMINHO.getText(), DS_NAME.getText(), "S");
+
+                        String modelo = Utilities.treinarKnnPadrao(
+                                NOME_MODELO.getSelectedItem().toString(),
+                                CAMINHO.getText(),
+                                DS_NAME.getText(),
+                                "S",
+                                DUMP.isSelected() ? "S" : "N");
+
                         STATUS.setBackground(Color.GREEN);
                         processar.setEnabled(true);
                         resetar = "N";
@@ -1162,6 +1251,37 @@ public class ScoreReader extends javax.swing.JFrame {
     private void SERVERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SERVERActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SERVERActionPerformed
+
+    private void BARRAS_COMPASSO_SLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_BARRAS_COMPASSO_SLStateChanged
+        QT_BARRAS_COMPASSO.setValue(BARRAS_COMPASSO_SL.getValue() * incremento);
+    }//GEN-LAST:event_BARRAS_COMPASSO_SLStateChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            Editor e = new Editor(Utilities.bufferedImageToIplImage2(originalImage));
+            e.setLocationRelativeTo(this);
+            e.setSize(800, 600);
+            e.setVisible(true);
+
+            BufferedImage IplImageToBufferedImage = Utilities.IplImageToBufferedImage(e.getImagemAlterada());
+            originalImage = Utilities.bufferedImageToByteArray(IplImageToBufferedImage);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            log_console("Erro ao abrir editor: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        if (!rotular.isEmpty()) {
+            JListCustomRenderer j = new JListCustomRenderer(rotular);
+            j.setTitle("JLIstCustomRenderer");
+            j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            j.setSize(JListCustomRenderer.width, JListCustomRenderer.height);
+            j.setLocationRelativeTo(null);
+            j.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1195,6 +1315,8 @@ public class ScoreReader extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 ScoreReader sc = new ScoreReader();
+
+                sc.setSize(1, 1);
                 sc.setSize(1024, 768);
                 sc.setLocationRelativeTo(null);
                 sc.setExtendedState(6);
@@ -1212,6 +1334,7 @@ public class ScoreReader extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton A;
     private javax.swing.JToggleButton B;
+    private javax.swing.JSlider BARRAS_COMPASSO_SL;
     private javax.swing.JToggleButton C;
     private javax.swing.JTextField CAMINHO;
     private javax.swing.JSpinner CLAVE_DO;
@@ -1227,6 +1350,7 @@ public class ScoreReader extends javax.swing.JFrame {
     private javax.swing.JPanel Container;
     private javax.swing.JToggleButton D;
     private javax.swing.JTextField DS_NAME;
+    private javax.swing.JCheckBox DUMP;
     private javax.swing.JToggleButton E;
     private javax.swing.JTextField FATOR;
     private javax.swing.JSpinner FERMATA;
@@ -1250,6 +1374,7 @@ public class ScoreReader extends javax.swing.JFrame {
     private javax.swing.JCheckBox PAUSA_SEMIFUSA;
     private javax.swing.JCheckBox PAUSA_SEMINIMA;
     private javax.swing.JTabbedPane Panels;
+    private javax.swing.JSpinner QT_BARRAS_COMPASSO;
     private javax.swing.JSpinner SEMIBREVE;
     private javax.swing.JSlider SEMIBREVE_SL;
     private javax.swing.JSpinner SEMICOLCHEIA;
@@ -1267,8 +1392,10 @@ public class ScoreReader extends javax.swing.JFrame {
     private javax.swing.JPanel fragmentos;
     private javax.swing.JPanel fragments2;
     private javax.swing.JPanel individual;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1286,6 +1413,7 @@ public class ScoreReader extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1347,7 +1475,7 @@ public class ScoreReader extends javax.swing.JFrame {
                             BufferedImage read = ImageIO.read(bais);
                             File f = new File(CAMINHO_NOTAS + i + ".png");
                             ImageIO.write(read, "PNG", f);
-                            addImagemIndividual(f.getAbsolutePath());
+                            addImagemIndividual(f.getAbsolutePath(), figura.getTipo());
                         }
                         i++;
                     }
@@ -1377,7 +1505,7 @@ public class ScoreReader extends javax.swing.JFrame {
         originalPanel.addImagem(caminho, true);
     }
 
-    private void addImagemIndividual(String caminho) {
+    private void addImagemIndividual(String caminho, String tipo) {
         individualPanel.addImagem(caminho, false);
     }
 
@@ -1402,7 +1530,7 @@ public class ScoreReader extends javax.swing.JFrame {
         addImagemBar(null);
         addImagemNotes(null);
         addImagemOriginal(null);
-        addImagemIndividual(null);
+        addImagemIndividual(null, "");
         addImagemSegmentados(null);
         addImagemChart(null);
         bounded.add(boundedPanel);
@@ -1424,5 +1552,40 @@ public class ScoreReader extends javax.swing.JFrame {
             log_console("Falha ao ler modelo " + MODELO.getText());
         }
 
+    }
+
+    private void loadTrainValues() {
+        int value = incremento;
+
+        SEMIBREVE_SL.setValue(value);
+        SEMICOLCHEIA_SL.setValue(value);
+        CLAVE_SOL_SL.setValue(0);
+        CLAVE_FA_SL.setValue(0);
+        CLAVE_DO_SL.setValue(0);
+        FERMATA_SL.setValue(0);
+        BARRAS_COMPASSO_SL.setValue(0);
+        MINIMA_SL.setValue(value);
+        COLCHEIA_SL.setValue(value);
+        FUSA_SL.setValue(value);
+        LIGADURA_SL.setValue(0);
+        SEMIFUSA_SL.setValue(value);
+        SEMICOLCHEIA_SL.setValue(value);
+        SEMINIMA_SL.setValue(value);
+
+        MINIMA.setValue(value);
+        SEMIBREVE.setValue(value);
+        SEMINIMA.setValue(value);
+
+        COLCHEIA.setValue(value);
+        SEMICOLCHEIA.setValue(value);
+
+        FUSA.setValue(value);
+        SEMIFUSA.setValue(value);
+        CLAVE_DO.setValue(0);
+        CLAVE_FA.setValue(0);
+        CLAVE_SOL.setValue(0);
+        FERMATA.setValue(0);
+        LIGADURA.setValue(0);
+        QT_BARRAS_COMPASSO.setValue(0);
     }
 }
