@@ -54,6 +54,7 @@ public class ScrollablePicture extends JLabel
             setOpaque(true);
             setFont(new Font("Tahoma", 0, 24));
             setBackground(Color.white);
+            
         }
         maxUnitIncrement = m;
 

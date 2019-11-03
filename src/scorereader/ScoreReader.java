@@ -15,12 +15,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.bytedeco.javacpp.opencv_core;
 import scorereader.abc.Parser;
 import scorereader.components.images.ScrollDemo;
-import scorereader.components.list.JListCustomRenderer;
 import scorereader.server.Server;
 import scorereader.structure.Figura;
 import scorereader.structure.Nota;
@@ -417,7 +415,7 @@ public class ScoreReader extends javax.swing.JFrame {
         Main.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 540, 580));
 
         original.setBackground(new java.awt.Color(255, 255, 255));
-        original.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "Imagem original ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
+        original.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Imagem original ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
         original.setMaximumSize(new java.awt.Dimension(10, 10));
         original.setOpaque(false);
         original.setPreferredSize(new java.awt.Dimension(10, 10));
@@ -443,10 +441,11 @@ public class ScoreReader extends javax.swing.JFrame {
         Container.setMaximumSize(new java.awt.Dimension(10, 10));
         Container.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jScrollPane4.setBorder(null);
         jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
         segmentados.setBackground(new java.awt.Color(255, 255, 255));
-        segmentados.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "2) Segmentar  elementos musicais encontradas ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
+        segmentados.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "2) Segmentar  elementos musicais encontradas ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
         segmentados.setMaximumSize(new java.awt.Dimension(5, 5));
         segmentados.setMinimumSize(new java.awt.Dimension(5, 5));
         segmentados.setOpaque(false);
@@ -455,7 +454,7 @@ public class ScoreReader extends javax.swing.JFrame {
         jScrollPane4.setViewportView(segmentados);
         segmentados.getAccessibleContext().setAccessibleName("");
 
-        Container.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 1520, 430));
+        Container.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 1520, 430));
 
         notes.setBackground(new java.awt.Color(255, 255, 255));
         notes.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "5) Detectar som musical dos elementos que parecem notas ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
@@ -463,30 +462,31 @@ public class ScoreReader extends javax.swing.JFrame {
         notes.setOpaque(false);
         notes.setPreferredSize(new java.awt.Dimension(10, 10));
         notes.setLayout(new java.awt.BorderLayout());
-        Container.add(notes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1790, 1520, 460));
+        Container.add(notes, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 1780, 1520, 460));
 
         bounded.setBackground(new java.awt.Color(255, 255, 255));
-        bounded.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "1) Remover Linhas da pauta - Detectar  elementos musicais contidos na imagem ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
+        bounded.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "1) Remover Linhas da pauta - Detectar  elementos musicais contidos na imagem ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
         bounded.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         bounded.setMaximumSize(new java.awt.Dimension(10, 10));
         bounded.setOpaque(false);
         bounded.setPreferredSize(new java.awt.Dimension(10, 10));
         bounded.setLayout(new java.awt.BorderLayout());
-        Container.add(bounded, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1520, 440));
+        Container.add(bounded, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 1520, 420));
         bounded.getAccessibleContext().setAccessibleName("");
 
         bars.setBackground(new java.awt.Color(255, 255, 255));
-        bars.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "3) Detectar altura das linhas da pauta ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
+        bars.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "3) Detectar altura das linhas da pauta ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
         bars.setMaximumSize(new java.awt.Dimension(10, 10));
         bars.setOpaque(false);
         bars.setPreferredSize(new java.awt.Dimension(10, 10));
         bars.setLayout(new java.awt.BorderLayout());
-        Container.add(bars, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 900, 1508, 437));
+        Container.add(bars, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 880, 1508, 437));
 
+        jScrollPane5.setBorder(null);
         jScrollPane5.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
         individual.setBackground(new java.awt.Color(255, 255, 255));
-        individual.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "4) Segmentar possiveis figuras encontradas ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
+        individual.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "4) Segmentar possiveis figuras encontradas ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
         individual.setMaximumSize(new java.awt.Dimension(5, 5));
         individual.setMinimumSize(new java.awt.Dimension(5, 5));
         individual.setOpaque(false);
@@ -495,7 +495,7 @@ public class ScoreReader extends javax.swing.JFrame {
         jScrollPane5.setViewportView(individual);
         individual.getAccessibleContext().setAccessibleName("3) Segmentar figuras que se parecem com notas musicais ");
 
-        Container.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1350, 1520, 430));
+        Container.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 1340, 1520, 430));
 
         jScrollPane3.setViewportView(Container);
 
@@ -1274,13 +1274,17 @@ public class ScoreReader extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         if (!rotular.isEmpty()) {
-            JListCustomRenderer j = new JListCustomRenderer(rotular);
-            j.setTitle("JLIstCustomRenderer");
-            j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            j.setSize(JListCustomRenderer.width, JListCustomRenderer.height);
-            j.setLocationRelativeTo(null);
-            j.setVisible(true);
+//            JListCustomRenderer j = new JListCustomRenderer(rotular);
+//            j.setTitle("JLIstCustomRenderer");
+//            j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//            j.setSize(JListCustomRenderer.width, JListCustomRenderer.height);
+//            j.setLocationRelativeTo(null);
+//            j.setVisible(true);
+
         }
+
+        Rotulador r = new Rotulador(rotular);
+        r.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**

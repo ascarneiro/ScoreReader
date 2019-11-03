@@ -5,20 +5,7 @@
     <bookmark url="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/_cpdispatch.py" line="57" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df176199-7e82-4001-a2bd-aa7f5aacb6c8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../nbproject/private/private.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../repository/staffless.png" beforeDir="false" afterPath="$PROJECT_DIR$/../repository/staffless.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/Editor.form" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/Editor.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/Editor.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/Editor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/ScoreReader.form" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/ScoreReader.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/ScoreReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/ScoreReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/Utilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/Utilities.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/components/Corner.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/components/images/Corner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/components/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/components/images/Rule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/components/ScrollDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/components/images/ScrollDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/components/ScrollablePicture.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/components/images/ScrollablePicture.java" afterDir="false" />
-    </list>
+    <list default="true" id="df176199-7e82-4001-a2bd-aa7f5aacb6c8" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,8 +17,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="59" selection-start-line="59" selection-end-line="59" />
+            <state relative-caret-position="157">
+              <caret line="62" column="60" lean-forward="true" selection-start-line="62" selection-start-column="60" selection-end-line="62" selection-end-column="60" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -714,8 +701,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="59" selection-start-line="59" selection-end-line="59" />
+        <state relative-caret-position="157">
+          <caret line="62" column="60" lean-forward="true" selection-start-line="62" selection-start-column="60" selection-end-line="62" selection-end-column="60" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>

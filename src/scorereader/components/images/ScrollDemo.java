@@ -44,35 +44,36 @@ import javax.swing.*;
  */
 public class ScrollDemo extends JPanel
         implements ItemListener {
-
+    
     private Rule columnView;
     private Rule rowView;
     private JToggleButton isMetric;
     private ScrollablePicture picture;
     private JPanel j = new JPanel();
     JScrollPane j2 = new JScrollPane();
-
+    
     public ScrollDemo() {
         add(j2);
         setLayout(new BorderLayout());
-
+        
         j.setLayout(new BoxLayout(j, BoxLayout.LINE_AXIS));
     }
-
+    
     public void limpar() {
         j.removeAll();
     }
-
+    
     public void addImagem(String caminhoImagem, boolean limpar) {
         //Get the image to use.
         ImageIcon image = createImageIcon(caminhoImagem);
         addImagem(image, limpar);
     }
-
+    
     public void atualizarImagem(ImageIcon image, boolean limpar) {
         picture.setIcon(image);
         picture.repaint();
     }
+
     public void addImagem(ImageIcon image, boolean limpar) {
         if (limpar) {
             j.removeAll();
@@ -81,7 +82,7 @@ public class ScrollDemo extends JPanel
         //Create the row and column headers.
         columnView = new Rule(Rule.HORIZONTAL, true);
         rowView = new Rule(Rule.VERTICAL, true);
-
+        
         if (image != null) {
             columnView.setPreferredWidth(image.getIconWidth());
             rowView.setPreferredHeight(image.getIconHeight());
@@ -103,8 +104,8 @@ public class ScrollDemo extends JPanel
         JScrollPane pictureScrollPane = new JScrollPane(picture);
         pictureScrollPane.setPreferredSize(new Dimension(300, 250));
         pictureScrollPane.setViewportBorder(
-                BorderFactory.createLineBorder(Color.black));
-
+                BorderFactory.createLineBorder(new Color(210, 239, 239)));
+        
         pictureScrollPane.setColumnHeaderView(columnView);
         pictureScrollPane.setRowHeaderView(rowView);
 
@@ -120,16 +121,17 @@ public class ScrollDemo extends JPanel
                 new Corner());
         pictureScrollPane.setCorner(JScrollPane.UPPER_RIGHT_CORNER,
                 new Corner());
-
+        
+        pictureScrollPane.setBorder(null);
         //Put it in this panel.
         j.add(pictureScrollPane);
 
-        j.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+//        j.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         j2.setViewportView(j);
         add(j2);
         updateUI();
     }
-
+    
     public void itemStateChanged(ItemEvent e) {
         if (e.getStateChange() == ItemEvent.SELECTED) {
             //Turn it to metric.
@@ -154,5 +156,5 @@ public class ScrollDemo extends JPanel
             return null;
         }
     }
-
+    
 }
