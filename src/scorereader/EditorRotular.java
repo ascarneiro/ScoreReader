@@ -211,7 +211,7 @@ public class EditorRotular extends javax.swing.JFrame {
         });
         jPanel1.add(SEMICOLCHEIA, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 120, 33));
 
-        BARRA_COMPASSO.setText("Barra compasso");
+        BARRA_COMPASSO.setText("Barra Compasso");
         BARRA_COMPASSO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BARRA_COMPASSOActionPerformed(evt);

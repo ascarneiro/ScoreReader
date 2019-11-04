@@ -26,6 +26,7 @@ class ScoreReaderDataSet(object):
         cinza = img.convert('L')  # converte para escala cinza
         cinza = cinza.point(lambda x: 0 if (x < 128) else 255, '1')  # binariza imagem
         imagem = numpy.array(cinza, dtype='uint8')
+        print('Imagem de ' + tipo + " adicionada com sucesso ao treinamento")
         if 'Semibreve' == tipo:
             self.semibreve.append(imagem)
         elif 'Seminima' == tipo:

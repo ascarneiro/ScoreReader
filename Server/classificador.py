@@ -29,13 +29,15 @@ class Classificador(object):
         self.ROTULO_CLAVEDO = 2
         self.ROTULO_CLAVESOL = 3
         self.ROTULO_CLAVEFA = 4
-        self.ROTULO_LIGADURA = 5
-        self.ROTULO_PAUSASEMINIMA = 6
-        self.ROTULO_PAUSACOLCHEIA = 7
-        self.ROTULO_PAUSASEMICOLCHEIA = 8
-        self.ROTULO_PAUSASEMIBREVE = 9
-        self.ROTULO_PAUSAMINIMA = 10
-        self.ROTULO_BARRACOMPASSO = 11
+        self.ROTULO_PAUSASEMINIMA = 5
+        self.ROTULO_PAUSACOLCHEIA = 6
+        self.ROTULO_PAUSASEMICOLCHEIA = 7
+        self.ROTULO_PAUSASEMIBREVE = 8
+        self.ROTULO_PAUSAMINIMA = 9
+        self.ROTULO_BARRACOMPASSO = 10
+        self.ROTULO_SUSTENIDOS = 11
+        self.ROTULO_BEMOIS = 12
+
 
     # imprimir classe das notas
     def printClasses(self, cropobjects):
@@ -60,10 +62,12 @@ class Classificador(object):
         pausaminima = dataSource.figuras('PausaMinima')
         pausasemibreve = dataSource.figuras('PausaSemibreve')
         barracompasso = dataSource.figuras('BarraCompasso')
+        sustenidos = dataSource.figuras('Sustenidos')
+        bemois = dataSource.figuras('Bemois')
 
-        return minimas, seminimas, ligadura, clavesol, clavefa, clavedo, \
+        return minimas, seminimas,  clavesol, clavefa, clavedo, \
                pausasemicolcheia, pausacolcheia, pausaseminima, pausaminima, \
-               pausasemibreve, barracompasso
+               pausasemibreve, barracompasso, sustenidos, bemois
 
 
 
@@ -89,6 +93,8 @@ class Classificador(object):
         fermata = []
         ligadura = []
         barracompasso = []
+        sustenidos = []
+        bemois = []
 
 
         _modelo_dict = {elem.objid: elem for elem in modelo}
@@ -175,9 +181,9 @@ class Classificador(object):
         pausasemibreve = [(n, s) for n, s in figuras if n.clsname == 'whole_rest']
         barracompasso = [(n, s) for n, s in figuras if n.clsname == 'thin_barline']
 
-        return minimas, seminimas, ligadura, clavesol, clavefa,clavedo,\
+        return minimas, seminimas,clavesol, clavefa,clavedo,\
                pausasemicolcheia,pausacolcheia, pausaseminima, pausaminima, \
-               pausasemibreve,barracompasso
+               pausasemibreve,barracompasso, sustenidos, bemois
 
 
     def extrair_imagem(self, tipo, elementos, margin=1):
@@ -263,22 +269,22 @@ class Classificador(object):
         self.dataSourceScoreReader.addFigura(tipo, imagem)
 
     def treinar(self, tipo, figuras):
-        seminimas = list(itertools.chain(*[s for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
-        minimas = list(itertools.chain(*[m for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
-        ligaduras = list(itertools.chain(*[l for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
-        clavesol = list(itertools.chain(*[g for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
-        clavefa = list(itertools.chain(*[f for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
-        clavedo = list(itertools.chain(*[c for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
-        pausaseminima = list(itertools.chain(*[ps for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
-        pausacolcheia = list(itertools.chain(*[pc for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
-        pausasemicolcheia = list(itertools.chain(*[psm for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
-        pausaminima = list(itertools.chain(*[pm for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
-        pausasemibreve = list(itertools.chain(*[psb for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
-        barracompasso = list(itertools.chain(*[bc for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
+        seminimas = list(itertools.chain(*[s for m, s,  g, f, c, ps, pc, psm, pm, psb, bc, st, bm in figuras]))
+        minimas = list(itertools.chain(*[m for m, s,  g, f, c, ps, pc, psm, pm, psb, bc, st, bm in figuras]))
+        clavesol = list(itertools.chain(*[g for m, s,  g, f, c, ps, pc, psm, pm, psb, bc, st, bm in figuras]))
+        clavefa = list(itertools.chain(*[f for m, s,  g, f, c, ps, pc, psm, pm, psb, bc, st, bm in figuras]))
+        clavedo = list(itertools.chain(*[c for m, s,  g, f, c, ps, pc, psm, pm, psb, bc, st, bm in figuras]))
+        pausaseminima = list(itertools.chain(*[ps for m, s,  g, f, c, ps, pc, psm, pm, psb, bc, st, bm in figuras]))
+        pausacolcheia = list(itertools.chain(*[pc for m, s,  g, f, c, ps, pc, psm, pm, psb, bc, st, bm in figuras]))
+        pausasemicolcheia = list(itertools.chain(*[psm for m, s,  g, f, c, ps, pc, psm, pm, psb, bc, st, bm in figuras]))
+        pausaminima = list(itertools.chain(*[pm for m, s,  g, f, c, ps, pc, psm, pm, psb, bc, st, bm in figuras]))
+        pausasemibreve = list(itertools.chain(*[psb for m, s,  g, f, c, ps, pc, psm, pm, psb, bc, st, bm in figuras]))
+        barracompasso = list(itertools.chain(*[bc for m, s,  g, f, c, ps, pc, psm, pm, psb, bc, st, bm in figuras]))
+        sustenidos = list(itertools.chain(*[st for m, s, g, f, c, ps, pc, psm, pm, psb, bc, st, bm in figuras]))
+        bemois = list(itertools.chain(*[bm for m, s, g, f, c, ps, pc, psm, pm, psb, bc, st, bm in figuras]))
 
         img_seminimas = [self.extrair_imagem(tipo, s) for s in seminimas]
         img_minimas = [self.extrair_imagem(tipo, m) for m in minimas]
-        img_ligaduras = [self.extrair_imagem(tipo, l) for l in ligaduras]
         img_clavesol = [self.extrair_imagem(tipo, g) for g in clavesol]
         img_clavefa = [self.extrair_imagem(tipo, f) for f in clavefa]
         img_clavedo = [self.extrair_imagem(tipo, c) for c in clavedo]
@@ -288,11 +294,12 @@ class Classificador(object):
         img_pausaminima = [self.extrair_imagem(tipo, pm) for pm in pausaminima]
         img_pausasemibreve = [self.extrair_imagem(tipo, psb) for psb in pausasemibreve]
         img_barracompasso = [self.extrair_imagem(tipo, bc) for bc in barracompasso]
+        img_sustenidos = [self.extrair_imagem(tipo, bc) for bc in sustenidos]
+        img_bemois = [self.extrair_imagem(tipo, bc) for bc in bemois]
 
         #if tipo == 'MANUSCRITO':
         img_seminimas = [resize(sm, (self.ALTURA, self.LARGURA)) for sm in img_seminimas]
         img_minimas = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_minimas]
-        img_ligaduras = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_ligaduras]
         img_clavesol = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_clavesol]
         img_clavefa = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_clavefa]
         img_clavedo = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_clavedo]
@@ -302,13 +309,13 @@ class Classificador(object):
         img_pausaminima = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_pausaminima]
         img_pausasemibreve = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_pausasemibreve]
         img_barracompasso = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_barracompasso]
+        img_sustenidos = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_sustenidos]
+        img_bemois = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_bemois]
 
         # And re-binarize, to compensate for interpolation effects
         for im in img_seminimas:
             im[im > 0] = 1
         for im in img_minimas:
-            im[im > 0] = 1
-        for im in img_ligaduras:
             im[im > 0] = 1
         for im in img_clavesol:
             im[im > 0] = 1
@@ -328,10 +335,13 @@ class Classificador(object):
             im[im > 0] = 1
         for im in img_barracompasso:
             im[im > 0] = 1
+        for im in img_sustenidos:
+            im[im > 0] = 1
+        for im in img_bemois:
+            im[im > 0] = 1
 
         rotulos_seminimas = [self.ROTULO_SEMINIMA for _ in img_seminimas]
         rotulos_minimas = [self.ROTULO_MINIMA for _ in img_minimas]
-        rotulos_ligaduras = [self.ROTULO_LIGADURA for _ in img_ligaduras]
         rotulos_clavesol = [self.ROTULO_CLAVESOL for _ in img_clavesol]
         rotulos_clavefa = [self.ROTULO_CLAVEFA for _ in img_clavefa]
         rotulos_clavedo = [self.ROTULO_CLAVEDO for _ in img_clavedo]
@@ -341,11 +351,12 @@ class Classificador(object):
         rotulos_pausaminima = [self.ROTULO_PAUSAMINIMA for _ in img_pausaminima]
         rotulos_pausasemibreve = [self.ROTULO_PAUSASEMIBREVE for _ in img_pausasemibreve]
         rotulos_barracompasso = [self.ROTULO_BARRACOMPASSO for _ in img_barracompasso]
+        rotulos_sustenido = [self.ROTULO_SUSTENIDOS for _ in img_sustenidos]
+        rotulos_bemois = [self.ROTULO_BEMOIS for _ in img_bemois]
 
 
         misturadas = img_seminimas +\
                           img_minimas + \
-                          img_ligaduras + \
                           img_clavesol + \
                           img_clavefa + \
                           img_clavedo + \
@@ -354,13 +365,14 @@ class Classificador(object):
                           img_pausasemicolcheia + \
                           img_pausaseminima + \
                           img_pausasemibreve + \
-                          img_barracompasso
+                          img_barracompasso+ \
+                          img_sustenidos + \
+                          img_bemois
 
             # converte imagem em matrix unidimencional
         figuras_array_linha = [n.flatten() for n in misturadas]
         rotulos_classe = rotulos_seminimas + \
                               rotulos_minimas + \
-                              rotulos_ligaduras + \
                               rotulos_clavesol + \
                               rotulos_clavefa + \
                               rotulos_clavedo + \
@@ -369,7 +381,9 @@ class Classificador(object):
                               rotulos_pausasemicolcheia + \
                               rotulos_pausaminima + \
                               rotulos_pausasemibreve + \
-                              rotulos_barracompasso
+                              rotulos_barracompasso+ \
+                              rotulos_sustenido + \
+                              rotulos_bemois
 
         self.X_conjunto_treino, self.X_conjunto_teste, self.Y_conjunto_treino, self.Y_conjunto_teste = train_test_split(
             figuras_array_linha, rotulos_classe, test_size=0.25, random_state=42,
@@ -393,8 +407,9 @@ class Classificador(object):
         cinza = cinza.point(lambda x: 0 if (x < 128) else 255, '1')  # binariza imagem
         elemento_teste = numpy.array(cinza, dtype='uint8').flatten()  # converte em array e achata imagem
 
-        classes = ['Seminima', 'Minima', 'ClaveDo', 'ClaveFa', 'ClaveSol', 'Ligadura', 'PausaSeminima',
-                   'PausaColcheia', 'PausaSemiColcheia', 'PausaSemiBreve', 'PausaMinima', 'BarraCompasso']
+        classes = ['Seminima', 'Minima', 'ClaveDo', 'ClaveSol', 'ClaveFa', 'PausaSeminima',
+                   'PausaColcheia', 'PausaSemiColcheia', 'PausaSemiBreve', 'PausaMinima', 'BarraCompasso',
+                   'Sustenido', 'Bemol']
         encontrado = self.KNN.predict([elemento_teste])
         return classes[encontrado[0]];
 
@@ -408,8 +423,9 @@ class Classificador(object):
             cinza = cinza.point(lambda x: 0 if (x < 128) else 255, '1')  # binariza imagem
             elemento_teste = numpy.array(cinza, dtype='uint8').flatten()  # converte em array e achata imagem
 
-            classes = ['Seminima', 'Minima', 'ClaveDo', 'ClaveFa', 'ClaveSol', 'Ligadura', 'PausaSeminima',
-                       'PausaColcheia', 'PausaSemiColcheia', 'PausaSemiBreve', 'PausaMinima', 'BarraCompasso']
+            classes = ['Seminima', 'Minima', 'ClaveDo', 'ClaveSol', 'ClaveFa', 'PausaSeminima',
+                       'PausaColcheia', 'PausaSemiColcheia', 'PausaSemiBreve', 'PausaMinima', 'BarraCompasso',
+                       'Sustenido', 'Bemol']
             encontrado = self.KNN.predict([elemento_teste])
             mensagem = 'A nota ' + nome + ' parece com uma : ' + classes[encontrado[0]];
             retorno.append(mensagem)

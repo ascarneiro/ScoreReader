@@ -126,7 +126,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="BARRA_COMPASSO">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Barra compasso"/>
+                <Property name="text" type="java.lang.String" value="Barra Compasso"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BARRA_COMPASSOActionPerformed"/>

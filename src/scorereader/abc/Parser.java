@@ -164,7 +164,7 @@ public class Parser {
         score = new StringBuilder();
         score.append("X: 1").append(getTitulo(fileName)).append("\n");
         score.append(ABC_NOTATION.TITULO).append(" ").append(getTitulo(fileName)).append("\n");
-        score.append(ABC_NOTATION.COMPOSITOR).append(" ").append(getCompositor()).append("\n");
+        score.append(ABC_NOTATION.COMPOSITOR).append(" ").append(getCompositor());
         score.append(getElementos(pautas));
 
         return score;
@@ -176,7 +176,7 @@ public class Parser {
     }
 
     private String getCompositor() {
-        return "Transcrito por prototipo Score Reader \n Alan Soares Carneiro";
+        return "Transcrito por prototipo Score Reader Alan Soares Carneiro";
     }
 
     //Fixo por enquanto testar compilador
@@ -186,13 +186,15 @@ public class Parser {
         int qtQuebra = 0;
         for (Clave pauta : pautas) {
 
+            boolean inicioNotasFimClave = false;
             String armaduraClave = getElementoArmaduraClave(pauta);
             abcCode.append(armaduraClave);
 
             for (Figura elemento : pauta.getFigurasPauta()) {
                 if (elemento.isNotaMusical()) {
                     abcCode.append(elemento.getNota().nome).append(getTipoNota(elemento));
-                } else {
+                    inicioNotasFimClave = true;
+                } else if (inicioNotasFimClave) {
 
                     String tipo = getTipoPausa(elemento);
                     if (tipo.isEmpty()) {
@@ -201,7 +203,7 @@ public class Parser {
                     abcCode.append(tipo);
                     qtQuebra++;
                 }
-                if (qtQuebra == 3) {
+                if (qtQuebra == 4) {
                     abcCode.append("\n");
                     qtQuebra = 0;
                 }
@@ -226,7 +228,7 @@ public class Parser {
         } else if ("PausaSemiColcheia".equalsIgnoreCase(elemento.tipo)) {
             return ABC_NOTATION.PAUSA_SEMICOLCHEIA;
         }
-        return ABC_NOTATION.PAUSA_COLCHEIA;
+        return "";
     }
 
     private String getElementoArmaduraClave(Clave pauta) {
@@ -242,17 +244,17 @@ public class Parser {
             if (figura.isNotaMusical()) {
                 break;
             }
-            if ("claveSol".equalsIgnoreCase(figura.tipo)) {
+            if ("ClaveSol".equalsIgnoreCase(figura.tipo)) {
                 clave = ABC_NOTATION.CLAVE_SOL;
-            } else if ("claveFa".equalsIgnoreCase(figura.tipo)) {
+            } else if ("ClaveFa".equalsIgnoreCase(figura.tipo)) {
                 clave = ABC_NOTATION.CLAVE_FA;
-            } else if ("claveDo".equalsIgnoreCase(figura.tipo)) {
+            } else if ("ClaveDo".equalsIgnoreCase(figura.tipo)) {
                 clave = ABC_NOTATION.CLAVE_DO;
-            } else if ("sustenido".equalsIgnoreCase(figura.tipo)) {
+            } else if ("Sustenido".equalsIgnoreCase(figura.tipo)) {
                 qtSustenidos++;
             } else if ("Bemol".equalsIgnoreCase(figura.tipo)) {
                 qtBemois++;
-            } else if ("tempo".equalsIgnoreCase(figura.tipo)) {
+            } else if ("Tempo".equalsIgnoreCase(figura.tipo)) {
                 //Ver regra tempo, fracao e caracter C
                 tempo = "4/4"; //Seguir nomenclatura fracoes
             }
@@ -264,9 +266,8 @@ public class Parser {
             tonalidade = ABC_NOTATION.TONALIDADE_BEMOL[qtBemois];
         }
 
-        armadura.append(ABC_NOTATION.TONALIDADE_E_CLAVE).append(ABC_NOTATION.TONALIDADE_SUSTENIDO[0]);//Do Maior
-        armadura.append("[").append(ABC_NOTATION.TONALIDADE_E_CLAVE).append(tonalidade).append(" ").append(clave).append("]");
-        armadura.append(ABC_NOTATION.MEDIDA).append(tempo);
+        armadura.append("\n").append(ABC_NOTATION.TONALIDADE_E_CLAVE).append(tonalidade).append(" ").append(clave);
+        armadura.append("\n").append(ABC_NOTATION.MEDIDA).append(tempo).append("\n");
 
         return armadura.toString();
     }
@@ -297,7 +298,7 @@ public class Parser {
         } else if ("SemiColcheia".equalsIgnoreCase(elemento.tipo)) {
             return ABC_NOTATION.SEMICOLCHEIA;
         }
-        return "Indeterminada";
+        return "";
     }
 
 }
