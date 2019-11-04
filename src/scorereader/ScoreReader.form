@@ -141,41 +141,6 @@
                         </Constraint>
                       </Constraints>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="SERVER">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="http://localhost:8090/"/>
-                        <Property name="toolTipText" type="java.lang.String" value="Informe aqui o endereco do servidor onde roda o Classificador"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SERVERActionPerformed"/>
-                      </Events>
-                      <Constraints>
-                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="100" y="130" width="140" height="-1"/>
-                        </Constraint>
-                      </Constraints>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel2">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Fator Distancia:"/>
-                      </Properties>
-                      <Constraints>
-                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="250" y="130" width="-1" height="20"/>
-                        </Constraint>
-                      </Constraints>
-                    </Component>
-                    <Component class="javax.swing.JTextField" name="FATOR">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="3"/>
-                        <Property name="toolTipText" type="java.lang.String" value="Informe aqui um fator para calulo da altura das linhas"/>
-                      </Properties>
-                      <Constraints>
-                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="330" y="130" width="20" height="-1"/>
-                        </Constraint>
-                      </Constraints>
-                    </Component>
                     <Component class="javax.swing.JLabel" name="jLabel4">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Debug:"/>
@@ -257,16 +222,6 @@
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                     </Container>
-                    <Component class="javax.swing.JLabel" name="jLabel8">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Servidor:"/>
-                      </Properties>
-                      <Constraints>
-                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="40" y="130" width="-1" height="-1"/>
-                        </Constraint>
-                      </Constraints>
-                    </Component>
                     <Container class="javax.swing.JPanel" name="jPanel2">
                       <Properties>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -294,7 +249,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="457" y="83" width="57" height="-1"/>
+                              <AbsoluteConstraints x="460" y="90" width="57" height="-1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -314,21 +269,21 @@
                         </Component>
                         <Component class="javax.swing.JTextField" name="MODELO">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="__KNN_PADRAO"/>
+                            <Property name="text" type="java.lang.String" value="KNN_PADRAO"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="89" y="84" width="370" height="-1"/>
+                              <AbsoluteConstraints x="90" y="90" width="370" height="-1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel3">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="Modelo"/>
+                            <Property name="text" type="java.lang.String" value="Tipo:"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="32" y="87" width="-1" height="-1"/>
+                              <AbsoluteConstraints x="50" y="120" width="30" height="-1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -455,7 +410,7 @@
                         </Component>
                         <Component class="javax.swing.JButton" name="jButton4">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="Rotulador"/>
+                            <Property name="text" type="java.lang.String" value="Rotular"/>
                           </Properties>
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
@@ -463,6 +418,56 @@
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                               <AbsoluteConstraints x="270" y="220" width="190" height="30"/>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="TIPO_MODELO_LOAD">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="3">
+                                <StringItem index="0" value="DIGITALIZADO"/>
+                                <StringItem index="1" value="MANUSCRITO"/>
+                                <StringItem index="2" value="ANTIGO"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                              <AbsoluteConstraints x="90" y="120" width="370" height="20"/>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="jLabel8">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Servidor:"/>
+                          </Properties>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                              <AbsoluteConstraints x="40" y="60" width="-1" height="-1"/>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="SERVER">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="http://localhost:8090/"/>
+                            <Property name="toolTipText" type="java.lang.String" value="Informe aqui o endereco do servidor onde roda o Classificador"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SERVERActionPerformed"/>
+                          </Events>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                              <AbsoluteConstraints x="90" y="60" width="140" height="-1"/>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="jLabel11">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Modelo:"/>
+                          </Properties>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                              <AbsoluteConstraints x="40" y="100" width="-1" height="-1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1380,13 +1385,13 @@
                                 <Property name="editable" type="boolean" value="true"/>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                                   <StringArray count="1">
-                                    <StringItem index="0" value="__KNN_PADRAO"/>
+                                    <StringItem index="0" value="KNN_PADRAO"/>
                                   </StringArray>
                                 </Property>
                               </Properties>
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                  <AbsoluteConstraints x="480" y="30" width="140" height="-1"/>
+                                  <AbsoluteConstraints x="480" y="30" width="190" height="-1"/>
                                 </Constraint>
                               </Constraints>
                             </Component>
@@ -1397,7 +1402,7 @@
                               </Properties>
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                  <AbsoluteConstraints x="480" y="60" width="-1" height="-1"/>
+                                  <AbsoluteConstraints x="480" y="90" width="-1" height="-1"/>
                                 </Constraint>
                               </Constraints>
                             </Component>
@@ -1428,6 +1433,46 @@
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                                   <AbsoluteConstraints x="170" y="450" width="360" height="-1"/>
+                                </Constraint>
+                              </Constraints>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="jLabel2">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Fator Distancia:"/>
+                              </Properties>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                  <AbsoluteConstraints x="170" y="90" width="-1" height="20"/>
+                                </Constraint>
+                              </Constraints>
+                            </Component>
+                            <Component class="javax.swing.JTextField" name="FATOR">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="3"/>
+                                <Property name="toolTipText" type="java.lang.String" value="Informe aqui um fator para calulo da altura das linhas"/>
+                              </Properties>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                  <AbsoluteConstraints x="250" y="90" width="20" height="-1"/>
+                                </Constraint>
+                              </Constraints>
+                            </Component>
+                            <Component class="javax.swing.JComboBox" name="TIPO_MODELO">
+                              <Properties>
+                                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                                  <StringArray count="3">
+                                    <StringItem index="0" value="DIGITALIZADO"/>
+                                    <StringItem index="1" value="MANUSCRITO"/>
+                                    <StringItem index="2" value="ANTIGO"/>
+                                  </StringArray>
+                                </Property>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TIPO_MODELOActionPerformed"/>
+                              </Events>
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                  <AbsoluteConstraints x="480" y="60" width="190" height="20"/>
                                 </Constraint>
                               </Constraints>
                             </Component>

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.bytedeco.javacpp.opencv_core;
 import scorereader.abc.Parser;
@@ -92,15 +93,11 @@ public class ScoreReader extends javax.swing.JFrame {
         jToggleButton2 = new javax.swing.JToggleButton();
         FILE_NAME = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        SERVER = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        FATOR = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         debugFIles = new javax.swing.JCheckBox();
         debugImages = new javax.swing.JCheckBox();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jToggleButton4 = new javax.swing.JToggleButton();
         jLabel9 = new javax.swing.JLabel();
@@ -116,6 +113,10 @@ public class ScoreReader extends javax.swing.JFrame {
         D = new javax.swing.JToggleButton();
         jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        TIPO_MODELO_LOAD = new javax.swing.JComboBox();
+        jLabel8 = new javax.swing.JLabel();
+        SERVER = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
         original = new javax.swing.JPanel();
         jToggleButton10 = new javax.swing.JToggleButton();
         jPanel5 = new javax.swing.JPanel();
@@ -192,6 +193,9 @@ public class ScoreReader extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         QT_BARRAS_COMPASSO = new javax.swing.JSpinner();
         BARRAS_COMPASSO_SL = new javax.swing.JSlider();
+        jLabel2 = new javax.swing.JLabel();
+        FATOR = new javax.swing.JTextField();
+        TIPO_MODELO = new javax.swing.JComboBox();
         fragments2 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
 
@@ -237,22 +241,6 @@ public class ScoreReader extends javax.swing.JFrame {
 
         jLabel1.setText("Arquivo:");
         Main.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 49, -1));
-
-        SERVER.setText("http://localhost:8090/");
-        SERVER.setToolTipText("Informe aqui o endereco do servidor onde roda o Classificador");
-        SERVER.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SERVERActionPerformed(evt);
-            }
-        });
-        Main.add(SERVER, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 140, -1));
-
-        jLabel2.setText("Fator Distancia:");
-        Main.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, -1, 20));
-
-        FATOR.setText("3");
-        FATOR.setToolTipText("Informe aqui um fator para calulo da altura das linhas");
-        Main.add(FATOR, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 20, -1));
 
         jLabel4.setText("Debug:");
         Main.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 50, -1));
@@ -305,9 +293,6 @@ public class ScoreReader extends javax.swing.JFrame {
         Main.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 370, 40));
         Main.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
 
-        jLabel8.setText("Servidor:");
-        Main.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
-
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -317,18 +302,18 @@ public class ScoreReader extends javax.swing.JFrame {
                 jToggleButton4ActionPerformed(evt);
             }
         });
-        jPanel2.add(jToggleButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 83, 57, -1));
+        jPanel2.add(jToggleButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, 57, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Score Reader 1.0.0");
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 13, 390, -1));
 
-        MODELO.setText("__KNN_PADRAO");
-        jPanel2.add(MODELO, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 84, 370, -1));
+        MODELO.setText("KNN_PADRAO");
+        jPanel2.add(MODELO, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 370, -1));
 
-        jLabel3.setText("Modelo");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 87, -1, -1));
+        jLabel3.setText("Tipo:");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 30, -1));
 
         processar.setText("Processar Conteudo Partitura");
         processar.setToolTipText("Faz o processamento dos elementos da pauta");
@@ -404,13 +389,31 @@ public class ScoreReader extends javax.swing.JFrame {
         });
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 180, 30));
 
-        jButton4.setText("Rotulador");
+        jButton4.setText("Rotular");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
         jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 190, 30));
+
+        TIPO_MODELO_LOAD.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "DIGITALIZADO", "MANUSCRITO", "ANTIGO" }));
+        jPanel2.add(TIPO_MODELO_LOAD, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 370, 20));
+
+        jLabel8.setText("Servidor:");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+
+        SERVER.setText("http://localhost:8090/");
+        SERVER.setToolTipText("Informe aqui o endereco do servidor onde roda o Classificador");
+        SERVER.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SERVERActionPerformed(evt);
+            }
+        });
+        jPanel2.add(SERVER, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 140, -1));
+
+        jLabel11.setText("Modelo:");
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
 
         Main.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 540, 580));
 
@@ -774,12 +777,12 @@ public class ScoreReader extends javax.swing.JFrame {
         jPanel3.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, -1));
 
         NOME_MODELO.setEditable(true);
-        NOME_MODELO.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "__KNN_PADRAO" }));
-        jPanel3.add(NOME_MODELO, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, 140, -1));
+        NOME_MODELO.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "KNN_PADRAO" }));
+        jPanel3.add(NOME_MODELO, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, 190, -1));
 
         DUMP.setSelected(true);
         DUMP.setText("Dump e Load DataSource");
-        jPanel3.add(DUMP, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, -1, -1));
+        jPanel3.add(DUMP, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 90, -1, -1));
 
         jLabel26.setText("Barra compasso");
         jPanel3.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 80, 20));
@@ -792,6 +795,21 @@ public class ScoreReader extends javax.swing.JFrame {
             }
         });
         jPanel3.add(BARRAS_COMPASSO_SL, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 450, 360, -1));
+
+        jLabel2.setText("Fator Distancia:");
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, -1, 20));
+
+        FATOR.setText("3");
+        FATOR.setToolTipText("Informe aqui um fator para calulo da altura das linhas");
+        jPanel3.add(FATOR, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, 20, -1));
+
+        TIPO_MODELO.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "DIGITALIZADO", "MANUSCRITO", "ANTIGO" }));
+        TIPO_MODELO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TIPO_MODELOActionPerformed(evt);
+            }
+        });
+        jPanel3.add(TIPO_MODELO, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 190, 20));
 
         treinamento.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 710, 570));
 
@@ -1117,6 +1135,7 @@ public class ScoreReader extends javax.swing.JFrame {
                         parametros.put("QT_BARRAS_COMPASSO", QT_BARRAS_COMPASSO.getValue().toString());
 
                         String modelo = Utilities.treinarKnnCustomizado(
+                                TIPO_MODELO.getSelectedItem().toString(),
                                 NOME_MODELO.getSelectedItem().toString(),
                                 CAMINHO.getText(),
                                 DS_NAME.getText(),
@@ -1215,6 +1234,7 @@ public class ScoreReader extends javax.swing.JFrame {
                         log_console("Treinando modelo...");
 
                         String modelo = Utilities.treinarKnnPadrao(
+                                TIPO_MODELO.getSelectedItem().toString(),
                                 NOME_MODELO.getSelectedItem().toString(),
                                 CAMINHO.getText(),
                                 DS_NAME.getText(),
@@ -1224,7 +1244,7 @@ public class ScoreReader extends javax.swing.JFrame {
                         STATUS.setBackground(Color.GREEN);
                         processar.setEnabled(true);
                         resetar = "N";
-                        addImagemChart(CAMINHO_TREINAMENTO + "chart.png");
+                        //addImagemChart(CAMINHO_TREINAMENTO + "chart.png");
                         log_console("Arquivo gerado: !" + modelo);
                         log_console("Modelo treinado e carregado com sucesso!");
                     } catch (Exception e) {
@@ -1258,9 +1278,9 @@ public class ScoreReader extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            Editor e = new Editor(Utilities.bufferedImageToIplImage2(originalImage));
+            EditorImagens e = new EditorImagens(Utilities.bufferedImageToIplImage2(originalImage));
             e.setLocationRelativeTo(this);
-            e.setSize(800, 600);
+            e.setExtendedState(JFrame.MAXIMIZED_BOTH);
             e.setVisible(true);
 
             BufferedImage IplImageToBufferedImage = Utilities.IplImageToBufferedImage(e.getImagemAlterada());
@@ -1274,18 +1294,18 @@ public class ScoreReader extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         if (!rotular.isEmpty()) {
-//            JListCustomRenderer j = new JListCustomRenderer(rotular);
-//            j.setTitle("JLIstCustomRenderer");
-//            j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//            j.setSize(JListCustomRenderer.width, JListCustomRenderer.height);
-//            j.setLocationRelativeTo(null);
-//            j.setVisible(true);
-
+            EditorRotular rotulador = new EditorRotular(rotular);
+            rotulador.setLocationRelativeTo(this);
+            rotulador.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            rotulador.setVisible(true);
         }
 
-        Rotulador r = new Rotulador(rotular);
-        r.setVisible(true);
+
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void TIPO_MODELOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TIPO_MODELOActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TIPO_MODELOActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1389,6 +1409,8 @@ public class ScoreReader extends javax.swing.JFrame {
     private javax.swing.JSlider SEMINIMA_SL;
     private javax.swing.JTextField SERVER;
     private javax.swing.JTextField STATUS;
+    private javax.swing.JComboBox TIPO_MODELO;
+    private javax.swing.JComboBox TIPO_MODELO_LOAD;
     private javax.swing.JPanel bars;
     private javax.swing.JPanel bounded;
     private javax.swing.JCheckBox debugFIles;
@@ -1403,6 +1425,7 @@ public class ScoreReader extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -1550,7 +1573,7 @@ public class ScoreReader extends javax.swing.JFrame {
         try {
             Server.server = SERVER.getText();
             log_console("Carregando modelo " + MODELO.getText());
-            Utilities.carregarModelo(MODELO.getText());
+            Utilities.carregarModelo(MODELO.getText(), TIPO_MODELO_LOAD.getSelectedItem().toString());
             log_console("Modelo carregado");
         } catch (Exception e) {
             log_console("Falha ao ler modelo " + MODELO.getText());

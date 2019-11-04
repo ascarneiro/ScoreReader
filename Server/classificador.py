@@ -11,9 +11,32 @@ from muscima.io import parse_cropobject_list
 from sklearn.externals import joblib
 from sklearn.neighbors import kneighbors_graph
 from sklearn.metrics import classification_report
+import datasourcescorereader as dscoreader
 
 
 class Classificador(object):
+
+    def __init__(self):
+        self.dataSourceScoreReader = dscoreader.ScoreReaderDataSet()
+        self.DIR_TREINAMENTO = 'C:/Users/ascarneiro/Desktop/TCC/ScoreReader/treinamento/'
+        self.data_source_carregado = False
+        self.LARGURA = 10  # Largura da figura
+        self.ALTURA = 40  # altura da figura
+        self.K_VIZINHOS_PROXIMOS = 5;  # numero de vizinhos proximos a verificar no KNN
+
+        self.ROTULO_SEMINIMA = 0
+        self.ROTULO_MINIMA = 1
+        self.ROTULO_CLAVEDO = 2
+        self.ROTULO_CLAVESOL = 3
+        self.ROTULO_CLAVEFA = 4
+        self.ROTULO_LIGADURA = 5
+        self.ROTULO_PAUSASEMINIMA = 6
+        self.ROTULO_PAUSACOLCHEIA = 7
+        self.ROTULO_PAUSASEMICOLCHEIA = 8
+        self.ROTULO_PAUSASEMIBREVE = 9
+        self.ROTULO_PAUSAMINIMA = 10
+        self.ROTULO_BARRACOMPASSO = 11
+
     # imprimir classe das notas
     def printClasses(self, cropobjects):
         _cropobj_dict = {c.objid: c for c in cropobjects}
@@ -24,7 +47,27 @@ class Classificador(object):
         for c in output:
             print(c)
 
-    def extrair_elementos(self, modelo, parametros):
+    def extrair_elementos_score_reader(self, dataSource):
+        seminimas = dataSource.figuras('Seminima')
+        minimas = dataSource.figuras('Minima')
+        ligadura = dataSource.figuras('Ligadura')
+        clavesol = dataSource.figuras('ClaveSol')
+        clavefa = dataSource.figuras('ClaveFa')
+        clavedo = dataSource.figuras('ClaveDo')
+        pausasemicolcheia = dataSource.figuras('PausaSemiColcheia')
+        pausacolcheia = dataSource.figuras('PausaColcheia')
+        pausaseminima = dataSource.figuras('PausaSeminima')
+        pausaminima = dataSource.figuras('PausaMinima')
+        pausasemibreve = dataSource.figuras('PausaSemibreve')
+        barracompasso = dataSource.figuras('BarraCompasso')
+
+        return minimas, seminimas, ligadura, clavesol, clavefa, clavedo, \
+               pausasemicolcheia, pausacolcheia, pausaseminima, pausaminima, \
+               pausasemibreve, barracompasso
+
+
+
+    def extrair_elementos_muscima(self, modelo, parametros):
 
         minimas = []
         seminimas = []
@@ -137,30 +180,32 @@ class Classificador(object):
                pausasemibreve,barracompasso
 
 
-    def extrair_imagem(self, elementos, margin=1):
+    def extrair_imagem(self, tipo, elementos, margin=1):
+        if tipo == 'MANUSCRITO':
+            # Get the bounding box into which all the objects fit
+            top = min([c.top for c in elementos])
+            left = min([c.left for c in elementos])
+            bottom = max([c.bottom for c in elementos])
+            right = max([c.right for c in elementos])
 
-        # Get the bounding box into which all the objects fit
-        top = min([c.top for c in elementos])
-        left = min([c.left for c in elementos])
-        bottom = max([c.bottom for c in elementos])
-        right = max([c.right for c in elementos])
+            # Create the canvas onto which the masks will be pasted
+            height = bottom - top + 2 * margin
+            width = right - left + 2 * margin
+            canvas = numpy.zeros((height, width), dtype='uint8')
 
-        # Create the canvas onto which the masks will be pasted
-        height = bottom - top + 2 * margin
-        width = right - left + 2 * margin
-        canvas = numpy.zeros((height, width), dtype='uint8')
+            for c in elementos:
+                # Get coordinates of upper left corner of the CropObject
+                # relative to the canvas
+                _pt = c.top - top + margin
+                _pl = c.left - left + margin
+                # We have to add the mask, so as not to overwrite
+                # previous nonzeros when symbol bounding boxes overlap.
+                canvas[_pt:_pt + c.height, _pl:_pl + c.width] += c.mask
 
-        for c in elementos:
-            # Get coordinates of upper left corner of the CropObject
-            # relative to the canvas
-            _pt = c.top - top + margin
-            _pl = c.left - left + margin
-            # We have to add the mask, so as not to overwrite
-            # previous nonzeros when symbol bounding boxes overlap.
-            canvas[_pt:_pt + c.height, _pl:_pl + c.width] += c.mask
-
-        canvas[canvas > 0] = 1
-        return canvas
+            canvas[canvas > 0] = 1
+            return canvas
+        else:
+            return elementos
 
     def plotar_imagem(self, mask):
         plt.imshow(mask, cmap='gray', interpolation='nearest')
@@ -182,37 +227,42 @@ class Classificador(object):
             ax.set_xticks([])
         plt.show()
 
-    def treinar_knn(self, nome, caminho, data_source, parametros, ie_dump):
+    def treinar_knn(self, tipo, nome, caminho, data_source, parametros, ie_dump):
         #try:
             print("DataSource :" + data_source)
             self.caminho = caminho
 
-            if ie_dump == "S":
-                self.data_source = self.carregar_objeto()
-            else:
-                self.CROPOBJECT_DIR = os.path.join(self.caminho, data_source)
-                self.cropobject_fnames = [os.path.join(self.CROPOBJECT_DIR, f) for f in os.listdir(self.CROPOBJECT_DIR)]
-                self.data_source = [parse_cropobject_list(f) for f in self.cropobject_fnames]
-                self.salvar_objeto(self.data_source)
+            if tipo == 'MANUSCRITO':
+                if ie_dump == "S":
+                    self.data_source = self.carregar_objeto()
+                else:
+                    self.CROPOBJECT_DIR = os.path.join(self.caminho, data_source)
+                    self.cropobject_fnames = [os.path.join(self.CROPOBJECT_DIR, f) for f in os.listdir(self.CROPOBJECT_DIR)]
+                    self.data_source = [parse_cropobject_list(f) for f in self.cropobject_fnames]
+                    self.salvar_objeto(self.data_source)
+            elif tipo == 'DIGITALIZADO':
+                    self.dataSourceScoreReader = self.loadDataSourceScoreReader()
+            elif tipo == 'MANUSCRITO':
+                    print('Nao implementado')
 
+            if tipo == 'MANUSCRITO':
+                self.figuras = [self.extrair_elementos_muscima(self.modelo, parametros) for self.modelo in self.data_source]
+            elif tipo == 'DIGITALIZADO':
+                self.figuras = [self.extrair_elementos_score_reader(self.dataSourceScoreReader)]
 
-
-
-            #self.f = [self.printClasses(self.modelo) for self.modelo in self.data_source]
-            self.figuras = [self.extrair_elementos(self.modelo, parametros) for self.modelo in self.data_source]
-
-
-
-            self.treinar(self.figuras)
+            self.treinar(tipo, self.figuras)
 
 
             print("Salvando Modelo...")
-            nome = self.salvar_modelo(nome)
+            nome = self.salvar_modelo(nome, tipo)
             print("Modelo salvo...")
             print("sucesso...")
             return nome
 
-    def treinar(self, figuras):
+    def addFiguraDataSource(self, tipo, imagem):
+        self.dataSourceScoreReader.addFigura(tipo, imagem)
+
+    def treinar(self, tipo, figuras):
         seminimas = list(itertools.chain(*[s for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
         minimas = list(itertools.chain(*[m for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
         ligaduras = list(itertools.chain(*[l for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
@@ -226,19 +276,20 @@ class Classificador(object):
         pausasemibreve = list(itertools.chain(*[psb for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
         barracompasso = list(itertools.chain(*[bc for m, s, l, g, f, c, ps, pc, psm, pm, psb, bc in figuras]))
 
-        img_seminimas = [self.extrair_imagem(s) for s in seminimas]
-        img_minimas = [self.extrair_imagem(m) for m in minimas]
-        img_ligaduras = [self.extrair_imagem(l) for l in ligaduras]
-        img_clavesol = [self.extrair_imagem(g) for g in clavesol]
-        img_clavefa = [self.extrair_imagem(f) for f in clavefa]
-        img_clavedo = [self.extrair_imagem(c) for c in clavedo]
-        img_pausaseminima = [self.extrair_imagem(ps) for ps in pausaseminima]
-        img_pausacolcheia = [self.extrair_imagem(pc) for pc in pausacolcheia]
-        img_pausasemicolcheia = [self.extrair_imagem(psm) for psm in pausasemicolcheia]
-        img_pausaminima = [self.extrair_imagem(pm) for pm in pausaminima]
-        img_pausasemibreve = [self.extrair_imagem(psb) for psb in pausasemibreve]
-        img_barracompasso = [self.extrair_imagem(bc) for bc in barracompasso]
+        img_seminimas = [self.extrair_imagem(tipo, s) for s in seminimas]
+        img_minimas = [self.extrair_imagem(tipo, m) for m in minimas]
+        img_ligaduras = [self.extrair_imagem(tipo, l) for l in ligaduras]
+        img_clavesol = [self.extrair_imagem(tipo, g) for g in clavesol]
+        img_clavefa = [self.extrair_imagem(tipo, f) for f in clavefa]
+        img_clavedo = [self.extrair_imagem(tipo, c) for c in clavedo]
+        img_pausaseminima = [self.extrair_imagem(tipo, ps) for ps in pausaseminima]
+        img_pausacolcheia = [self.extrair_imagem(tipo, pc) for pc in pausacolcheia]
+        img_pausasemicolcheia = [self.extrair_imagem(tipo, psm) for psm in pausasemicolcheia]
+        img_pausaminima = [self.extrair_imagem(tipo, pm) for pm in pausaminima]
+        img_pausasemibreve = [self.extrair_imagem(tipo, psb) for psb in pausasemibreve]
+        img_barracompasso = [self.extrair_imagem(tipo, bc) for bc in barracompasso]
 
+        #if tipo == 'MANUSCRITO':
         img_seminimas = [resize(sm, (self.ALTURA, self.LARGURA)) for sm in img_seminimas]
         img_minimas = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_minimas]
         img_ligaduras = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_ligaduras]
@@ -251,7 +302,6 @@ class Classificador(object):
         img_pausaminima = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_pausaminima]
         img_pausasemibreve = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_pausasemibreve]
         img_barracompasso = [resize(mn, (self.ALTURA, self.LARGURA)) for mn in img_barracompasso]
-
 
         # And re-binarize, to compensate for interpolation effects
         for im in img_seminimas:
@@ -366,8 +416,8 @@ class Classificador(object):
             print(mensagem)
         return retorno
 
-    def salvar_modelo(self, nome):
-        s = self.DIR_TREINAMENTO + nome + '.pkl';
+    def salvar_modelo(self, nome, tipo):
+        s = self.DIR_TREINAMENTO + tipo + "_" + nome + '.pkl';
         joblib.dump(self.KNN, s)
         return s
 
@@ -413,31 +463,20 @@ class Classificador(object):
         plt.xlabel('Measures')
         plt.savefig(self.DIR_TREINAMENTO + 'chart.png')
 
-    def carregar_modelo(self, nome):
-        self.KNN = joblib.load(self.DIR_TREINAMENTO + nome + '.pkl')
+    def carregar_modelo(self, nome, tipo):
+        self.KNN = joblib.load(self.DIR_TREINAMENTO + tipo + "_" + nome + '.pkl')
 
 
 
+    def loadDataSourceScoreReader(self):
+        self.dataSourceScoreReader = joblib.load(self.DIR_TREINAMENTO + 'SCORE_READER_DATASOURCE.pkl')
+        return self.dataSourceScoreReader
 
-    def __init__(self):
-          self.DIR_TREINAMENTO = 'C:/Users/ascarneiro/Desktop/TCC/ScoreReader/treinamento/'
-          self.data_source_carregado = False
-          self.LARGURA = 10  # Largura da figura
-          self.ALTURA = 40  # altura da figura
-          self.K_VIZINHOS_PROXIMOS = 5;  # numero de vizinhos proximos a verificar no KNN
+    def saveDataSourceScoreReader(self):
+        s = self.DIR_TREINAMENTO + 'SCORE_READER_DATASOURCE.pkl';
+        joblib.dump(self.dataSourceScoreReader, s)
 
-          self.ROTULO_SEMINIMA = 0
-          self.ROTULO_MINIMA = 1
-          self.ROTULO_CLAVEDO = 2
-          self.ROTULO_CLAVESOL = 3
-          self.ROTULO_CLAVEFA = 4
-          self.ROTULO_LIGADURA = 5
-          self.ROTULO_PAUSASEMINIMA = 6
-          self.ROTULO_PAUSACOLCHEIA = 7
-          self.ROTULO_PAUSASEMICOLCHEIA = 8
-          self.ROTULO_PAUSASEMIBREVE = 9
-          self.ROTULO_PAUSAMINIMA = 10
-          self.ROTULO_BARRACOMPASSO = 11
+
 
 
 

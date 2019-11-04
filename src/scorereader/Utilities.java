@@ -216,9 +216,26 @@ public class Utilities {
 
     }
 
-    public static String carregarModelo(String nome) throws Exception {
+    public static void addFiguraDataSource(Figura figura) throws Exception {
+
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("tipo", figura.tipo);
+        params.put("figura", figura.getBase64Image());
+        Server.callServerPython("addFiguraDataSource", params);
+
+    }
+
+    public static void salvarDsScoreReader() throws Exception {
+
+        HashMap<String, Object> params = new HashMap<>();
+        Server.callServerPython("salvarDsScoreReader", params);
+
+    }
+
+    public static String carregarModelo(String nome, String tipo) throws Exception {
         HashMap<String, Object> params = new HashMap<>();
         params.put("nome", nome);
+        params.put("tipo", tipo);
         String retorno = Server.callServerPython("carregarModelo", params);
         return retorno;
     }
@@ -317,8 +334,9 @@ public class Utilities {
         return segmentado;
     }
 
-    public static String treinarKnnPadrao(String nome, String caminho, String dataSource, String resetar, String ieDump) throws Exception {
+    public static String treinarKnnPadrao(String tipo, String nome, String caminho, String dataSource, String resetar, String ieDump) throws Exception {
         HashMap<String, Object> params = new HashMap<>();
+        params.put("tipo", tipo);
         params.put("nome", nome);
         params.put("caminho", caminho);
         params.put("data_source", dataSource);
@@ -340,8 +358,9 @@ public class Utilities {
         return retorno;
     }
 
-    public static String treinarKnnCustomizado(String nome, String caminho, String dataSource, String resetar, HashMap parametros, String ieDump) throws Exception {
+    public static String treinarKnnCustomizado(String tipo, String nome, String caminho, String dataSource, String resetar, HashMap parametros, String ieDump) throws Exception {
         HashMap<String, Object> params = new HashMap<>();
+        params.put("tipo", tipo);
         params.put("nome", nome);
         params.put("caminho", caminho);
         params.put("data_source", dataSource);

@@ -5,7 +5,21 @@
     <bookmark url="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/_cpdispatch.py" line="57" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df176199-7e82-4001-a2bd-aa7f5aacb6c8" name="Default Changelist" comment="" />
+    <list default="true" id="df176199-7e82-4001-a2bd-aa7f5aacb6c8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classificador.py" beforeDir="false" afterPath="$PROJECT_DIR$/classificador.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/Editor.form" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/EditorImagens.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/Editor.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/EditorImagens.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/Rotulador.form" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/EditorRotular.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/Rotulador.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/EditorRotular.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/ScoreReader.form" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/ScoreReader.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/ScoreReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/ScoreReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/Utilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/Utilities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../treinamento/__KNN_PADRAO.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../treinamento/__KNN_PADRAO_PERFEITO.pkl" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,11 +28,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="62" column="60" lean-forward="true" selection-start-line="62" selection-start-column="60" selection-end-line="62" selection-end-column="60" />
+            <state relative-caret-position="-776">
+              <caret line="126" column="50" lean-forward="true" selection-start-line="126" selection-start-column="50" selection-end-line="126" selection-end-column="50" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -27,43 +41,40 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/1.py">
+        <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/_cpdispatch.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2328">
-              <caret line="106" selection-start-line="106" selection-end-line="106" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="95">
+              <caret line="53" selection-start-line="53" selection-end-line="53" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/3.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3576">
-              <caret line="158" selection-start-line="158" selection-end-line="158" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/parametros.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="20" column="31" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/classificador.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7536">
-              <caret line="326" selection-start-line="326" selection-end-line="326" />
+            <state relative-caret-position="-531">
+              <caret line="259" column="14" lean-forward="true" selection-start-line="259" selection-start-column="14" selection-end-line="259" selection-end-column="14" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/skimage/transform/_warps.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="218">
+              <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/datasourcescorereader.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="31" selection-start-line="31" selection-end-line="31" />
             </state>
           </provider>
         </entry>
@@ -79,16 +90,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>aguarde</find>
-      <find>carregarDataSource</find>
-      <find>plot_modelo</find>
-      <find>plotar</find>
-      <find>plot_decision_regions</find>
-      <find>predict</find>
-      <find>predic</find>
-      <find>classifi</find>
-      <find>doVerificaCarregouDataSource</find>
-      <find>loadK</find>
       <find>melhora</find>
       <find>remove</find>
       <find>printClasses</find>
@@ -96,7 +97,6 @@
       <find>extrair_figuras_modelo</find>
       <find>extrair(</find>
       <find>sucesso</find>
-      <find>load</find>
       <find>loadk</find>
       <find>detectarPontosNotas</find>
       <find>erodida</find>
@@ -109,6 +109,17 @@
       <find>ROTULO_BARRACOMPASSO</find>
       <find>extrair_elementos</find>
       <find>ROTULO_SEMINIMA</find>
+      <find>treinarCustomizado</find>
+      <find>treinar_knn</find>
+      <find>addi</find>
+      <find>salvar_objeto</find>
+      <find>loadM</find>
+      <find>self.k</find>
+      <find>salvarm</find>
+      <find>salvar_modelo</find>
+      <find>carregar_objeto</find>
+      <find>load</find>
+      <find>modelo</find>
     </findStrings>
     <replaceStrings>
       <replace>matrizInicial</replace>
@@ -136,12 +147,13 @@
         <option value="$PROJECT_DIR$/arquivo.py" />
         <option value="$PROJECT_DIR$/2.py" />
         <option value="$PROJECT_DIR$/3.py" />
-        <option value="$PROJECT_DIR$/1.py" />
         <option value="$PROJECT_DIR$/MUSCIMA/Imagens.py" />
         <option value="$PROJECT_DIR$/identificadornotas.py" />
         <option value="$PROJECT_DIR$/Parametros.py" />
-        <option value="$PROJECT_DIR$/server.py" />
         <option value="$PROJECT_DIR$/parametros.py" />
+        <option value="$PROJECT_DIR$/1.py" />
+        <option value="$PROJECT_DIR$/datasourcescorereader.py" />
+        <option value="$PROJECT_DIR$/server.py" />
         <option value="$PROJECT_DIR$/classificador.py" />
       </list>
     </option>
@@ -353,13 +365,13 @@
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11494253" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.22349936" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.36507937" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49867234" visible="true" weight="0.5310245" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49867234" weight="0.41414142" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Terminal" order="6" sideWeight="0.4992034" weight="0.74458873" />
@@ -417,12 +429,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/classificador.py</url>
-          <line>376</line>
+          <line>426</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/classificador.py</url>
-          <line>114</line>
+          <line>157</line>
           <option name="timeStamp" value="26" />
         </line-breakpoint>
       </breakpoints>
@@ -466,6 +478,11 @@
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
+        <expression-string>classes[encontrado[0]]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
         <expression-string>cY +15</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
@@ -502,11 +519,6 @@
       </expression>
       <expression>
         <expression-string>self.plot_classification_report(str(cr), &quot;Grafico de classificacao&quot;, True)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>self.plot_classification_report(str(cr), &quot;Grafico de classificacao&quot;)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -577,13 +589,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="1796" selection-start-line="1796" selection-end-line="1796" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/skimage/transform/_warps.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
         </state>
       </provider>
     </entry>
@@ -671,13 +676,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/_cpdispatch.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="565">
-          <caret line="53" selection-start-line="53" selection-end-line="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/_cprequest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
@@ -699,30 +697,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.py">
+    <entry file="file://$PROJECT_DIR$/3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="62" column="60" lean-forward="true" selection-start-line="62" selection-start-column="60" selection-end-line="62" selection-end-column="60" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="3576">
+          <caret line="158" selection-start-line="158" selection-end-line="158" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2328">
-          <caret line="106" selection-start-line="106" selection-end-line="106" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3576">
-          <caret line="158" selection-start-line="158" selection-end-line="158" />
+        <state relative-caret-position="1392">
+          <caret line="58" column="72" selection-start-line="58" selection-start-column="72" selection-end-line="58" selection-end-column="72" />
         </state>
       </provider>
     </entry>
@@ -733,10 +718,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/datasourcescorereader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/skimage/transform/_warps.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/_cpdispatch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-776">
+          <caret line="126" column="50" lean-forward="true" selection-start-line="126" selection-start-column="50" selection-end-line="126" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/classificador.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7536">
-          <caret line="326" selection-start-line="326" selection-end-line="326" />
+        <state relative-caret-position="-531">
+          <caret line="259" column="14" lean-forward="true" selection-start-line="259" selection-start-column="14" selection-end-line="259" selection-end-column="14" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>

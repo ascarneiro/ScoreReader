@@ -13,6 +13,7 @@ from gamera.core import *
 from gamera.plugins import pil_io
 from gamera.toolkits.musicstaves import musicstaves_rl_simple
 from numpy import fft
+from sklearn.externals import joblib
 
 
 class Server(object):
@@ -21,9 +22,11 @@ class Server(object):
     init_gamera()
     self.data_carregado = False
     self.DIR = 'C:/Users/ascarneiro/Desktop/TCC/ScoreReader/repository/'
+    self.DIR_TREINAMENTO = 'C:/Users/ascarneiro/Desktop/TCC/ScoreReader/treinamento/'
     self.array = None
     self.debug = True
     self.classificador = clf.Classificador()
+
 
   def encodeImageStr(self, image):
     nparr = image.to_numpy()
@@ -119,9 +122,9 @@ class Server(object):
 
 
   @cherrypy.expose
-  def carregarModelo(self, nome):
+  def carregarModelo(self, nome, tipo):
     print("Carregando Modelo...")
-    self.classificador.carregar_modelo(nome)
+    self.classificador.carregar_modelo(nome, tipo)
     print("Modelo carregado...")
 
 
@@ -137,20 +140,33 @@ class Server(object):
     return self.classificador.classificar(img, int(K))
 
   @cherrypy.expose
-  def treinarKnnPadrao(self, nome, caminho, data_source, ie_dump):
+  def treinarKnnPadrao(self, tipo, nome, caminho, data_source, ie_dump):
 
       parametros = params.Parametros()
       #if not self.loaddingDataSource and \
       #        (not self.classificador.isDataSourceCarregado()):
       #   print("Treinando Modelo...")
       self.loaddingDataSource = True
-      nome = self.classificador.treinar_knn(nome, caminho, data_source, parametros, ie_dump)
+      nome = self.classificador.treinar_knn(tipo, nome, caminho, data_source, parametros, ie_dump)
       self.loaddingDataSource = False
       print("Modelo treinado e carregado...")
       return nome
 
   @cherrypy.expose
-  def treinarCustomizado(self, nome, caminho, data_source,
+  def addFiguraDataSource(self, tipo, figura):
+      imagem = self.convertToPilImage(figura)
+      self.classificador.addFiguraDataSource(tipo, imagem)
+
+  @cherrypy.expose
+  def salvarDsScoreReader(self):
+      self.classificador.saveDataSourceScoreReader()
+
+  @cherrypy.expose
+  def carregarObjetoScoreReader(self):
+      self.classificador.loadDataSourceScoreReader()
+
+  @cherrypy.expose
+  def treinarCustomizado(self, tipo, nome, caminho, data_source,
                          QT_SEMIBREVE,
                          QT_MINIMA,
                          QT_SEMINIMA,
@@ -207,7 +223,7 @@ class Server(object):
               (not self.classificador.isDataSourceCarregado()):
           print("Treinando Modelo customizado...")
           self.loaddingDataSource = True
-          nome = self.classificador.treinar_knn(nome, caminho, data_source, parametros, IE_DUMP)
+          nome = self.classificador.treinar_knn(tipo, nome, caminho, data_source, parametros, IE_DUMP)
           self.loaddingDataSource = False
           print("Modelo customizado treinado e carregado...")
           return nome
