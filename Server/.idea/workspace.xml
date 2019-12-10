@@ -5,60 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df176199-7e82-4001-a2bd-aa7f5aacb6c8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../src/scorereader/structure/claves/ClaveFa.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/arquivo.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classificador.py" beforeDir="false" afterPath="$PROJECT_DIR$/classificador.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datasourcescorereader.py" beforeDir="false" afterPath="$PROJECT_DIR$/datasourcescorereader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/identificadornotas.py" beforeDir="false" afterPath="$PROJECT_DIR$/identificadornotas.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/padrao" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/removed" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../repository/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../repository/Cannon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../repository/Manuscrita.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../repository/Ode to Joy.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../repository/Sonata.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../repository/Twinkle Twinkle Litlle Star 2 Barras.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../repository/Twinkle Twinkle Litlle Star Uma Barra de Compasso.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../repository/Twinkle Twinkle Litlle Star.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../repository/alturaNotas.png" beforeDir="false" afterPath="$PROJECT_DIR$/../repository/alturaNotas.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../repository/bounded.png" beforeDir="false" afterPath="$PROJECT_DIR$/../repository/bounded.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../repository/posicaoLinhas.png" beforeDir="false" afterPath="$PROJECT_DIR$/../repository/posicaoLinhas.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../repository/reconhecimento.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../repository/reconhecimento.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../repository/staffless.png" beforeDir="false" afterPath="$PROJECT_DIR$/../repository/staffless.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/EditorImagens.form" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/EditorImagens.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/EditorImagens.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/EditorImagens.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/EditorRotular.form" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/EditorRotular.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/EditorRotular.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/EditorRotular.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/ScoreReader.form" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/ScoreReader.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/scorereader/ScoreReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/ScoreReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/Utilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/Utilities.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/abc/ABC_NOTATION.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/abc/ABC_NOTATION.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/scorereader/abc/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/abc/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/components/images/ScrollDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/components/images/ScrollDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/components/list/FiguraRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/components/list/FiguraRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/image/Fragmentador.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/image/OtherMain.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/image/Prototipo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/reconhecimento/Classificador.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/saidas/Midia.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/structure/Nota.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/structure/Nota.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/structure/claves/Clave.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/structure/claves/Pauta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/scorereader/structure/claves/ClaveSol.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/structure/claves/ClaveSol.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tools/abc2abc.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tools/abc2prt.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tools/abcmatch.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tools/abcpp.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tools/beep.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tools/mftext.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tools/midi2abc.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tools/midicopy.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tools/yaps.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../treinamento/DIGITALIZADO_KNN_PADRAO.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../treinamento/MANUSCRITO_KNN_PADRAO.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../treinamento/SCORE_READER_DATASOURCE.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tools/musicxml.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../tools/musicxml.bat" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -72,7 +22,7 @@
         <entry file="file://$PROJECT_DIR$/server.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="220">
-              <caret line="70" column="26" lean-forward="true" selection-start-line="70" selection-start-column="26" selection-end-line="70" selection-end-column="26" />
+              <caret line="70" column="26" selection-start-line="70" selection-start-column="26" selection-end-line="70" selection-end-column="26" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -93,7 +43,7 @@
         <entry file="file://$PROJECT_DIR$/parametros.py">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="17" lean-forward="true" selection-start-column="17" selection-end-column="17" />
+              <caret column="17" selection-start-column="17" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -865,7 +815,7 @@
     <entry file="file://$PROJECT_DIR$/parametros.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="17" lean-forward="true" selection-start-column="17" selection-end-column="17" />
+          <caret column="17" selection-start-column="17" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -896,7 +846,7 @@
     <entry file="file://$PROJECT_DIR$/server.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
-          <caret line="70" column="26" lean-forward="true" selection-start-line="70" selection-start-column="26" selection-end-line="70" selection-end-column="26" />
+          <caret line="70" column="26" selection-start-line="70" selection-start-column="26" selection-end-line="70" selection-end-column="26" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>

@@ -1,1 +1,1 @@
-%1\abcm2ps.exe %2 -O %3 -X
+%1\abc2xml.exe %2 -o %3

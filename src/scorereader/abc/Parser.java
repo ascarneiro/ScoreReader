@@ -29,6 +29,7 @@ public class Parser {
     private static String filePDF = "";
     private static String fileMidi = "";
     private static String fileXHTML = "";
+    private static String fileMUSICXML = "";
 
     private static final int quebrarEmCompassos = 3;
     private static String PATHTOFILE = "C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\output\\";
@@ -36,6 +37,7 @@ public class Parser {
 
     private String BAT_SVG = "C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\tools\\svg.bat";
     private String BAT_MIDI = "C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\tools\\midi.bat";
+    private String BAT_MUSICXML = "C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\tools\\musicxml.bat";
 
     private StringBuilder score = new StringBuilder();
 
@@ -99,6 +101,27 @@ public class Parser {
         }
     }
 
+    private String exportMUSICXML(String file) {
+        String fileName = file;
+        try {
+            fileName = file.replace(".abc", ".musicxml");
+            String file1 = new String(PATHTOTOOLS);
+            String file2 = new String(PATHTOFILE + file + ".abc");
+            String file3 = new String(PATHTOFILE);
+            Process exec = Runtime.getRuntime().exec(new String[]{"cmd.exe", "/c", BAT_MUSICXML, file1, file2, file3});
+            while (exec.waitFor() != 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String musicXMLFile = PATHTOFILE + fileName + ".xml";
+        File f = new File(musicXMLFile);
+        if (f.exists()) {
+            f.renameTo(new File(musicXMLFile.replace(".xml", ".musicxml")));
+        }
+        return musicXMLFile.replace(".xml", ".musicxml");
+    }
+
     private String exportMIDI(String file) {
         String fileName = file;
         try {
@@ -149,6 +172,10 @@ public class Parser {
         return fileXHTML;
     }
 
+    public static String getFileMUSICXML() {
+        return fileMUSICXML;
+    }
+
     public String[] compile(String filename, ArrayList<Pauta> pautas) {
         StringBuilder score = make(filename, pautas);
         abcFile = makeABCFile(score);
@@ -156,8 +183,9 @@ public class Parser {
         fileXHTML = exportXHTML(abcFile);
         fileMidi = exportMIDI(abcFile);
         filePDF = exportPDF(abcFile);
+        fileMUSICXML = exportMUSICXML(abcFile);
 
-        return new String[]{abcFile, fileSvg, fileMidi};
+        return new String[]{abcFile, fileSvg, fileMidi, fileMUSICXML};
     }
 
     private StringBuilder make(String fileName, ArrayList<Pauta> pautas) {
@@ -199,8 +227,7 @@ public class Parser {
                         if ("Semibreve".equalsIgnoreCase(figura)
                                 || "Minima".equalsIgnoreCase(figura)
                                 || "Seminima".equalsIgnoreCase(figura)
-                                || "Colcheia".equalsIgnoreCase(figura)
-                                ) {
+                                || "Colcheia".equalsIgnoreCase(figura)) {
                             //Caso nao identificar o nome da nota mas for nota musical usa padrao G (Sol)
                             figura = "G".concat(figura);
                         }

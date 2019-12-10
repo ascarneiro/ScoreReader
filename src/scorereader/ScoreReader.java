@@ -1322,7 +1322,15 @@ public class ScoreReader extends javax.swing.JFrame {
     }//GEN-LAST:event_TIPO_DISTRIBUICAOActionPerformed
 
     private void D1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_D1ActionPerformed
-        // TODO add your handling code here:
+        try {
+            String dir = parser.getFileMUSICXML();
+            if (!dir.isEmpty()) {
+                Desktop.getDesktop().open(new File(dir));
+            }
+        } catch (Exception e) {
+            log_console("Falha ao carregar arquivo PDF: \n" + e.getMessage());
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_D1ActionPerformed
 
     private void FILE_NAMEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FILE_NAMEActionPerformed
