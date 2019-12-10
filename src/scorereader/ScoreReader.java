@@ -53,7 +53,7 @@ public class ScoreReader extends javax.swing.JFrame {
     private ArrayList<Pauta> pautas = new ArrayList<>();
     private ArrayList<Figura> rotular = new ArrayList<>();
     //Compilar os elementos
-    Parser parser = new Parser();
+    Parser parser = new Parser(this);
 
     private byte[] originalImage = null;
 

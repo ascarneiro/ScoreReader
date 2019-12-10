@@ -629,7 +629,7 @@ public class EditorRotular extends javax.swing.JFrame {
             selectedJList.repaint();
             rotularJL.repaint();
         } else {
-            JOptionPane.showMessageDialog(this, "Para remover selecione um o mais itens nas caixas de rotula??o!");
+            JOptionPane.showMessageDialog(this, "Para remover selecione um o mais itens nas caixas de rotulacao!");
         }
     }//GEN-LAST:event_REMOVERActionPerformed
 

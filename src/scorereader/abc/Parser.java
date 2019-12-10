@@ -18,12 +18,14 @@ import org.apache.batik.transcoder.Transcoder;
 import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.TranscoderOutput;
 import org.apache.fop.svg.PDFTranscoder;
+import scorereader.ScoreReader;
 
 import scorereader.structure.Figura;
 import scorereader.structure.claves.Pauta;
 
 public class Parser {
 
+    private ScoreReader scoreReader = null;
     private static String abcFile = "";
     private static String fileSvg = "";
     private static String filePDF = "";
@@ -41,6 +43,10 @@ public class Parser {
 
     private StringBuilder score = new StringBuilder();
 
+    public Parser(ScoreReader scoreReader) {
+        this.scoreReader = scoreReader;
+    }
+
     private String exportXHTML(String file) {
         String fileName = file;
         try {
@@ -49,8 +55,10 @@ public class Parser {
             String file3 = new String(PATHTOFILE + file + ".xhtml");
             Process exec = Runtime.getRuntime().exec(new String[]{"cmd.exe", "/c", BAT_SVG, file1, file2, file3});
             while (exec.waitFor() != 0);
+            scoreReader.log_console("Arquivo XHTML gerado com sucesso....");
         } catch (Exception e) {
             e.printStackTrace();
+            scoreReader.log_console("Falha ao gerar arquivo XHTML ....");
         }
         return PATHTOFILE + fileName + ".xhtml";
     }
@@ -66,9 +74,10 @@ public class Parser {
             TranscoderOutput transcoderOutput = new TranscoderOutput(new FileOutputStream(new File(pdf)));
             transcoder.transcode(transcoderInput, transcoderOutput);
             transcoderOutput.getOutputStream().close();
-
+            scoreReader.log_console("Arquivo PDF gerado com sucesso....");
             return pdf;
         } catch (Exception e) {
+            scoreReader.log_console("Falha ao gerar arquivo PDF ....");
             e.printStackTrace();
             return " ";
         }
@@ -84,7 +93,9 @@ public class Parser {
                 String file3 = new String(PATHTOFILE + file + ".svg");
                 Process exec = Runtime.getRuntime().exec(new String[]{"cmd.exe", "/c", BAT_SVG, file1, file2, file3});
                 while (exec.waitFor() != 0);
+                scoreReader.log_console("Arquivo SVG gerado com sucesso....");
             } catch (Exception e) {
+                scoreReader.log_console("Falha ao gerar arquivo SVG ....");
             }
             String path = PATHTOFILE + fileName + ".svg";
 
@@ -110,7 +121,9 @@ public class Parser {
             String file3 = new String(PATHTOFILE);
             Process exec = Runtime.getRuntime().exec(new String[]{"cmd.exe", "/c", BAT_MUSICXML, file1, file2, file3});
             while (exec.waitFor() != 0);
+            scoreReader.log_console("Arquivo MUSICXML gerado com sucesso....");
         } catch (Exception e) {
+            scoreReader.log_console("Falha ao gerar arquivo MUSICXML ....");
             e.printStackTrace();
         }
 
@@ -131,7 +144,9 @@ public class Parser {
             String file3 = new String(PATHTOFILE + file + ".midi");
             Process exec = Runtime.getRuntime().exec(new String[]{"cmd.exe", "/c", BAT_MIDI, file1, file2, file3});
             while (exec.waitFor() != 0);
+            scoreReader.log_console("Arquivo MIDI gerado com sucesso....");
         } catch (Exception e) {
+            scoreReader.log_console("Falha ao gerar arquivo MIDI ....");
             e.printStackTrace();
         }
         return PATHTOFILE + fileName + ".midi";
@@ -145,7 +160,9 @@ public class Parser {
             BufferedWriter bw = new BufferedWriter(writer);
             bw.write(score.toString());
             bw.close();
+            scoreReader.log_console("Arquivo ABC Notation gerado com sucesso....");
         } catch (Exception e) {
+            scoreReader.log_console("Falha ao gerar arquivo ABC Notation ....");
             e.printStackTrace();
         }
 

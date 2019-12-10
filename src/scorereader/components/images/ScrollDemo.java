@@ -5,100 +5,89 @@ import java.awt.event.*;
 import javax.swing.*;
 import scorereader.Utilities;
 
-/* 
- * ScrollDemo.java requires these files:
- *   Rule.java
- *   Corner.java
- *   ScrollablePicture.java
- *   images/flyingBee.jpg
- */
-public class ScrollDemo extends JPanel
-        implements ItemListener {
+public class ScrollDemo extends JPanel implements ItemListener {
 
-    private double zoom = 100;
-    private Rule columnView;
-    private Rule rowView;
+    private Rule colunas;
+    private Rule linhas;
     private JToggleButton isMetric;
-    private ScrollablePicture picture;
-    private JPanel j = new JPanel();
-    private ImageIcon image;
-    JScrollPane j2 = new JScrollPane();
+    private ScrollablePicture painelImagem;
+    private JPanel jpanel = new JPanel();
+    private ImageIcon imagem;
+    private ImageIcon imagemOriginal;
+    JScrollPane jscroolPane = new JScrollPane();
+    private int ZOOM = 1100;
 
     public ScrollDemo() {
 
-        add(j2);
+        add(jscroolPane);
         setLayout(new BorderLayout());
 
-        j.setLayout(new BoxLayout(j, BoxLayout.LINE_AXIS));
+        jpanel.setLayout(new BoxLayout(jpanel, BoxLayout.LINE_AXIS));
 
     }
 
     public void limpar() {
-        j.removeAll();
+        jpanel.removeAll();
     }
 
     public void addImagem(String caminhoImagem, boolean limpar) {
-        //Get the image to use.
-        ImageIcon im = createImageIcon(caminhoImagem);
-
-        ImageIcon image = im;
-        if (im != null
+        ImageIcon imagemLocal = criarImageIcon(caminhoImagem);
+        imagemOriginal = imagemLocal;
+        ImageIcon imagem = imagemLocal;
+        if (imagemLocal != null
                 && limpar) {
-            image = Utilities.redimencionarImagem(im, 1100, 1100);
-            im.getImage().flush();
+            imagem = Utilities.redimencionarImagem(imagemLocal, 1100, 1100);
+            imagemLocal.getImage().flush();
 
         }
-        addImagem(image, limpar);
+        addImagem(imagem, limpar);
 
     }
 
     public void atualizarImagem(ImageIcon image, boolean limpar) {
-        picture.setIcon(image);
-        picture.repaint();
+        painelImagem.setIcon(image);
+        painelImagem.repaint();
     }
 
     public void addImagem(ImageIcon image, boolean limpar) {
         if (limpar) {
-            j.removeAll();
+            jpanel.removeAll();
         }
 
-        //Create the row and column headers.
-        columnView = new Rule(Rule.HORIZONTAL, true);
-        rowView = new Rule(Rule.VERTICAL, true);
+        colunas = new Rule(Rule.HORIZONTAL, true);
+        linhas = new Rule(Rule.VERTICAL, true);
 
         if (image != null) {
-            columnView.setPreferredWidth(image.getIconWidth());
-            rowView.setPreferredHeight(image.getIconHeight());
-           if (this.image != null
-                   && image != null) {
-                this.image.getImage().flush();
+            colunas.setPreferredWidth(image.getIconWidth());
+            linhas.setPreferredHeight(image.getIconHeight());
+            if (this.imagem != null
+                    && this.imagem != null) {
+                this.imagem.getImage().flush();
                 image.getImage().flush();
-           }
-            this.image = image;
+            }
+            this.imagem = image;
         } else {
-            columnView.setPreferredWidth(320);
-            rowView.setPreferredHeight(480);
+            colunas.setPreferredWidth(320);
+            linhas.setPreferredHeight(480);
         }
 
-        //Create the corners.
-        JPanel buttonCorner = new JPanel(); //use FlowLayout
+        JPanel buttonCorner = new JPanel();
         isMetric = new JToggleButton("cm", true);
         isMetric.setFont(new Font("SansSerif", Font.PLAIN, 11));
         isMetric.setMargin(new Insets(2, 2, 2, 2));
         isMetric.addItemListener(this);
         buttonCorner.add(isMetric);
 
-        //Set up the scroll pane.
-        picture = new ScrollablePicture(image, columnView.getIncrement());
+        painelImagem = new ScrollablePicture(image, colunas.getIncrement());
 
-        JScrollPane pictureScrollPane = new JScrollPane(picture);
+        JScrollPane pictureScrollPane = new JScrollPane(painelImagem);
 
         pictureScrollPane.setPreferredSize(new Dimension(300, 250));
         pictureScrollPane.setViewportBorder(
                 BorderFactory.createLineBorder(new Color(210, 239, 239)));
 
-        pictureScrollPane.setColumnHeaderView(columnView);
-        pictureScrollPane.setRowHeaderView(rowView);
+        pictureScrollPane.setColumnHeaderView(colunas);
+        pictureScrollPane.setRowHeaderView(linhas);
 
         pictureScrollPane.setCorner(JScrollPane.UPPER_LEFT_CORNER,
                 buttonCorner);
@@ -108,32 +97,48 @@ public class ScrollDemo extends JPanel
                 new Corner());
 
         pictureScrollPane.setBorder(null);
-        //Put it in this panel.
-        j.add(pictureScrollPane);
+        jpanel.add(pictureScrollPane);
 
-//        j.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        j2.setViewportView(j);
-        add(j2);
+        jscroolPane.setViewportView(jpanel);
+        add(jscroolPane);
         updateUI();
+
+        painelImagem.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getButton() == MouseEvent.BUTTON1) {
+                    ZOOM += 100;
+                } else {
+                    ZOOM -= 100;
+
+                }
+
+                if (imagemOriginal != null) {
+                    ImageIcon imageIcon = Utilities.redimencionarImagem(imagemOriginal, ZOOM, ZOOM);
+                    imageIcon.getImage().flush();
+
+                    addImagem(imageIcon, true);
+                }
+
+            }
+
+        });
     }
 
     public void itemStateChanged(ItemEvent e) {
         if (e.getStateChange() == ItemEvent.SELECTED) {
-            //Turn it to metric.
-            rowView.setIsMetric(true);
-            columnView.setIsMetric(true);
+            linhas.setIsMetric(true);
+            colunas.setIsMetric(true);
         } else {
-            //Turn it to inches.
-            rowView.setIsMetric(false);
-            columnView.setIsMetric(false);
+            linhas.setIsMetric(false);
+            colunas.setIsMetric(false);
         }
-        picture.setMaxUnitIncrement(rowView.getIncrement());
+        painelImagem.setMaxUnitIncrement(linhas.getIncrement());
+
     }
 
-    /**
-     * Returns an ImageIcon, or null if the path was invalid.
-     */
-    protected static ImageIcon createImageIcon(String path) {
+    protected static ImageIcon criarImageIcon(String path) {
         if (path != null) {
             ImageIcon im = new ImageIcon(path);
             return im;
@@ -143,11 +148,4 @@ public class ScrollDemo extends JPanel
         }
     }
 
-    public double getZoom() {
-        return zoom;
-    }
-
-    public void setZoom(double zoom) {
-        this.zoom = zoom;
-    }
 }

@@ -1,47 +1,13 @@
-/*
- * Copyright (c) 1995, 2008, Oracle and/or its affiliates. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- *   - Redistributions of source code must retain the above copyright
- *     notice, this list of conditions and the following disclaimer.
- *
- *   - Redistributions in binary form must reproduce the above copyright
- *     notice, this list of conditions and the following disclaimer in the
- *     documentation and/or other materials provided with the distribution.
- *
- *   - Neither the name of Oracle or the names of its
- *     contributors may be used to endorse or promote products derived
- *     from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
- * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
 package scorereader.components.images;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.*;
 
-/* ScrollablePicture.java is used by ScrollDemo.java. */
-public class ScrollablePicture extends JLabel
-        implements Scrollable,
-        MouseMotionListener {
+public class ScrollablePicture extends JLabel implements Scrollable, MouseMotionListener {
 
-    private int maxUnitIncrement = 1;
-    private boolean missingPicture = false;
+    private int maxIncremento = 1;
+    private boolean imagemAusente = false;
 
     public void init() {
 
@@ -50,7 +16,7 @@ public class ScrollablePicture extends JLabel
     public ScrollablePicture(ImageIcon i, int m) {
         super(i);
         if (i == null) {
-            missingPicture = true;
+            imagemAusente = true;
             setText("Sem imagem");
             setHorizontalAlignment(CENTER);
             setOpaque(true);
@@ -58,26 +24,23 @@ public class ScrollablePicture extends JLabel
             setBackground(Color.white);
 
         }
-        maxUnitIncrement = m;
+        maxIncremento = m;
 
-        //Let the user scroll by dragging to outside the window.
-        setAutoscrolls(true); //enable synthetic drag events
-        addMouseMotionListener(this); //handle mouse drags
+        setAutoscrolls(true);
+        addMouseMotionListener(this);
         init();
     }
 
-    //Methods required by the MouseMotionListener interface:
     public void mouseMoved(MouseEvent e) {
     }
 
     public void mouseDragged(MouseEvent e) {
-        //The user is dragging us, so scroll!
         Rectangle r = new Rectangle(e.getX(), e.getY(), 1, 1);
         scrollRectToVisible(r);
     }
 
     public Dimension getPreferredSize() {
-        if (missingPicture) {
+        if (imagemAusente) {
             return new Dimension(320, 480);
         } else {
             return super.getPreferredSize();
@@ -90,8 +53,7 @@ public class ScrollablePicture extends JLabel
 
     public int getScrollableUnitIncrement(Rectangle visibleRect,
             int orientation,
-            int direction) {
-        //Get the current position.
+            int direcao) {
         int currentPosition = 0;
         if (orientation == SwingConstants.HORIZONTAL) {
             currentPosition = visibleRect.x;
@@ -99,27 +61,25 @@ public class ScrollablePicture extends JLabel
             currentPosition = visibleRect.y;
         }
 
-        //Return the number of pixels between currentPosition
-        //and the nearest tick mark in the indicated direction.
-        if (direction < 0) {
+        if (direcao < 0) {
             int newPosition = currentPosition
-                    - (currentPosition / maxUnitIncrement)
-                    * maxUnitIncrement;
-            return (newPosition == 0) ? maxUnitIncrement : newPosition;
+                    - (currentPosition / maxIncremento)
+                    * maxIncremento;
+            return (newPosition == 0) ? maxIncremento : newPosition;
         } else {
-            return ((currentPosition / maxUnitIncrement) + 1)
-                    * maxUnitIncrement
+            return ((currentPosition / maxIncremento) + 1)
+                    * maxIncremento
                     - currentPosition;
         }
     }
 
-    public int getScrollableBlockIncrement(Rectangle visibleRect,
-            int orientation,
-            int direction) {
-        if (orientation == SwingConstants.HORIZONTAL) {
-            return visibleRect.width - maxUnitIncrement;
+    public int getScrollableBlockIncrement(Rectangle rect,
+            int orientacao,
+            int direcao) {
+        if (orientacao == SwingConstants.HORIZONTAL) {
+            return rect.width - maxIncremento;
         } else {
-            return visibleRect.height - maxUnitIncrement;
+            return rect.height - maxIncremento;
         }
     }
 
@@ -131,7 +91,7 @@ public class ScrollablePicture extends JLabel
         return false;
     }
 
-    public void setMaxUnitIncrement(int pixels) {
-        maxUnitIncrement = pixels;
+    public void setMaxUnitIncrement(int qtPixels) {
+        maxIncremento = qtPixels;
     }
 }

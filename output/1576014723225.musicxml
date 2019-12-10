@@ -483,6 +483,15 @@
         <voice>1</voice>
         <type>quarter</type>
       </note>
+      <note>
+        <pitch>
+          <step>D</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>240</duration>
+        <voice>1</voice>
+        <type>half</type>
+      </note>
       <barline location="right">
         <bar-style>light-heavy</bar-style>
       </barline>
