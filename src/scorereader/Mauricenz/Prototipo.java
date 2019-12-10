@@ -1,4 +1,4 @@
-package scorereader.image;
+package scorereader.Mauricenz;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
