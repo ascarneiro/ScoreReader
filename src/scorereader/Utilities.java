@@ -44,12 +44,12 @@ import static org.bytedeco.javacpp.opencv_imgproc.cvThreshold;
 import org.bytedeco.javacv.Java2DFrameConverter;
 import org.bytedeco.javacv.OpenCVFrameConverter;
 import org.bytedeco.javacv.OpenCVFrameConverter.ToIplImage;
-import static scorereader.image.Prototipo.CV_LOAD_IMAGE_ANYCOLOR;
+
 import scorereader.server.Server;
 import scorereader.structure.Crop;
 import scorereader.structure.Figura;
 import scorereader.structure.Linha;
-import scorereader.structure.claves.Clave;
+import scorereader.structure.claves.Pauta;
 import scorereader.structure.Nota;
 import scorereader.structure.claves.ClaveSol;
 
@@ -58,6 +58,12 @@ import scorereader.structure.claves.ClaveSol;
  * @author ascarneiro
  */
 public class Utilities {
+
+    public static final int CV_LOAD_IMAGE_UNCHANGED = -1,
+            CV_LOAD_IMAGE_GRAYSCALE = 0,
+            CV_LOAD_IMAGE_COLOR = 1,
+            CV_LOAD_IMAGE_ANYDEPTH = 2,
+            CV_LOAD_IMAGE_ANYCOLOR = 4;
 
     public static boolean DEBUG_IMAGES = false;
     public static boolean DEBUG_VALUES = false;
@@ -94,9 +100,9 @@ public class Utilities {
                 bb.y(bb.y());
                 bb.width(bb.width());
                 bb.height(bb.height());
+//                cvRectangleR(imagemBB, bb, CV_RGB(0, 255, 0), 1, 8, 0);
 //                if (DEBUG_VALUES) {
-                // cvRectangleR(imagemBB, bb, CV_RGB(0, 255, 0), 1, 8, 0);
-//                }
+                // cvRectangleR(imagemBB, bb, CV_RGB(0, 255, 0), 1, 8, 0);                }
 
 //                if (DEBUG_VALUES) {
                 // Adding Text
@@ -133,6 +139,7 @@ public class Utilities {
         opencv_core.CvMemStorage storage = opencv_core.CvMemStorage.create();
         opencv_core.CvSeq contours = new opencv_core.CvContour();
 
+        //Busca formas conexas na imagem
         cvFindContours(imagemCinza, storage, contours, Loader.sizeof(opencv_core.CvContour.class),
                 CV_RETR_CCOMP, CV_CHAIN_APPROX_NONE, new opencv_core.CvPoint(0, 0));
 
@@ -141,8 +148,10 @@ public class Utilities {
             contourList.add(contours);
         }
 
+        //Ordena da Direita para esquerda e de cima para baixo
         contourList = sortLeftToRightTopToBottom(contourList);
-
+        
+       
         for (opencv_core.CvSeq c : contourList) {
             opencv_core.CvRect r = cvBoundingRect(c, 0);
             if ((r.height() * r.width()) > 10) { //se a area do contorno for maior que a area minima
@@ -163,7 +172,7 @@ public class Utilities {
                 opencv_core.Rect rectCrop = new opencv_core.Rect(bb.x(), bb.y(), bb.width(), bb.height());
                 opencv_core.Mat croppedImage = new opencv_core.Mat(new opencv_core.Mat(imagemBB), rectCrop);
                 opencv_core.IplImage crop = new opencv_core.IplImage(croppedImage);
-
+                 //Corta as imagens contidas nas boundboxes
                 Crop cr = new Crop(meioX, meioY, bb.width(), bb.height(), crop);
                 String s = DIR_DEBUG + "crop" + System.currentTimeMillis() + ".png";
                 cr.fileName = s;
@@ -191,10 +200,10 @@ public class Utilities {
             opencv_core.CvRect rect1 = cvBoundingRect(o1, 0);
             opencv_core.CvRect rect2 = cvBoundingRect(o2, 0);
             int result = 0;
-            double total = rect1.y() / rect2.y();
-            if (total >= 0.9 && total <= 1.4) {
-                result = Double.compare(rect1.x(), rect2.x());
-            }
+//            double total = rect1.y() / rect2.y();
+//            if (total >= 0.9 && total <= 1.4) {
+            result = Double.compare(rect1.x(), rect2.x());
+//            }
             return result;
         });
         return contourList;
@@ -357,6 +366,18 @@ public class Utilities {
         }
         return retorno;
     }
+    
+    public static String showDistribuicao(String tipo) throws Exception {
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("tipo", tipo);
+        return Server.callServerPython("showDistribuicao", params);
+    }
+    
+    public static String salvarTreino() throws Exception {
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("tipo", "S");
+        return Server.callServerPython("salvarModeloAtual", params);
+    }
 
     public static String treinarKnnCustomizado(String tipo, String nome, String caminho, String dataSource, String resetar, HashMap parametros, String ieDump) throws Exception {
         HashMap<String, Object> params = new HashMap<>();
@@ -414,7 +435,7 @@ public class Utilities {
 
     }
 
-    public static ArrayList<Clave> obterInformacoesPautas(byte[] image) throws Exception {
+    public static ArrayList<Pauta> obterInformacoesPautas(byte[] image) throws Exception {
         String encoded = Base64.getEncoder().encodeToString(image);
         HashMap<String, Object> params = new HashMap<>();
         params.put("imageEncoded", encoded);
@@ -422,7 +443,7 @@ public class Utilities {
         JsonParser parser = new JsonParser();
         JsonArray array = parser.parse(json).getAsJsonArray();
 
-        ArrayList<Clave> pautas = new ArrayList<Clave>();
+        ArrayList<Pauta> pautas = new ArrayList<Pauta>();
         for (int i = 0; i < array.size(); i++) {
             JsonObject rootObj = (JsonObject) array.get(i);
             JsonObject pautaJson = rootObj.getAsJsonObject("pauta");
@@ -430,7 +451,7 @@ public class Utilities {
             int indexPauta = pautaJson.get("index").getAsInt();
             JsonArray linhasJson = pautaJson.get("linhas").getAsJsonArray();
 
-            Clave pauta = new ClaveSol(indexPauta);
+            Pauta pauta = new ClaveSol(indexPauta);
             for (int j = 0; j < linhasJson.size(); j++) {
                 JsonObject o = (JsonObject) linhasJson.get(j);
                 JsonObject linhaJson = (JsonObject) o.getAsJsonObject("linha");

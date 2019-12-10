@@ -1,17 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/MUSCIMA/Imagens.py" line="49" mnemonic="1" />
     <bookmark url="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/_cpdispatch.py" line="57" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df176199-7e82-4001-a2bd-aa7f5aacb6c8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../src/scorereader/structure/claves/ClaveFa.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/arquivo.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/classificador.py" beforeDir="false" afterPath="$PROJECT_DIR$/classificador.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datasourcescorereader.py" beforeDir="false" afterPath="$PROJECT_DIR$/datasourcescorereader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/identificadornotas.py" beforeDir="false" afterPath="$PROJECT_DIR$/identificadornotas.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/padrao" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/removed" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repository/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repository/Cannon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repository/Manuscrita.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repository/Ode to Joy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repository/Sonata.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repository/Twinkle Twinkle Litlle Star 2 Barras.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repository/Twinkle Twinkle Litlle Star Uma Barra de Compasso.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repository/Twinkle Twinkle Litlle Star.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repository/alturaNotas.png" beforeDir="false" afterPath="$PROJECT_DIR$/../repository/alturaNotas.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repository/bounded.png" beforeDir="false" afterPath="$PROJECT_DIR$/../repository/bounded.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repository/posicaoLinhas.png" beforeDir="false" afterPath="$PROJECT_DIR$/../repository/posicaoLinhas.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repository/reconhecimento.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../repository/reconhecimento.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../repository/staffless.png" beforeDir="false" afterPath="$PROJECT_DIR$/../repository/staffless.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/EditorImagens.form" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/EditorImagens.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/EditorImagens.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/EditorImagens.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/EditorRotular.form" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/EditorRotular.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/EditorRotular.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/EditorRotular.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/scorereader/ScoreReader.form" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/ScoreReader.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/scorereader/ScoreReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/ScoreReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../treinamento/SCORE_READER_DATASOURCE.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/../treinamento/SCORE_READER_DATASOURCE.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/Utilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/Utilities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/abc/ABC_NOTATION.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/abc/ABC_NOTATION.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/abc/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/abc/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/components/images/ScrollDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/components/images/ScrollDemo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/components/list/FiguraRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/components/list/FiguraRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/image/Fragmentador.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/image/OtherMain.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/image/Prototipo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/reconhecimento/Classificador.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/saidas/Midia.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/structure/Nota.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/structure/Nota.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/structure/claves/Clave.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/structure/claves/Pauta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/scorereader/structure/claves/ClaveSol.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/scorereader/structure/claves/ClaveSol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tools/abc2abc.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tools/abc2prt.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tools/abcmatch.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tools/abcpp.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tools/beep.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tools/mftext.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tools/midi2abc.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tools/midicopy.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tools/yaps.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../treinamento/DIGITALIZADO_KNN_PADRAO.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../treinamento/MANUSCRITO_KNN_PADRAO.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../treinamento/SCORE_READER_DATASOURCE.pkl" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,11 +68,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3331">
-              <caret line="181" column="41" lean-forward="true" selection-start-line="181" selection-start-column="41" selection-end-line="181" selection-end-column="41" />
+            <state relative-caret-position="220">
+              <caret line="70" column="26" lean-forward="true" selection-start-line="70" selection-start-column="26" selection-end-line="70" selection-end-column="26" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -34,10 +81,37 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/_cpdispatch.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="106">
+              <caret line="53" selection-start-line="53" selection-end-line="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/parametros.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="17" lean-forward="true" selection-start-column="17" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/datasourcescorereader.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="106">
+              <caret line="66" selection-start-line="66" selection-end-line="66" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/classificador.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5219">
-              <caret line="354" column="44" selection-start-line="354" selection-start-column="44" selection-end-line="354" selection-end-column="44" />
+            <state relative-caret-position="106">
+              <caret line="317" selection-start-line="317" selection-end-line="317" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -48,8 +122,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/identificadornotas.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="16" column="65" selection-start-line="16" selection-start-column="65" selection-end-line="16" selection-end-column="65" />
+            <state relative-caret-position="95">
+              <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="6" selection-end-column="30" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -58,19 +132,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/skimage/transform/_warps.py">
+        <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_bundle/pydev_monkey_qt.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
+            <state relative-caret-position="2242">
+              <caret line="119" column="40" selection-start-line="119" selection-start-column="40" selection-end-line="119" selection-end-column="40" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/datasourcescorereader.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cv2/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="42" column="30" lean-forward="true" selection-start-line="42" selection-start-column="30" selection-end-line="42" selection-end-column="30" />
+            <state relative-caret-position="38">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
             </state>
           </provider>
         </entry>
@@ -86,36 +160,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>printClasses</find>
-      <find>parse_cropobject_list</find>
-      <find>extrair_figuras_modelo</find>
-      <find>extrair(</find>
-      <find>sucesso</find>
-      <find>loadk</find>
-      <find>detectarPontosNotas</find>
-      <find>erodida</find>
-      <find>erod</find>
-      <find>erodi</find>
-      <find>erodidaDilatada.png</find>
-      <find>erodidaDilatada</find>
-      <find>melhorar</find>
-      <find>melhorarImagem</find>
-      <find>ROTULO_BARRACOMPASSO</find>
-      <find>extrair_elementos</find>
-      <find>ROTULO_SEMINIMA</find>
-      <find>treinarCustomizado</find>
-      <find>treinar_knn</find>
-      <find>addi</find>
-      <find>salvar_objeto</find>
-      <find>loadM</find>
       <find>self.k</find>
       <find>salvarm</find>
-      <find>salvar_modelo</find>
       <find>carregar_objeto</find>
       <find>load</find>
-      <find>extrair_elementos_score_reader</find>
       <find>liga</find>
+      <find>resu</find>
+      <find>plot_classification_report</find>
       <find>modelo</find>
+      <find>colcheias</find>
+      <find>colche</find>
+      <find>add</find>
+      <find>addFiguraDataSource</find>
+      <find>extrair_elementos_score_reader</find>
+      <find>addI</find>
+      <find>adic</find>
+      <find>semibrev</find>
+      <find>ROTULO_PAUSASEMINIMA</find>
+      <find>ROTULO_PAUSACOLCHEIA</find>
+      <find>class</find>
+      <find>KNeighborsClassifier</find>
+      <find>n_classes</find>
+      <find>.dict</find>
+      <find>salva</find>
+      <find>salvar_modelo</find>
+      <find>DataSource</find>
+      <find>.show</find>
+      <find>carre</find>
+      <find>carregar</find>
+      <find>remover</find>
+      <find>knei</find>
     </findStrings>
     <replaceStrings>
       <replace>matrizInicial</replace>
@@ -144,10 +218,10 @@
         <option value="$PROJECT_DIR$/2.py" />
         <option value="$PROJECT_DIR$/3.py" />
         <option value="$PROJECT_DIR$/MUSCIMA/Imagens.py" />
-        <option value="$PROJECT_DIR$/identificadornotas.py" />
         <option value="$PROJECT_DIR$/Parametros.py" />
         <option value="$PROJECT_DIR$/parametros.py" />
         <option value="$PROJECT_DIR$/1.py" />
+        <option value="$PROJECT_DIR$/identificadornotas.py" />
         <option value="$PROJECT_DIR$/server.py" />
         <option value="$PROJECT_DIR$/datasourcescorereader.py" />
         <option value="$PROJECT_DIR$/classificador.py" />
@@ -155,10 +229,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-4" />
-    <option name="y" value="-4" />
-    <option name="width" value="1400" />
-    <option name="height" value="912" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -166,6 +240,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -182,14 +257,14 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/2.py" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -358,19 +433,20 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18557794" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18377693" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.36507937" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49867234" visible="true" weight="0.31500572" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.36363637" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49867234" visible="true" weight="0.5067204" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Terminal" order="6" sideWeight="0.4992034" weight="0.74458873" />
-      <window_info anchor="bottom" id="TODO" order="7" sideWeight="0.4992034" weight="0.32756132" />
+      <window_info anchor="bottom" id="Terminal" order="6" sideWeight="0.4992034" weight="0.74242425" />
+      <window_info anchor="bottom" id="TODO" order="7" sideWeight="0.4992034" weight="0.3266129" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49973446" weight="0.32646048" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5013277" side_tool="true" weight="0.6296296" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32646048" />
@@ -424,13 +500,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/classificador.py</url>
-          <line>442</line>
-          <option name="timeStamp" value="21" />
+          <line>200</line>
+          <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/classificador.py</url>
-          <line>163</line>
-          <option name="timeStamp" value="26" />
+          <line>518</line>
+          <option name="timeStamp" value="58" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -473,6 +549,16 @@
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
+        <expression-string>self.nome_modelo</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>rotulos[idx]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
         <expression-string>classes[encontrado[0]]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
@@ -507,42 +593,9 @@
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>self.plot_classification_report(str(cr), &quot;Grafico de classificacao&quot;, True, plt.cm.Blues)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>self.plot_classification_report(str(cr), &quot;Grafico de classificacao&quot;, True)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Downloads/AlgGen (2).py" />
-    <entry file="file://$USER_HOME$/Downloads/AlgGen (3).py" />
-    <entry file="file://$USER_HOME$/Downloads/Trabalho2_Guilherme.py" />
-    <entry file="file://$PROJECT_DIR$/../../../trabalho/AlgGen.py" />
-    <entry file="file://C:/ProgramData/Anaconda3/Lib/codecs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="797">
-          <caret line="311" selection-start-line="311" selection-end-line="311" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="16" lean-forward="true" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/pyvenv.cfg">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fix python 2.7.reg" />
-    <entry file="file://$PROJECT_DIR$/tst.py" />
     <entry file="file://$PROJECT_DIR$/musicstavestest.py" />
     <entry file="file://$PROJECT_DIR$/promissores.txt" />
     <entry file="file://$PROJECT_DIR$/DataView.py" />
@@ -588,31 +641,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/2.py" />
-    <entry file="file://$PROJECT_DIR$/removed">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="9" column="100" selection-start-line="9" selection-start-column="100" selection-end-line="9" selection-end-column="100" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/threading.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="218">
           <caret line="800" selection-start-line="800" selection-end-line="800" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/sklearn/utils/validation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="567" column="19" selection-start-line="567" selection-start-column="19" selection-end-line="567" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/arquivo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="3" column="12" lean-forward="true" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -661,13 +693,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/_cprequest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="595" selection-start-line="595" selection-end-line="595" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cheroot/server.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
@@ -675,34 +700,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/lib/encoding.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4108">
-          <caret line="228" column="25" selection-start-line="228" selection-start-column="25" selection-end-line="228" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3576">
-          <caret line="158" selection-start-line="158" selection-end-line="158" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1392">
-          <caret line="58" column="72" selection-start-line="58" selection-start-column="72" selection-end-line="58" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/parametros.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="20" column="31" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/1.py" />
     <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/skimage/transform/_warps.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="218">
@@ -710,47 +708,198 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/_cpdispatch.py">
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/matplotlib/backends/backend_qt5.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="53" selection-start-line="53" selection-end-line="53" />
+        <state relative-caret-position="20729">
+          <caret line="1116" selection-start-line="1116" selection-end-line="1116" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/matplotlib/backend_bases.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3496">
+          <caret line="207" selection-start-line="207" selection-end-line="207" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/matplotlib/pyplot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3819">
+          <caret line="252" selection-start-line="252" selection-end-line="252" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/sklearn/manifold/isomap.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2033">
+          <caret line="113" selection-start-line="113" selection-end-line="113" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/matplotlib/axes/_axes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80712">
+          <caret line="4292" selection-start-line="4292" selection-end-line="4292" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/matplotlib/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34770">
+          <caret line="1866" selection-start-line="1866" selection-end-line="1866" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/sklearn/utils/validation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="589" selection-start-line="589" selection-end-line="589" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/matplotlib/pyplot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="2864" column="14" lean-forward="true" selection-start-line="2864" selection-start-column="14" selection-end-line="2864" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/sklearn/neighbors/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="291" selection-start-line="291" selection-end-line="291" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/sklearn/externals/joblib/_parallel_backends.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="548" selection-start-line="548" selection-end-line="548" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/sklearn/model_selection/_split.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="31806">
+          <caret line="1693" selection-start-line="1693" selection-end-line="1693" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/_cprequest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12806">
+          <caret line="688" selection-start-line="688" selection-end-line="688" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/lib/encoding.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3990">
+          <caret line="220" selection-start-line="220" selection-end-line="220" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/bokeh/models/plots.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6650">
+          <caret line="375" column="2" selection-start-line="375" selection-start-column="2" selection-end-line="375" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/sklearn/externals/joblib/numpy_pickle.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11324">
+          <caret line="599" selection-start-line="599" selection-end-line="599" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/sklearn/externals/joblib/parallel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13832">
+          <caret line="758" selection-start-line="758" selection-end-line="758" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/sklearn/decomposition/pca.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="762">
+          <caret line="312" column="8" selection-start-line="312" selection-start-column="8" selection-end-line="312" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/removed" />
+    <entry file="file://$PROJECT_DIR$/padrao" />
+    <entry file="file://$PROJECT_DIR$/arquivo.py" />
+    <entry file="file://$PROJECT_DIR$/3.py" />
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_bundle/pydev_monkey_qt.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2242">
+          <caret line="119" column="40" selection-start-line="119" selection-start-column="40" selection-end-line="119" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cv2/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/identificadornotas.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="16" column="65" selection-start-line="16" selection-start-column="65" selection-end-line="16" selection-end-column="65" />
+        <state relative-caret-position="95">
+          <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="6" selection-end-column="30" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/parametros.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="17" lean-forward="true" selection-start-column="17" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/envs/IA2/Lib/site-packages/cherrypy/_cpdispatch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/classificador.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5219">
-          <caret line="354" column="44" selection-start-line="354" selection-start-column="44" selection-end-line="354" selection-end-column="44" />
+        <state relative-caret-position="106">
+          <caret line="317" selection-start-line="317" selection-end-line="317" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.py">
+    <entry file="file://$PROJECT_DIR$/datasourcescorereader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3331">
-          <caret line="181" column="41" lean-forward="true" selection-start-line="181" selection-start-column="41" selection-end-line="181" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="106">
+          <caret line="66" selection-start-line="66" selection-end-line="66" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/datasourcescorereader.py">
+    <entry file="file://$PROJECT_DIR$/server.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="42" column="30" lean-forward="true" selection-start-line="42" selection-start-column="30" selection-end-line="42" selection-end-column="30" />
+        <state relative-caret-position="220">
+          <caret line="70" column="26" lean-forward="true" selection-start-line="70" selection-start-column="26" selection-end-line="70" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

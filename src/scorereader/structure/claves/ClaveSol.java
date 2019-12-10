@@ -8,14 +8,13 @@ package scorereader.structure.claves;
 import java.util.HashMap;
 import java.util.Map;
 import scorereader.abc.ABC_NOTATION;
-import scorereader.structure.Figura;
 import scorereader.structure.Linha;
 
 /**
  *
  * @author ascarneiro
  */
-public class ClaveSol extends Clave {
+public class ClaveSol extends Pauta {
 
     private Map<String, Linha> linhas = new HashMap<String, Linha>();
     protected String[] pentagramaSol = new String[]{

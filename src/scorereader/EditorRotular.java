@@ -9,16 +9,14 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.ListModel;
 import javax.swing.border.EmptyBorder;
 import scorereader.components.list.FiguraRenderer;
 import scorereader.structure.Figura;
@@ -38,17 +36,21 @@ public class EditorRotular extends javax.swing.JFrame {
     private ArrayList<Figura> minimas = new ArrayList<Figura>();
     private ArrayList<Figura> seminimas = new ArrayList<Figura>();
     private ArrayList<Figura> colcheias = new ArrayList<Figura>();
-    private ArrayList<Figura> senicolcheias = new ArrayList<Figura>();
+    private ArrayList<Figura> semicolcheias = new ArrayList<Figura>();
     private ArrayList<Figura> barraCompasso = new ArrayList<Figura>();
     private ArrayList<Figura> pausaSemibreve = new ArrayList<Figura>();
     private ArrayList<Figura> pausaMinima = new ArrayList<Figura>();
     private ArrayList<Figura> pausaSeminima = new ArrayList<Figura>();
     private ArrayList<Figura> pausaColcheia = new ArrayList<Figura>();
+    private ArrayList<Figura> pausaSemicolcheias = new ArrayList<Figura>();
     private ArrayList<Figura> claveSol = new ArrayList<Figura>();
     private ArrayList<Figura> claveFa = new ArrayList<Figura>();
     private ArrayList<Figura> claveDo = new ArrayList<Figura>();
     private ArrayList<Figura> sustenidos = new ArrayList<Figura>();
     private ArrayList<Figura> bemois = new ArrayList<Figura>();
+    private ArrayList<Figura> marcacaoTempo = new ArrayList<Figura>();
+    private ArrayList<Figura> outros_simbolos = new ArrayList<Figura>();
+
     private JList<Figura> rotularJL;
     private JList<Figura> semibreveJL;
     private JList<Figura> minimasJL;
@@ -63,10 +65,13 @@ public class EditorRotular extends javax.swing.JFrame {
     private JList<Figura> pausaSemibreveJL;
     private JList<Figura> pausaMinimaJL;
     private JList<Figura> pausaSeminimaJL;
+    private JList<Figura> pausaSemicolcheiaJL;
     private JList<Figura> pausaColcheiaJL;
     private JList<Figura> claveSolJL;
     private JList<Figura> claveFaJL;
     private JList<Figura> claveDoJL;
+    private JList<Figura> marcacaoTempoJL;
+    private JList<Figura> outrosSimbolosJL;
 
     /**
      * Creates new form Rotulador
@@ -90,6 +95,10 @@ public class EditorRotular extends javax.swing.JFrame {
         claveSolJL = getJlist(claveSol);
         claveFaJL = getJlist(claveFa);
         claveDoJL = getJlist(claveDo);
+        marcacaoTempoJL = getJlist(marcacaoTempo);
+        outrosSimbolosJL = getJlist(outros_simbolos);
+        semiColcheiasJL = getJlist(semicolcheias);
+        pausaSemicolcheiaJL = getJlist(pausaSemicolcheias);
 
         ROTULAR_P.add(createMainPanel(rotularJL));
         SEMIBREVE_P.add(createMainPanel(semibreveJL));
@@ -106,6 +115,10 @@ public class EditorRotular extends javax.swing.JFrame {
         CLAVE_DO_P.add(createMainPanel(claveDoJL));
         SUSTENIDOS_P.add(createMainPanel(sustenidosJL));
         BEMOIS_P.add(createMainPanel(bemoisJL));
+        MARCACAO_TEMPO_P.add(createMainPanel(marcacaoTempoJL));
+        OUTROS_SIMBOLOS_P.add(createMainPanel(outrosSimbolosJL));
+        SEMICOLCHEIAS_P.add(createMainPanel(semiColcheiasJL));
+        PAUSA_SEMICOLCHEIA_P.add(createMainPanel(pausaSemicolcheiaJL));
 
         SEMINIMA.requestFocus();
         setSelecionado(SEMINIMA);
@@ -121,7 +134,7 @@ public class EditorRotular extends javax.swing.JFrame {
     private void initComponents() {
 
         jSplitPane1 = new javax.swing.JSplitPane();
-        jPanel1 = new javax.swing.JPanel();
+        painelBotoes = new javax.swing.JPanel();
         SEMIBREVE = new javax.swing.JButton();
         SEMINIMA = new javax.swing.JButton();
         CLAVE_SOL = new javax.swing.JButton();
@@ -138,6 +151,8 @@ public class EditorRotular extends javax.swing.JFrame {
         SUSTENIDOS = new javax.swing.JButton();
         BEMOIS = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        MARCACAO_TEMPO = new javax.swing.JButton();
+        OUTROS_SIMBOLOS = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         Container = new javax.swing.JPanel();
@@ -149,19 +164,23 @@ public class EditorRotular extends javax.swing.JFrame {
         SUSTENIDOS_P = new javax.swing.JPanel();
         BEMOIS_P = new javax.swing.JPanel();
         CLAVE_SOL_P = new javax.swing.JPanel();
-        CLAVE_FA_P = new javax.swing.JPanel();
         CLAVE_DO_P = new javax.swing.JPanel();
         SEMIBREVE_P = new javax.swing.JPanel();
         PAUSA_SEMIBREVE_P = new javax.swing.JPanel();
         PAUSA_MINIMA_P = new javax.swing.JPanel();
         PAUSA_SEMINIMA_P = new javax.swing.JPanel();
         PAUSA_COLCHEIA_P = new javax.swing.JPanel();
+        MARCACAO_TEMPO_P = new javax.swing.JPanel();
+        OUTROS_SIMBOLOS_P = new javax.swing.JPanel();
+        SEMICOLCHEIAS_P = new javax.swing.JPanel();
+        PAUSA_SEMICOLCHEIA_P = new javax.swing.JPanel();
+        CLAVE_FA_P = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        painelBotoes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         SEMIBREVE.setText("Semibreve");
         SEMIBREVE.addActionListener(new java.awt.event.ActionListener() {
@@ -169,7 +188,7 @@ public class EditorRotular extends javax.swing.JFrame {
                 SEMIBREVEActionPerformed(evt);
             }
         });
-        jPanel1.add(SEMIBREVE, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 100, 33));
+        painelBotoes.add(SEMIBREVE, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 100, 33));
 
         SEMINIMA.setText("Seminima");
         SEMINIMA.addActionListener(new java.awt.event.ActionListener() {
@@ -177,7 +196,7 @@ public class EditorRotular extends javax.swing.JFrame {
                 SEMINIMAActionPerformed(evt);
             }
         });
-        jPanel1.add(SEMINIMA, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 110, 33));
+        painelBotoes.add(SEMINIMA, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 110, 33));
 
         CLAVE_SOL.setText("Clave Sol");
         CLAVE_SOL.addActionListener(new java.awt.event.ActionListener() {
@@ -185,7 +204,7 @@ public class EditorRotular extends javax.swing.JFrame {
                 CLAVE_SOLActionPerformed(evt);
             }
         });
-        jPanel1.add(CLAVE_SOL, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 120, 33));
+        painelBotoes.add(CLAVE_SOL, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 120, 33));
 
         MINIMA.setText("Minima");
         MINIMA.addActionListener(new java.awt.event.ActionListener() {
@@ -193,7 +212,7 @@ public class EditorRotular extends javax.swing.JFrame {
                 MINIMAActionPerformed(evt);
             }
         });
-        jPanel1.add(MINIMA, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 120, 33));
+        painelBotoes.add(MINIMA, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 120, 33));
 
         COLCHEIA.setText("Colcheia");
         COLCHEIA.addActionListener(new java.awt.event.ActionListener() {
@@ -201,15 +220,15 @@ public class EditorRotular extends javax.swing.JFrame {
                 COLCHEIAActionPerformed(evt);
             }
         });
-        jPanel1.add(COLCHEIA, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 100, 33));
+        painelBotoes.add(COLCHEIA, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 100, 33));
 
-        SEMICOLCHEIA.setText("Semi Colcheia");
+        SEMICOLCHEIA.setText("SemiColcheia");
         SEMICOLCHEIA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SEMICOLCHEIAActionPerformed(evt);
             }
         });
-        jPanel1.add(SEMICOLCHEIA, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 120, 33));
+        painelBotoes.add(SEMICOLCHEIA, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 120, 33));
 
         BARRA_COMPASSO.setText("Barra Compasso");
         BARRA_COMPASSO.addActionListener(new java.awt.event.ActionListener() {
@@ -217,7 +236,7 @@ public class EditorRotular extends javax.swing.JFrame {
                 BARRA_COMPASSOActionPerformed(evt);
             }
         });
-        jPanel1.add(BARRA_COMPASSO, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 110, 33));
+        painelBotoes.add(BARRA_COMPASSO, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 110, 33));
 
         CLAVE_FA.setText("Clave Fa");
         CLAVE_FA.addActionListener(new java.awt.event.ActionListener() {
@@ -225,7 +244,7 @@ public class EditorRotular extends javax.swing.JFrame {
                 CLAVE_FAActionPerformed(evt);
             }
         });
-        jPanel1.add(CLAVE_FA, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 10, 110, 33));
+        painelBotoes.add(CLAVE_FA, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 10, 110, 33));
 
         REMOVER.setText("Remover");
         REMOVER.addActionListener(new java.awt.event.ActionListener() {
@@ -233,14 +252,19 @@ public class EditorRotular extends javax.swing.JFrame {
                 REMOVERActionPerformed(evt);
             }
         });
-        jPanel1.add(REMOVER, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 10, 120, 33));
+        painelBotoes.add(REMOVER, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 10, 120, 33));
 
         IE_PAUSA.setText("Pausa");
-        jPanel1.add(IE_PAUSA, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 80, 30));
+        IE_PAUSA.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                IE_PAUSAMouseReleased(evt);
+            }
+        });
+        painelBotoes.add(IE_PAUSA, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 80, 30));
 
         SELECIONANDO.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         SELECIONANDO.setText("Selecionando: Semibreve");
-        jPanel1.add(SELECIONANDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 290, -1));
+        painelBotoes.add(SELECIONANDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 290, -1));
 
         CLAVE_DO.setText("Clave Do");
         CLAVE_DO.addActionListener(new java.awt.event.ActionListener() {
@@ -248,15 +272,15 @@ public class EditorRotular extends javax.swing.JFrame {
                 CLAVE_DOActionPerformed(evt);
             }
         });
-        jPanel1.add(CLAVE_DO, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 50, 120, 33));
+        painelBotoes.add(CLAVE_DO, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 50, 120, 30));
 
-        ADICIONAR.setText("Adicionar");
+        ADICIONAR.setText("Agrupar");
         ADICIONAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ADICIONARActionPerformed(evt);
             }
         });
-        jPanel1.add(ADICIONAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 10, 120, 33));
+        painelBotoes.add(ADICIONAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 10, 120, 33));
 
         SUSTENIDOS.setText("Sustenidos");
         SUSTENIDOS.addActionListener(new java.awt.event.ActionListener() {
@@ -264,7 +288,7 @@ public class EditorRotular extends javax.swing.JFrame {
                 SUSTENIDOSActionPerformed(evt);
             }
         });
-        jPanel1.add(SUSTENIDOS, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, 120, 33));
+        painelBotoes.add(SUSTENIDOS, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, 120, 33));
 
         BEMOIS.setText("Bemois");
         BEMOIS.addActionListener(new java.awt.event.ActionListener() {
@@ -272,17 +296,33 @@ public class EditorRotular extends javax.swing.JFrame {
                 BEMOISActionPerformed(evt);
             }
         });
-        jPanel1.add(BEMOIS, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, 120, 33));
+        painelBotoes.add(BEMOIS, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, 120, 33));
 
-        jButton1.setText("Submitar");
+        jButton1.setText("Enviar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 50, 120, 30));
+        painelBotoes.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 50, 120, 30));
 
-        jSplitPane1.setTopComponent(jPanel1);
+        MARCACAO_TEMPO.setText("Tempo");
+        MARCACAO_TEMPO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MARCACAO_TEMPOActionPerformed(evt);
+            }
+        });
+        painelBotoes.add(MARCACAO_TEMPO, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 50, 110, 30));
+
+        OUTROS_SIMBOLOS.setText("Outros");
+        OUTROS_SIMBOLOS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OUTROS_SIMBOLOSActionPerformed(evt);
+            }
+        });
+        painelBotoes.add(OUTROS_SIMBOLOS, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 10, 110, 30));
+
+        jSplitPane1.setTopComponent(painelBotoes);
 
         jPanel2.setLayout(new java.awt.BorderLayout());
 
@@ -301,123 +341,156 @@ public class EditorRotular extends javax.swing.JFrame {
         Container.add(ROTULAR_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1530, 390));
 
         SEMINIMAS_P.setBackground(new java.awt.Color(255, 255, 255));
-        SEMINIMAS_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Semimas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
+        SEMINIMAS_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Semimas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 22))); // NOI18N
         SEMINIMAS_P.setMaximumSize(new java.awt.Dimension(10, 10));
         SEMINIMAS_P.setOpaque(false);
         SEMINIMAS_P.setPreferredSize(new java.awt.Dimension(10, 10));
         SEMINIMAS_P.setLayout(new java.awt.BorderLayout());
-        Container.add(SEMINIMAS_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 390, 210, 340));
+        Container.add(SEMINIMAS_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 390, 210, 200));
 
         COLCHEIAS_P.setBackground(new java.awt.Color(255, 255, 255));
-        COLCHEIAS_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Colcheias", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
+        COLCHEIAS_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Colcheias", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 22))); // NOI18N
         COLCHEIAS_P.setMaximumSize(new java.awt.Dimension(5, 5));
         COLCHEIAS_P.setMinimumSize(new java.awt.Dimension(5, 5));
         COLCHEIAS_P.setOpaque(false);
         COLCHEIAS_P.setPreferredSize(new java.awt.Dimension(5, 5));
         COLCHEIAS_P.setLayout(new java.awt.BorderLayout());
-        Container.add(COLCHEIAS_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 390, 210, 340));
+        Container.add(COLCHEIAS_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 390, 210, 200));
 
         BARRA_COMPASSO_P.setBackground(new java.awt.Color(255, 255, 255));
-        BARRA_COMPASSO_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Barra Compasso", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
+        BARRA_COMPASSO_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Barra Compasso", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 22))); // NOI18N
         BARRA_COMPASSO_P.setMaximumSize(new java.awt.Dimension(5, 5));
         BARRA_COMPASSO_P.setMinimumSize(new java.awt.Dimension(5, 5));
         BARRA_COMPASSO_P.setOpaque(false);
         BARRA_COMPASSO_P.setPreferredSize(new java.awt.Dimension(5, 5));
         BARRA_COMPASSO_P.setLayout(new java.awt.BorderLayout());
-        Container.add(BARRA_COMPASSO_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 390, 210, 340));
+        Container.add(BARRA_COMPASSO_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 800, 210, 210));
 
         MINIMAS_P.setBackground(new java.awt.Color(255, 255, 255));
-        MINIMAS_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Minimas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
+        MINIMAS_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Minimas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 22))); // NOI18N
         MINIMAS_P.setMaximumSize(new java.awt.Dimension(10, 10));
         MINIMAS_P.setOpaque(false);
         MINIMAS_P.setPreferredSize(new java.awt.Dimension(10, 10));
         MINIMAS_P.setLayout(new java.awt.BorderLayout());
-        Container.add(MINIMAS_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 210, 340));
+        Container.add(MINIMAS_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 210, 200));
 
         SUSTENIDOS_P.setBackground(new java.awt.Color(255, 255, 255));
-        SUSTENIDOS_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sustenidos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
+        SUSTENIDOS_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sustenidos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 22))); // NOI18N
         SUSTENIDOS_P.setMaximumSize(new java.awt.Dimension(5, 5));
         SUSTENIDOS_P.setMinimumSize(new java.awt.Dimension(5, 5));
         SUSTENIDOS_P.setOpaque(false);
         SUSTENIDOS_P.setPreferredSize(new java.awt.Dimension(5, 5));
         SUSTENIDOS_P.setLayout(new java.awt.BorderLayout());
-        Container.add(SUSTENIDOS_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 390, 210, 340));
+        Container.add(SUSTENIDOS_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 390, 210, 200));
 
         BEMOIS_P.setBackground(new java.awt.Color(255, 255, 255));
-        BEMOIS_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bemois", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
+        BEMOIS_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bemois", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 22))); // NOI18N
         BEMOIS_P.setMaximumSize(new java.awt.Dimension(5, 5));
         BEMOIS_P.setMinimumSize(new java.awt.Dimension(5, 5));
         BEMOIS_P.setOpaque(false);
         BEMOIS_P.setPreferredSize(new java.awt.Dimension(5, 5));
         BEMOIS_P.setLayout(new java.awt.BorderLayout());
-        Container.add(BEMOIS_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 390, 210, 340));
+        Container.add(BEMOIS_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 390, 210, 200));
 
         CLAVE_SOL_P.setBackground(new java.awt.Color(255, 255, 255));
-        CLAVE_SOL_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Clave Sol", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
+        CLAVE_SOL_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Clave Sol", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 22))); // NOI18N
         CLAVE_SOL_P.setMaximumSize(new java.awt.Dimension(5, 5));
         CLAVE_SOL_P.setMinimumSize(new java.awt.Dimension(5, 5));
         CLAVE_SOL_P.setOpaque(false);
         CLAVE_SOL_P.setPreferredSize(new java.awt.Dimension(5, 5));
         CLAVE_SOL_P.setLayout(new java.awt.BorderLayout());
-        Container.add(CLAVE_SOL_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 730, 210, 340));
-
-        CLAVE_FA_P.setBackground(new java.awt.Color(255, 255, 255));
-        CLAVE_FA_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Clave Fa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
-        CLAVE_FA_P.setMaximumSize(new java.awt.Dimension(5, 5));
-        CLAVE_FA_P.setMinimumSize(new java.awt.Dimension(5, 5));
-        CLAVE_FA_P.setOpaque(false);
-        CLAVE_FA_P.setPreferredSize(new java.awt.Dimension(5, 5));
-        CLAVE_FA_P.setLayout(new java.awt.BorderLayout());
-        Container.add(CLAVE_FA_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 730, 210, 340));
+        Container.add(CLAVE_SOL_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 590, 210, 210));
 
         CLAVE_DO_P.setBackground(new java.awt.Color(255, 255, 255));
-        CLAVE_DO_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Clave Do", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
+        CLAVE_DO_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Clave Do", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 22))); // NOI18N
         CLAVE_DO_P.setMaximumSize(new java.awt.Dimension(5, 5));
         CLAVE_DO_P.setMinimumSize(new java.awt.Dimension(5, 5));
         CLAVE_DO_P.setOpaque(false);
         CLAVE_DO_P.setPreferredSize(new java.awt.Dimension(5, 5));
         CLAVE_DO_P.setLayout(new java.awt.BorderLayout());
-        Container.add(CLAVE_DO_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 730, 210, 340));
+        Container.add(CLAVE_DO_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 800, 210, 210));
 
         SEMIBREVE_P.setBackground(new java.awt.Color(255, 255, 255));
-        SEMIBREVE_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Semibreve", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
+        SEMIBREVE_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Semibreve", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 22))); // NOI18N
         SEMIBREVE_P.setMaximumSize(new java.awt.Dimension(10, 10));
         SEMIBREVE_P.setOpaque(false);
         SEMIBREVE_P.setPreferredSize(new java.awt.Dimension(10, 10));
         SEMIBREVE_P.setLayout(new java.awt.BorderLayout());
-        Container.add(SEMIBREVE_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 210, 340));
+        Container.add(SEMIBREVE_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 210, 200));
 
         PAUSA_SEMIBREVE_P.setBackground(new java.awt.Color(255, 255, 255));
-        PAUSA_SEMIBREVE_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pausa Semiberve", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
+        PAUSA_SEMIBREVE_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pausa Semibreve", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 22))); // NOI18N
         PAUSA_SEMIBREVE_P.setMaximumSize(new java.awt.Dimension(10, 10));
         PAUSA_SEMIBREVE_P.setOpaque(false);
         PAUSA_SEMIBREVE_P.setPreferredSize(new java.awt.Dimension(10, 10));
         PAUSA_SEMIBREVE_P.setLayout(new java.awt.BorderLayout());
-        Container.add(PAUSA_SEMIBREVE_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 730, 210, 340));
+        Container.add(PAUSA_SEMIBREVE_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 590, 210, 210));
 
         PAUSA_MINIMA_P.setBackground(new java.awt.Color(255, 255, 255));
-        PAUSA_MINIMA_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pausa Minima", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
+        PAUSA_MINIMA_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pausa Minima", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 22))); // NOI18N
         PAUSA_MINIMA_P.setMaximumSize(new java.awt.Dimension(10, 10));
         PAUSA_MINIMA_P.setOpaque(false);
         PAUSA_MINIMA_P.setPreferredSize(new java.awt.Dimension(10, 10));
         PAUSA_MINIMA_P.setLayout(new java.awt.BorderLayout());
-        Container.add(PAUSA_MINIMA_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 730, 210, 340));
+        Container.add(PAUSA_MINIMA_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 590, 210, 210));
 
         PAUSA_SEMINIMA_P.setBackground(new java.awt.Color(255, 255, 255));
-        PAUSA_SEMINIMA_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pausa Seminima", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
+        PAUSA_SEMINIMA_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pausa Seminima", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 22))); // NOI18N
         PAUSA_SEMINIMA_P.setMaximumSize(new java.awt.Dimension(10, 10));
         PAUSA_SEMINIMA_P.setOpaque(false);
         PAUSA_SEMINIMA_P.setPreferredSize(new java.awt.Dimension(10, 10));
         PAUSA_SEMINIMA_P.setLayout(new java.awt.BorderLayout());
-        Container.add(PAUSA_SEMINIMA_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 730, 200, 340));
+        Container.add(PAUSA_SEMINIMA_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 590, 210, 210));
 
         PAUSA_COLCHEIA_P.setBackground(new java.awt.Color(255, 255, 255));
-        PAUSA_COLCHEIA_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pausa Colcheia", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24))); // NOI18N
+        PAUSA_COLCHEIA_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pausa Colcheia", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 22))); // NOI18N
         PAUSA_COLCHEIA_P.setMaximumSize(new java.awt.Dimension(10, 10));
         PAUSA_COLCHEIA_P.setOpaque(false);
         PAUSA_COLCHEIA_P.setPreferredSize(new java.awt.Dimension(10, 10));
         PAUSA_COLCHEIA_P.setLayout(new java.awt.BorderLayout());
-        Container.add(PAUSA_COLCHEIA_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 730, 210, 340));
+        Container.add(PAUSA_COLCHEIA_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 590, 210, 210));
+
+        MARCACAO_TEMPO_P.setBackground(new java.awt.Color(255, 255, 255));
+        MARCACAO_TEMPO_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Marcacao tempo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 22))); // NOI18N
+        MARCACAO_TEMPO_P.setMaximumSize(new java.awt.Dimension(10, 10));
+        MARCACAO_TEMPO_P.setOpaque(false);
+        MARCACAO_TEMPO_P.setPreferredSize(new java.awt.Dimension(10, 10));
+        MARCACAO_TEMPO_P.setLayout(new java.awt.BorderLayout());
+        Container.add(MARCACAO_TEMPO_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 800, 210, 210));
+
+        OUTROS_SIMBOLOS_P.setBackground(new java.awt.Color(255, 255, 255));
+        OUTROS_SIMBOLOS_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Outros", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 22))); // NOI18N
+        OUTROS_SIMBOLOS_P.setMaximumSize(new java.awt.Dimension(10, 10));
+        OUTROS_SIMBOLOS_P.setOpaque(false);
+        OUTROS_SIMBOLOS_P.setPreferredSize(new java.awt.Dimension(10, 10));
+        OUTROS_SIMBOLOS_P.setLayout(new java.awt.BorderLayout());
+        Container.add(OUTROS_SIMBOLOS_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 800, 210, 210));
+
+        SEMICOLCHEIAS_P.setBackground(new java.awt.Color(255, 255, 255));
+        SEMICOLCHEIAS_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Semicolcheias", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 22))); // NOI18N
+        SEMICOLCHEIAS_P.setMaximumSize(new java.awt.Dimension(5, 5));
+        SEMICOLCHEIAS_P.setMinimumSize(new java.awt.Dimension(5, 5));
+        SEMICOLCHEIAS_P.setOpaque(false);
+        SEMICOLCHEIAS_P.setPreferredSize(new java.awt.Dimension(5, 5));
+        SEMICOLCHEIAS_P.setLayout(new java.awt.BorderLayout());
+        Container.add(SEMICOLCHEIAS_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 390, 210, 200));
+
+        PAUSA_SEMICOLCHEIA_P.setBackground(new java.awt.Color(255, 255, 255));
+        PAUSA_SEMICOLCHEIA_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pausa Semicolcheia", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 22))); // NOI18N
+        PAUSA_SEMICOLCHEIA_P.setMaximumSize(new java.awt.Dimension(10, 10));
+        PAUSA_SEMICOLCHEIA_P.setOpaque(false);
+        PAUSA_SEMICOLCHEIA_P.setPreferredSize(new java.awt.Dimension(10, 10));
+        PAUSA_SEMICOLCHEIA_P.setLayout(new java.awt.BorderLayout());
+        Container.add(PAUSA_SEMICOLCHEIA_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 590, 210, 210));
+
+        CLAVE_FA_P.setBackground(new java.awt.Color(255, 255, 255));
+        CLAVE_FA_P.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Clave Fa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 22))); // NOI18N
+        CLAVE_FA_P.setMaximumSize(new java.awt.Dimension(5, 5));
+        CLAVE_FA_P.setMinimumSize(new java.awt.Dimension(5, 5));
+        CLAVE_FA_P.setOpaque(false);
+        CLAVE_FA_P.setPreferredSize(new java.awt.Dimension(5, 5));
+        CLAVE_FA_P.setLayout(new java.awt.BorderLayout());
+        Container.add(CLAVE_FA_P, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 590, 210, 210));
 
         jScrollPane3.setViewportView(Container);
 
@@ -469,54 +542,64 @@ public class EditorRotular extends javax.swing.JFrame {
     private void ADICIONARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ADICIONARActionPerformed
 
         List<Figura> selecionados = definirTipo(getSelecionadosRotular(), selecionado);
-        if (IE_PAUSA.isSelected()) {
-            if (selecionado.equalsIgnoreCase("Semibreve")) {
-                pausaSemibreve.addAll(selecionados);
-                recarregar(pausaSemibreve, pausaSemibreveJL);
-            } else if (selecionado.equalsIgnoreCase("Minima")) {
 
-                pausaMinima.addAll(selecionados);
-                recarregar(pausaMinima, pausaMinimaJL);
-            } else if (selecionado.equalsIgnoreCase("Seminima")) {
-                pausaSeminima.addAll(selecionados);
-                recarregar(pausaSeminima, pausaSeminimaJL);
-            } else if (selecionado.equalsIgnoreCase("Colcheia")) {
-                pausaColcheia.addAll(selecionados);
-                recarregar(pausaColcheia, pausaColcheiaJL);
-            }
-        } else {
-            if (selecionado.equalsIgnoreCase("Semibreve")) {
-                semibreve.addAll(selecionados);
-                recarregar(semibreve, semibreveJL);
-            } else if (selecionado.equalsIgnoreCase("Minima")) {
-                minimas.addAll(selecionados);
-                recarregar(minimas, minimasJL);
-            } else if (selecionado.equalsIgnoreCase("Seminima")) {
-                seminimas.addAll(selecionados);
-                recarregar(seminimas, seminimasJL);
-            } else if (selecionado.equalsIgnoreCase("Colcheia")) {
-                colcheias.addAll(selecionados);
-                recarregar(colcheias, colcheiasJL);
-            } else if (selecionado.equalsIgnoreCase("Barra Compasso")) {
-                barraCompasso.addAll(selecionados);
-                recarregar(barraCompasso, barraCompassoJL);
-            } else if (selecionado.equalsIgnoreCase("Clave Sol")) {
-                claveSol.addAll(selecionados);
-                recarregar(claveSol, claveSolJL);
-            } else if (selecionado.equalsIgnoreCase("Clave Fa")) {
-                claveFa.addAll(selecionados);
-                recarregar(claveFa, claveFaJL);
-            } else if (selecionado.equalsIgnoreCase("Clave Do")) {
-                claveDo.addAll(selecionados);
-                recarregar(claveDo, claveDoJL);
-            } else if (selecionado.equalsIgnoreCase("Sustenidos")) {
-                sustenidos.addAll(selecionados);
-                recarregar(sustenidos, sustenidosJL);
-            } else if (selecionado.equalsIgnoreCase("Bemois")) {
-                bemois.addAll(selecionados);
-                recarregar(bemois, bemoisJL);
-            }
+        if (selecionado.equalsIgnoreCase("PausaSemibreve")) {
+            pausaSemibreve.addAll(selecionados);
+            recarregar(pausaSemibreve, pausaSemibreveJL);
+        } else if (selecionado.equalsIgnoreCase("PausaMinima")) {
+
+            pausaMinima.addAll(selecionados);
+            recarregar(pausaMinima, pausaMinimaJL);
+        } else if (selecionado.equalsIgnoreCase("PausaSeminima")) {
+            pausaSeminima.addAll(selecionados);
+            recarregar(pausaSeminima, pausaSeminimaJL);
+        } else if (selecionado.equalsIgnoreCase("PausaColcheia")) {
+            pausaColcheia.addAll(selecionados);
+            recarregar(pausaColcheia, pausaColcheiaJL);
+        } else if (selecionado.equalsIgnoreCase("Pausasemicolcheia")) {
+            pausaSemicolcheias.addAll(selecionados);
+            recarregar(pausaSemicolcheias, pausaSemicolcheiaJL);
+        } else if (selecionado.equalsIgnoreCase("Semibreve")) {
+            semibreve.addAll(selecionados);
+            recarregar(semibreve, semibreveJL);
+        } else if (selecionado.equalsIgnoreCase("Minima")) {
+            minimas.addAll(selecionados);
+            recarregar(minimas, minimasJL);
+        } else if (selecionado.equalsIgnoreCase("Seminima")) {
+            seminimas.addAll(selecionados);
+            recarregar(seminimas, seminimasJL);
+        } else if (selecionado.equalsIgnoreCase("Colcheia")) {
+            colcheias.addAll(selecionados);
+            recarregar(colcheias, colcheiasJL);
+        } else if (selecionado.equalsIgnoreCase("Semicolcheia")) {
+            semicolcheias.addAll(selecionados);
+            recarregar(semicolcheias, semiColcheiasJL);
+        } else if (selecionado.equalsIgnoreCase("Barra Compasso")) {
+            barraCompasso.addAll(selecionados);
+            recarregar(barraCompasso, barraCompassoJL);
+        } else if (selecionado.equalsIgnoreCase("Clave Sol")) {
+            claveSol.addAll(selecionados);
+            recarregar(claveSol, claveSolJL);
+        } else if (selecionado.equalsIgnoreCase("Clave Fa")) {
+            claveFa.addAll(selecionados);
+            recarregar(claveFa, claveFaJL);
+        } else if (selecionado.equalsIgnoreCase("Clave Do")) {
+            claveDo.addAll(selecionados);
+            recarregar(claveDo, claveDoJL);
+        } else if (selecionado.equalsIgnoreCase("Sustenidos")) {
+            sustenidos.addAll(selecionados);
+            recarregar(sustenidos, sustenidosJL);
+        } else if (selecionado.equalsIgnoreCase("Bemois")) {
+            bemois.addAll(selecionados);
+            recarregar(bemois, bemoisJL);
+        } else if (selecionado.equalsIgnoreCase("Tempo")) {
+            marcacaoTempo.addAll(selecionados);
+            recarregar(marcacaoTempo, marcacaoTempoJL);
+        } else if (selecionado.equalsIgnoreCase("Outros")) {
+            outros_simbolos.addAll(selecionados);
+            recarregar(outros_simbolos, outrosSimbolosJL);
         }
+
 
     }//GEN-LAST:event_ADICIONARActionPerformed
 
@@ -545,6 +628,8 @@ public class EditorRotular extends javax.swing.JFrame {
             recarregar(rotular, rotularJL);
             selectedJList.repaint();
             rotularJL.repaint();
+        } else {
+            JOptionPane.showMessageDialog(this, "Para remover selecione um o mais itens nas caixas de rotula??o!");
         }
     }//GEN-LAST:event_REMOVERActionPerformed
 
@@ -605,7 +690,23 @@ public class EditorRotular extends javax.swing.JFrame {
             for (Figura f : barraCompasso) {
                 Utilities.addFiguraDataSource(f);
             }
-            
+
+            for (Figura f : marcacaoTempo) {
+                Utilities.addFiguraDataSource(f);
+            }
+
+            for (Figura f : outros_simbolos) {
+                Utilities.addFiguraDataSource(f);
+            }
+
+            for (Figura f : semicolcheias) {
+                Utilities.addFiguraDataSource(f);
+            }
+
+            for (Figura f : pausaSemicolcheias) {
+                Utilities.addFiguraDataSource(f);
+            }
+
             Utilities.salvarDsScoreReader();
         } catch (Exception e) {
             e.printStackTrace();
@@ -613,10 +714,37 @@ public class EditorRotular extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void MARCACAO_TEMPOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MARCACAO_TEMPOActionPerformed
+        setSelecionado(MARCACAO_TEMPO);
+    }//GEN-LAST:event_MARCACAO_TEMPOActionPerformed
+
+    private void OUTROS_SIMBOLOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OUTROS_SIMBOLOSActionPerformed
+        setSelecionado(OUTROS_SIMBOLOS);
+    }//GEN-LAST:event_OUTROS_SIMBOLOSActionPerformed
+
+    private void IE_PAUSAMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IE_PAUSAMouseReleased
+        Component[] components = painelBotoes.getComponents();
+        for (Component component : components) {
+            if (component instanceof JButton) {
+                JButton jb = ((JButton) component);
+                if (selecionado.startsWith(jb.getText())
+                        || selecionado.replace("Pausa", "").startsWith(jb.getText())) {
+                    if (!jb.getText().contains("Clave")
+                            && !jb.getText().contains("Suste")
+                            && !jb.getText().contains("Bem")
+                            && !jb.getText().contains("Tem")
+                            && !jb.getText().contains("Barr")
+                            && !jb.getText().contains("Outros")) {
+                        jb.doClick();
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_IE_PAUSAMouseReleased
+
     public ArrayList<Figura> getRespectivoArray(JList<Figura> lista) {
         if (lista == semibreveJL) {
             return semibreve;
-
         } else if (lista == minimasJL) {
             return minimas;
         } else if (lista == seminimasJL) {
@@ -624,7 +752,7 @@ public class EditorRotular extends javax.swing.JFrame {
         } else if (lista == colcheiasJL) {
             return colcheias;
         } else if (lista == pausaSemibreveJL) {
-            return senicolcheias;
+            return pausaSemibreve;
         } else if (lista == pausaMinimaJL) {
             return pausaMinima;
         } else if (lista == pausaSeminimaJL) {
@@ -641,14 +769,29 @@ public class EditorRotular extends javax.swing.JFrame {
             return claveFa;
         } else if (lista == claveDoJL) {
             return claveDo;
-
+        } else if (lista == semiColcheiasJL) {
+            return semicolcheias;
+        } else if (lista == outrosSimbolosJL) {
+            return outros_simbolos;
         }
+
         return new ArrayList<Figura>();
     }
 
     public void setSelecionado(JButton jb) {
-        this.selecionado = jb.getText();
-        SELECIONANDO.setText("Selecionando: " + jb.getText());
+        if (!jb.getText().contains("Clave")
+                && !jb.getText().contains("Suste")
+                && !jb.getText().contains("Bem")
+                && !jb.getText().contains("Tem")
+                && !jb.getText().contains("Barr")
+                && !jb.getText().contains("Outros")) {
+            this.selecionado = IE_PAUSA.isSelected() ? "Pausa" + jb.getText() : jb.getText();
+
+        } else {
+            this.selecionado = jb.getText();
+        }
+
+        SELECIONANDO.setText("Selecionando: " + selecionado);
     }
 
     private JList getJlist(ArrayList<Figura> figuras) {
@@ -717,11 +860,16 @@ public class EditorRotular extends javax.swing.JFrame {
     private javax.swing.JPanel COLCHEIAS_P;
     private javax.swing.JPanel Container;
     private javax.swing.JCheckBox IE_PAUSA;
+    private javax.swing.JButton MARCACAO_TEMPO;
+    private javax.swing.JPanel MARCACAO_TEMPO_P;
     private javax.swing.JButton MINIMA;
     private javax.swing.JPanel MINIMAS_P;
+    private javax.swing.JButton OUTROS_SIMBOLOS;
+    private javax.swing.JPanel OUTROS_SIMBOLOS_P;
     private javax.swing.JPanel PAUSA_COLCHEIA_P;
     private javax.swing.JPanel PAUSA_MINIMA_P;
     private javax.swing.JPanel PAUSA_SEMIBREVE_P;
+    private javax.swing.JPanel PAUSA_SEMICOLCHEIA_P;
     private javax.swing.JPanel PAUSA_SEMINIMA_P;
     private javax.swing.JButton REMOVER;
     private javax.swing.JPanel ROTULAR_P;
@@ -729,15 +877,16 @@ public class EditorRotular extends javax.swing.JFrame {
     private javax.swing.JButton SEMIBREVE;
     private javax.swing.JPanel SEMIBREVE_P;
     private javax.swing.JButton SEMICOLCHEIA;
+    private javax.swing.JPanel SEMICOLCHEIAS_P;
     private javax.swing.JButton SEMINIMA;
     private javax.swing.JPanel SEMINIMAS_P;
     private javax.swing.JButton SUSTENIDOS;
     private javax.swing.JPanel SUSTENIDOS_P;
     private javax.swing.JButton jButton1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JPanel painelBotoes;
     // End of variables declaration//GEN-END:variables
 
     private List<Figura> getSelecionadosRotular() {

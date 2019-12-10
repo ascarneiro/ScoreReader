@@ -23,13 +23,16 @@ public class EditorImagens extends javax.swing.JFrame {
     private ScrollDemo editor = new ScrollDemo();
     private opencv_core.IplImage imagemSemAlteracoes = null;
     private opencv_core.IplImage imagemEdicao = null;
+    private ScoreReader sc = null;
 
     /**
      * Creates new form Editor
      */
-    public EditorImagens(opencv_core.IplImage image) {
+    public EditorImagens(ScoreReader sc, opencv_core.IplImage image) {
         initComponents();
+        this.sc = sc;
         this.imagemSemAlteracoes = image;
+        this.imagemSemAlteracoes = imagemSemAlteracoes;
         editor.setOpaque(true);
         BufferedImage IplImageToBufferedImage = Utilities.IplImageToBufferedImage(imagemSemAlteracoes);
         ImageIcon imageIcon = new ImageIcon(Utilities.bufferedImageToByteArray(IplImageToBufferedImage));
@@ -57,7 +60,6 @@ public class EditorImagens extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         DILATE_SL = new javax.swing.JSlider();
-        jButton1 = new javax.swing.JButton();
         DILATAR = new javax.swing.JSpinner();
         ERODIR = new javax.swing.JSpinner();
         jButton2 = new javax.swing.JButton();
@@ -96,9 +98,6 @@ public class EditorImagens extends javax.swing.JFrame {
         });
         menu.add(DILATE_SL, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 630, -1));
 
-        jButton1.setText("Buscar contornos");
-        menu.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 140, -1));
-
         DILATAR.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 DILATARStateChanged(evt);
@@ -119,15 +118,15 @@ public class EditorImagens extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        menu.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 130, -1));
+        menu.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 130, -1));
 
-        jButton3.setText("Remover linhas");
+        jButton3.setText("Testar remover linhas");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        menu.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, 120, -1));
+        menu.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, 140, -1));
 
         jSplitPane1.setTopComponent(menu);
 
@@ -146,6 +145,8 @@ public class EditorImagens extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         imagemSemAlteracoes = imagemEdicao;
+        sc.atualizarImagemOriginal(imagemSemAlteracoes);
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void ERODIRStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ERODIRStateChanged
@@ -204,6 +205,7 @@ public class EditorImagens extends javax.swing.JFrame {
                     ImageIcon imageIcon = new ImageIcon(Utilities.bufferedImageToByteArray(read));
                     imageIcon = Utilities.redimencionarImagem(imageIcon, 970, 970);
                     editor.atualizarImagem(imageIcon, true);
+                    sc.removeuLinhas = true;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -224,7 +226,6 @@ public class EditorImagens extends javax.swing.JFrame {
     private javax.swing.JSlider ERODE_SL;
     private javax.swing.JSpinner ERODIR;
     private javax.swing.JPanel containerEditor;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;

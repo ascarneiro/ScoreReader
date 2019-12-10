@@ -39,7 +39,7 @@ class IdentificaNotas(object):
             center = (x, y)
             r = int(r)
             # Elimina partes que nao estao dentro dos padroes
-            if r >= 15 and r <= 25:
+            if r >= 12 and r <= 25:
                 # cv2.circle(image, center, int(r), (0, 255, 0), 3)
 
                 M = cv2.moments(c)

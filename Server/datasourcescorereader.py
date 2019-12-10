@@ -15,12 +15,16 @@ class ScoreReaderDataSet(object):
         self.sustenidos = []
         self.bemois = []
 
-        self.pausaSembreve = []
+        self.pausaSemibreve = []
         self.pausaMinimas = []
         self.pausaSeminimas = []
         self.pausaColcheias = []
+        self.pausaSemicolcheias = []
 
+        self.marcacaoTempo = []
         self.barraCompasso = []
+        self.outrossimbolos = []
+        self.semicolcheias = []
 
     def addFigura(self, tipo, img):
         cinza = img.convert('L')  # converte para escala cinza
@@ -46,15 +50,24 @@ class ScoreReaderDataSet(object):
         elif 'Bemois' == tipo:
             self.bemois.append(imagem)
         elif 'PausaSemiBreve' == tipo:
-            self.pausaSembreve.append(imagem)
+            self.pausaSemibreve.append(imagem)
         elif 'PausaMinima' == tipo:
             self.pausaMinimas.append(imagem)
         elif 'PausaSeminima' == tipo:
             self.pausaSeminimas.append(imagem)
         elif 'PausaColcheia' == tipo:
             self.pausaColcheias.append(imagem)
+        elif 'PausaSemiColcheia' == tipo:
+            self.pausaSemicolcheias.append(imagem)
         elif 'BarraCompasso' == tipo:
             self.barraCompasso.append(imagem)
+        elif 'Tempo' == tipo:
+            self.marcacaoTempo.append(imagem)
+        elif 'SemiColcheia' == tipo:
+            self.semicolcheias.append(imagem)
+        else:
+            self.outrossimbolos.append(imagem)
+
 
     def figuras(self, tipo):
         vazio = []
@@ -66,6 +79,8 @@ class ScoreReaderDataSet(object):
             return self.minimas
         elif 'Colcheia' == tipo:
             return self.colcheias
+        elif 'SemiColcheia' == tipo:
+            return self.semicolcheias
         elif 'ClaveSol' == tipo:
             return self.claveSol
         elif 'ClaveDo' == tipo:
@@ -77,15 +92,20 @@ class ScoreReaderDataSet(object):
         elif 'Bemois' == tipo:
             return self.bemois
         elif 'PausaSemiBreve' == tipo:
-            return self.pausaSembreve
+            return self.pausaSemibreve
         elif 'PausaMinima' == tipo:
             return self.pausaMinimas
         elif 'PausaSeminima' == tipo:
             return self.pausaSeminimas
         elif 'PausaColcheia' == tipo:
             return self.pausaColcheias
+        elif 'PausaSemiColcheia' == tipo:
+            return self.pausaSemicolcheias
         elif 'BarraCompasso' == tipo:
             return self.barraCompasso
         elif 'Ligadura' == tipo:
             return self.barraCompasso
-        return vazio
+        elif 'Tempo' == tipo:
+            return self.marcacaoTempo
+        else:
+            return self.outrossimbolos

@@ -69,9 +69,9 @@ class Server(object):
     if self.debug:
       pautas = ms.get_staffpos()
       for pauta in pautas:
-          print "Staff %d has %d staves:" % (pauta.staffno, len(pauta.yposlist))
+          print ("Staff %d has %d staves:" % (pauta.staffno, len(pauta.yposlist)))
           for index, y in enumerate(pauta.yposlist):
-              print "    %d. line at y-position:" % (index+1), y
+              print ("    %d. line at y-position:" % (index+1), y)
 
     imageEncoded = self.encodeImageStr(ms.image)
     ms.image.image_save(self.DIR + 'staffless.png', 'PNG')
@@ -166,6 +166,10 @@ class Server(object):
       self.classificador.loadDataSourceScoreReader()
 
   @cherrypy.expose
+  def showDistribuicao(self, tipo):
+      self.classificador.showDistribuicao(tipo)
+
+  @cherrypy.expose
   def treinarCustomizado(self, tipo, nome, caminho, data_source,
                          QT_SEMIBREVE,
                          QT_MINIMA,
@@ -230,10 +234,15 @@ class Server(object):
       else:
           return "Erro"
 
+  @cherrypy.expose
+  def salvarModeloAtual(self, tipo):
+     return self.classificador.salvarModeloAtual()
 
-
+  @cherrypy.expose
+  def showDistribuicao(self, tipo):
+      return self.classificador.showDistribuicao(tipo)
 
 s = Server()
-cherrypy.config.update({'server.socket_port': 8090})
+cherrypy.config.update({'server.socket_port': 8091})
 cherrypy.quickstart(s)
 

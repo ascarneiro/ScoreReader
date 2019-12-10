@@ -65,15 +65,15 @@ public class ABC_NOTATION {
     public static final String COLCHEIA = "8";
     public static final String SEMICOLCHEIA = "16";
 
-    public static final String PAUSA_SEMIBREVE = "z1";
-    public static final String PAUSA_SEMINIMA = "z2";
-    public static final String PAUSA_MINIMA = "z4";
-    public static final String PAUSA_COLCHEIA = "z8";
-    public static final String PAUSA_SEMICOLCHEIA = "z16";
+    public static final String PAUSA_SEMIBREVE = "z4";
+    public static final String PAUSA_SEMINIMA = " z2";
+    public static final String PAUSA_MINIMA = " z4";
+    public static final String PAUSA_COLCHEIA = "z";
+    public static final String PAUSA_SEMICOLCHEIA = "z/";
 
 
     public static final String BEMOL = "_";
-    public static final String SUSTENIDO = "^";
+    public static final String SUSTENIDO = "";// ^ TODO rever isso
     public static final String BEQUADRO = "=";
     
     public static final String BARRA_COMPASSO = "|";

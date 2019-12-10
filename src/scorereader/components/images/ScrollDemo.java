@@ -44,7 +44,8 @@ public class ScrollDemo extends JPanel
         ImageIcon image = im;
         if (im != null
                 && limpar) {
-            image = Utilities.redimencionarImagem(im, 970, 970);
+            image = Utilities.redimencionarImagem(im, 1100, 1100);
+            im.getImage().flush();
 
         }
         addImagem(image, limpar);
@@ -68,6 +69,11 @@ public class ScrollDemo extends JPanel
         if (image != null) {
             columnView.setPreferredWidth(image.getIconWidth());
             rowView.setPreferredHeight(image.getIconHeight());
+           if (this.image != null
+                   && image != null) {
+                this.image.getImage().flush();
+                image.getImage().flush();
+           }
             this.image = image;
         } else {
             columnView.setPreferredWidth(320);
@@ -129,7 +135,8 @@ public class ScrollDemo extends JPanel
      */
     protected static ImageIcon createImageIcon(String path) {
         if (path != null) {
-            return new ImageIcon(path);
+            ImageIcon im = new ImageIcon(path);
+            return im;
         } else {
             System.err.println("Arquivo nao encontrado: " + path);
             return null;

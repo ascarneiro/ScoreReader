@@ -20,7 +20,7 @@ import org.apache.batik.transcoder.TranscoderOutput;
 import org.apache.fop.svg.PDFTranscoder;
 
 import scorereader.structure.Figura;
-import scorereader.structure.claves.Clave;
+import scorereader.structure.claves.Pauta;
 
 public class Parser {
 
@@ -149,7 +149,7 @@ public class Parser {
         return fileXHTML;
     }
 
-    public String[] compile(String filename, ArrayList<Clave> pautas) {
+    public String[] compile(String filename, ArrayList<Pauta> pautas) {
         StringBuilder score = make(filename, pautas);
         abcFile = makeABCFile(score);
         fileSvg = exportSVG(abcFile);
@@ -160,7 +160,7 @@ public class Parser {
         return new String[]{abcFile, fileSvg, fileMidi};
     }
 
-    private StringBuilder make(String fileName, ArrayList<Clave> pautas) {
+    private StringBuilder make(String fileName, ArrayList<Pauta> pautas) {
         score = new StringBuilder();
         score.append("X: 1").append(getTitulo(fileName)).append("\n");
         score.append(ABC_NOTATION.TITULO).append(" ").append(getTitulo(fileName)).append("\n");
@@ -179,13 +179,10 @@ public class Parser {
         return "Transcrito por prototipo Score Reader Alan Soares Carneiro";
     }
 
-    //Fixo por enquanto testar compilador
-    private String getElementos(ArrayList<Clave> pautas) {
+    private String getElementos(ArrayList<Pauta> pautas) {
         StringBuilder abcCode = new StringBuilder();
-
         int qtQuebra = 0;
-        for (Clave pauta : pautas) {
-
+        for (Pauta pauta : pautas) {
             boolean inicioNotasFimClave = false;
             String armaduraClave = getElementoArmaduraClave(pauta);
             abcCode.append(armaduraClave);
@@ -196,23 +193,25 @@ public class Parser {
                     inicioNotasFimClave = true;
                 } else if (inicioNotasFimClave) {
 
-                    String tipo = getTipoPausa(elemento);
-                    if (tipo.isEmpty()) {
-                        tipo = getTipoFigura(elemento);
+                    String figura = getTipoPausa(elemento);
+                    if (figura.isEmpty()) {
+                        figura = getTipoFigura(elemento);
+                        if ("Semibreve".equalsIgnoreCase(figura)
+                                || "Minima".equalsIgnoreCase(figura)
+                                || "Seminima".equalsIgnoreCase(figura)
+                                || "Colcheia".equalsIgnoreCase(figura)
+                                ) {
+                            //Caso nao identificar o nome da nota mas for nota musical usa padrao G (Sol)
+                            figura = "G".concat(figura);
+                        }
                     }
-                    abcCode.append(tipo);
+                    abcCode.append(figura);
                     qtQuebra++;
-                }
-                if (qtQuebra == 4) {
-                    abcCode.append("\n");
-                    qtQuebra = 0;
                 }
 
             }
         }
-
         abcCode.append(ABC_NOTATION.FINAL);
-
         return abcCode.toString();
     }
 
@@ -231,7 +230,7 @@ public class Parser {
         return "";
     }
 
-    private String getElementoArmaduraClave(Clave pauta) {
+    private String getElementoArmaduraClave(Pauta pauta) {
         StringBuilder armadura = new StringBuilder();
         int qtSustenidos = 0;
         int qtBemois = 0;
@@ -254,7 +253,7 @@ public class Parser {
                 qtSustenidos++;
             } else if ("Bemol".equalsIgnoreCase(figura.tipo)) {
                 qtBemois++;
-            } else if ("Tempo".equalsIgnoreCase(figura.tipo)) {
+            } else if ("MarcacaoTempo".equalsIgnoreCase(figura.tipo)) {
                 //Ver regra tempo, fracao e caracter C
                 tempo = "4/4"; //Seguir nomenclatura fracoes
             }

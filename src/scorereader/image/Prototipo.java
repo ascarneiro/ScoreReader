@@ -2,7 +2,6 @@ package scorereader.image;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.TreeMap;
@@ -18,7 +17,6 @@ import org.bytedeco.javacpp.Loader;
 import static org.bytedeco.javacpp.helper.opencv_core.CV_RGB;
 import static org.bytedeco.javacpp.helper.opencv_imgcodecs.cvLoadImage;
 import static org.bytedeco.javacpp.helper.opencv_imgcodecs.cvSaveImage;
-import org.bytedeco.javacpp.opencv_core;
 import org.bytedeco.javacpp.opencv_core.CvContour;
 import org.bytedeco.javacpp.opencv_core.CvMemStorage;
 import org.bytedeco.javacpp.opencv_core.CvPoint;
@@ -40,15 +38,7 @@ import static org.bytedeco.javacpp.opencv_imgproc.cvFindContours;
 import static org.bytedeco.javacpp.opencv_imgproc.cvLine;
 import static org.bytedeco.javacpp.opencv_imgproc.cvRectangleR;
 import static org.bytedeco.javacpp.opencv_imgproc.cvThreshold;
-
-import org.bytedeco.javacv.Java2DFrameConverter;
-import org.bytedeco.javacv.OpenCVFrameConverter;
-import org.opencv.core.Core;
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.core.Size;
-import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.imgproc.Imgproc;
+import static scorereader.Utilities.IplImageToBufferedImage;
 
 /**
  *
@@ -79,14 +69,14 @@ public class Prototipo extends JFrame {
      */
     public Prototipo() {
 
-        boolean debug = true; //grava imagens intermediarias da construção
+        boolean debug = false; //grava imagens intermediarias da construção
 
         //opcoes de tela
         setTitle("Prototipo");
         setName("Svm test");
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        JFileChooser arquivo = new JFileChooser("C:\\TCC\\ScoreReader\\img\\");//arquivo de imagem de entrada
+        JFileChooser arquivo = new JFileChooser("C:\\Users\\ascarneiro\\Desktop\\TCC\\ScoreReader\\repository\\Casos\\Recortados monografia\\");//arquivo de imagem de entrada
         arquivo.setFileFilter(new FiltroArquivoDescArq());
         if (arquivo.showOpenDialog(this) != JFileChooser.APPROVE_OPTION) {
             System.exit(0);
@@ -147,7 +137,7 @@ public class Prototipo extends JFrame {
                     pontoX[i] = p.x();
                     pontoY[i] = p.y();
                     // marcar contornos com vermelho
-                    cvLine(imagemOriginal, p, p, opencv_core.CvScalar.RED, 1, 4, 0);
+                    //cvLine(imagemOriginal, p, p, opencv_core.CvScalar.RED, 1, 4, 0);
                 }
                 /**
                  * fim lista pontos do contorno
@@ -207,33 +197,6 @@ public class Prototipo extends JFrame {
      * ocorrem duas buscas 1 - maior quantidade 2 - pintar de branco as
      * similares
      */
-    public static void retiraLinhasdePauta2() {
-
-        Mat source = Imgcodecs.imread("C:\\TCC\\ScoreReader\\remover\\bill.jpg");
-
-        Mat image_h = Mat.zeros(source.size(), CvType.CV_8UC1);
-        Mat image_v = Mat.zeros(source.size(), CvType.CV_8UC1);
-
-        Mat output = new Mat();
-        Core.bitwise_not(source, output);
-        Mat output_result = new Mat();
-
-        Mat kernel_h = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(20, 1));
-        Imgproc.morphologyEx(output, image_h, Imgproc.MORPH_OPEN, kernel_h);
-        Imgcodecs.imwrite("C:\\TCC\\ScoreReader\\remover\\output.jpg", output);
-
-        Core.subtract(output, image_h, output_result);
-        Imgcodecs.imwrite("C:\\TCC\\ScoreReader\\remover\\output_result.jpg", output_result);
-
-        Mat kernel_v = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(1, 20));
-        Imgproc.morphologyEx(output_result, image_v, Imgproc.MORPH_OPEN, kernel_v);
-        Mat output_result2 = new Mat();
-
-        Core.subtract(output_result, image_v, output_result2);
-        Imgcodecs.imwrite("C:\\TCC\\ScoreReader\\remover\\output_result2.jpg", output_result2);
-
-    }
-
     private IplImage retiraLinhasdePauta(IplImage imagem) {
         int[] hist = new int[imagem.cvSize().height()];
         int maior = 0;
@@ -263,11 +226,8 @@ public class Prototipo extends JFrame {
      * @return - simbolos segmentados
      */
     private IplImage morfologiaMatematica(IplImage imagem) {
-//        cvErode(imagem, imagem, null, 1);
-//        cvDilate(imagem, imagem, null, 1);
         cvErode(imagem, imagem, null, 3);
         cvDilate(imagem, imagem, null, 2);
-
         return imagem;
     }
 
@@ -283,13 +243,6 @@ public class Prototipo extends JFrame {
         bb.width(bb.width() + 10);
         bb.height(bb.height() + 10);
         cvRectangleR(imagem, bb, CV_RGB(0, 255, 0), 1, 8, 0);
-        try {
-            opencv_core.Rect rectCrop = new opencv_core.Rect(bb.x(), bb.y(), bb.width(), bb.height());
-            opencv_core.Mat croppedImage = new opencv_core.Mat(new opencv_core.Mat(imagem), rectCrop);
-            cvSaveImage("C:\\TCC\\ScoreReader\\fragment\\" + System.currentTimeMillis() + ".png", new IplImage(croppedImage));
-        } catch (Exception e) {
-        }
-
     }
 
     /**
@@ -451,7 +404,7 @@ public class Prototipo extends JFrame {
      */
     private static void gravaEstadoImagem(IplImage imagem, int contadorGravarImagem, boolean debug) {
         if (debug) {
-            cvSaveImage("C:\\TCC\\ScoreReader\\steps\\" + contadorGravarImagem + ".png", imagem);
+            cvSaveImage("Resultado " + contadorGravarImagem + ".png", imagem);
         }
     }
 
@@ -471,17 +424,6 @@ public class Prototipo extends JFrame {
         } catch (Exception ee) {
             ee.printStackTrace();
         }
-    }
-
-    public BufferedImage IplImageToBufferedImage(IplImage src) {
-        try {
-            OpenCVFrameConverter.ToIplImage grabberConverter = new OpenCVFrameConverter.ToIplImage();
-            Java2DFrameConverter paintConverter = new Java2DFrameConverter();
-            org.bytedeco.javacv.Frame frame = grabberConverter.convert(src);
-            return paintConverter.getBufferedImage(frame, 1);
-        } catch (Exception e) {
-        }
-        return null;
     }
 
     /**
@@ -786,5 +728,4 @@ class FiltroArquivoDescArq extends FileFilter {
     public String getDescription() {
         return description;
     }
-
 }

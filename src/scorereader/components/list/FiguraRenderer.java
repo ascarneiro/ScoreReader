@@ -35,7 +35,7 @@ public class FiguraRenderer extends JPanel implements ListCellRenderer<Figura> {
     @Override
     public Component getListCellRendererComponent(JList<? extends Figura> list,
             Figura figura, int index, boolean isSelected, boolean cellHasFocus) {
-        lbIcon.setIcon(Utilities.redimencionarImagem(new ImageIcon(figura.getImage()), 40, 40));
+        lbIcon.setIcon(Utilities.redimencionarImagem(new ImageIcon(figura.getImage()), 80, 80));
         lbIcon.setOpaque(true);
         if (isSelected) {
             lbIcon.setBackground(list.getSelectionBackground());
