@@ -11,6 +11,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.nio.file.Files;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.imageio.ImageIO;
@@ -52,6 +54,7 @@ public class ScoreReader extends javax.swing.JFrame {
     public String resetar = "S";
     private ArrayList<Pauta> pautas = new ArrayList<>();
     private ArrayList<Figura> rotular = new ArrayList<>();
+    private long tempoInicial = 0;
     //Compilar os elementos
     Parser parser = new Parser(this);
 
@@ -840,6 +843,7 @@ public class ScoreReader extends javax.swing.JFrame {
 
             @Override
             public void run() {
+                tempoInicial = System.currentTimeMillis();
                 Server.server = SERVER.getText();
                 if (!FILE_NAME.getText().isEmpty()) {
 
@@ -908,10 +912,10 @@ public class ScoreReader extends javax.swing.JFrame {
 
                         Compilar.setEnabled(true);
 
+                        DateFormat df = new SimpleDateFormat("dd:MM:yy:HH:mm:ss.SSS");
+                        log_console(("Tempo: " + df.format(tempoInicial - System.currentTimeMillis())));
+
                     } catch (Exception e) {
-                        e.printStackTrace();
-                        habilitarDesabilitarBotoes(false);
-                        STATUS.setBackground(Color.ORANGE);
                         log_console("Falha ao processar elementos da partitura: \n" + e.getMessage());
                     }
                 } else {
@@ -1542,6 +1546,8 @@ public class ScoreReader extends javax.swing.JFrame {
                 }
 
             }
+
+            System.out.println(System.currentTimeMillis());
 
         } catch (Exception e) {
             e.printStackTrace();

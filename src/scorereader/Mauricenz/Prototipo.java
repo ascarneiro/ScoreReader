@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.TreeMap;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -48,6 +50,7 @@ import static scorereader.Utilities.IplImageToBufferedImage;
  */
 public class Prototipo extends JFrame {
 
+    private long tempoInicial = 0;
     public static final int CV_LOAD_IMAGE_UNCHANGED = -1,
             CV_LOAD_IMAGE_GRAYSCALE = 0,
             CV_LOAD_IMAGE_COLOR = 1,
@@ -81,6 +84,8 @@ public class Prototipo extends JFrame {
         if (arquivo.showOpenDialog(this) != JFileChooser.APPROVE_OPTION) {
             System.exit(0);
         }
+
+        tempoInicial = System.currentTimeMillis();
 
         int contador = 1;//para gravar sequencia imagem
         IplImage imagemOriginal = carregaImagem(arquivo.getSelectedFile());
@@ -166,6 +171,8 @@ public class Prototipo extends JFrame {
         gravaEstadoImagem(imagemBB, contador++, debug);
         gravaArquivoReconhecimento(arquivo.getSelectedFile(), Listaformas);
         exibeResultado(imagemOriginal, imagemBB, Listaformas);
+        DateFormat df = new SimpleDateFormat("dd:MM:yy:HH:mm:ss.SSS");
+        System.out.println(("Tempo: " + df.format(tempoInicial - System.currentTimeMillis())));
     }
 
     /**

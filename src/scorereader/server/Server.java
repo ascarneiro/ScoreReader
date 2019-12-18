@@ -22,39 +22,44 @@ public class Server {
     public static String server = "http://localhost:8080/";
 
     public static String callServerPython(String method, HashMap<String, Object> params) throws Exception {
-        String retorno = "";
+        try {
+            String retorno = "";
 
-        URL url = new URL(server + method);
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            URL url = new URL(server + method);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
-        StringBuilder postData = new StringBuilder();
-        for (Map.Entry<String, Object> param : params.entrySet()) {
-            if (postData.length() != 0) {
-                postData.append('&');
+            StringBuilder postData = new StringBuilder();
+            for (Map.Entry<String, Object> param : params.entrySet()) {
+                if (postData.length() != 0) {
+                    postData.append('&');
+                }
+                postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
+                postData.append('=');
+                postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
             }
-            postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
-            postData.append('=');
-            postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
+            byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
+            conn.setDoOutput(true);
+            conn.getOutputStream().write(postDataBytes);
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+
+            String c = "";
+            while ((c = in.readLine()) != null) {
+                retorno += c;
+            }
+
+            con.disconnect();
+            return retorno;
+        } catch (Exception e) {
+            System.out.println("Falha na comunicacao ou no servidor");
         }
-        byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+        return "";
 
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-        conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
-        conn.setDoOutput(true);
-        conn.getOutputStream().write(postDataBytes);
-
-        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-
-        String c = "";
-        while ((c = in.readLine()) != null) {
-            retorno += c;
-        }
-
-        con.disconnect();
-
-        return retorno;
     }
 
 }
