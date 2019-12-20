@@ -1,0 +1,4 @@
+Precisa destes compiladores. Baixe no site oficial do ABC Notation
+	abc2midi.exe
+	abc2xml.exe
+	abcm2ps.exe
