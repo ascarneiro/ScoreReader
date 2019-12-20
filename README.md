@@ -12,4 +12,5 @@ Uses
     Batik (external)
     musicstaves (All rights reserved to maintainers)
     gamera (All rights reserved to maintainers)
+    MUSCIMA++ (All rights reserved to maintainers)
     
