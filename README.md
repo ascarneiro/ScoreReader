@@ -1,8 +1,11 @@
 # ScoreReader
 
 ScoreReader - Prototype for sheet music reconstruction using elements identified from images.
+---
 ScoreReader - Protótipo para reconstrução de partituras através de elementos identificados a partir de imagens.
+---
 Uses
+---
     Java
     Python
     OpenCV (external)
