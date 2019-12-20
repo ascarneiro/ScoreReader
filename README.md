@@ -6,7 +6,7 @@ Uses
 ---
     Java
     Python
-    Interpress Mauricenz(extended)
+    Interpress (extended)
     OpenCV (external)
     ABC Notation (All rights reserved to maintainers).
     ABC Notation compilers (All rights reserved to maintainers)
